@@ -1,0 +1,75 @@
+" 言語環境の設定
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932
+
+" ファイル形式別プラグイン
+filetype plugin on
+
+" タブ、改行などの表示
+highlight NonText guifg=lightgray ctermfg=lightgray
+highlight SpecialKey guifg=lightgray ctermfg=lightgray
+set list
+set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+
+" シンタックスハイライト
+syntax on
+
+" インデント設定
+set autoindent
+set smartindent
+set expandtab
+set tabstop=4 shiftwidth=4 softtabstop=4
+
+" 大小文字を区別しない検索
+set ignorecase
+
+" ステータスラインを表示する
+set laststatus=2
+
+" 行番号を表示する
+set number
+
+" コマンドをステータスラインに表示
+set showcmd
+
+" 補完候補を表示する
+set wildmenu
+
+" 折り返さない
+set nowrap
+
+" 全角文字の文字幅を正しくする
+set ambiwidth=double
+
+" ビープ音の代わりに画面をフラッシュ
+set visualbell
+
+" 変更の差分を表示するコマンド
+if !exists(":DiffOrig")
+    command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+            \ | wincmd p | diffthis
+endif
+
+
+
+" ステータスライン
+highlight StatusLine term=reverse cterm=reverse
+augroup EventHook
+    autocmd!
+    autocmd InsertLeave * call s:changeFace('(*ﾟーﾟ)♪\ ')
+    autocmd CursorMoved * call s:changeFace('(*ﾟーﾟ)')
+    autocmd InsertEnter * call s:changeFace('(*ﾟД\ ﾟ)')
+    autocmd BufWritePost * call s:changeFace('(*^ーﾟ)')
+    autocmd CursorHold * call s:changeFace('ｃ⌒っ*ﾟーﾟ)っ')
+augroup END
+let s:oldFace = ""
+function! s:changeFace(face)
+    if a:face == s:oldFace
+        return
+    endif
+    silent let l:line = 'set statusline=\ ' . a:face
+    silent let l:line .= '\ %<%l,%c=%B%=%n:%p%%\ %m%r%h%w%y\ %t\ [%{&fenc}][%{&ff}]\ '
+    silent exec l:line
+    silent let s:oldFace = a:face
+endfunction
+
