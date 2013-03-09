@@ -23,6 +23,9 @@ set tabstop=4 shiftwidth=4 softtabstop=4
 " 大小文字を区別しない検索
 set ignorecase
 
+" 制限なしにバックスペース
+set backspace=indent,eol,start
+
 " ステータスラインを表示する
 set laststatus=2
 
@@ -44,13 +47,27 @@ set ambiwidth=double
 " ビープ音の代わりに画面をフラッシュ
 set visualbell
 
+" カーソルの上下に表示する最低行数
+set scrolloff=5
+
+" インクリメンタルサーチ
+set incsearch
+
+" 検索結果のハイライト
+set hlsearch
+
+" 行結合時にスペースを入れない
+set nojoinspaces
+
+" 行の最大文字数と自動改行の設定
+set textwidth=120
+set formatoptions=q
+
 " 変更の差分を表示するコマンド
 if !exists(":DiffOrig")
     command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
             \ | wincmd p | diffthis
 endif
-
-
 
 " ステータスライン
 highlight StatusLine term=reverse cterm=reverse
