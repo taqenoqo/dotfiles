@@ -64,7 +64,7 @@ setopt glob #ファイルグロブ
 setopt extendedglob #拡張グロブ
 
 # エイリアスの設定
-alias ls='ls -gfl'
+alias ls='ls -GFl'
 alias tmux='tmux -2'
 alias rm='gmv -f --backup=numbered --target-directory ~/.trash'
 alias vim='/usr/local/bin/vim'
