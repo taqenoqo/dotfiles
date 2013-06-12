@@ -1,18 +1,32 @@
+" neobundle関連
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim
+endif
+call neobundle#rc(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" プラグイン
+NeoBundle 'Smooth-Scroll'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'Shougo/neocomplcache'
+let g:neocomplcache_enable_at_startup = 1
+
+" ファイル形式別プラグイン
+filetype plugin indent on
+
 " 言語環境の設定
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932
 
-" ファイル形式別プラグイン
-filetype plugin on
+" シンタックスハイライト
+syntax on
+colorscheme nuyo
 
 " タブ、改行などの表示
 highlight NonText guifg=lightgray ctermfg=lightgray
 highlight SpecialKey guifg=lightgray ctermfg=lightgray
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
-
-" シンタックスハイライト
-syntax on
 
 " インデント設定
 set autoindent
@@ -63,6 +77,7 @@ set nojoinspaces
 set textwidth=120
 set formatoptions=q
 
+
 " 変更の差分を表示するコマンド
 if !exists(":DiffOrig")
     command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
@@ -80,12 +95,15 @@ augroup EventHook
     autocmd CursorHold * call s:changeFace('ｃ⌒っ*ﾟーﾟ)っ')
 augroup END
 let s:oldFace = ""
-function! s:changeFace(face)
+function GetSyntaxType()
+    return synIDattr(synID(line('.'), col('.'), 0), 'name')
+endfunction
+function s:changeFace(face)
     if a:face == s:oldFace
         return
     endif
     silent let l:line = 'set statusline=\ ' . a:face
-    silent let l:line .= '\ %<%l,%c=%B%=%n:%p%%\ %m%r%h%w%y\ %t\ [%{&fenc}][%{&ff}]\ '
+    silent let l:line .= '\ %<%l,%c=%B[%{GetSyntaxType()}]%=%n:%p%%\ %m%r%h%w%y\ %t\ [%{&fenc}][%{&ff}]\ '
     silent exec l:line
     silent let s:oldFace = a:face
 endfunction
