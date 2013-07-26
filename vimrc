@@ -7,9 +7,29 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " プラグイン
 NeoBundle 'Smooth-Scroll'
+
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'taglist.vim'
+    let g:Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
+NeoBundle 'SrcExpl'
+" NeoBundle 'Trinity'
+
 NeoBundle 'Shougo/neocomplcache'
-let g:neocomplcache_enable_at_startup = 1
+    let g:neocomplcache_enable_at_startup = 1
+    " タブで補完
+    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    " ポップアップを閉じるときのキー
+    inoremap <expr><C-y>  neocomplcache#close_popup()
+    inoremap <expr><C-e>  neocomplcache#cancel_popup()
+    " オムニ補完
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" 起動時にチェック
+NeoBundleCheck
 
 " ファイル形式別プラグイン
 filetype plugin indent on
@@ -106,5 +126,53 @@ function s:changeFace(face)
     silent let l:line .= '\ %<%l,%c=%B[%{GetSyntaxType()}]%=%n:%p%%\ %m%r%h%w%y\ %t\ [%{&fenc}][%{&ff}]\ '
     silent exec l:line
     silent let s:oldFace = a:face
+endfunction
+
+" IDEっぽくするコマンド
+command -nargs=0 -bar IDEMode call s:startIDEMode()
+function s:initTlist()
+    " Tlistのwindow設定
+    let g:Tlist_Use_Right_Window = 1
+    let g:Tlist_WinWidth = 32
+    " 表示順
+    let g:Tlist_Sort_Type = "order"
+    " スペース等を省いたコンパクトな表示
+    let g:Tlist_Compact_Format = 0
+    " Tlistのwindowだけが残った場合終了する
+    let g:Tlist_Exit_OnlyWindow = 1
+    " 現在のバッファのタグツリーだけ表示
+    let g:Tlist_File_Fold_Auto_Close = 1
+    " タグツリーのアウトライン非表示
+    let g:Tlist_Enable_Fold_Column = 0
+    " 現在のバッファだけ表示
+    let g:Tlist_Show_One_File = 1
+endfunction
+function s:initSrcExpl()
+    " window設定
+    let g:SrcExpl_winHeight = 7
+    " プレビューの表示間隔(ms)
+    let g:SrcExpl_refreshTime = 10
+    " 競合のプラグイン
+    let g:SrcExpl_pluginList = [
+        \ "__Tag_List__",
+        \ "_NERD_tree_",
+        \ "Source_Explorer"
+    \ ]
+    " 開くときにtagsファイルの更新を許可しない
+    let g:SrcExpl_isUpdateTags = 0
+endfunction
+function s:initNerdTree()
+    " window設定
+    let g:NERDTreeWinSize = 24
+    let g:NERDTreeWinPos = "left"
+endfunction
+
+function s:startIDEMode()
+    call s:initSrcExpl()
+    call s:initTlist()
+    call s:initNerdTree()
+    SrcExpl
+    NERDTree
+    Tlist
 endfunction
 

@@ -12,38 +12,54 @@ set t_Co=256
 let g:colors_name = "nuyo"
 
 
-hi Normal guifg=#1f801f guibg=#efffe7 guisp=#efffe7 gui=NONE ctermfg=22 ctermbg=194 cterm=NONE
+" 通常のテキスト
+hi Normal guifg=#1f801f guibg=NONE guisp=#efffe7 gui=NONE ctermfg=22 ctermbg=NONE cterm=NONE
+hi link Constant Normal
+
+" 改行やタブなどの記号
 hi NonText guifg=#aaaaaa gui=NONE ctermfg=249 cterm=NONE
 hi SpecialKey guifg=#aaaaaa gui=NONE ctermfg=249 cterm=NONE
+
+" 行番号
 hi LineNr guifg=#505050 guibg=#eae8e2 guisp=#eae8e2 gui=NONE ctermfg=239 ctermbg=255 cterm=NONE
 
+" コメント
 hi Comment guifg=#dd6c26 guibg=NONE guisp=NONE gui=NONE ctermfg=166 ctermbg=NONE cterm=NONE
 
-hi link Constant Normal
+" リテラル
 hi String guifg=#d72926 guibg=NONE guisp=NONE gui=NONE ctermfg=160 ctermbg=NONE cterm=NONE
 hi link Character String
 hi link Float String 
 hi link Number String
 hi link Boolean String
 
-hi Identifier guifg=#2973ea guibg=NONE guisp=NONE gui=italic ctermfg=26 ctermbg=NONE cterm=NONE
+" 関数、メソッド
+hi Identifier guifg=#2973ea guibg=NONE guisp=NONE gui=NONE ctermfg=26 ctermbg=NONE cterm=NONE
 
+" キーワード
 hi Statement guifg=#5c28e9 guibg=NONE guisp=NONE gui=bold ctermfg=56 ctermbg=NONE cterm=bold
 hi link PreProc Statement
 hi link Type Statement
 hi Type gui=NONE cterm=NONE
 
+" 記号
 hi Special guifg=#bb00bb guibg=NONE guisp=NONE gui=italic ctermfg=5 ctermbg=NONE cterm=NONE
 hi link Operator Special
 
+" URL等
 hi Underlined guifg=#0000ff guibg=NONE guisp=NONE gui=underline ctermfg=4 ctermbg=NONE cterm=underline
 
-hi Error guifg=#ff0000 guibg=NONE guisp=NONE gui=bold,underline ctermfg=196 ctermbg=15 cterm=bold,underline
+" エラー
+hi Error guifg=#ff0000 guibg=NONE guisp=NONE gui=bold,underline ctermfg=196 ctermbg=NONE cterm=bold,underline
 
+" TODO
 hi Todo guifg=#d72926 guibg=NONE guisp=NONE gui=bold,underline ctermfg=160 ctermbg=NONE cterm=bold,underline
 
-hi PMenu guifg=#505050 guibg=#eae8e2 guisp=#eae8e2 gui=NONE ctermfg=239 ctermbg=255 cterm=NONE
-hi PMenuSbar guifg=#b7b7b7 guibg=#ededed guisp=#ededed gui=NONE ctermfg=250 ctermbg=255 cterm=NONE
+
+
+" 補完ウインドウ
+hi PMenu guifg=#505050 guibg=#eae8e2 guisp=#eae8e2 gui=NONE ctermfg=239 ctermbg=253 cterm=NONE
+hi PMenuSbar guifg=#b7b7b7 guibg=#ededed guisp=#ededed gui=NONE ctermfg=250 ctermbg=253 cterm=NONE
 hi PMenuSel guifg=#ffffff guibg=#3966c7 guisp=#3966c7 gui=NONE ctermfg=15 ctermbg=68 cterm=NONE
 hi PMenuThumb guifg=#ededed guibg=#b7b7b7 guisp=#b7b7b7 gui=NONE ctermfg=255 ctermbg=250 cterm=NONE
 
