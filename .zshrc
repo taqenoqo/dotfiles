@@ -42,7 +42,9 @@ setopt nolistbeep
 setopt nobeep
 
 # 補完候補の色づけ
-eval `gdircolors`
+if type dircolors >/dev/null 2>&1; then
+    eval `dircolors`
+fi
 export ZLS_COLORS=$LS_COLORS
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:messages' format %{$fg[yellow]%}'%d'format %{${reset_color}%}
@@ -64,14 +66,16 @@ setopt glob #ファイルグロブ
 setopt extendedglob #拡張グロブ
 
 # エイリアスの設定
-alias ls='ls -GFl'
+if ls --color >/dev/null 2>&1; then
+    alias ls='ls -Fl --color=auto'
+elif ls -G >/dev/null 2>&1; then
+    alias ls='ls -GFl'
+fi
 alias tmux='tmux -2'
-alias rm='gmv -f --backup=numbered --target-directory ~/.trash'
-alias vim='/usr/local/bin/vim'
 alias up='cd ..'
 
 # tmuxで開始する
-if [ $SHLVL = 1 ]; then
+if (type tmux >/dev/null 2>&1) && [ $SHLVL = 1 ]; then
     tmux -2
 fi
 
