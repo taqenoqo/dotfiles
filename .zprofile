@@ -7,3 +7,9 @@ if type brew >/dev/null 2>&1; then
     fi
 fi
 
+if type rbenv >/dev/null 2>&1; then
+    eval "$(rbenv init -)"
+    if type brew >/dev/null 2>&1; then
+        source "`brew --prefix rbenv`/completions/rbenv.zsh"
+    fi
+fi
