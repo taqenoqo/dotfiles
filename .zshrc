@@ -73,6 +73,11 @@ elif ls -G >/dev/null 2>&1; then
 fi
 alias tmux='tmux -2'
 alias up='cd ..'
+if type rmtrash >/dev/null 2>&1; then
+    alias rm='rmtrash'
+else
+    alias rm='rm -i'
+fi
 
 # tmuxで開始する
 if (type tmux >/dev/null 2>&1) && [ $SHLVL = 1 ]; then
