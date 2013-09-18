@@ -10,9 +10,8 @@ NeoBundle 'Smooth-Scroll'
 
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'taglist.vim'
-    let g:Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
 NeoBundle 'SrcExpl'
-" NeoBundle 'Trinity'
+NeoBundle 'surround.vim'
 
 NeoBundle 'Shougo/neocomplcache'
     let g:neocomplcache_enable_at_startup = 1
@@ -27,6 +26,20 @@ NeoBundle 'Shougo/neocomplcache'
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+NeoBundle 'hallison/vim-markdown'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'tyru/open-browser.vim'
+    let g:quickrun_config = {}
+    if (isdirectory('/Applications/Marked.app'))
+        let g:quickrun_config.markdown = {
+            \ 'outputter' : 'null',
+            \ 'command'   : 'open',
+            \ 'cmdopt'    : '-a',
+            \ 'args'      : 'Marked',
+            \ 'exec'      : '%c %o %a %s',
+        \ }
+    endif
 
 " 起動時にチェック
 NeoBundleCheck
@@ -96,6 +109,9 @@ set nojoinspaces
 " 行の最大文字数と自動改行の設定
 set textwidth=120
 set formatoptions=q
+
+" swpファイル作らない
+set noswapfile
 
 
 " 変更の差分を表示するコマンド
@@ -171,6 +187,12 @@ function s:startIDEMode()
     call s:initSrcExpl()
     call s:initTlist()
     call s:initNerdTree()
+
+    " TODO エラー出力されないようにする
+    SrcExplClose
+    NERDTreeClose
+    TlistClose
+
     SrcExpl
     NERDTree
     Tlist
