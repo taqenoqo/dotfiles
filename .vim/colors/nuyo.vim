@@ -13,7 +13,7 @@ let g:colors_name = "nuyo"
 
 
 " 通常のテキスト
-hi Normal guifg=#1f801f guibg=NONE guisp=#efffe7 gui=NONE ctermfg=22 ctermbg=NONE cterm=NONE
+hi Normal guifg=#081313 guibg=#e6fde6 guisp=#081313 gui=NONE ctermbg=NONE cterm=NONE
 hi link Constant Normal
 
 " 改行やタブなどの記号
@@ -55,11 +55,17 @@ hi Error guifg=#ff0000 guibg=NONE guisp=NONE gui=bold,underline ctermfg=196 cter
 " TODO
 hi Todo guifg=#d72926 guibg=NONE guisp=NONE gui=bold,underline ctermfg=160 ctermbg=NONE cterm=bold,underline
 
-
-
 " 補完ウインドウ
 hi PMenu guifg=#505050 guibg=#eae8e2 guisp=#eae8e2 gui=NONE ctermfg=239 ctermbg=253 cterm=NONE
 hi PMenuSbar guifg=#b7b7b7 guibg=#ededed guisp=#ededed gui=NONE ctermfg=250 ctermbg=253 cterm=NONE
 hi PMenuSel guifg=#ffffff guibg=#3966c7 guisp=#3966c7 gui=NONE ctermfg=15 ctermbg=68 cterm=NONE
 hi PMenuThumb guifg=#ededed guibg=#b7b7b7 guisp=#b7b7b7 gui=NONE ctermfg=255 ctermbg=250 cterm=NONE
 
+" ステータスラインと境界線
+hi StatusLine guifg=#0ea279 guibg=#ffffff gui=NONE ctermfg=231 ctermbg=29 cterm=NONE
+hi StatusLineNC guifg=#ffffff guibg=#b7e3bf gui=NONE ctermfg=231 ctermbg=151 cterm=NONE
+hi VertSplit guifg=#b7e3bf guibg=#b7e3bf gui=NONE ctermfg=151 ctermbg=151 cterm=NONE
+
+" 折り畳み
+hi Folded guifg=#005faf guibg=#ffffff gui=NONE ctermfg=25 ctermbg=231 cterm=NONE
+hi FoldColumn guifg=#005faf guibg=#ffffff gui=NONE ctermfg=25 ctermbg=231 cterm=NONE
