@@ -41,6 +41,15 @@ NeoBundle 'tyru/open-browser.vim'
         \ }
     endif
 
+NeoBundle 'LeafCage/foldCC'
+    set foldtext=foldCC#foldtext()
+    let g:foldCCtext_head = ''
+    let g:foldCCtext_tail = ''
+    set fillchars=vert:\|
+    set foldcolumn=1
+    set foldlevel=3
+    noremap z<Space> za
+
 " 起動時にチェック
 NeoBundleCheck
 
@@ -121,7 +130,6 @@ if !exists(":DiffOrig")
 endif
 
 " ステータスライン
-highlight StatusLine term=reverse cterm=reverse
 augroup EventHook
     autocmd!
     autocmd InsertLeave * call s:changeFace('(*ﾟーﾟ)♪\ ')
