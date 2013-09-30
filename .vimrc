@@ -50,6 +50,15 @@ NeoBundle 'LeafCage/foldCC'
     set foldlevel=3
     noremap z<Space> za
 
+NeoBundle 'camelcasemotion'
+    map <silent> w <Plug>CamelCaseMotion_w
+    map <silent> b <Plug>CamelCaseMotion_b
+    map <silent> e <Plug>CamelCaseMotion_e
+    omap <silent> ic <Plug>CamelCaseMotion_iw
+    vmap <silent> ic <Plug>CamelCaseMotion_iw
+    omap <silent> ac <Plug>CamelCaseMotion_ie
+    vmap <silent> ac <Plug>CamelCaseMotion_ie
+
 " 起動時にチェック
 NeoBundleCheck
 
@@ -119,12 +128,14 @@ set nojoinspaces
 set textwidth=120
 autocmd FileType * setlocal fo-=t fo-=c fo-=r fo-=o
 
-
 " swpファイル作らない
 set noswapfile
 
 " チルダファイル作らない
 set nobackup
+
+" キーコードのタイムアウトをしない
+set notimeout
 
 " 変更の差分を表示するコマンド
 if !exists(":DiffOrig")
