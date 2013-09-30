@@ -117,11 +117,14 @@ set nojoinspaces
 
 " 行の最大文字数と自動改行の設定
 set textwidth=120
-set formatoptions=q
+autocmd FileType * setlocal fo-=t fo-=c fo-=r fo-=o
+
 
 " swpファイル作らない
 set noswapfile
 
+" チルダファイル作らない
+set nobackup
 
 " 変更の差分を表示するコマンド
 if !exists(":DiffOrig")
@@ -154,6 +157,7 @@ endfunction
 
 " IDEっぽくするコマンド
 command -nargs=0 -bar IDEMode call s:startIDEMode()
+command -nargs=0 -bar IDEModeClose call s:endIDEMode()
 function s:initTlist()
     " Tlistのwindow設定
     let g:Tlist_Use_Right_Window = 1
@@ -190,19 +194,18 @@ function s:initNerdTree()
     let g:NERDTreeWinSize = 24
     let g:NERDTreeWinPos = "left"
 endfunction
-
 function s:startIDEMode()
     call s:initSrcExpl()
     call s:initTlist()
     call s:initNerdTree()
-
-    " TODO エラー出力されないようにする
-    SrcExplClose
-    NERDTreeClose
-    TlistClose
-
+    call s:endIDEMode()
     SrcExpl
     NERDTree
     Tlist
+endfunction
+function s:endIDEMode()
+    silent SrcExplClose
+    silent NERDTreeClose
+    silent TlistClose
 endfunction
 
