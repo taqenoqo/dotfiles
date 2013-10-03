@@ -25,8 +25,12 @@ function updateMessage() {
     fi
 }
 add-zsh-hook precmd updateMessage
+case $(hostname -s) in
+    "TakenokoMaintosh" ) promptColor="%{[38;5;173m%}" ;;
+    * ) echo $(hostname -s) ;;
+esac
 PS1="
-%{[38;5;173m%}     ∧ ∧
+$promptColor     ∧ ∧
     (*ﾟーﾟ) %m:%~
     /  .|   %1v
 ～（＿＿ﾉ
