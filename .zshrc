@@ -26,7 +26,7 @@ function updateMessage() {
 }
 add-zsh-hook precmd updateMessage
 case $(hostname -s) in
-    "TakenokoMaintosh" ) promptColor="%{[38;5;173m%}" ;;
+    "TakenokoMacintosh" ) promptColor="%{[38;5;173m%}" ;;
     * ) echo $(hostname -s) ;;
 esac
 PS1="
@@ -68,6 +68,8 @@ zstyle ':completion:*' insert-unambiguous true
 
 setopt glob #ファイルグロブ
 setopt extendedglob #拡張グロブ
+
+bindkey -v #vim風の操作
 
 # エイリアスの設定
 if ls --color >/dev/null 2>&1; then
