@@ -62,7 +62,7 @@ hi PMenuSel guifg=#ffffff guibg=#3966c7 guisp=#3966c7 gui=NONE ctermfg=15 ctermb
 hi PMenuThumb guifg=#ededed guibg=#b7b7b7 guisp=#b7b7b7 gui=NONE ctermfg=255 ctermbg=250 cterm=NONE
 
 " ステータスラインと境界線
-hi StatusLine guifg=#0ea279 guibg=#ffffff gui=NONE ctermfg=231 ctermbg=29 cterm=NONE
+hi StatusLine guifg=#ffffff guibg=#0ea279 gui=NONE ctermfg=231 ctermbg=29 cterm=NONE
 hi StatusLineNC guifg=#ffffff guibg=#b7e3bf gui=NONE ctermfg=231 ctermbg=151 cterm=NONE
 hi VertSplit guifg=#b7e3bf guibg=#b7e3bf gui=NONE ctermfg=151 ctermbg=151 cterm=NONE
 
