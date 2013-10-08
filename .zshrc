@@ -69,8 +69,6 @@ zstyle ':completion:*' insert-unambiguous true
 setopt glob #ファイルグロブ
 setopt extendedglob #拡張グロブ
 
-bindkey -v #vim風の操作
-
 # エイリアスの設定
 if ls --color >/dev/null 2>&1; then
     alias ls='ls -Fl --color=auto'
