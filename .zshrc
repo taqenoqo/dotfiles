@@ -26,8 +26,16 @@ function updateMessage() {
 }
 add-zsh-hook precmd updateMessage
 case $(hostname -s) in
-    "TakenokoMacintosh" ) promptColor="%{[38;5;173m%}" ;;
-    * ) echo $(hostname -s) ;;
+    "TakenokoMacintosh" )
+        promptColor="%{[38;5;173m%}"
+        ;;
+    "tak3n0k0" )
+        promptColor="%{[38;5;26m%}"
+        ;;
+    * )
+        promptColor="%{[38;5;244m%}"
+        echo $(hostname -s)
+        ;;
 esac
 PS1="
 $promptColor     ∧ ∧
@@ -71,9 +79,9 @@ setopt extendedglob #拡張グロブ
 
 # エイリアスの設定
 if ls --color >/dev/null 2>&1; then
-    alias ls='ls -Fl --color=auto'
+    alias ls='ls -Flh --color=auto'
 elif ls -G >/dev/null 2>&1; then
-    alias ls='ls -GFl'
+    alias ls='ls -GFlh'
 fi
 alias tmux='tmux -2'
 alias up='cd ..'
@@ -82,9 +90,10 @@ if type rmtrash >/dev/null 2>&1; then
 else
     alias rm='rm -i'
 fi
+alias df='df -h'
 
 # tmuxで開始する
-if (type tmux >/dev/null 2>&1) && [ $SHLVL = 1 ]; then
+if [ type tmux >/dev/null 2>&1 ] && [ $SHLVL = 1 ]; then
     tmux -2
 fi
 
