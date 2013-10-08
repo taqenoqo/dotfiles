@@ -6,7 +6,7 @@ for file in .*
 do
     if [ $file != '.git' ] && [ $file != '.gitignore' ]
     then
-        ln -is "$PWD/$file" $HOME
+        ln -fs "$PWD/$file" $HOME
     fi
 done
 
