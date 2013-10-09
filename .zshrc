@@ -93,7 +93,7 @@ fi
 alias df='df -h'
 
 # tmuxで開始する
-if [ type tmux >/dev/null 2>&1 ] && [ $SHLVL = 1 ]; then
+if (type -p tmux >/dev/null 2>&1) && [ $SHLVL = 1 ]; then
     tmux -2
 fi
 
