@@ -10,7 +10,6 @@ NeoBundle 'Smooth-Scroll'
 
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'taglist.vim'
-NeoBundle 'SrcExpl'
 NeoBundle 'surround.vim'
 
 NeoBundle 'Shougo/neocomplcache'
@@ -141,7 +140,7 @@ if !exists(":DiffOrig")
 endif
 
 " ステータスライン
-augroup EventHook
+augroup FaceEventHook
     autocmd!
     autocmd InsertLeave * call s:changeFace('(*ﾟーﾟ)♪\ ')
     autocmd CursorMoved * call s:changeFace('(*ﾟーﾟ)')
@@ -203,16 +202,13 @@ function s:initNerdTree()
     let g:NERDTreeWinPos = "left"
 endfunction
 function s:startIDEMode()
-    call s:initSrcExpl()
     call s:initTlist()
     call s:initNerdTree()
     call s:endIDEMode()
-    SrcExpl
     NERDTree
     Tlist
 endfunction
 function s:endIDEMode()
-    silent SrcExplClose
     silent NERDTreeClose
     silent TlistClose
 endfunction
