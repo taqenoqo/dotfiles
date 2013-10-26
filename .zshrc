@@ -91,9 +91,15 @@ else
     alias rm='rm -i'
 fi
 alias df='df -h'
+alias be='bundle exec'
+alias back='popd'
 
 # tmuxで開始する
 if (type -p tmux >/dev/null 2>&1) && [ $SHLVL = 1 ]; then
-    tmux -2
+    if $(tmux has-session); then
+        tmux attach
+    else
+        tmux
+    fi
 fi
 

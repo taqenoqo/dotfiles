@@ -17,9 +17,6 @@ NeoBundle 'Shougo/neocomplcache'
     let g:neocomplcache_enable_at_startup = 1
     " タブで補完
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-    " ポップアップを閉じるときのキー
-    inoremap <expr><C-y>  neocomplcache#close_popup()
-    inoremap <expr><C-e>  neocomplcache#cancel_popup()
     " オムニ補完
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
