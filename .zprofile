@@ -16,6 +16,8 @@ fi
 
 export EDITOR=vim
 
+export LANG=ja_JP.UTF-8
+
 if [ -f ~/.zprofile.local ]; then
     source ~/.zprofile.local
 fi
