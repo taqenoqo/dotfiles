@@ -13,3 +13,7 @@ if type rbenv >/dev/null 2>&1; then
         source "`brew --prefix rbenv`/completions/rbenv.zsh"
     fi
 fi
+
+if [ -f ~/.zprofile.local ]; then
+    source ~/.zprofile.local
+fi
