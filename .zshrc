@@ -97,6 +97,10 @@ alias df='df -h'
 alias be='bundle exec'
 alias back='popd'
 
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi
+
 # tmuxで開始する
 if (type -p tmux >/dev/null 2>&1) && [ $SHLVL = 1 ]; then
     if $(tmux has-session); then
