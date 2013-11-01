@@ -213,3 +213,7 @@ function s:endIDEMode()
     silent TlistClose
 endfunction
 
+if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
+endif
+
