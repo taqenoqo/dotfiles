@@ -14,6 +14,8 @@ if type rbenv >/dev/null 2>&1; then
     fi
 fi
 
+export EDITOR=vim
+
 if [ -f ~/.zprofile.local ]; then
     source ~/.zprofile.local
 fi
