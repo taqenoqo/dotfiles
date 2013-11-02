@@ -1,4 +1,11 @@
-alias ls='ls -Fl'
+export EDITOR=vim
+
+export LANG=ja_JP.UTF-8
+
+if [ -f ~/.zshenv.local ]; then
+    source ~/.zshenv.local
+fi
+
 if type brew >/dev/null 2>&1; then
     libexec="$(brew --prefix coreutils)/libexec"
     if [ -d $libexec ]; then
@@ -14,10 +21,3 @@ if type rbenv >/dev/null 2>&1; then
     fi
 fi
 
-export EDITOR=vim
-
-export LANG=ja_JP.UTF-8
-
-if [ -f ~/.zprofile.local ]; then
-    source ~/.zprofile.local
-fi
