@@ -50,10 +50,10 @@ NeoBundle 'camelcasemotion'
     map <silent> w <Plug>CamelCaseMotion_w
     map <silent> b <Plug>CamelCaseMotion_b
     map <silent> e <Plug>CamelCaseMotion_e
-    omap <silent> ic <Plug>CamelCaseMotion_iw
-    vmap <silent> ic <Plug>CamelCaseMotion_iw
-    omap <silent> ac <Plug>CamelCaseMotion_ie
-    vmap <silent> ac <Plug>CamelCaseMotion_ie
+    omap <silent> ic <Plug>CamelCaseMotion_ie
+    vmap <silent> ic <Plug>CamelCaseMotion_ie
+    omap <silent> ac <Plug>CamelCaseMotion_iw
+    vmap <silent> ac <Plug>CamelCaseMotion_iw
 
 " 起動時にチェック
 NeoBundleCheck
