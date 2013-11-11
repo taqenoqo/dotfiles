@@ -60,6 +60,8 @@ stty stop undef #C-s の無効化
 setopt nolistbeep
 setopt nobeep
 
+bindkey -e
+
 # 補完候補の色づけ
 if type dircolors >/dev/null 2>&1; then
     eval `dircolors`
