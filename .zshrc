@@ -36,7 +36,7 @@ case $(hostname -s) in
     "tak3n0k0" )
         promptColor="%{[38;5;26m%}"
         ;;
-    acacia[0-5][0-9] | burnet[0-5][0-9] | cosmos[0-5][0-9] )
+    abelia[0-5][0-9] | borage[0-5][0-9] | crocus[0-5][0-9] )
         promptColor="%{[38;5;163m%}"
         ;;
     * )
