@@ -102,6 +102,7 @@ fi
 alias df='df -h'
 alias be='bundle exec'
 alias back='popd'
+alias diff='colordiff'
 
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
