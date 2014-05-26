@@ -1,6 +1,6 @@
-.vim/bundle/
-.vim/.netrwhist
+vim/bundle/*
+vim/.netrwhist
 
-.ssh/*
-!.ssh/config
+ssh/*
+!ssh/config
 
