@@ -1,25 +1,23 @@
-" ファイル形式別プラグイン
-filetype plugin indent on
-
-" 言語環境の設定
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932
-
 " シンタックスハイライト
 syntax on
 colorscheme nuyo
 
 " タブ、改行などの表示
-highlight NonText guifg=lightgray ctermfg=lightgray
-highlight SpecialKey guifg=lightgray ctermfg=lightgray
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+
+" 言語環境の設定
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932
 
 " インデント設定
 set autoindent
 set smartindent
 set expandtab
 set tabstop=4 shiftwidth=4 softtabstop=4
+
+" <Leader> の設定
+let mapleader = " "
 
 " 大小文字を区別しない検索
 set ignorecase
@@ -62,7 +60,6 @@ set nojoinspaces
 
 " 行の最大文字数と自動改行の設定
 set textwidth=120
-autocmd FileType * setlocal fo-=t fo-=c fo-=r fo-=o
 
 " swpファイル作らない
 set noswapfile
@@ -73,13 +70,8 @@ set nobackup
 " キーコードのタイムアウトをしない
 set notimeout
 
-" 変更の差分を表示するコマンド
-if !exists(":DiffOrig")
-    command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-            \ | wincmd p | diffthis
-endif
+" 自動改行
+autocmd FileType * setlocal formatoptions=roql
 
-if filereadable(expand('~/.vimrc.local'))
-    source ~/.vimrc.local
-endif
+silent! source ~/.vimrc.local
 
