@@ -4,7 +4,9 @@ let s:SETTINGS_EXTENSION = ".vim"
 function s:loadSettings()
     let files = split(glob(s:SETTINGS_DIR . "/*" . s:SETTINGS_EXTENSION), "\n")
     for f in files
-        silent! execute "source " . f
+        if filereadable(f)
+            execute "source " . f
+        endif
     endfor
 endfunction
 
