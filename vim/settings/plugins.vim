@@ -1,18 +1,19 @@
-" neobundle関連
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim
 endif
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-" プラグイン
 NeoBundle 'Smooth-Scroll'
-
+NeoBundle 'surround.vim'
+NeoBundle 'camelcasemotion'
+NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'taglist.vim'
-NeoBundle 'surround.vim'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'hallison/vim-markdown'
 
-NeoBundle 'Shougo/neocomplcache'
+if neobundle#tap("neocomplcache")
     let g:neocomplcache_enable_at_startup = 1
     " タブで補完
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -22,10 +23,9 @@ NeoBundle 'Shougo/neocomplcache'
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+endif
 
-NeoBundle 'hallison/vim-markdown'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'tyru/open-browser.vim'
+if neobundle#tap("vim-quickrun")
     let g:quickrun_config = {}
     if (isdirectory('/Applications/Marked.app'))
         let g:quickrun_config.markdown = {
@@ -36,17 +36,9 @@ NeoBundle 'tyru/open-browser.vim'
             \ 'exec'      : '%c %o %a %s',
         \ }
     endif
+endif
 
-NeoBundle 'LeafCage/foldCC'
-    set foldtext=foldCC#foldtext()
-    let g:foldCCtext_head = ''
-    let g:foldCCtext_tail = ''
-    set fillchars=vert:\|
-    set foldcolumn=1
-    set foldlevel=3
-    noremap z<Space> za
-
-NeoBundle 'camelcasemotion'
+if neobundle#tap("camelcasemotion")
     map <silent> w <Plug>CamelCaseMotion_w
     map <silent> b <Plug>CamelCaseMotion_b
     map <silent> e <Plug>CamelCaseMotion_e
@@ -54,7 +46,9 @@ NeoBundle 'camelcasemotion'
     vmap <silent> ic <Plug>CamelCaseMotion_ie
     omap <silent> ac <Plug>CamelCaseMotion_iw
     vmap <silent> ac <Plug>CamelCaseMotion_iw
+endif
 
-" 起動時にチェック
+call neobundle#end()
+filetype plugin indent on
 NeoBundleCheck
 

@@ -1,4 +1,4 @@
-augroup FaceEventHook
+augroup EmoticonStatusLine
     autocmd!
     autocmd InsertLeave * call s:changeFace('(*ﾟーﾟ)♪\ ')
     autocmd CursorMoved * call s:changeFace('(*ﾟーﾟ)')
@@ -6,16 +6,14 @@ augroup FaceEventHook
     autocmd BufWritePost * call s:changeFace('(*^ーﾟ)')
     autocmd CursorHold * call s:changeFace('ｃ⌒っ*ﾟーﾟ)っ')
 augroup END
+
 let s:oldFace = ""
-function GetSyntaxType()
-    return synIDattr(synID(line('.'), col('.'), 0), 'name')
-endfunction
+
 function s:changeFace(face)
-    if a:face == s:oldFace
+    if s:oldFace == a:face
         return
     endif
-    silent let l:line = 'set statusline=\ ' . a:face
-    silent let l:line .= '\ %<%l,%c=%B[%{GetSyntaxType()}]%=%n:%p%%\ %m%r%h%w%y\ %t\ [%{&fenc}][%{&ff}]\ '
+    silent let l:line = 'setlocal statusline=\ %t%m\ %y[%{&fenc},\ %{&ff}]\ %r%h%w%=(%p%%)\ %l,%c\ =\ 0x%B\ ' . a:face . '\ '
     silent exec l:line
     silent let s:oldFace = a:face
 endfunction
