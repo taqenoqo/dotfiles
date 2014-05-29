@@ -17,14 +17,17 @@ NeoBundle 'Shougo/neosnippet-snippets'
 
 if neobundle#tap("neocomplcache")
     let g:neocomplcache_enable_at_startup = 1
-    " タブで補完
+    inoremap <expr><C-n>  neocomplcache#start_manual_complete()
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-    " オムニ補完
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    if !exists('g:neocomplcache_omni_patterns')
+        let g:neocomplcache_omni_patterns = {}
+    endif
+    let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 endif
 
 if neobundle#tap("vim-quickrun")
