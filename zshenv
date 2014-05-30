@@ -22,3 +22,4 @@ if (type rbenv >/dev/null 2>&1) && (rbenv --version >/dev/null 2>&1); then
 fi
 
 export PATH=~/.zsh/bin:$PATH
+
