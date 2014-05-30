@@ -68,13 +68,11 @@ if neobundle#tap("neosnippet")
     imap <C-k> <Plug>(neosnippet_expand_or_jump)
     smap <C-k> <Plug>(neosnippet_expand_or_jump)
     xmap <C-k> <Plug>(neosnippet_expand_target)
-    imap <expr><CR> pumvisible() ? "\<C-k>" : "\<CR>"
-    imap <expr><TAB> neosnippet#jumpable() ?
-                \ "\<Plug>(neosnippet_expand_or_jump)"
-                \: pumvisible() ? "\<C-n>" : "\<Tab>"
-    smap <expr><TAB> neosnippet#jumpable() ?
-                \ "\<Plug>(neosnippet_expand_or_jump)"
-                \: "\<TAB>"
+    imap <expr><CR> pumvisible() ? "\<Plug>(neosnippet_expand)" : "\<CR>"
+    imap <expr><Tab> pumvisible() ?
+                \ "\<C-n>"
+                \: neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
+    smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
 endif
 
 call neobundle#end()
