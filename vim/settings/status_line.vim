@@ -7,7 +7,7 @@ augroup EmoticonStatusLine
     autocmd CursorHold * call s:changeFace('ｃ⌒っ*ﾟーﾟ)っ')
 augroup END
 
-let s:oldFace = ""
+let s:oldFace = ''
 
 function s:changeFace(face)
     if s:oldFace == a:face
