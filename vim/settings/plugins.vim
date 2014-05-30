@@ -4,16 +4,17 @@ endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-NeoBundle 'Smooth-Scroll'
 NeoBundle 'surround.vim'
 NeoBundle 'camelcasemotion'
+NeoBundle 'Smooth-Scroll'
 NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'taglist.vim'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'hallison/vim-markdown'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'taglist.vim'
+NeoBundle "kien/ctrlp.vim"
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'hallison/vim-markdown'
 
 if neobundle#tap("neocomplcache")
     let g:neocomplcache_enable_at_startup = 1
