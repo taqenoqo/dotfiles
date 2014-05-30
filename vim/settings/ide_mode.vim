@@ -5,7 +5,7 @@ function s:initTlist()
     let g:Tlist_Use_Right_Window = 1
     let g:Tlist_WinWidth = 32
     " 表示順
-    let g:Tlist_Sort_Type = "order"
+    let g:Tlist_Sort_Type = 'order'
     " スペース等を省いたコンパクトな表示
     let g:Tlist_Compact_Format = 0
     " Tlistのwindowだけが残った場合終了する
@@ -24,9 +24,9 @@ function s:initSrcExpl()
     let g:SrcExpl_refreshTime = 10
     " 競合のプラグイン
     let g:SrcExpl_pluginList = [
-        \ "__Tag_List__",
-        \ "_NERD_tree_",
-        \ "Source_Explorer"
+        \ '__Tag_List__',
+        \ '_NERD_tree_',
+        \ 'Source_Explorer'
     \ ]
     " 開くときにtagsファイルの更新を許可しない
     let g:SrcExpl_isUpdateTags = 0
@@ -34,7 +34,7 @@ endfunction
 function s:initNerdTree()
     " window設定
     let g:NERDTreeWinSize = 24
-    let g:NERDTreeWinPos = "left"
+    let g:NERDTreeWinPos = 'left'
 endfunction
 function s:startIDEMode()
     call s:initTlist()

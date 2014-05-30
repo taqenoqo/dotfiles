@@ -17,7 +17,7 @@ set expandtab
 set tabstop=4 shiftwidth=4 softtabstop=4
 
 " <Leader> の設定
-let mapleader = " "
+let mapleader = ' '
 
 " 大小文字を区別しない検索
 set ignorecase

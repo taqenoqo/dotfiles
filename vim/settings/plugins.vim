@@ -16,14 +16,14 @@ NeoBundle "kien/ctrlp.vim"
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'hallison/vim-markdown'
 
-if neobundle#tap("neocomplcache")
+if neobundle#tap('neocomplcache')
     let g:neocomplcache_enable_at_startup = 1
     inoremap <expr><C-n> neocomplcache#start_manual_complete()
     inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
     inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
     inoremap <silent> <Return> <C-r>=<SID>my_cr_function()<Return>
     function! s:my_cr_function()
-        return pumvisible() ? neocomplcache#close_popup() : "\<Return>"
+        return pumvisible() ? neocomplcache#close_popup() : '\<Return>'
     endfunction
     inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
     inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
@@ -38,9 +38,10 @@ if neobundle#tap("neocomplcache")
         let g:neocomplcache_omni_patterns = {}
     endif
     let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+    call neobundle#untap()
 endif
 
-if neobundle#tap("vim-quickrun")
+if neobundle#tap('vim-quickrun')
     let g:quickrun_config = {}
     if (isdirectory('/Applications/Marked.app'))
         let g:quickrun_config.markdown = {
@@ -51,9 +52,10 @@ if neobundle#tap("vim-quickrun")
             \ 'exec'      : '%c %o %a %s',
         \ }
     endif
+    call neobundle#untap()
 endif
 
-if neobundle#tap("camelcasemotion")
+if neobundle#tap('camelcasemotion')
     map <silent> w <Plug>CamelCaseMotion_w
     map <silent> b <Plug>CamelCaseMotion_b
     map <silent> e <Plug>CamelCaseMotion_e
@@ -61,10 +63,11 @@ if neobundle#tap("camelcasemotion")
     vmap <silent> ic <Plug>CamelCaseMotion_ie
     omap <silent> ac <Plug>CamelCaseMotion_iw
     vmap <silent> ac <Plug>CamelCaseMotion_iw
+    call neobundle#untap()
 endif
 
-if neobundle#tap("neosnippet")
-    let g:neosnippet#snippets_directory = "~/.vim/snippets/"
+if neobundle#tap('neosnippet')
+    let g:neosnippet#snippets_directory = '~/.vim/snippets/'
     imap <C-k> <Plug>(neosnippet_expand_or_jump)
     smap <C-k> <Plug>(neosnippet_expand_or_jump)
     xmap <C-k> <Plug>(neosnippet_expand_target)
@@ -73,6 +76,7 @@ if neobundle#tap("neosnippet")
                 \ "\<C-n>"
                 \: neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
     smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
+    call neobundle#untap()
 endif
 
 call neobundle#end()
