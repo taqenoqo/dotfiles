@@ -18,6 +18,9 @@ NeoBundle 'hallison/vim-markdown'
 
 if neobundle#tap('neocomplcache')
     let g:neocomplcache_enable_at_startup = 1
+    let g:neocomplcache_enable_smart_case = 1
+    let g:neocomplcache_auto_completion_start_length = 0
+    let g:neocomplcache_enable_fuzzy_completion = 1
     inoremap <expr><C-n> neocomplcache#start_manual_complete()
     inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
     inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
@@ -37,6 +40,9 @@ if neobundle#tap('neocomplcache')
     if !exists('g:neocomplcache_omni_patterns')
         let g:neocomplcache_omni_patterns = {}
     endif
+    let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+    let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+    let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
     let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
     call neobundle#untap()
 endif
