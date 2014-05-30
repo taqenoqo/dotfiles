@@ -17,8 +17,17 @@ NeoBundle 'Shougo/neosnippet-snippets'
 
 if neobundle#tap("neocomplcache")
     let g:neocomplcache_enable_at_startup = 1
-    inoremap <expr><C-n>  neocomplcache#start_manual_complete()
-    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    inoremap <expr><C-n> neocomplcache#start_manual_complete()
+    inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+    inoremap <silent> <Return> <C-r>=<SID>my_cr_function()<Return>
+    function! s:my_cr_function()
+        return pumvisible() ? neocomplcache#close_popup() : "\<Return>"
+    endfunction
+    inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+    inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+    inoremap <expr><C-y> neocomplcache#close_popup()
+    inoremap <expr><C-e> neocomplcache#cancel_popup()
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -58,10 +67,11 @@ if neobundle#tap("neosnippet")
     imap <C-k> <Plug>(neosnippet_expand_or_jump)
     smap <C-k> <Plug>(neosnippet_expand_or_jump)
     xmap <C-k> <Plug>(neosnippet_expand_target)
-    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    imap <expr><CR> pumvisible() ? "\<C-k>" : "\<CR>"
+    imap <expr><TAB> neosnippet#jumpable() ?
                 \ "\<Plug>(neosnippet_expand_or_jump)"
-                \: pumvisible() ? "\<C-n>" : "\<TAB>"
-    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+                \: pumvisible() ? "\<C-n>" : "\<Tab>"
+    smap <expr><TAB> neosnippet#jumpable() ?
                 \ "\<Plug>(neosnippet_expand_or_jump)"
                 \: "\<TAB>"
 endif
