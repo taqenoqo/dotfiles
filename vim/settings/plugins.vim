@@ -15,6 +15,7 @@ NeoBundle 'taglist.vim'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'hallison/vim-markdown'
+NeoBundle 'sudo.vim'
 
 if neobundle#tap('neocomplcache')
     let g:neocomplcache_enable_at_startup = 1
