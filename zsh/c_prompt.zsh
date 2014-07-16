@@ -1,5 +1,5 @@
 autoload -Uz is-at-least
-if is-at-least 4.3.11; then
+if is-at-least 4.3.10; then
     autoload -Uz vcs_info
     autoload -Uz add-zsh-hook
     zstyle ':vcs_info:*' enable git svn hg
