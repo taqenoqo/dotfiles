@@ -91,6 +91,7 @@ endif
 if neobundle#tap('vim-gista')
     let g:gista#list_opener = 'topleft 80 vsplit'
     let g:gista#post_private = 1
+    command! GistaList :Gista -l
     call neobundle#untap()
 endif
 
