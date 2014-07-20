@@ -14,3 +14,5 @@
 	email = ttaakkee@gmail.com
 [include]
 	path = .gitconfig.local
+[github]
+	user = tak3n0k0

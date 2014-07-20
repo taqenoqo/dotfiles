@@ -16,6 +16,7 @@ NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'hallison/vim-markdown'
 NeoBundle 'sudo.vim'
+NeoBundle 'lambdalisue/vim-gista'
 
 if neobundle#tap('neocomplcache')
     let g:neocomplcache_enable_at_startup = 1
@@ -83,6 +84,12 @@ if neobundle#tap('neosnippet')
                 \ "\<C-n>"
                 \: neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
     smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
+    call neobundle#untap()
+endif
+
+if neobundle#tap('vim-gista')
+    let g:gista#list_opener = 'topleft 80 vsplit'
+    let g:gista#post_private = 1
     call neobundle#untap()
 endif
 
