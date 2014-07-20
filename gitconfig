@@ -12,3 +12,5 @@
 [user]
 	name = Takenoko
 	email = ttaakkee@gmail.com
+[include]
+	path = .gitconfig.local
