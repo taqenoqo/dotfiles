@@ -23,7 +23,7 @@ case $(hostname -s) in
     "TakenokoMacintosh" )
         promptColor="%{[38;5;173m%}"
         ;;
-    "TAK3N0K0" )
+    "tak3n0k0" )
         promptColor="%{[38;5;26m%}"
         ;;
     abelia[0-5][0-9] | borage[0-5][0-9] | crocus[0-5][0-9] )
