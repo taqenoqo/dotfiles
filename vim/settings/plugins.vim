@@ -14,10 +14,11 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'taglist.vim'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'hallison/vim-markdown'
+NeoBundle 'TAK3N0K0/vim-markdown'
 NeoBundle 'sudo.vim'
 NeoBundle 'lambdalisue/vim-gista'
 NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'kannokanno/previm'
 
 if neobundle#tap('neocomplcache')
     let g:neocomplcache_enable_at_startup = 1
@@ -47,20 +48,17 @@ if neobundle#tap('neocomplcache')
     let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
     let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
     let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+
     call neobundle#untap()
 endif
 
 if neobundle#tap('vim-quickrun')
     let g:quickrun_config = {}
-    if (isdirectory('/Applications/Marked.app'))
-        let g:quickrun_config.markdown = {
-            \ 'outputter' : 'null',
-            \ 'command'   : 'open',
-            \ 'cmdopt'    : '-a',
-            \ 'args'      : 'Marked',
-            \ 'exec'      : '%c %o %a %s',
-        \ }
-    endif
+    let g:quickrun_config['markdown'] = {
+        \ 'outputter' : 'null',
+        \ 'exec' : ':PrevimOpen'
+    \ }
+
     call neobundle#untap()
 endif
 
@@ -72,6 +70,7 @@ if neobundle#tap('camelcasemotion')
     vmap <silent> ic <Plug>CamelCaseMotion_ie
     omap <silent> ac <Plug>CamelCaseMotion_iw
     vmap <silent> ac <Plug>CamelCaseMotion_iw
+
     call neobundle#untap()
 endif
 
@@ -85,13 +84,15 @@ if neobundle#tap('neosnippet')
                 \ "\<C-n>"
                 \: neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
     smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
+
     call neobundle#untap()
 endif
 
 if neobundle#tap('vim-gista')
-    let g:gista#list_opener = 'topleft 80 vsplit'
+    let g:gista#list_opener = 'topleft 90 vsplit'
     let g:gista#post_private = 1
     command! GistaList :Gista -l
+
     call neobundle#untap()
 endif
 
