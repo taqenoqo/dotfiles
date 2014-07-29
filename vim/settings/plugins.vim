@@ -96,6 +96,12 @@ if neobundle#tap('vim-gista')
     call neobundle#untap()
 endif
 
+if neobundle#tap('vim-markdown')
+    let g:vim_markdown_initial_foldlevel = 1
+
+    call neobundle#untap()
+endif
+
 call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck
