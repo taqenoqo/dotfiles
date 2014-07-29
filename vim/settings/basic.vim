@@ -73,5 +73,16 @@ set notimeout
 " 自動改行
 autocmd FileType * setlocal formatoptions=roql
 
+" バックアップを作成しないファイル
+set backupskip=/tmp/*,/private/tmp/*
+
+" 折り畳み設定
+set fillchars="vert:|,fold:"
+set foldmethod=syntax
+set foldtext=MyFoldText()
+function MyFoldText()
+    return getline(v:foldstart)
+endfunction
+
 silent! source ~/.vimrc.local
 
