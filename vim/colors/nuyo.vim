@@ -69,3 +69,10 @@ hi VertSplit guifg=#b7e3bf guibg=#b7e3bf gui=NONE ctermfg=151 ctermbg=151 cterm=
 " 折り畳み
 hi Folded guifg=#005faf guibg=#ffffff gui=NONE ctermfg=25 ctermbg=231 cterm=NONE
 hi FoldColumn guifg=#005faf guibg=#ffffff gui=NONE ctermfg=25 ctermbg=231 cterm=NONE
+
+" diff
+hi DiffAdd guifg=NONE guibg=#d5ffff ctermfg=NONE ctermbg=195 cterm=NONE
+hi DiffDelete guifg=NONE guibg=#ffdcff ctermfg=NONE ctermbg=225 cterm=NONE
+hi DiffChange guifg=NONE guibg=#feffdc ctermfg=NONE ctermbg=230 cterm=NONE
+hi DiffText guifg=NONE guibg=#ffdf90 ctermfg=NONE ctermbg=222 cterm=NONE
+
