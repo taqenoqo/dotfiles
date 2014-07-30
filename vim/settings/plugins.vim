@@ -55,9 +55,9 @@ endif
 if neobundle#tap('vim-quickrun')
     let g:quickrun_config = {}
     let g:quickrun_config['markdown'] = {
-        \ 'outputter' : 'null',
-        \ 'exec' : ':PrevimOpen'
-    \ }
+    \       'outputter' : 'null',
+    \       'exec' : ':PrevimOpen'
+    \   }
 
     call neobundle#untap()
 endif
