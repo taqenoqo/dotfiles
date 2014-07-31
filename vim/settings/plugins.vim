@@ -97,7 +97,7 @@ if neobundle#tap('vim-gista')
 endif
 
 if neobundle#tap('vim-markdown')
-    let g:vim_markdown_initial_foldlevel = 1
+    let g:vim_markdown_initial_foldlevel = 2
 
     call neobundle#untap()
 endif

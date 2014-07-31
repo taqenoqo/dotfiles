@@ -77,7 +77,7 @@ autocmd FileType * setlocal formatoptions=roql
 set backupskip=/tmp/*,/private/tmp/*
 
 " 折り畳み設定
-set foldlevel=1
+set foldlevel=2
 set foldnestmax=2
 set fillchars="vert:|,fold:"
 set foldmethod=syntax
