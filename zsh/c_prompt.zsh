@@ -34,10 +34,20 @@ case $(hostname -s) in
         echo $(hostname -s)
         ;;
 esac
-PS1="
+
+function change_prompt() {
+    simplePrompt="%# "
+    cPrompt="
 $promptColor     ∧ ∧
     (*ﾟーﾟ) %m:%~
     /  .|   %1v
 ～（＿＿ﾉ
 %n${WINDOW:+"[$WINDOW]"}%# %{[38;5;00m%}"
+    if [ $PS1 = $cPrompt ]; then
+        PS1=$simplePrompt
+    else
+        PS1=$cPrompt
+    fi
+}
+change_prompt
 
