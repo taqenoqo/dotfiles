@@ -7,6 +7,7 @@ if [ -f ~/.zshenv.local ]; then
 fi
 
 if (type brew >/dev/null 2>&1) && (brew --version >/dev/null 2>&1); then
+    export PATH="$(brew --prefix)/sbin:$PATH"
     libexec="$(brew --prefix coreutils)/libexec"
     if [ -d $libexec ]; then
         export PATH=$libexec/gnubin:$PATH
