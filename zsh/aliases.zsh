@@ -16,4 +16,4 @@ alias back='popd'
 if type colordiff >/dev/null 2>&1; then
     alias diff='colordiff'
 fi
-
+alias emacs='vim'
