@@ -55,9 +55,16 @@ endif
 if neobundle#tap('vim-quickrun')
     let g:quickrun_config = {}
     let g:quickrun_config['markdown'] = {
-    \       'outputter' : 'null',
-    \       'exec' : ':PrevimOpen'
-    \   }
+            \'outputter' : 'null',
+            \'command' : 'open',
+            \'cmdopt' : '-a',
+            \'args' : 'Marked',
+            \'exec' : '%c %o %a %s'
+        \}
+    "let g:quickrun_config['markdown'] = {
+    "\       'outputter' : 'null',
+    "\       'exec' : ':PrevimOpen'
+    "\   }
 
     call neobundle#untap()
 endif
@@ -91,6 +98,7 @@ endif
 if neobundle#tap('vim-gista')
     let g:gista#list_opener = 'topleft 90 vsplit'
     let g:gista#post_private = 1
+    let g:gista#update_on_write = 1
     command! GistaList :Gista -l
 
     call neobundle#untap()
