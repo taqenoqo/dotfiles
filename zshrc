@@ -19,8 +19,10 @@ setopt nobeep
 
 bindkey -e #emacs的キーバインド
 
-setopt glob #ファイルグロブ
+setopt glob #グロブ
 setopt extendedglob #拡張グロブ
+
+setopt auto_cd #ディレクトリ名を打つと自動でcd
 
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
