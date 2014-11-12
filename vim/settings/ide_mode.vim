@@ -33,7 +33,7 @@ function s:initSrcExpl()
 endfunction
 function s:initNerdTree()
     " window設定
-    let g:NERDTreeWinSize = 24
+    let g:NERDTreeWinSize = 32
     let g:NERDTreeWinPos = 'left'
 endfunction
 function s:startIDEMode()
