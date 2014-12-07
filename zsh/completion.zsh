@@ -21,3 +21,9 @@ zstyle ':completion:*' verbose yes
 zstyle ':completion:*' completer _oldlist _complete  _expand _match _prefix _approximate _list _history
 zstyle ':completion:*' insert-unambiguous true
 
+# zsh-completions
+if [ -d ${HOME}/.zsh/zsh-completions/src ] ; then
+   fpath=(${HOME}/.zsh/zsh-completions/src $fpath)
+   compinit
+fi
+
