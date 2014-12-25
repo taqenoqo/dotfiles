@@ -21,28 +21,33 @@ if is-at-least 4.3.10; then
 fi
 case $(hostname -s) in
     "TakenokoMacintosh" )
-        promptColor="%{[38;5;173m%}"
+        aaColor="%{[38;5;173m%}"
         ;;
     "tak3n0k0" )
-        promptColor="%{[38;5;26m%}"
+        aaColor="%{[38;5;26m%}"
         ;;
     abelia[0-5][0-9] | borage[0-5][0-9] | crocus[0-5][0-9] )
-        promptColor="%{[38;5;163m%}"
+        aaColor="%{[38;5;163m%}"
         ;;
     * )
-        promptColor="%{[38;5;244m%}"
+        aaColor="%{[38;5;244m%}"
         echo $(hostname -s)
         ;;
 esac
+if [[ $UID -eq 0 ]]; then
+    promptColor="%{[38;5;197m%}"
+else
+    promptColor=""
+fi
 
 function change_prompt() {
     simplePrompt="%# "
     cPrompt="
-$promptColor     ∧ ∧
+$aaColor     ∧ ∧
     (*ﾟーﾟ) %m:%~
     /  .|   %1v
 ～（＿＿ﾉ
-%n${WINDOW:+"[$WINDOW]"}%# %{[38;5;00m%}"
+%n${WINDOW:+"[$WINDOW]"}$promptColor%# %{[38;5;00m%}"
     if [ $PS1 = $cPrompt ]; then
         PS1=$simplePrompt
     else
