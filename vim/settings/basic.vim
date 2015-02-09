@@ -66,6 +66,7 @@ set noswapfile
 
 " チルダファイル作らない
 set nobackup
+set noundofile
 
 " キーコードのタイムアウトをしない
 set notimeout
