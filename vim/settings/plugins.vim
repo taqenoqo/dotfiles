@@ -18,6 +18,16 @@ NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'sudo.vim'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'h1mesuke/vim-alignta'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'Shougo/vimproc.vim', {
+    \ 'build' : {
+        \ 'windows' : 'tools\\update-dll-mingw',
+        \ 'cygwin' : 'make -f make_cygwin.mak',
+        \ 'mac' : 'make -f make_mac.mak',
+        \ 'linux' : 'make',
+        \ 'unix' : 'gmake',
+    \ },
+\ }
 
 if neobundle#tap('neocomplcache')
     let g:neocomplcache_enable_at_startup = 1
