@@ -14,9 +14,10 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'taglist.vim'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'TAK3N0K0/vim-markdown'
+NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'sudo.vim'
 NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'h1mesuke/vim-alignta'
 
 if neobundle#tap('neocomplcache')
     let g:neocomplcache_enable_at_startup = 1
@@ -52,7 +53,7 @@ endif
 
 if neobundle#tap('vim-quickrun')
     let g:quickrun_config = {}
-    let g:quickrun_config['markdown'] = {
+    let g:quickrun_config['mkd'] = {
             \'outputter' : 'null',
             \'command' : 'open',
             \'cmdopt' : '-a',
