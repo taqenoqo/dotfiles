@@ -8,6 +8,7 @@ for src in */*; do
     ln -siTn "${src:A}" "$tgt"
 done
 
+git pull --recurse-submodules
 git submodule update --init --recursive
 
 chsh -s $(where zsh)
