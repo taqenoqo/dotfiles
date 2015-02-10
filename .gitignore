@@ -1,7 +1,10 @@
-vim/bundle/*
-!vim/bundle/neobundle.vim
-vim/.netrwhist
+.*
+!.gitignore
+!.gitmodules
 
-ssh/*
-!ssh/config
+vim/vim/bundle/*
+!vim/vim/bundle/neobundle.vim
+
+ssh/ssh/*
+!ssh/ssh/config
 
