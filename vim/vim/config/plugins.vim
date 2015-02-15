@@ -178,6 +178,69 @@ if neobundle#tap('vim-markdown')
     function! neobundle#tapped.hooks.on_source(bundle)
         let g:vim_markdown_initial_foldlevel = 2
     endfunction
+
+    call neobundle#untap()
+endif
+
+NeoBundleLazy 'Shougo/unite.vim'
+if neobundle#tap('unite.vim')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'commands': {
+                \ 'name': 'Unite',
+                \ 'complete': 'customlist,unite#complete#source'
+            \ }
+        \ }
+    \ })
+
+    call neobundle#untap()
+endif
+
+NeoBundleLazy 'Shougo/unite-outline', { 'depends': 'Shougo/unite.vim' }
+if neobundle#tap('unite-outline')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'unite_sources': 'outline',
+            \ 'commands': [ 'Outline', 'OutlineStart', 'OutlineStop']
+        \ }
+    \ })
+
+    function! neobundle#tapped.hooks.on_source(bundle)
+        call unite#custom#profile('outline', 'context', {
+            \ 'no_quit': 1,
+            \ 'vertical': 1,
+            \ 'winwidth': 40,
+            \ 'direction': 'botright',
+            \ 'hide_source_names': 1,
+        \ })
+
+        function! s:outline()
+            if unite#sources#outline#get_outline_info(&filetype) != {}
+                silent UniteClose
+                Unite -profile-name=outline outline
+            endif
+        endfunction
+
+        function! s:outline_start()
+            augroup outline
+                autocmd!
+                autocmd BufWinEnter * Outline
+            augroup END
+            call s:outline()
+        endfunction
+
+        function! s:outline_stop()
+            augroup outline
+                autocmd!
+            augroup END
+            silent UniteClose
+        endfunction
+
+        command! -nargs=0 Outline call s:outline()
+        command! -nargs=0 OutlineStart call s:outline_start()
+        command! -nargs=0 OutlineStop call s:outline_stop()
+    endfunction
+
     call neobundle#untap()
 endif
 
