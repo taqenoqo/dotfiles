@@ -6,8 +6,6 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'yonchu/accelerated-smooth-scroll'
 
-NeoBundle 'h1mesuke/vim-alignta'
-
 NeoBundle 'surround.vim'
 if neobundle#tap('surround.vim')
     let g:surround_no_mappings = 1
@@ -41,6 +39,17 @@ if neobundle#tap('vim-indent-guides')
 
     hi IndentGuidesOdd  ctermbg=194 ctermfg=145
     hi IndentGuidesEven ctermbg=194 ctermfg=145
+
+    call neobundle#untap()
+endif
+
+NeoBundleLazy 'h1mesuke/vim-alignta'
+if neobundle#tap('vim-alignta')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'commands': 'Alignta'
+        \ }
+    \ })
 
     call neobundle#untap()
 endif
