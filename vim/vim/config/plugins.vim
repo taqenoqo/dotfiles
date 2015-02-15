@@ -5,15 +5,18 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'yonchu/accelerated-smooth-scroll'
+
 NeoBundle 'h1mesuke/vim-alignta'
 
 NeoBundle 'surround.vim'
 if neobundle#tap('surround.vim')
     let g:surround_no_mappings = 1
+
     nmap ds <Plug>Dsurround
     nmap cs <Plug>Csurround
     nmap s <Plug>Ysurround
     xmap s <Plug>VSurround
+
     call neobundle#untap()
 endif
 
@@ -26,6 +29,7 @@ if neobundle#tap('camelcasemotion')
     vmap <silent> ic <Plug>CamelCaseMotion_ie
     omap <silent> ac <Plug>CamelCaseMotion_iw
     vmap <silent> ac <Plug>CamelCaseMotion_iw
+
     call neobundle#untap()
 endif
 
@@ -34,8 +38,10 @@ if neobundle#tap('vim-markdown')
     let g:indent_guides_enable_on_vim_startup = 1
     let g:indent_guides_guide_size = 1
     let g:indent_guides_auto_colors = 0
+
     hi IndentGuidesOdd  ctermbg=194 ctermfg=145
     hi IndentGuidesEven ctermbg=194 ctermfg=145
+
     call neobundle#untap()
 endif
 
@@ -46,9 +52,11 @@ if neobundle#tap('nerdtree')
             \ 'commands': 'NERDTree'
         \ }
     \ })
+
     function! neobundle#tapped.hooks.on_source(bundle)
         let g:NERDTreeWinSize = 32
     endfunction
+
     call neobundle#untap()
 endif
 
@@ -59,6 +67,7 @@ if neobundle#tap('nerdtree')
             \ 'on_source': 'nerdtree'
         \ }
     \ })
+
     function! neobundle#tapped.hooks.on_source(bundle)
         let g:NERDTreeIndicatorMap = {
             \ "Modified" : "*",
@@ -72,6 +81,7 @@ if neobundle#tap('nerdtree')
             \ "Unknown" : "?"
         \ }
     endfunction
+
     call neobundle#untap()
 endif
 
@@ -82,6 +92,7 @@ if neobundle#tap('neocomplcache')
             \ 'insert': 1
         \ }
     \ })
+
     function! neobundle#tapped.hooks.on_source(bundle)
         let g:neocomplcache_enable_at_startup = 1
         let g:neocomplcache_enable_smart_case = 1
@@ -96,21 +107,25 @@ if neobundle#tap('neocomplcache')
             \ 'php': '\w',
             \ 'ruby': '\w',
         \ }
+
         inoremap <expr> <C-n> neocomplcache#start_manual_complete()
-        inoremap <expr> <CR> <SID>cr_neocomplcache()
-        function s:cr_neocomplcache()
-            return pumvisible() ? neocomplcache#close_popup() : "\<Return>"
-        endfunction
-        inoremap <expr> <TAB> <SID>tab_neocomplcache()
-        function s:tab_neocomplcache()
-            return pumvisible() ? "\<C-n>" : "\<TAB>"
-        endfunction
         inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
         inoremap <expr> <C-h> neocomplcache#smart_close_popup()."\<C-h>"
         inoremap <expr> <BS> neocomplcache#smart_close_popup()."\<C-h>"
         inoremap <expr> <C-y> neocomplcache#close_popup()
         inoremap <expr> <C-e> neocomplcache#cancel_popup()
+        inoremap <expr> <CR> <SID>cr_neocomplcache()
+        inoremap <expr> <TAB> <SID>tab_neocomplcache()
+
+        function! s:cr_neocomplcache()
+            return pumvisible() ? neocomplcache#close_popup() : "\<Return>"
+        endfunction
+
+        function! s:tab_neocomplcache()
+            return pumvisible() ? "\<C-n>" : "\<TAB>"
+        endfunction
     endfunction
+
     call neobundle#untap()
 endif
 
@@ -121,29 +136,36 @@ if neobundle#tap('neosnippet')
             \ 'on_source': 'neocomplcache'
         \ }
     \ })
+
     function! neobundle#tapped.hooks.on_source(bundle)
         let g:neosnippet#snippets_directory = '~/.vim/snippets/'
         let g:neosnippet#enable_preview = 1
+
+        smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
         imap <expr> <CR> <SID>cr_neosnippet()
-        function s:cr_neosnippet()
+        imap <expr> <TAB> <SID>tab_neosnippet()
+
+        function! s:cr_neosnippet()
             return pumvisible() && neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : s:cr_neocomplcache()
         endfunction
-        imap <expr> <TAB> <SID>tab_neosnippet()
-        function s:tab_neosnippet()
+
+        function! s:tab_neosnippet()
             return !pumvisible() && neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : s:tab_neocomplcache()
         endfunction
-        smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
     endfunction
+
     call neobundle#untap()
 endif
 
 NeoBundleLazy 'Shougo/neosnippet-snippets', { 'depends': 'Shougo/neosnippet' }
 if neobundle#tap('neosnippet-snippets')
+
     call neobundle#config({
         \ 'autoload': {
             \ 'on_source': 'neosnippet'
         \ }
     \ })
+
     call neobundle#untap()
 endif
 
@@ -155,6 +177,7 @@ if neobundle#tap('vim-quickrun')
             \ 'commands': 'QuickRun'
         \ }
     \ })
+
     function! neobundle#tapped.hooks.on_source(bundle)
         let g:quickrun_config = {}
         let g:quickrun_config['mkd'] = {
@@ -165,6 +188,7 @@ if neobundle#tap('vim-quickrun')
             \ 'exec' : '%c %o %a %s'
         \ }
     endfunction
+
     call neobundle#untap()
 endif
 
@@ -175,6 +199,7 @@ if neobundle#tap('vim-markdown')
             \ 'filetypes': 'mkd'
         \ }
     \ })
+
     function! neobundle#tapped.hooks.on_source(bundle)
         let g:vim_markdown_initial_foldlevel = 2
     endfunction
