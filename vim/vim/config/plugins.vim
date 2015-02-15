@@ -58,7 +58,10 @@ NeoBundleLazy 'scrooloose/nerdtree'
 if neobundle#tap('nerdtree')
     call neobundle#config({
         \ 'autoload': {
-            \ 'commands': 'NERDTree'
+            \ 'commands': {
+                \ 'name': 'NERDTree',
+                \ 'complete': 'dir'
+            \ }
         \ }
     \ })
 
@@ -66,11 +69,27 @@ if neobundle#tap('nerdtree')
         let g:NERDTreeWinSize = 32
     endfunction
 
+    function! neobundle#tapped.hooks.on_post_source(bundle)
+        call nerdtree#postSourceActions()
+    endfunction
+
+    function! s:nerdtree_auto_start()
+        if argc() == 0 && !exists("s:exists_std_in")
+            NERDTree
+        endif
+    endfunction
+
+    augroup nerdtree
+        autocmd!
+        autocmd StdinReadPre * let s:exists_std_in = 1
+        autocmd VimEnter * call s:nerdtree_auto_start()
+    augroup END
+
     call neobundle#untap()
 endif
 
-NeoBundle 'TAK3N0K0/nerdtree-git-plugin', { 'depends': 'scrooloose/nerdtree' }
-if neobundle#tap('nerdtree')
+NeoBundleLazy 'Xuyuanp/nerdtree-git-plugin', { 'depends': 'scrooloose/nerdtree' }
+if neobundle#tap('nerdtree-git-plugin')
     call neobundle#config({
         \ 'autoload': {
             \ 'on_source': 'nerdtree'
