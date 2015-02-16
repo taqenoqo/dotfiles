@@ -202,7 +202,10 @@ if neobundle#tap('vim-quickrun')
     call neobundle#config({
         \ 'autoload': {
             \ 'mappings': '<Leader>r',
-            \ 'commands': 'QuickRun'
+            \ 'commands': {
+                \ 'name': 'QuickRun',
+                \ 'complete': 'customlist,quickrun#complete'
+            \ }
         \ }
     \ })
 
