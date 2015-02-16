@@ -273,7 +273,11 @@ if neobundle#tap('unite-outline')
         function! s:outline()
             if unite#sources#outline#get_outline_info(&filetype) != {}
                 silent UniteClose
-                Unite -profile-name=outline outline
+                if &foldmethod == 'marker'
+                    Unite -profile-name=outline outline:folding
+                else
+                    Unite -profile-name=outline outline
+                endif
             endif
         endfunction
 
