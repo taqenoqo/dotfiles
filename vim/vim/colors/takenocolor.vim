@@ -1,4 +1,4 @@
-" Vim color file - nuyo
+" Vim color file - Takenocolor
 
 set background=light
 hi clear
@@ -6,7 +6,7 @@ if exists("syntax_on")
     syntax reset
 endif
 set t_Co=256
-let g:colors_name="nuyo"
+let g:colors_name = "Takenocolor"
 
 " 通常のテキスト
 hi Normal guifg=#081313 guibg=#E6FDE6 guisp=#081313 gui=NONE ctermbg=NONE cterm=NONE
