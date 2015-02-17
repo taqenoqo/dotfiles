@@ -211,7 +211,7 @@ if neobundle#tap('vim-quickrun')
 
     function! neobundle#tapped.hooks.on_source(bundle)
         let g:quickrun_config = {}
-        let g:quickrun_config['mkd'] = {
+        let g:quickrun_config['markdown'] = {
             \ 'outputter' : 'null',
             \ 'command' : 'open',
             \ 'cmdopt' : '-a',
@@ -223,16 +223,32 @@ if neobundle#tap('vim-quickrun')
     call neobundle#untap()
 endif
 
-NeoBundleLazy 'plasticboy/vim-markdown'
+NeoBundleLazy 'tpope/vim-markdown'
 if neobundle#tap('vim-markdown')
     call neobundle#config({
         \ 'autoload': {
-            \ 'filetypes': 'mkd'
+            \ 'filetypes': 'markdown'
         \ }
     \ })
 
     function! neobundle#tapped.hooks.on_source(bundle)
-        let g:vim_markdown_initial_foldlevel = 2
+        let g:markdown_fenced_languages = [
+            \ 'zsh',
+            \ 'c',
+            \ 'ruby',
+            \ 'vim'
+        \ ]
+
+        hi link markdownCode String
+        hi link markdownCodeDelimiter String
+        hi link markdownHeadingDelimiter Title
+        hi link markdownH1 Title
+        hi link markdownH2 Title
+        hi link markdownH3 Title
+        hi link markdownH4 Title
+        hi link markdownH5 Title
+        hi link markdownH6 Title
+        hi link markdownListMarker Identifier
     endfunction
 
     call neobundle#untap()
