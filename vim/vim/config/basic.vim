@@ -1,6 +1,6 @@
 " シンタックスハイライト
 syntax on
-colorscheme nuyo
+colorscheme takenocolor
 
 " タブ、改行などの表示
 set list
