@@ -3,7 +3,7 @@ augroup emoticon_status_line
     autocmd BufEnter * call s:changeFace('\|ﾟーﾟ)ﾉｨｮｩ')
     autocmd CursorMoved * call s:changeFace('(*ﾟーﾟ)')
     autocmd InsertLeave * call s:changeFace('ε＝(ﾉ*ﾟーﾟ)ﾉ')
-    autocmd InsertEnter * call s:changeFace('(σ* ﾟーﾟ)σ')
+    autocmd InsertEnter * call s:changeFace('(σ*ﾟーﾟ)σ')
     autocmd BufWritePost * call s:changeFace('(*ﾟーﾟ*)♪')
     autocmd CursorHold * call s:changeFace('ｃ⌒っ*ﾟーﾟ)っ')
 augroup END
