@@ -1,23 +1,20 @@
-augroup EmoticonStatusLine
+augroup emoticon_status_line
     autocmd!
-    autocmd InsertLeave * call s:changeFace('(*ﾟーﾟ)♪\ ')
+    autocmd BufEnter * call s:changeFace('\|ﾟーﾟ)ﾉｨｮｩ')
     autocmd CursorMoved * call s:changeFace('(*ﾟーﾟ)')
-    autocmd InsertEnter * call s:changeFace('(*ﾟД\ ﾟ)')
-    autocmd BufWritePost * call s:changeFace('(*^ーﾟ)')
+    autocmd InsertLeave * call s:changeFace('ε＝(ﾉ*ﾟーﾟ)ﾉ')
+    autocmd InsertEnter * call s:changeFace('(σ* ﾟーﾟ)σ')
+    autocmd BufWritePost * call s:changeFace('(*ﾟーﾟ*)♪')
     autocmd CursorHold * call s:changeFace('ｃ⌒っ*ﾟーﾟ)っ')
 augroup END
 
-let s:oldFace = ''
 function GetSyntaxType()
     return synIDattr(synID(line('.'), col('.'), 0), 'name')
 endfunction
 
 function s:changeFace(face)
-    if s:oldFace == a:face
-        return
-    endif
-    silent let l:line = 'setlocal statusline=\ %t%m\ %y[%{&fenc},\ %{&ff}]\ %r%h%w%=%{GetSyntaxType()}\ (%p%%)\ %l,%c\ =\ 0x%B\ ' . a:face . '\ '
-    silent exec l:line
-    silent let s:oldFace = a:face
+    let l:left = '\ %t%m\ %y[%{&fenc},\ %{&ff}]\ %r%h%w'
+    let l:right = '%{GetSyntaxType()}\ (%p%%)\ %l,%c\ =\ 0x%B\ ' . a:face . '\ '
+    exec 'setlocal statusline=' . l:left . '%=' . l:right
 endfunction
 
