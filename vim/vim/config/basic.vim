@@ -70,6 +70,8 @@ set noundofile
 
 " キーコードのタイムアウトをしない
 set notimeout
+set ttimeout
+set ttimeoutlen=0
 
 " スペルチェック
 set spell
