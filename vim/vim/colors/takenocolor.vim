@@ -83,3 +83,9 @@ hi DiffDelete guifg=NONE guibg=#FFCCFF ctermfg=NONE ctermbg=225 cterm=NONE
 hi DiffChange guifg=NONE guibg=#FFFFCC ctermfg=NONE ctermbg=230 cterm=NONE
 hi DiffText guifg=NONE guibg=#FFCC66 ctermfg=NONE ctermbg=222 cterm=NONE
 
+" スペルチェック
+hi SpellBad guifg=NONE guibg=#FFCCFF ctermfg=NONE ctermbg=225 cterm=NONE
+hi SpellCap guifg=NONE guibg=#FFCCFF ctermfg=NONE ctermbg=225 cterm=NONE
+hi SpellRare guifg=NONE guibg=#FFFFCC ctermfg=NONE ctermbg=230 cterm=NONE
+hi SpellLocal guifg=NONE guibg=#FFFFCC ctermfg=NONE ctermbg=230 cterm=NONE
+
