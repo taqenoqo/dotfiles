@@ -8,13 +8,13 @@ augroup emoticon_status_line
     autocmd CursorHold * call s:changeFace('ｃ⌒っ*ﾟーﾟ)っ')
 augroup END
 
-function GetSyntaxType()
+function GetCursorSyntax()
     return synIDattr(synID(line('.'), col('.'), 0), 'name')
 endfunction
 
 function s:changeFace(face)
     let l:left = '\ %t%m\ %y[%{&fenc},\ %{&ff}]\ %r%h%w'
-    let l:right = '%{GetSyntaxType()}\ (%p%%)\ %l,%c\ =\ 0x%B\ ' . a:face . '\ '
+    let l:right = '%{GetCursorSyntax()}\ (%p%%)\ %l,%c\ =\ 0x%B\ ' . a:face . '\ '
     exec 'setlocal statusline=' . l:left . '%=' . l:right
 endfunction
 
