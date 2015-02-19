@@ -71,6 +71,10 @@ set noundofile
 " キーコードのタイムアウトをしない
 set notimeout
 
+" スペルチェック
+set spell
+set spelllang+=cjk
+
 " 自動改行
 autocmd FileType * setlocal formatoptions=roql
 
