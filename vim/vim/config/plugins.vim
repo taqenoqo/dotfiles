@@ -311,6 +311,17 @@ if neobundle#tap('unite-outline')
     call neobundle#untap()
 endif
 
+NeoBundleLazy 'koron/nyancat-vim'
+if neobundle#tap('nyancat-vim')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'commands': [ 'Nyancat', 'Nyancat2']
+        \ }
+    \ })
+
+    call neobundle#untap()
+endif
+
 call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck
