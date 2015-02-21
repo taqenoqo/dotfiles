@@ -239,15 +239,7 @@ if neobundle#tap('vim-markdown')
             \ 'vim'
         \ ]
 
-        hi link markdownCode String
-        hi link markdownCodeDelimiter String
-        hi link markdownHeadingDelimiter Title
-        hi link markdownH1 Title
-        hi link markdownH2 Title
-        hi link markdownH3 Title
-        hi link markdownH4 Title
-        hi link markdownH5 Title
-        hi link markdownH6 Title
+        hi link markdownCodeDelimiter Delimiter
         hi link markdownListMarker Identifier
     endfunction
 
