@@ -1,6 +1,9 @@
 autoload -Uz colors
 colors
 
+autoload -Uz compinit
+compinit
+
 if type dircolors >/dev/null 2>&1; then
     eval `dircolors`
 fi
