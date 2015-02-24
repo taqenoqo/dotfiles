@@ -23,4 +23,8 @@ zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' completer _oldlist _complete  _expand _match _prefix _approximate _list _history
 zstyle ':completion:*' insert-unambiguous true
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters #変数の添字補完
+zstyle ':completion:*' list-separator ':' #セパレータ文字
+zstyle ':completion:*:manuals' separate-sections true #manの補完をセクションごとに
 
