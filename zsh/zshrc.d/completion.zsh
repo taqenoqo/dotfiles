@@ -28,3 +28,5 @@ zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters #変数の�
 zstyle ':completion:*' list-separator ':' #セパレータ文字
 zstyle ':completion:*:manuals' separate-sections true #manの補完をセクションごとに
 
+fpath=(/usr/local/share/zsh-completions $fpath) # zsh-completions
+
