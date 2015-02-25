@@ -1,2 +1,4 @@
-runtime! config/*
+for src in glob('~/.vimrc.d/*.vim', 1, 1)
+    execute 'source ' . src
+endfor
 
