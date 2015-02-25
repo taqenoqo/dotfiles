@@ -11,5 +11,3 @@ done
 git pull --recurse-submodules
 git submodule update --init --recursive
 
-chsh -s /bin/zsh
-
