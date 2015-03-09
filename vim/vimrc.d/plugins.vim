@@ -322,6 +322,17 @@ if neobundle#tap('nyancat-vim')
     call neobundle#untap()
 endif
 
+NeoBundleLazy 'vim-stylus'
+if neobundle#tap('vim-stylus')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'filename_patterns': '.*\.styl'
+        \ }
+    \ })
+
+    call neobundle#untap()
+endif
+
 call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck
