@@ -5,6 +5,3 @@
 vim/vim/bundle/*
 !vim/vim/bundle/neobundle.vim
 
-ssh/ssh/*
-!ssh/ssh/config
-
