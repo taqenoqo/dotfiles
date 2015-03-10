@@ -66,7 +66,10 @@ set noswapfile
 
 " チルダファイル作らない
 set nobackup
-set noundofile
+
+if has('persistent_undo')
+    set noundofile
+endif
 
 " キーコードのタイムアウトをしない
 set notimeout
@@ -74,8 +77,10 @@ set ttimeout
 set ttimeoutlen=0
 
 " スペルチェック
-set spell
-set spelllang+=cjk
+if v:version >= 704
+    set spell
+    set spelllang+=cjk
+endif
 
 " 自動改行
 autocmd FileType * setlocal formatoptions=roql
