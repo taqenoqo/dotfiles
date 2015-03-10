@@ -1,4 +1,4 @@
-for src in glob('~/.vimrc.d/*.vim', 1, 1)
+for src in split(glob('~/.vimrc.d/*.vim'), '\n')
     execute 'source ' . src
 endfor
 
