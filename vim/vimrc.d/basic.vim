@@ -25,6 +25,9 @@ set ignorecase
 " 制限なしにバックスペース
 set backspace=indent,eol,start
 
+" 行移動時に行頭にカーソルを移動させない
+set nostartofline
+
 " ステータスラインを表示する
 set laststatus=2
 
