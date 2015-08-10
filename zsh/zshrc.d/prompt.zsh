@@ -50,7 +50,8 @@ function change_prompt() {
     fi
 
     local simple_prompt
-    simple_prompt="%# "
+    simple_prompt="
+%# "
 
     local c_prompt
     c_prompt="$aa_color
