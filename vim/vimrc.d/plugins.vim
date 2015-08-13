@@ -134,6 +134,8 @@ if neobundle#tap('neocomplcache')
             \ 'cpp': '\w',
             \ 'php': '\w',
             \ 'ruby': '\w',
+            \ 'java': '\w',
+            \ 'typescript': '\w',
         \ }
 
         inoremap <expr> <C-n> neocomplcache#start_manual_complete()
@@ -327,6 +329,43 @@ if neobundle#tap('vim-stylus')
     call neobundle#config({
         \ 'autoload': {
             \ 'filename_patterns': '.*\.styl'
+        \ }
+    \ })
+
+    call neobundle#untap()
+endif
+
+NeoBundle 'Shougo/vimproc.vim'
+if neobundle#tap('vimproc.vim')
+    call neobundle#config({
+        \ 'build' : {
+            \ 'windows' : 'tools\\update-dll-mingw',
+            \ 'cygwin' : 'make -f make_cygwin.mak',
+            \ 'mac' : 'make -f make_mac.mak',
+            \ 'linux' : 'make',
+            \ 'unix' : 'gmake',
+        \ }
+    \ })
+
+    call neobundle#untap()
+endif
+
+NeoBundleLazy 'Quramy/tsuquyomi', { 'depends': 'Shougo/vimproc.vim' }
+if neobundle#tap('tsuquyomi')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'filetypes': 'typescript'
+        \ }
+    \ })
+
+    call neobundle#untap()
+endif
+
+NeoBundleLazy 'leafgarland/typescript-vim'
+if neobundle#tap('typescript-vim')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'filename_patterns': '.*\.ts'
         \ }
     \ })
 
