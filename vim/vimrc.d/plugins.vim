@@ -221,6 +221,10 @@ if neobundle#tap('vim-quickrun')
             \ 'args' : 'Marked',
             \ 'exec' : '%c %o %a %s'
         \ }
+        let g:quickrun_config['html'] = {
+            \ 'outputter' : 'browser',
+            \ 'command' : 'cat',
+        \ }
     endfunction
 
     call neobundle#untap()
@@ -370,6 +374,11 @@ if neobundle#tap('typescript-vim')
         \ }
     \ })
 
+    call neobundle#untap()
+endif
+
+NeoBundle 'open-browser.vim'
+if neobundle#tap('open-browser.vim')
     call neobundle#untap()
 endif
 
