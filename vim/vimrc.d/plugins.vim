@@ -125,20 +125,16 @@ if neobundle#tap('neocomplcache')
     function! neobundle#tapped.hooks.on_source(bundle)
         let g:neocomplcache_enable_at_startup = 1
         let g:neocomplcache_enable_smart_case = 1
-        let g:neocomplcache_auto_completion_start_length = 0
+        let g:neocomplcache_auto_completion_start_length = 1
         let g:neocomplcache_enable_fuzzy_completion = 1
-        if !exists('g:neocomplcache_omni_patterns')
-            let g:neocomplcache_omni_patterns = {}
-        endif
-        let g:neocomplcache_omni_patterns = {
+        let g:neocomplcache_force_omni_patterns = {
             \ 'c': '\w',
             \ 'cpp': '\w',
             \ 'php': '\w',
             \ 'ruby': '\w',
             \ 'java': '\w',
-            \ 'typescript': '\w',
+            \ 'typescript': '\w\|\.',
         \ }
-
         inoremap <expr> <C-n> neocomplcache#start_manual_complete()
         inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
         inoremap <expr> <C-h> neocomplcache#smart_close_popup()."\<C-h>"
