@@ -227,7 +227,7 @@ if neobundle#tap('vim-quickrun')
     call neobundle#untap()
 endif
 
-NeoBundleLazy 'tpope/vim-markdown', { 'depends': 'leafgarland/typescript-vim' }
+NeoBundleLazy 'tpope/vim-markdown'
 if neobundle#tap('vim-markdown')
     call neobundle#config({
         \ 'autoload': {
@@ -236,18 +236,24 @@ if neobundle#tap('vim-markdown')
     \ })
 
     function! neobundle#tapped.hooks.on_source(bundle)
-        let g:markdown_fenced_languages = [
-            \ 'zsh',
-            \ 'c',
-            \ 'ruby',
-            \ 'vim',
-            \ 'java',
-            \ 'haskell',
-            \ 'typescript'
-        \ ]
-
+        if !exists('g:markdown_fenced_languages')
+            let g:markdown_fenced_languages = []
+        endif
+        call add(g:markdown_fenced_languages, 'zsh')
+        call add(g:markdown_fenced_languages, 'c')
+        call add(g:markdown_fenced_languages, 'ruby')
+        call add(g:markdown_fenced_languages, 'vim')
+        call add(g:markdown_fenced_languages, 'java')
+        call add(g:markdown_fenced_languages, 'haskell')
         hi link markdownCodeDelimiter Delimiter
         hi link markdownListMarker Identifier
+    endfunction
+
+    function! neobundle#tapped.hooks.on_post_source_typescript(bundle)
+        if !exists('g:markdown_fenced_languages')
+            let g:markdown_fenced_languages = []
+        endif
+        call add(g:markdown_fenced_languages, 'typescript')
     endfunction
 
     call neobundle#untap()
@@ -370,12 +376,13 @@ NeoBundleLazy 'leafgarland/typescript-vim'
 if neobundle#tap('typescript-vim')
     call neobundle#config({
         \ 'autoload': {
-            \ 'filename_patterns': '.*\.ts'
+            \ 'filename_patterns': '.*\.ts',
+            \ 'on_source': 'vim-markdown'
         \ }
     \ })
 
     function! neobundle#tapped.hooks.on_post_source(bundle)
-        call add(g:markdown_fenced_languages, 'typescript')
+        call neobundle#call_hook('on_post_source_typescript')
     endfunction
 
     call neobundle#untap()
