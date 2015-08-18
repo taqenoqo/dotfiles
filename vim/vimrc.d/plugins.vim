@@ -127,13 +127,14 @@ if neobundle#tap('neocomplcache')
         let g:neocomplcache_enable_smart_case = 1
         let g:neocomplcache_auto_completion_start_length = 0
         let g:neocomplcache_enable_fuzzy_completion = 1
+        let g:neocomplcache_skip_auto_completion_time = 0.1
         let g:neocomplcache_force_omni_patterns = {
             \ 'c': '\w',
             \ 'cpp': '\w',
             \ 'php': '\w',
             \ 'ruby': '\w',
             \ 'java': '\w',
-            \ 'typescript': '\v(^|[^[:alnum:]_."''])\w{1,2}|\w\.',
+            \ 'typescript': '\v(^|[^[:alnum:]_."''])\w|\w\.',
         \ }
         inoremap <expr> <C-n> neocomplcache#start_manual_complete()
         inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
@@ -226,7 +227,7 @@ if neobundle#tap('vim-quickrun')
     call neobundle#untap()
 endif
 
-NeoBundleLazy 'tpope/vim-markdown'
+NeoBundleLazy 'tpope/vim-markdown', { 'depends': 'leafgarland/typescript-vim' }
 if neobundle#tap('vim-markdown')
     call neobundle#config({
         \ 'autoload': {
@@ -239,7 +240,10 @@ if neobundle#tap('vim-markdown')
             \ 'zsh',
             \ 'c',
             \ 'ruby',
-            \ 'vim'
+            \ 'vim',
+            \ 'java',
+            \ 'haskell',
+            \ 'typescript'
         \ ]
 
         hi link markdownCodeDelimiter Delimiter
@@ -369,6 +373,10 @@ if neobundle#tap('typescript-vim')
             \ 'filename_patterns': '.*\.ts'
         \ }
     \ })
+
+    function! neobundle#tapped.hooks.on_post_source(bundle)
+        call add(g:markdown_fenced_languages, 'typescript')
+    endfunction
 
     call neobundle#untap()
 endif
