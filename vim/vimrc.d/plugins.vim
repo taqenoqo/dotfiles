@@ -134,7 +134,7 @@ if neobundle#tap('neocomplcache')
             \ 'php': '\w',
             \ 'ruby': '\w',
             \ 'java': '\w',
-            \ 'typescript': '\v(^|[^[:alnum:]_."''])\w|\w\.',
+            \ 'typescript': '\v(^|[^[:alnum:]_."''])\w{2}|\w\.',
         \ }
         inoremap <expr> <C-n> neocomplcache#start_manual_complete()
         inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
