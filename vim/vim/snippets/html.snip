@@ -1,12 +1,26 @@
-snippet     doctype
+snippet     doctype5
     <!DOCTYPE html>${1}
 
 snippet     charset
-    <meta charset="UTF-8">${1}
+    <meta charset="UTF-8" />${1}
 
 snippet     css
-    <link rel="stylesheet" href="${1:href}">${2}
+    <link rel="stylesheet" href="${1}" />${2}
+
+snippet     javascript
+    <script src="${1}"></script>${2}
 
 snippet     title
     <title>${1:title}</title>${2}
 
+snippet     html5
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8" />
+        <title>${1:title}</title>
+      </head>
+      <body>
+      ${2}
+      </body>
+    </html>
