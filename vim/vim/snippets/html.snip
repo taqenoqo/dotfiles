@@ -15,7 +15,20 @@ snippet     title
 
 snippet     html5
     <!DOCTYPE html>
-    <html>
+    <html lang="ja">
+      <head>
+        <meta charset="UTF-8" />
+        <title>${1:title}</title>
+      </head>
+      <body>
+      ${2}
+      </body>
+    </html>
+
+snippet     xhtml5
+    <?xml version='1.0' encoding='UTF-8' ?>
+    <!DOCTYPE html>
+    <html lang="ja" xmlns="http://www.w3.org/1999/xhtml">
       <head>
         <meta charset="UTF-8" />
         <title>${1:title}</title>
