@@ -393,6 +393,32 @@ if neobundle#tap('open-browser.vim')
     call neobundle#untap()
 endif
 
+NeoBundleLazy 'jvoorhis/coq.vim'
+if neobundle#tap('coq.vim')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'filename_patterns': '.*\.v'
+        \ }
+    \ })
+
+    call neobundle#untap()
+endif
+
+NeoBundleLazy 'dxue2012/CoqIDE', { 'depends': 'jvoorhis/coq.vim' }
+if neobundle#tap('CoqIDE')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'filetypes': 'coq'
+        \ }
+    \ })
+
+    function! neobundle#tapped.hooks.on_source(bundle)
+        nmap <Leader><Enter> :CoqIDEToCursor<CR>
+    endfunction
+
+    call neobundle#untap()
+endif
+
 call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck
