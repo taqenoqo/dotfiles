@@ -393,7 +393,7 @@ if neobundle#tap('open-browser.vim')
     call neobundle#untap()
 endif
 
-NeoBundleLazy 'jvoorhis/coq.vim'
+NeoBundleLazy 'mgrabovsky/coq.vim'
 if neobundle#tap('coq.vim')
     call neobundle#config({
         \ 'autoload': {
@@ -404,7 +404,7 @@ if neobundle#tap('coq.vim')
     call neobundle#untap()
 endif
 
-NeoBundleLazy 'dxue2012/CoqIDE', { 'depends': 'jvoorhis/coq.vim' }
+NeoBundleLazy 'dxue2012/CoqIDE', { 'depends': 'mgrabovsky/coq.vim' }
 if neobundle#tap('CoqIDE')
     call neobundle#config({
         \ 'autoload': {
