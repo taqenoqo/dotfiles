@@ -419,6 +419,19 @@ if neobundle#tap('CoqIDE')
     call neobundle#untap()
 endif
 
+NeoBundleLazy 'adimit/prolog.vim'
+if neobundle#tap('prolog.vim')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'filename_patterns': '.*\.swi'
+        \ }
+    \ })
+
+    au BufNewFile,BufRead *.swi setfiletype prolog
+
+    call neobundle#untap()
+endif
+
 call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck

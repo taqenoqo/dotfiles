@@ -81,7 +81,6 @@ set ttimeoutlen=0
 
 " スペルチェック
 if v:version >= 704
-    set spell
     set spelllang+=cjk
 endif
 
