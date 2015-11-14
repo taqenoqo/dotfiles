@@ -432,6 +432,42 @@ if neobundle#tap('prolog.vim')
     call neobundle#untap()
 endif
 
+NeoBundleLazy 'ujihisa/neco-ghc'
+if neobundle#tap('neco-ghc')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'filetypes': 'haskell'
+        \ }
+    \ })
+
+    function! neobundle#tapped.hooks.on_source(bundle)
+        setlocal omnifunc=necoghc#omnifunc
+    endfunction
+
+    call neobundle#untap()
+endif
+
+NeoBundleLazy 'eagletmt/ghcmod-vim'
+if neobundle#tap('ghcmod-vim')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'filetypes': 'haskell'
+        \ }
+    \ })
+
+    function! neobundle#tapped.hooks.on_source(bundle)
+        nmap <Leader><Enter> :GhcModType<CR>
+
+        augroup ghcmodcheck
+            autocmd! BufWritePost <buffer> GhcModCheckAsync
+        augroup END
+    endfunction
+
+
+    call neobundle#untap()
+endif
+
+
 call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck
