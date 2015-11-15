@@ -456,17 +456,19 @@ if neobundle#tap('ghcmod-vim')
     \ })
 
     function! neobundle#tapped.hooks.on_source(bundle)
-        nmap <Leader><Enter> :GhcModType<CR>
+        noremap <Leader><Enter> :GhcModType<CR>
+
+        let l:old_cl = maparg("<C-L>", "n")
+        let l:new_cl = ":GhcModTypeClear<CR>" . l:old_cl
+        exec "noremap <silent> <C-L> " . l:new_cl
 
         augroup ghcmodcheck
             autocmd! BufWritePost <buffer> GhcModCheckAsync
         augroup END
     endfunction
 
-
     call neobundle#untap()
 endif
-
 
 call neobundle#end()
 filetype plugin indent on

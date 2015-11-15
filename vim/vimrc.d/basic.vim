@@ -100,5 +100,8 @@ function MyFoldText()
     return getline(v:foldstart)
 endfunction
 
+" C-Lでハイライトもクリア
+nnoremap <silent> <C-L> :noh<CR><C-L>
+
 silent! source ~/.vimrc.local
 
