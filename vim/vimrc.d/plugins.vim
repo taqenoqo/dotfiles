@@ -476,7 +476,7 @@ NeoBundle 'easymotion/vim-easymotion'
 if neobundle#tap('vim-easymotion')
     let g:EasyMotion_smartcase = 1
 
-    nmap f <Plug>(easymotion-sl2)
+    nmap f <Plug>(easymotion-sl)
 
     call neobundle#untap()
 endif
