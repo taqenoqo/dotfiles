@@ -462,6 +462,8 @@ if neobundle#tap('ghcmod-vim')
         let l:new_cl = ":GhcModTypeClear<CR>" . l:old_cl
         exec "noremap <silent> <C-L> " . l:new_cl
 
+        command! HLint :GhcModCheckAndLintAsync
+
         augroup ghcmodcheck
             autocmd! BufWritePost <buffer> GhcModCheckAsync
         augroup END
