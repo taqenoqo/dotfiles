@@ -472,6 +472,15 @@ if neobundle#tap('ghcmod-vim')
     call neobundle#untap()
 endif
 
+NeoBundle 'easymotion/vim-easymotion'
+if neobundle#tap('vim-easymotion')
+    let g:EasyMotion_smartcase = 1
+
+    nmap f <Plug>(easymotion-sl2)
+
+    call neobundle#untap()
+endif
+
 call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck
