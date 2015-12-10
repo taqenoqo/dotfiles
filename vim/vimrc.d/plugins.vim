@@ -98,7 +98,7 @@ if neobundle#tap('nerdtree-git-plugin')
     \ })
 
     function! neobundle#tapped.hooks.on_source(bundle)
-        let g:NERDTreeIndicatorMap = {
+        let g:NERDTreeIndicatorMapCustom = {
             \ "Modified" : "*",
             \ "Staged" : "+",
             \ "Untracked" : "!",
