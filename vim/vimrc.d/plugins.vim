@@ -484,6 +484,28 @@ if neobundle#tap('vim-easymotion')
     call neobundle#untap()
 endif
 
+NeoBundleLazy 'rking/ag.vim'
+if neobundle#tap('ag.vim')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'commands': 'Ag'
+        \ }
+    \ })
+
+    call neobundle#untap()
+endif
+
+NeoBundleLazy 'taiansu/nerdtree-ag', { 'depends': ['scrooloose/nerdtree', 'rking/ag.vim'] }
+if neobundle#tap('nerdtree-ag')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'on_source': 'nerdtree'
+        \ }
+    \ })
+
+    call neobundle#untap()
+endif
+
 call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck
