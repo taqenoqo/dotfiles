@@ -252,13 +252,6 @@ if neobundle#tap('vim-markdown')
         hi link markdownListMarker Identifier
     endfunction
 
-    function! neobundle#tapped.hooks.on_post_source_typescript(bundle)
-        if !exists('g:markdown_fenced_languages')
-            let g:markdown_fenced_languages = []
-        endif
-        call add(g:markdown_fenced_languages, 'typescript')
-    endfunction
-
     call neobundle#untap()
 endif
 
@@ -385,7 +378,10 @@ if neobundle#tap('typescript-vim')
     \ })
 
     function! neobundle#tapped.hooks.on_post_source(bundle)
-        call neobundle#call_hook('on_post_source_typescript')
+        if !exists('g:markdown_fenced_languages')
+            let g:markdown_fenced_languages = []
+        endif
+        call add(g:markdown_fenced_languages, 'typescript')
     endfunction
 
     call neobundle#untap()
