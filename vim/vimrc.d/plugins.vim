@@ -378,6 +378,9 @@ if neobundle#tap('typescript-vim')
     \ })
 
     function! neobundle#tapped.hooks.on_post_source(bundle)
+        if !exists('g:markdown_fenced_languages')
+            let g:markdown_fenced_languages = []
+        endif
         call add(g:markdown_fenced_languages, 'typescript')
     endfunction
 
@@ -509,6 +512,9 @@ if neobundle#tap('vim-swift')
     \ })
 
     function! neobundle#tapped.hooks.on_post_source(bundle)
+        if !exists('g:markdown_fenced_languages')
+            let g:markdown_fenced_languages = []
+        endif
         call add(g:markdown_fenced_languages, 'swift')
     endfunction
 
