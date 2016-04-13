@@ -506,6 +506,17 @@ if neobundle#tap('nerdtree-ag')
     call neobundle#untap()
 endif
 
+NeoBundleLazy 'toyamarinyon/vim-swift'
+if neobundle#tap('vim-swift')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'filename_patterns': '.*\.swift'
+        \ }
+    \ })
+
+    call neobundle#untap()
+endif
+
 call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck
