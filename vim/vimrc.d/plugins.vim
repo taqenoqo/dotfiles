@@ -378,9 +378,6 @@ if neobundle#tap('typescript-vim')
     \ })
 
     function! neobundle#tapped.hooks.on_post_source(bundle)
-        if !exists('g:markdown_fenced_languages')
-            let g:markdown_fenced_languages = []
-        endif
         call add(g:markdown_fenced_languages, 'typescript')
     endfunction
 
@@ -506,9 +503,14 @@ NeoBundleLazy 'toyamarinyon/vim-swift'
 if neobundle#tap('vim-swift')
     call neobundle#config({
         \ 'autoload': {
-            \ 'filename_patterns': '.*\.swift'
+            \ 'filename_patterns': '.*\.swift',
+            \ 'on_source': 'vim-markdown'
         \ }
     \ })
+
+    function! neobundle#tapped.hooks.on_post_source(bundle)
+        call add(g:markdown_fenced_languages, 'swift')
+    endfunction
 
     call neobundle#untap()
 endif
