@@ -114,8 +114,10 @@ if neobundle#tap('nerdtree-git-plugin')
     call neobundle#untap()
 endif
 
-NeoBundleLazy 'Shougo/neocomplcache'
-if neobundle#tap('neocomplcache')
+NeoBundle 'Konfekt/FastFold'
+
+NeoBundleLazy 'Shougo/neocomplete'
+if neobundle#tap('neocomplete')
     call neobundle#config({
         \ 'autoload': {
             \ 'insert': 1
@@ -123,33 +125,34 @@ if neobundle#tap('neocomplcache')
     \ })
 
     function! neobundle#tapped.hooks.on_source(bundle)
-        let g:neocomplcache_enable_at_startup = 1
-        let g:neocomplcache_enable_smart_case = 1
-        let g:neocomplcache_auto_completion_start_length = 0
-        let g:neocomplcache_enable_fuzzy_completion = 1
-        let g:neocomplcache_skip_auto_completion_time = 0.1
-        let g:neocomplcache_force_omni_patterns = {
-            \ 'c': '\w',
-            \ 'cpp': '\w',
-            \ 'php': '\w',
-            \ 'ruby': '\w',
-            \ 'java': '\w',
-            \ 'typescript': '\w\.',
-        \ }
-        inoremap <expr> <C-n> neocomplcache#start_manual_complete()
-        inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-        inoremap <expr> <C-h> neocomplcache#smart_close_popup()."\<C-h>"
-        inoremap <expr> <BS> neocomplcache#smart_close_popup()."\<C-h>"
-        inoremap <expr> <C-y> neocomplcache#close_popup()
-        inoremap <expr> <C-e> neocomplcache#cancel_popup()
-        inoremap <expr> <CR> <SID>cr_neocomplcache()
-        inoremap <expr> <TAB> <SID>tab_neocomplcache()
+        let g:neocomplete#enable_at_startup = 1
+        let g:neocomplete#enable_smart_case = 1
+        let g:neocomplete#auto_completion_start_length = 1
+        let g:neocomplete#enable_fuzzy_completion = 1
+        let g:neocomplete#skip_auto_completion_time = '0.1'
+        if !exists('g:neocomplete#sources#omni#input_patterns')
+            let g:neocomplete#sources#omni#input_patterns = {}
+        endif
+        let g:neocomplete#sources#omni#input_patterns['php'] = '\w'
+        if !exists('g:neocomplete#force_omni_input_patterns')
+            let g:neocomplete#force_omni_input_patterns = {}
+        endif
+        let g:neocomplete#force_omni_input_patterns['ruby'] = '\w'
 
-        function! s:cr_neocomplcache()
-            return pumvisible() ? neocomplcache#close_popup() : "\<Return>"
+        inoremap <expr> <C-n> neocomplete#start_manual_complete()
+        inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+        inoremap <expr> <C-h> neocomplete#smart_close_popup()."\<C-h>"
+        inoremap <expr> <BS> neocomplete#smart_close_popup()."\<C-h>"
+        inoremap <expr> <C-y> neocomplete#close_popup()
+        inoremap <expr> <C-e> neocomplete#cancel_popup()
+        inoremap <expr> <CR> <SID>cr_neocomplete()
+        inoremap <expr> <TAB> <SID>tab_neocomplete()
+
+        function! s:cr_neocomplete()
+            return pumvisible() ? neocomplete#close_popup() : "\<Return>"
         endfunction
 
-        function! s:tab_neocomplcache()
+        function! s:tab_neocomplete()
             return pumvisible() ? "\<C-n>" : "\<TAB>"
         endfunction
     endfunction
@@ -157,11 +160,11 @@ if neobundle#tap('neocomplcache')
     call neobundle#untap()
 endif
 
-NeoBundleLazy 'Shougo/neosnippet', { 'depends': 'Shougo/neocomplcache' }
+NeoBundleLazy 'Shougo/neosnippet', { 'depends': 'Shougo/neocomplete' }
 if neobundle#tap('neosnippet')
     call neobundle#config({
         \ 'autoload': {
-            \ 'on_source': 'neocomplcache'
+            \ 'on_source': 'neocomplete'
         \ }
     \ })
 
@@ -174,11 +177,11 @@ if neobundle#tap('neosnippet')
         imap <expr> <TAB> <SID>tab_neosnippet()
 
         function! s:cr_neosnippet()
-            return pumvisible() && neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : s:cr_neocomplcache()
+            return pumvisible() && neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : s:cr_neocomplete()
         endfunction
 
         function! s:tab_neosnippet()
-            return !pumvisible() && neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : s:tab_neocomplcache()
+            return !pumvisible() && neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : s:tab_neocomplete()
         endfunction
     endfunction
 
@@ -364,6 +367,14 @@ if neobundle#tap('tsuquyomi')
             \ 'filetypes': 'typescript'
         \ }
     \ })
+
+    function! neobundle#tapped.hooks.on_source(bundle)
+        setlocal omnifunc=necoghc#omnifunc
+        if !exists('g:neocomplete#force_omni_input_patterns')
+            let g:neocomplete#force_omni_input_patterns = {}
+        endif
+        let g:neocomplete#force_omni_input_patterns['typescript'] = '\w\w'
+    endfunction
 
     call neobundle#untap()
 endif
