@@ -6,6 +6,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'yonchu/accelerated-smooth-scroll'
 
+NeoBundle 'sudo.vim'
+
 NeoBundle 'surround.vim'
 if neobundle#tap('surround.vim')
     let g:surround_no_mappings = 1
