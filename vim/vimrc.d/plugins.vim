@@ -232,7 +232,7 @@ if neobundle#tap('vim-quickrun')
     call neobundle#untap()
 endif
 
-NeoBundleLazy 'tpope/vim-markdown'
+NeoBundleLazy 'TAK3N0K0/vim-markdown', 'my-custom'
 if neobundle#tap('vim-markdown')
     call neobundle#config({
         \ 'autoload': {
