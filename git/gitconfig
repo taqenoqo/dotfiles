@@ -1,3 +1,5 @@
+[core]
+	excludesfile = /Users/Takenoko/.gitignore
 [color]
 	ui = true
 [alias]
