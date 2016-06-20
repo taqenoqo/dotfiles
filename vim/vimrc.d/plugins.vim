@@ -91,31 +91,6 @@ if neobundle#tap('nerdtree')
     call neobundle#untap()
 endif
 
-NeoBundleLazy 'Xuyuanp/nerdtree-git-plugin', { 'depends': 'scrooloose/nerdtree' }
-if neobundle#tap('nerdtree-git-plugin')
-    call neobundle#config({
-        \ 'autoload': {
-            \ 'on_source': 'nerdtree'
-        \ }
-    \ })
-
-    function! neobundle#tapped.hooks.on_source(bundle)
-        let g:NERDTreeIndicatorMapCustom = {
-            \ "Modified" : "*",
-            \ "Staged" : "+",
-            \ "Untracked" : "!",
-            \ "Renamed" : ">",
-            \ "Unmerged" : "=",
-            \ "Deleted" : "X",
-            \ "Dirty" : "-",
-            \ "Clean" : "c",
-            \ "Unknown" : "?"
-        \ }
-    endfunction
-
-    call neobundle#untap()
-endif
-
 NeoBundle 'Konfekt/FastFold'
 
 NeoBundleLazy 'Shougo/neocomplete'
@@ -416,7 +391,7 @@ if neobundle#tap('coq.vim')
     call neobundle#untap()
 endif
 
-NeoBundleLazy 'dxue2012/CoqIDE', { 'depends': 'mgrabovsky/coq.vim' }
+NeoBundleLazy 'dxue2012/CoqIDE'
 if neobundle#tap('CoqIDE')
     call neobundle#config({
         \ 'autoload': {
