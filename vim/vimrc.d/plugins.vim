@@ -202,6 +202,16 @@ if neobundle#tap('vim-quickrun')
             \ 'outputter' : 'browser',
             \ 'command' : 'cat',
         \ }
+        let g:quickrun_config['tex'] = {
+            \ 'command': 'xelatex',
+            \ 'outputter': 'error',
+            \ 'outputter/error/success': 'null',
+            \ 'outputter/error/error': 'buffer',
+            \ 'exec': [
+                \ '%c %o %a %s',
+                \ 'open "%S:r.pdf"'
+            \ ]
+        \ }
     endfunction
 
     call neobundle#untap()
