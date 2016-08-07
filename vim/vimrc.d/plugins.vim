@@ -238,6 +238,7 @@ if neobundle#tap('vim-markdown')
         call add(g:markdown_fenced_languages, 'ocaml')
         call add(g:markdown_fenced_languages, 'javascript')
         call add(g:markdown_fenced_languages, 'r')
+        call add(g:markdown_fenced_languages, 'sh')
         hi link markdownCodeDelimiter Delimiter
         hi link markdownListMarker Identifier
     endfunction
