@@ -459,12 +459,6 @@ if neobundle#tap('ghcmod-vim')
         let l:old_cl = maparg("<C-L>", "n")
         let l:new_cl = ":GhcModTypeClear<CR>" . l:old_cl
         exec "noremap <silent> <C-L> " . l:new_cl
-
-        command! HLint :GhcModCheckAndLintAsync
-
-        augroup ghcmodcheck
-            autocmd! BufWritePost <buffer> GhcModCheckAsync
-        augroup END
     endfunction
 
     call neobundle#untap()
@@ -515,6 +509,22 @@ if neobundle#tap('vim-swift')
             let g:markdown_fenced_languages = []
         endif
         call add(g:markdown_fenced_languages, 'swift')
+    endfunction
+
+    call neobundle#untap()
+endif
+
+NeoBundleLazy 'dag/vim2hs'
+if neobundle#tap('vim2hs')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'filename_patterns': ['.*\.hs', '.*\.hsc']
+        \ }
+    \ })
+
+    function! neobundle#tapped.hooks.on_source(bundle)
+        let g:haskell_conceal = 0
+        hi clear Conceal
     endfunction
 
     call neobundle#untap()
