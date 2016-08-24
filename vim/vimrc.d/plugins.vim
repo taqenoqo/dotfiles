@@ -191,13 +191,6 @@ if neobundle#tap('vim-quickrun')
 
     function! neobundle#tapped.hooks.on_source(bundle)
         let g:quickrun_config = {}
-        let g:quickrun_config['markdown'] = {
-            \ 'outputter' : 'null',
-            \ 'command' : 'open',
-            \ 'cmdopt' : '-a',
-            \ 'args' : 'Marked',
-            \ 'exec' : '%c %o %a %s'
-        \ }
         let g:quickrun_config['html'] = {
             \ 'outputter' : 'browser',
             \ 'command' : 'cat',
@@ -211,6 +204,26 @@ if neobundle#tap('vim-quickrun')
                 \ '%c %o %a %s',
                 \ 'open "%S:r.pdf"'
             \ ]
+        \ }
+        let g:quickrun_config['markdown'] = {
+            \ 'type': 'pandoc',
+            \ 'outputter': 'error',
+            \ 'outputter/error/success': 'browser',
+            \ 'outputter/error/error': 'buffer',
+            \ 'cmdopt': '--from=markdown_strict' . 
+                \ '+tex_math_dollars' .
+                \ '+tex_math_double_backslash' .
+                \ '+fenced_code_blocks' .
+                \ '+fenced_code_attributes' .
+                \ '+backtick_code_blocks' .
+                \ '+definition_lists' .
+                \ '+pipe_tables' .
+                \ ' --to=html5' .
+                \ ' --standalone' .
+                \ ' --mathjax="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"' .
+                \ ' --css="$HOME/.pandoc/style.css"' .
+                \ ' --include-in-header="$HOME/.pandoc/mathjax_config.html"'
+                \ ,
         \ }
     endfunction
 
