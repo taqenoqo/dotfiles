@@ -219,7 +219,7 @@ if neobundle#tap('vim-quickrun')
                 \ '+definition_lists' .
                 \ '+pipe_tables' .
                 \ ' --to=html5' .
-                \ ' --standalone' .
+                \ ' --template="$HOME/.pandoc/template.html"' .
                 \ ' --mathjax="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"' .
                 \ ' --css="$HOME/.pandoc/style.css"' .
                 \ ' --include-in-header="$HOME/.pandoc/mathjax_config.html"'
