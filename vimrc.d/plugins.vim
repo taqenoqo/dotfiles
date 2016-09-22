@@ -377,6 +377,8 @@ if neobundle#tap('tsuquyomi')
             let g:neocomplete#force_omni_input_patterns = {}
         endif
         let g:neocomplete#force_omni_input_patterns['typescript'] = '\w\w'
+
+        autocmd FileType typescript nmap <buffer> <Leader><Return> : <C-u>echo tsuquyomi#hint()<CR>
     endfunction
 
     call neobundle#untap()
