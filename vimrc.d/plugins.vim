@@ -376,9 +376,10 @@ if neobundle#tap('tsuquyomi')
         if !exists('g:neocomplete#force_omni_input_patterns')
             let g:neocomplete#force_omni_input_patterns = {}
         endif
-        let g:neocomplete#force_omni_input_patterns['typescript'] = '\w\w'
+        let g:neocomplete#force_omni_input_patterns['typescript'] = '\w'
 
         autocmd FileType typescript nmap <buffer> <Leader><Return> : <C-u>echo tsuquyomi#hint()<CR>
+        autocmd FileType typescript nmap <buffer> <Leader>c <Plug>(TsuquyomiRenameSymbolC)
     endfunction
 
     call neobundle#untap()
