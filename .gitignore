@@ -2,6 +2,6 @@
 !.gitignore
 !.gitmodules
 
-vim/vim/bundle/*
-!vim/vim/bundle/neobundle.vim
+vim/bundle/*
+!vim/bundle/neobundle.vim
 
