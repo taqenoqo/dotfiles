@@ -103,5 +103,11 @@ endfunction
 " C-Lでハイライトもクリア
 nnoremap <silent> <C-L> :noh<CR><C-L>
 
+" ファイルを開いたときに以前のカーソル位置に移動
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+    \   exe "normal! g'\"" |
+    \ endif
+
 silent! source ~/.vimrc.local
 
