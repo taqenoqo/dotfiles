@@ -39,6 +39,7 @@ if neobundle#tap('vim-indent-guides')
     let g:indent_guides_guide_size = 1
     let g:indent_guides_auto_colors = 0
     let g:indent_guides_right_align = 1
+    let g:indent_guides_default_mapping = 0
 
     hi IndentGuidesOdd  ctermbg=194 ctermfg=145
     hi IndentGuidesEven ctermbg=194 ctermfg=145
@@ -107,6 +108,7 @@ if neobundle#tap('neocomplete')
         let g:neocomplete#auto_completion_start_length = 1
         let g:neocomplete#enable_fuzzy_completion = 1
         let g:neocomplete#skip_auto_completion_time = '0.1'
+        let g:neocomplete#use_vimproc = 1
         if !exists('g:neocomplete#sources#omni#input_patterns')
             let g:neocomplete#sources#omni#input_patterns = {}
         endif
@@ -378,8 +380,10 @@ if neobundle#tap('tsuquyomi')
         endif
         let g:neocomplete#force_omni_input_patterns['typescript'] = '\w'
 
-        autocmd FileType typescript nmap <buffer> <Leader><Return> : <C-u>echo tsuquyomi#hint()<CR>
-        autocmd FileType typescript nmap <buffer> <Leader>c <Plug>(TsuquyomiRenameSymbolC)
+        augroup typescript
+            autocmd FileType typescript nmap <buffer> <Leader><Return> : <C-u>echo tsuquyomi#hint()<CR>
+            autocmd FileType typescript nmap <buffer> <Leader>c <Plug>(TsuquyomiRenameSymbolC)
+        augroup END
     endfunction
 
     call neobundle#untap()
@@ -443,7 +447,9 @@ if neobundle#tap('prolog.vim')
         \ }
     \ })
 
-    au BufNewFile,BufRead *.swi setfiletype prolog
+    augroup prolog
+        autocmd BufNewFile,BufRead *.swi setfiletype prolog
+    augroup END
 
     call neobundle#untap()
 endif
@@ -458,6 +464,7 @@ if neobundle#tap('neco-ghc')
 
     function! neobundle#tapped.hooks.on_source(bundle)
         setlocal omnifunc=necoghc#omnifunc
+        let g:necoghc_enable_detailed_browse = 1
     endfunction
 
     call neobundle#untap()
@@ -472,21 +479,20 @@ if neobundle#tap('ghcmod-vim')
     \ })
 
     function! neobundle#tapped.hooks.on_source(bundle)
-        noremap <Leader><Enter> :GhcModType<CR>
+        noremap <Leader><Enter> :GhcModType!<CR>
+        noremap <Leader>t :GhcModType!<CR>
+        noremap <Leader>i :GhcModInfo!<CR>
+        noremap <Leader>l :GhcModLintAsync!<CR>
 
         let l:old_cl = maparg("<C-L>", "n")
         let l:new_cl = ":GhcModTypeClear<CR>" . l:old_cl
         exec "noremap <silent> <C-L> " . l:new_cl
+
+        augroup haskell
+            autocmd!
+            autocmd BufWritePost * :GhcModCheckAsync
+        augroup END
     endfunction
-
-    call neobundle#untap()
-endif
-
-NeoBundle 'easymotion/vim-easymotion'
-if neobundle#tap('vim-easymotion')
-    let g:EasyMotion_smartcase = 1
-
-    nmap f <Plug>(easymotion-sl)
 
     call neobundle#untap()
 endif
