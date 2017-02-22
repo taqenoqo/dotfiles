@@ -195,14 +195,16 @@ pre, code {
     background-color: #f7f7f7;
     font-size: 85%;
     word-wrap: normal;
+    word-break: keep-all;
     border: 1px solid #eee;
     border-radius: 3px;
-    font-family: "Consolas", "Liberation Mono", "Menlo, Courier", "monospace";
+    font-family: "Consolas", "Liberation Mono", "Menlo", "Courier", "monospace";
 }
+
 
 pre {
     padding: 1em;
-    overflow: scroll;
+    overflow: visible;
     line-height: 1.45;
 }
 
