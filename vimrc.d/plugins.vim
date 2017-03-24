@@ -483,14 +483,23 @@ if neobundle#tap('ghcmod-vim')
         noremap <Leader>t :GhcModType!<CR>
         noremap <Leader>i :GhcModInfo!<CR>
         noremap <Leader>l :GhcModLintAsync!<CR>
+        noremap <Leader>s :GhcModTypeInsert!<CR>
+        noremap <Leader>p :GhcModSplitFunCase!<CR>
 
         let l:old_cl = maparg("<C-L>", "n")
         let l:new_cl = ":GhcModTypeClear<CR>" . l:old_cl
         exec "noremap <silent> <C-L> " . l:new_cl
 
-        augroup haskell
+        function! s:haskell_set_autocmd()
+            augroup haskell_error_check
+                autocmd! * <buffer>
+                autocmd BufWritePost <buffer> :GhcModCheckAsync
+            augroup END
+        endfunction
+
+        augroup haskell_autocmd_setter
             autocmd!
-            autocmd BufWritePost * :GhcModCheckAsync
+            autocmd FileType haskell call s:haskell_set_autocmd()
         augroup END
     endfunction
 
