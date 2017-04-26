@@ -7,7 +7,8 @@ stty stop undef #C-s の無効化
 setopt nolistbeep
 setopt nobeep
 
-bindkey -e #emacs的キーバインド
+bindkey -v #emacs的キーバインド
+bindkey -v '^?' backward-delete-char
 
 setopt glob #グロブ
 setopt extendedglob #拡張グロブ

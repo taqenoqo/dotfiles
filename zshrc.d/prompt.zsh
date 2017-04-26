@@ -27,17 +27,14 @@ fi
 function change_prompt() {
     local aa_color
     case $(hostname -s) in
-    "TakenokoMacintosh" )
-        aa_color="%{[38;5;173m%}"
+    "takenoko-macbook" )
+        aa_color="%{[38;5;172m%}"
         ;;
     "tak3n0k0" )
         aa_color="%{[38;5;26m%}"
         ;;
-    abelia[0-5][0-9] | borage[0-5][0-9] | crocus[0-5][0-9] )
-        aa_color="%{[38;5;163m%}"
-        ;;
     * )
-        aa_color="%{[38;5;244m%}"
+        aa_color="%{[38;5;198m%}"
         echo $(hostname -s)
         ;;
     esac
