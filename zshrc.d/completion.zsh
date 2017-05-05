@@ -31,13 +31,19 @@ zstyle ':completion:*:manuals' separate-sections true #manの補完をセクシ�
 zmodload zsh/complist
 bindkey '^n' down-line-or-history
 bindkey '^p' up-line-or-history
+bindkey '^w' backward-kill-word
 bindkey -M menuselect '^n' down-line-or-history
 bindkey -M menuselect '^p' up-line-or-history
 bindkey -M menuselect '^f' forward-char
 bindkey -M menuselect '^b' backward-char
+bindkey -M menuselect '^j' down-line-or-history
+bindkey -M menuselect '^k' up-line-or-history
+bindkey -M menuselect '^l' forward-char
+bindkey -M menuselect '^h' backward-char
 bindkey -M menuselect '\t' down-line-or-history
 bindkey -M menuselect '\e[Z' up-line-or-history
 bindkey -M menuselect '^e' send-break
+bindkey -M menuselect '^w' backward-kill-word
 
 fpath=(/usr/local/share/zsh-completions $fpath) # zsh-completions
 
