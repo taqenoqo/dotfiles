@@ -33,7 +33,7 @@ if neobundle#tap('camelcasemotion')
     call neobundle#untap()
 endif
 
-NeoBundle 'TAK3N0K0/vim-indent-guides'
+NeoBundle 'TAK3N0K0/vim-indent-guides', 'right-align'
 if neobundle#tap('vim-indent-guides')
     let g:indent_guides_enable_on_vim_startup = 1
     let g:indent_guides_guide_size = 1
