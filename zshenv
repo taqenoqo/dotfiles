@@ -6,7 +6,7 @@ if [ -f ~/.zshenv.local ]; then
     source ~/.zshenv.local
 fi
 
-if (type brew >/dev/null 2>&1) && (brew --version >/dev/null 2>&1); then
+if (brew --version >/dev/null 2>&1); then
     export PATH="$(brew --prefix)/sbin:$PATH"
     libexec="$(brew --prefix coreutils)/libexec"
     if [ -d $libexec ]; then
@@ -15,10 +15,14 @@ if (type brew >/dev/null 2>&1) && (brew --version >/dev/null 2>&1); then
     fi
 fi
 
-if (type rbenv >/dev/null 2>&1) && (rbenv --version >/dev/null 2>&1); then
+if (rbenv --version >/dev/null 2>&1); then
     eval "$(rbenv init -)"
-    if (type brew >/dev/null 2>&1) && (brew --version >/dev/null 2>&1); then
+    if (brew --version >/dev/null 2>&1); then
         source "`brew --prefix rbenv`/completions/rbenv.zsh"
     fi
+fi
+
+if (nodebrew --version >/dev/null 2>&1); then
+    export PATH=$HOME/.nodebrew/current/bin:$PATH
 fi
 
