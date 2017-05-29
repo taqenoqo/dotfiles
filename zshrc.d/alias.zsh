@@ -8,7 +8,7 @@ alias tmux='tmux -2'
 
 alias up='cd ..'
 
-if type rmtrash >/dev/null 2>&1; then
+if type -p rmtrash >/dev/null 2>&1; then
     alias rm='rmtrash'
 else
     alias rm='rm -i'
@@ -20,7 +20,7 @@ alias be='bundle exec'
 
 alias back='popd'
 
-if type colordiff >/dev/null 2>&1; then
+if type -p colordiff >/dev/null 2>&1; then
     alias diff='colordiff'
 fi
 
