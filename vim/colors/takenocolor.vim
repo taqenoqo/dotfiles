@@ -64,7 +64,7 @@ hi MatchParen ctermfg=NONE ctermbg=NONE cterm=bold,underline
 
 " 検索ヒット
 hi Search guifg=#FFFFCC guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=229 cterm=NONE
-hi IncSearch guifg=#FFFFCC guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=229 cterm=NONE
+hi IncSearch guifg=#FFCC00 guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=220 cterm=NONE
 
 " 補完ウインドウ
 hi PMenu guifg=#505050 guibg=#EAE8E2 guisp=NONE gui=NONE ctermfg=239 ctermbg=253 cterm=NONE
