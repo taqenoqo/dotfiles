@@ -17,3 +17,4 @@ if (type -p tmux >/dev/null 2>&1) && [ $SHLVL -le 1 -a $TERM != "screen" ]; then
         tmux
     fi
 fi
+
