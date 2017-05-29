@@ -4,7 +4,7 @@ colors
 autoload -Uz compinit
 compinit
 
-if type dircolors >/dev/null 2>&1; then
+if type -p dircolors >/dev/null 2>&1; then
     eval `dircolors`
 fi
 

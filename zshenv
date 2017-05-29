@@ -9,7 +9,7 @@ if [ -e "/usr/local/share/zsh-completions" ]; then
     FPATH="/usr/local/share/zsh-completions:$FPATH"
 fi
 
-if (type brew >/dev/null 2>&1); then
+if (type -p brew >/dev/null 2>&1); then
     export PATH="$(brew --prefix)/sbin:$PATH"
     () {
         local libexec="/usr/local/opt/coreutils/libexec"
@@ -20,7 +20,7 @@ if (type brew >/dev/null 2>&1); then
     }
 fi
 
-if (type rbenv >/dev/null 2>&1); then
+if (type -p rbenv >/dev/null 2>&1); then
     eval "$(rbenv init -)"
     () {
         local rbenv_completion="/usr/local/opt/coreutils/libexec/completions/rbenv.zsh"
@@ -30,7 +30,7 @@ if (type rbenv >/dev/null 2>&1); then
     }
 fi
 
-if (nodebrew --version >/dev/null 2>&1); then
+if (type -p nodebrew >/dev/null 2>&1); then
     export PATH=$HOME/.nodebrew/current/bin:$PATH
 fi
 
