@@ -9,6 +9,8 @@ setopt nobeep
 
 bindkey -v #emacs的キーバインド
 bindkey -v '^?' backward-delete-char
+bindkey -v '^a' beginning-of-line
+bindkey -v '^e' end-of-line
 
 setopt glob #グロブ
 setopt extendedglob #拡張グロブ
