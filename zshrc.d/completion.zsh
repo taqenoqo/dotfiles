@@ -45,5 +45,3 @@ bindkey -M menuselect '\e[Z' up-line-or-history
 bindkey -M menuselect '^e' send-break
 bindkey -M menuselect '^w' backward-kill-word
 
-fpath=(/usr/local/share/zsh-completions $fpath) # zsh-completions
-

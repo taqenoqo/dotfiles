@@ -1,9 +1,12 @@
 export EDITOR=vim
-
 export LANG=ja_JP.UTF-8
 
 if [ -f ~/.zshenv.local ]; then
     source ~/.zshenv.local
+fi
+
+if [ -e "/usr/local/share/zsh-completions" ]; then
+    FPATH="/usr/local/share/zsh-completions:$FPATH"
 fi
 
 if (brew --version >/dev/null 2>&1); then
