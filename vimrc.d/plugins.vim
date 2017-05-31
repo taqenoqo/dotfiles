@@ -220,11 +220,13 @@ if neobundle#tap('vim-quickrun')
                 \ '+backtick_code_blocks' .
                 \ '+definition_lists' .
                 \ '+pipe_tables' .
+                \ '+markdown_in_html_blocks' .
                 \ ' --to=html5' .
                 \ ' --template="$HOME/.pandoc/template.html"' .
-                \ ' --mathjax="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"' .
+                \ ' --mathjax="$HOME/.pandoc/dynload.js"' .
                 \ ' --css="$HOME/.pandoc/style.css"' .
-                \ ' --include-in-header="$HOME/.pandoc/mathjax_config.html"'
+                \ ' --include-in-header="$HOME/.pandoc/mathjax_config.html"' .
+                \ ' --self-contained'
                 \ ,
         \ }
     endfunction
