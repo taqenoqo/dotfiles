@@ -558,6 +558,7 @@ if neobundle#tap('vim2hs')
     \ })
 
     function! neobundle#tapped.hooks.on_source(bundle)
+        let g:haskell_conceal_wide = 0
         let g:haskell_conceal = 0
     endfunction
 
@@ -573,7 +574,7 @@ if neobundle#tap('latex-unicoder.vim')
     inoremap <C-u> <Esc>:call unicoder#start(1)<CR>
 endif
 
-NeoBundleLazy 'TAK3N0K0/tex-conceal.vim'
+NeoBundleLazy 'TAK3N0K0/tex-conceal.vim', 'my-custom'
 if neobundle#tap('tex-conceal.vim')
     call neobundle#config({
         \ 'autoload': {
