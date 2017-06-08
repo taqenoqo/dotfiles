@@ -559,7 +559,6 @@ if neobundle#tap('vim2hs')
 
     function! neobundle#tapped.hooks.on_source(bundle)
         let g:haskell_conceal = 0
-        hi clear Conceal
     endfunction
 
     call neobundle#untap()
@@ -572,6 +571,21 @@ if neobundle#tap('latex-unicoder.vim')
     let g:unicoder_cancel_visual = 1
     let g:unicoder_no_map = 1
     inoremap <C-u> <Esc>:call unicoder#start(1)<CR>
+endif
+
+NeoBundleLazy 'TAK3N0K0/tex-conceal.vim'
+if neobundle#tap('tex-conceal.vim')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'filename_patterns': ['.*\.md', '.*\.tex']
+        \ }
+    \ })
+
+    function! neobundle#tapped.hooks.on_source(bundle)
+        hi clear Conceal
+        set conceallevel=2
+        let g:tex_conceal="abdgm"
+    endfunction
 endif
 
 call neobundle#end()

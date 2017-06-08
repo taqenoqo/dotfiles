@@ -79,6 +79,9 @@ set notimeout
 set ttimeout
 set ttimeoutlen=0
 
+" conceal
+set conceallevel=2
+
 " スペルチェック
 if v:version >= 704
     set spelllang+=cjk
