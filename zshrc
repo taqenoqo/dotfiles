@@ -18,3 +18,5 @@ if (type -p tmux >/dev/null 2>&1) && [ $SHLVL -le 1 -a $TERM != "screen" ]; then
     fi
 fi
 
+# OPAM configuration
+. /Users/takenoko/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
