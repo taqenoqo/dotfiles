@@ -426,7 +426,7 @@ if neobundle#tap('coq.vim')
     call neobundle#untap()
 endif
 
-NeoBundleLazy 'dxue2012/CoqIDE'
+NeoBundleLazy 'CoqIDE'
 if neobundle#tap('CoqIDE')
     call neobundle#config({
         \ 'autoload': {
@@ -563,6 +563,15 @@ if neobundle#tap('vim2hs')
     endfunction
 
     call neobundle#untap()
+endif
+
+NeoBundle 'joom/latex-unicoder.vim'
+if neobundle#tap('latex-unicoder.vim')
+    let g:unicoder_cancel_normal = 1
+    let g:unicoder_cancel_insert = 1
+    let g:unicoder_cancel_visual = 1
+    let g:unicoder_no_map = 1
+    inoremap <C-u> <Esc>:call unicoder#start(1)<CR>
 endif
 
 call neobundle#end()
