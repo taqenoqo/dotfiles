@@ -89,3 +89,6 @@ hi SpellCap guifg=NONE guibg=#FFCCFF ctermfg=NONE ctermbg=225 cterm=NONE
 hi SpellRare guifg=NONE guibg=#FFFFCC ctermfg=NONE ctermbg=230 cterm=NONE
 hi SpellLocal guifg=NONE guibg=#FFFFCC ctermfg=NONE ctermbg=230 cterm=NONE
 
+" conceal の背景色削除
+hi clear Conceal
+
