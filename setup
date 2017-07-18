@@ -1,7 +1,6 @@
 #!/bin/zsh
 
-set -eu
-autoload -Uz
+builtin setopt -o NO_UNSET -o ERR_EXIT
 
 cd $(dirname $0)
 
