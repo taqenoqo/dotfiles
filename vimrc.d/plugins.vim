@@ -481,12 +481,12 @@ if neobundle#tap('ghcmod-vim')
     \ })
 
     function! neobundle#tapped.hooks.on_source(bundle)
-        noremap <Leader><Enter> :GhcModType!<CR>
-        noremap <Leader>t :GhcModType!<CR>
-        noremap <Leader>i :GhcModInfo!<CR>
-        noremap <Leader>l :GhcModLintAsync!<CR>
-        noremap <Leader>s :GhcModTypeInsert!<CR>
-        noremap <Leader>p :GhcModSplitFunCase!<CR>
+        noremap <Leader>h<Enter> :GhcModType!<CR>
+        noremap <Leader>ht :GhcModType!<CR>
+        noremap <Leader>hi :GhcModInfo!<CR>
+        noremap <Leader>hl :GhcModLintAsync!<CR>
+        noremap <Leader>hs :GhcModTypeInsert!<CR>
+        noremap <Leader>hp :GhcModSplitFunCase!<CR>
 
         let l:old_cl = maparg("<C-L>", "n")
         let l:new_cl = ":GhcModTypeClear<CR>" . l:old_cl
@@ -587,6 +587,21 @@ if neobundle#tap('tex-conceal.vim')
         set conceallevel=2
         let g:tex_conceal="abdgm"
     endfunction
+endif
+
+NeoBundle 'gtags.vim'
+if neobundle#tap('tex-conceal.vim')
+    nnoremap <Leader>g<Enter> :Gtags <C-r><C-w><CR>
+    nnoremap <Leader>gr :Gtags -r <C-r><C-w><CR>
+    nnoremap <Leader>gl :Gtags -f %<CR>
+    nnoremap <Leader>gi :Gtags<CR>
+    nnoremap <Leader>gn :cn<CR>
+    nnoremap <Leader>gp :cp<CR>
+endif
+
+NeoBundle 'zebult/auto-gtags.vim'
+if neobundle#tap('tex-conceal.vim')
+    nnoremap <Leader>gg :GtagsCreate<CR>
 endif
 
 call neobundle#end()
