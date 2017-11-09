@@ -255,6 +255,11 @@ code > span.fu { color: #a71d5d; }
 /* Error */
 code > span.er { color: #ff0000; font-weight: bold; }
 
+div.author {
+    margin: 1.5em 0;
+    text-align: right;
+}
+
 @media print {
     @page {
         size: A4;
