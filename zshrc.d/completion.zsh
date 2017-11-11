@@ -33,6 +33,7 @@ bindkey '^d' self-insert
 bindkey '^q' self-insert
 bindkey '^r' self-insert
 bindkey '\e[Z' menu-select
+bindkey '^s' menu-select
 bindkey '^n' down-line-or-history
 bindkey '^p' up-line-or-history
 bindkey '^w' backward-kill-word
