@@ -28,12 +28,29 @@ zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters #変数の�
 zstyle ':completion:*' list-separator ':' #セパレータ文字
 zstyle ':completion:*:manuals' separate-sections true #manの補完をセクションごとに
 
+function set-comp-state() {
+    if [[ $compstate[old_list] == "shown" ]]; then
+        is_comp_shown=1
+    fi
+}
+zle -C set-comp-state menu-expand-or-complete set-comp-state
+
+function my-completion() {
+    is_comp_shown=0
+    zle set-comp-state
+    if [[ $is_comp_shown == 1 ]]; then
+        zle menu-select
+    else
+        zle menu-expand-or-complete
+    fi
+}
+zle -N my-completion
+
 zmodload zsh/complist
 bindkey '^d' self-insert
 bindkey '^q' self-insert
 bindkey '^r' self-insert
-bindkey '\e[Z' menu-select
-bindkey '^s' menu-select
+bindkey '\t' my-completion
 bindkey '^n' down-line-or-history
 bindkey '^p' up-line-or-history
 bindkey '^w' backward-kill-word
