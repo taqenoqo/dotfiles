@@ -467,6 +467,7 @@ if neobundle#tap('neco-ghc')
     function! neobundle#tapped.hooks.on_source(bundle)
         setlocal omnifunc=necoghc#omnifunc
         let g:necoghc_enable_detailed_browse = 1
+        let g:necoghc_use_stack = 1
     endfunction
 
     call neobundle#untap()
@@ -602,6 +603,7 @@ endif
 NeoBundle 'zebult/auto-gtags.vim'
 if neobundle#tap('tex-conceal.vim')
     nnoremap <Leader>gg :GtagsCreate<CR>
+    let g:auto_gtags = 1
 endif
 
 call neobundle#end()
