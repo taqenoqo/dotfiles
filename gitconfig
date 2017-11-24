@@ -13,7 +13,7 @@
 [push]
 	default = simple
 [user]
-	name = Takenoko
+	name = takenoko
 	email = ttaakkee@gmail.com
 [include]
 	path = .gitconfig.local
