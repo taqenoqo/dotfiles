@@ -198,13 +198,13 @@ if neobundle#tap('vim-quickrun')
             \ 'command' : 'cat',
         \ }
         let g:quickrun_config['tex'] = {
-            \ 'command': 'xelatex',
+            \ 'command': 'latexmk',
+            \ 'cmdopt': '-pv',
             \ 'outputter': 'error',
             \ 'outputter/error/success': 'null',
             \ 'outputter/error/error': 'buffer',
             \ 'exec': [
-                \ '%c %o %a %s',
-                \ 'open "%S:r.pdf"'
+                \ '%c %o %a %s'
             \ ]
         \ }
         let g:quickrun_config['markdown'] = {
