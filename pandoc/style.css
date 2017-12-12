@@ -1,309 +1,239 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
-
-body {
-    background-color: #fff;
-    color: #333;
-    font-family: "Helvetica Neue", "Helvetica", "Segoe UI", "Arial", "freesans", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    line-height: 1.6;
-    border-radius: 3px;
-    word-wrap: break-word;
-}
-
-@media screen {
-    body {
-        box-shadow: 0 0 0 1px #ddd, 0 0 0 4px #eee;
-        padding: 4em;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    body {
-        margin: 0;
-        width: 100%;
-        font-size: 14px;
-        padding-left: 1em; padding-right: 1em;
-        border-radius: none;
-    }
-}
-
-@media screen and (min-width: 800px) {
-    body {
-        margin-left: auto; margin-right: auto;
-        width: 750px;
-        font-size: 15px;
-    }
-}
-
-@media screen and (min-width: 1400px) {
-    body {
-        margin-left: auto; margin-right: auto;
-        width: 1100px;
-        font-size: 19px;
-    }
-}
-
-main > :first-child {
-    margin-top: 0;
-}
-
-main > :last-child {
-    margin-bottom: 0;
-}
-
-p {
-    margin: 1em 0
-}
-
-h1, h2, h3, h4, h5, h6 {
-    margin-top: 1em;
-    font-weight: bold;
-}
-
-h1 {
-    font-size: 2.25em;
-    line-height: 1.2;
-    padding-bottom: 0.3em;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 0.45em;
-}
-
-h2 {
-    font-size: 1.75em;
-    line-height: 1.225;
-    padding-bottom: 0.3em;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 0.58em;
-}
-
-h3 {
-    font-size: 1.5em;
-    line-height: 1.43;
-    margin-bottom: 0.67em;
-}
-
-h4 {
-    font-size: 1.25em;
-    line-height: 1.4;
-    margin-bottom: 0.8em;
-}
-
-h5 {
-    font-size: 1em;
-    line-height: 1.4;
-    margin-bottom: 1em;
-}
-
-h6 {
-    font-size: 1em;
-    line-height: 1.4;
-    margin-bottom: 1em;
-    color: #777;
-}
-
-blockquote {
-    padding: 0 1em;
-    color: #777;
-    border-left: 4px solid #ddd;
-    margin: 1em 0;
-}
-
-blockquote > :first-child {
-    margin-top: 0;
-}
-
-blockquote > :last-child {
-    margin-bottom: 0;
-}
-
-a {
-    color: #47c;
-}
-
-ul, ol {
-    padding-left: 2em;
-}
-
-ol ol, ul ol {
-    list-style-type: lower-roman;
-}
-
-table {
-    display: block;
-    width: 100%;
-    overflow: auto;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    border-spacing: 0;
-    border-collapse: collapse;
-}
-
-table tr {
-    background-color: #fff;
-    border-top: 1px solid #ccc;
-}
-
-table th {
-    font-weight: bold;
-}
-
-table th, table td {
-    border: 1px solid #ccc;
-    padding: 0.38em 0.81em
-}
-
-table tr:nth-child(2n) {
-    background-color: #f8f8f8
-}
-
-img {
-    max-width: 100%
-}
-
-hr {
-    border: none;
-    border-top: 1px solid;
-    color: #ddd;
-    padding: 0;
-    margin: 2em 0;
-}
-
-dl {
-    padding: 0
-}
-
-dl dt {
-    padding: 0;
-    margin-top: 1em;
-    font-size: 1em;
-    font-weight: bolder;
-    font-style: italic;
-}
-
-h5 ~ dl dt,
-h6 ~ dl dt {
-    font-weight: normal;
-}
-
-dl dd {
-    padding: 0 2em;
-    margin-left: 0;
-}
-
-pre, code {
-    background-color: #f7f7f7;
-    font-size: 85%;
-    word-wrap: normal;
-    word-break: keep-all;
-    border: 1px solid #eee;
-    border-radius: 3px;
-    font-family: "Consolas", "Liberation Mono", "Menlo", "Courier", "monospace";
-}
-
-
-pre {
-    padding: 1em;
-    overflow: visible;
-    line-height: 1.45;
-}
-
-code {
-    padding: 0.2em;
+@media print {
+  @page {
+    size: A4;
+    margin: 30mm 25mm;
+  }
+  img,
+  pre,
+  blockquote,
+  table,
+  figure {
+    page-break-inside: avoid;
+  }
+  hr {
+    page-break-after: always;
+    visibility: hidden;
     margin: 0;
-}
-
-pre > code {
     padding: 0;
     border: 0;
-    white-space: pre;
+    height: 0;
+  }
 }
-
-/* Key Word */
-code > span.kw { color: #a71d5d; }
-
-/* Data Type */
-code > span.dt { color: #0086b3; }
-
-/* Decimal Value */
-code > span.dv { color: #0086b3; }
-
-/* BaseNTok */
-code > span.bn { color: #0086b3; }
-
-/* Float */
-code > span.fl { color: #0086b3; }
-
-/* Char */
-code > span.ch { color: #183691; }
-
-/* String */
-code > span.st { color: #183691; }
-
-/* Comment */
-code > span.co { color: #969896; }
-
-/* Other Token */
-code > span.ot { color: #795da3; }
-
-/* Alert */
-code > span.al { color: #ff0000; font-weight: bold; }
-
-/* Function */
-code > span.fu { color: #a71d5d; }
-
-/* Error */
-code > span.er { color: #ff0000; font-weight: bold; }
-
-div.author {
-    margin: 1.5em 0;
-    text-align: right;
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: "Helvetica", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.6;
+  word-wrap: break-word;
 }
-
 @media print {
-    @page {
-        size: A4;
-        margin: 30mm 25mm;
-    }
-
-    body {
-        margin: 0;
-        padding: 0;
-        font-size: 10.5pt;
-        color: #000;
-    }
-
-    img, pre, blockquote, table, figure {
-        page-break-inside: avoid;
-    }
-
-    pre code {
-        overflow: visible;
-    }
-
-    h1, h2 {
-        border-color: #ccc;
-    }
-
-    blockquote {
-        padding: 0 1em;
-        color: #555;
-        border-color: #bbb;
-        margin: 1em 0;
-    }
-
-    code, pre {
-        background-color: #eee;
-        border-color: #ccc;
-    }
-
-    hr {
-        visibility: hidden;
-        page-break-after: always;
-        margin: 0;
-        padding: 0;
-        border: 0;
-        height: 0;
-    }
+  body {
+    font-size: 10.5pt;
+    color: #000;
+  }
 }
-
+@media screen and (min-width: 900px) {
+  body {
+    font-size: 15px;
+    width: 850px;
+    margin: 0.5rem auto;
+    padding: 4rem;
+    box-shadow: 0 0 0 1px #ddd, 0 0 0 4px #eee;
+    border-radius: 0.5rem;
+  }
+}
+@media screen and (max-width: 900px) {
+  body {
+    font-size: 14px;
+    padding: 4rem 1rem;
+  }
+}
+main {
+  overflow: hidden;
+}
+main > :first-child {
+  margin-top: 0;
+}
+main > :last-child {
+  margin-bottom: 0;
+}
+a {
+  color: #47c;
+}
+img {
+  max-width: 100%;
+}
+p {
+  margin: 1em 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  line-height: 1;
+  margin-top: 1em;
+  margin-bottom: 1rem;
+}
+h1 {
+  font-size: 2.0736rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
+}
+@media print {
+  h1 {
+    border-color: #ccc;
+  }
+}
+h2 {
+  font-size: 1.728rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
+}
+@media print {
+  h2 {
+    border-color: #ccc;
+  }
+}
+h3 {
+  font-size: 1.44rem;
+}
+h4 {
+  font-size: 1.2rem;
+}
+h5 {
+  font-size: 1rem;
+}
+h6 {
+  font-size: 1rem;
+}
+blockquote {
+  padding: 0 1rem;
+  color: #777;
+  border-left: 4px solid #ddd;
+  margin: 1rem 0;
+}
+@media print {
+  blockquote {
+    color: #555;
+    border-color: #bbb;
+  }
+}
+blockquote > :first-child {
+  margin-top: 0;
+}
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+ul,
+ol {
+  padding-left: 2rem;
+}
+table {
+  margin: 1rem 0;
+  border-collapse: collapse;
+}
+table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+table th,
+table td {
+  border: 1px solid #ccc;
+  padding: 0.4rem 0.8rem;
+}
+table th {
+  font-weight: bold;
+}
+hr {
+  border: none;
+  border-top: 1px solid;
+  color: #ddd;
+  padding: 0;
+  margin: 2rem 0;
+}
+dl {
+  margin-top: 1rem;
+}
+dl dt {
+  text-decoration: underline #333;
+}
+dl dd {
+  margin-left: 2rem;
+}
+pre,
+code {
+  font-size: 0.75rem;
+  border-radius: 0.2rem;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  font-family: "Consolas", "Menlo", "monospace";
+  word-wrap: normal;
+  word-break: keep-all;
+  overflow: scroll !important;
+}
+@media print {
+  pre,
+  code {
+    background-color: #eee;
+    border-color: #ccc;
+  }
+}
+code {
+  padding: 0.1rem 0.2rem;
+}
+pre {
+  padding: 0.7rem;
+  line-height: 1.5;
+}
+pre > code {
+  padding: 0;
+  border: 0;
+  white-space: pre;
+}
+pre > span.kw {
+  color: #a26;
+}
+pre > span.dt {
+  color: #08b;
+}
+pre > span.dv {
+  color: #08b;
+}
+pre > span.bn {
+  color: #08b;
+}
+pre > span.fl {
+  color: #08b;
+}
+pre > span.ch {
+  color: #239;
+}
+pre > span.st {
+  color: #239;
+}
+pre > span.co {
+  color: #9a9;
+}
+pre > span.ot {
+  color: #86a;
+}
+pre > span.al {
+  color: #f00;
+  font-weight: bold;
+}
+pre > span.fu {
+  color: #a26;
+}
+pre > span.er {
+  color: #f00;
+  font-weight: bold;
+}

@@ -1,0 +1,193 @@
+*
+  box-sizing: border-box
+
+@media print
+  @page
+    size: A4
+    margin: 30mm 25mm
+
+  img, pre, blockquote, table, figure
+    page-break-inside: avoid
+
+  hr
+    page-break-after: always
+    visibility: hidden
+    margin: 0
+    padding: 0
+    border: 0
+    height: 0
+
+body
+  background-color: #fff
+  color: #333
+  font-family: "Helvetica", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+  line-height: 1.6
+  word-wrap: break-word
+    
+  @media screen
+    threshold-width = 900px
+
+    @media (min-width: threshold-width)
+      font-size: 15px
+      width: 850px
+      margin: 0.5rem auto
+      padding: 4rem
+      box-shadow: 0 0 0 1px #ddd, 0 0 0 4px #eee
+      border-radius: 0.5rem
+
+    @media (max-width: threshold-width)
+      font-size: 14px
+      padding: 4rem 1rem
+
+  @media print
+    font-size: 10.5pt
+    color: #000
+
+main
+  overflow: hidden
+
+  & > :first-child
+    margin-top: 0
+
+  & > :last-child
+    margin-bottom: 0
+
+a
+  color: #47c
+
+img
+  max-width: 100%
+
+p
+  margin: 1em 0
+
+
+h1, h2, h3, h4, h5, h6
+  font-weight: bold
+  line-height: 1
+  margin-top: 1em
+  margin-bottom: 1rem
+
+heading-base = 1.2
+
+h1
+  font-size: (heading-base ** 4)rem
+  border-bottom: 1px solid #ddd
+  padding-bottom: 0.5rem
+
+  @media print
+    border-color: #ccc
+
+h2
+  font-size: (heading-base ** 3)rem
+  border-bottom: 1px solid #ddd
+  padding-bottom: 0.5rem
+
+  @media print
+    border-color: #ccc
+
+h3
+  font-size: (heading-base ** 2)rem
+
+h4
+  font-size: (heading-base ** 1)rem
+
+h5
+  font-size: (heading-base ** 0)rem
+
+h6
+  font-size: (heading-base ** 0)rem
+
+
+blockquote
+  padding: 0 1rem
+  color: #777
+  border-left: 4px solid #ddd
+  margin: 1rem 0
+
+  @media print
+    color: #555
+    border-color: #bbb
+
+  & > :first-child
+    margin-top: 0
+
+  & > :last-child
+    margin-bottom: 0
+
+ul, ol
+  padding-left: 2rem
+
+table
+  margin: 1rem 0
+  border-collapse: collapse
+
+  tr
+    background-color: #fff
+    border-top: 1px solid #ccc
+
+    &:nth-child(2n)
+      background-color: #f8f8f8
+
+  th, td
+    border: 1px solid #ccc
+    padding: 0.4rem 0.8rem
+
+  th
+    font-weight: bold
+
+hr
+  border: none
+  border-top: 1px solid
+  color: #ddd
+  padding: 0
+  margin: 2rem 0
+
+dl
+  margin-top: 1rem
+  dt
+    text-decoration: underline #333
+
+  dd
+    margin-left: 2rem
+
+pre, code
+  font-size: 0.75rem
+  border-radius: 0.2rem
+  background-color: #f8f8f8
+  border: 1px solid #ddd
+  font-family: "Consolas", "Menlo", "monospace"
+  word-wrap: normal
+  word-break: keep-all
+  overflow: scroll !important
+
+  @media print
+    background-color: #eee
+    border-color: #ccc
+
+code
+  padding: 0.1rem 0.2rem
+
+pre
+  padding: 0.7rem
+  line-height: 1.5
+
+  & > code
+    padding: 0
+    border: 0
+    white-space: pre
+
+  & > span.kw { color: #a26; } // Key Word
+  & > span.dt { color: #08b; } // Data Type
+  & > span.dv { color: #08b; } // Decimal Value
+  & > span.bn { color: #08b; } // BaseNTok
+  & > span.fl { color: #08b; } // Float
+  & > span.ch { color: #239; } // Char
+  & > span.st { color: #239; } // String
+  & > span.co { color: #9a9; } // Comment
+  & > span.ot { color: #86a; } // Other Token
+  & > span.al { color: #f00; font-weight: bold; } // Alert
+  & > span.fu { color: #a26; } // Function
+  & > span.er { color: #f00; font-weight: bold; } // Error
+
+
