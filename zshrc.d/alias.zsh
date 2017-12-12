@@ -4,25 +4,30 @@ elif ls -G >/dev/null 2>&1; then
     alias ls='ls -GFlh'
 fi
 
-alias tmux='tmux -2'
+alias cp='cp -i'
 
-alias up='cd ..'
+alias mv='mv -i'
+
+alias mv='ln -i'
 
 if type -p rmtrash >/dev/null 2>&1; then
     alias rm='rmtrash'
 else
     alias rm='rm -i'
+    alias rm='rm -i'
 fi
 
+alias tmux='tmux -2'
+
 alias df='df -h'
-
-alias be='bundle exec'
-
-alias back='popd'
 
 if type -p colordiff >/dev/null 2>&1; then
     alias diff='colordiff'
 fi
 
-alias emacs='vim'
+alias up='cd ..'
+
+alias be='bundle exec'
+
+alias back='popd'
 

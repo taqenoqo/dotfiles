@@ -7,6 +7,7 @@ cd $(dirname $0)
 for src_file in *; do
     if [[ ${0:a} != ${src_file:a} ]]; then
         link_file="$HOME/.${src_file:t}"
+        # リンクなら強制上書き、リンク以外のファイルを上書きするときは確認
         if [[ -L $link_file ]]; then
             ln -snfv "${src_file:A}" "$link_file"
         else
