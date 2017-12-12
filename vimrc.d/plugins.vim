@@ -260,6 +260,7 @@ if neobundle#tap('vim-markdown')
         call add(g:markdown_fenced_languages, 'sh')
         call add(g:markdown_fenced_languages, 'conf')
         call add(g:markdown_fenced_languages, 'pfmain')
+        call add(g:markdown_fenced_languages, 'perl')
         hi link markdownCodeDelimiter Delimiter
         hi link markdownListMarker Identifier
     endfunction
@@ -347,9 +348,17 @@ NeoBundleLazy 'vim-stylus'
 if neobundle#tap('vim-stylus')
     call neobundle#config({
         \ 'autoload': {
-            \ 'filename_patterns': '.*\.styl'
+            \ 'filename_patterns': '.*\.styl',
+            \ 'on_source': 'vim-markdown'
         \ }
     \ })
+
+    function! neobundle#tapped.hooks.on_post_source(bundle)
+        if !exists('g:markdown_fenced_languages')
+            let g:markdown_fenced_languages = []
+        endif
+        call add(g:markdown_fenced_languages, 'stylus')
+    endfunction
 
     call neobundle#untap()
 endif
