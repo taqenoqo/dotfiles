@@ -8,12 +8,11 @@ alias cp='cp -i'
 
 alias mv='mv -i'
 
-alias mv='ln -i'
+alias ln='ln -i'
 
 if type -p rmtrash >/dev/null 2>&1; then
     alias rm='rmtrash'
 else
-    alias rm='rm -i'
     alias rm='rm -i'
 fi
 
