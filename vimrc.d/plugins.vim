@@ -226,7 +226,9 @@ if neobundle#tap('vim-quickrun')
                 \ ' --mathjax="$HOME/.pandoc/dynload.js"' .
                 \ ' --css="$HOME/.pandoc/style.css"' .
                 \ ' --include-in-header="$HOME/.pandoc/mathjax_config.html"' .
-                \ ' --self-contained'
+                \ ' --self-contained' .
+                \ ' --standalone' .
+                \ ' --variable=pagetitle:%{expand("%:t")}'
                 \ ,
         \ }
     endfunction

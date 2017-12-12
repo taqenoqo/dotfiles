@@ -12,9 +12,6 @@ $if(date-meta)$
 $endif$
   <title>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</title>
   <style type="text/css">code{white-space: pre;}</style>
-  <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
 $if(quotes)$
   <style type="text/css">q { quotes: "“" "”" "‘" "’"; }</style>
 $endif$
@@ -32,6 +29,9 @@ $endif$
 $for(header-includes)$
   $header-includes$
 $endfor$
+$if(javascript)$
+  <script src="$javascript$"></script>
+$endif$
 </head>
 <body>
 $for(include-before)$
@@ -64,3 +64,4 @@ $include-after$
 $endfor$
 </body>
 </html>
+
