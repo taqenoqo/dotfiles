@@ -2,9 +2,24 @@
   box-sizing: border-box;
 }
 @media print {
+  :root {
+    font-size: 10pt;
+  }
+}
+@media screen and (min-width: 65.48031496062993rem) {
+  :root {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 65.48031496062993rem) {
+  :root {
+    font-size: 14px;
+  }
+}
+@media print {
   @page {
     size: A4;
-    margin: 30mm 25mm;
+    margin: 1in 1in;
   }
   img,
   pre,
@@ -26,28 +41,26 @@ body {
   background-color: #fff;
   color: #333;
   font-family: "Helvetica", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  line-height: 1.6;
+  line-height: 1.5;
   word-wrap: break-word;
 }
 @media print {
   body {
-    font-size: 10.5pt;
+    width: 159.2mm;
     color: #000;
   }
 }
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 65.48031496062993rem) {
   body {
-    font-size: 15px;
-    width: 850px;
+    width: 59.52755905511811rem;
     margin: 0.5rem auto;
-    padding: 4rem;
+    padding: 7.199999999999999rem 7.199999999999999rem;
     box-shadow: 0 0 0 1px #ddd, 0 0 0 4px #eee;
     border-radius: 0.5rem;
   }
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 65.48031496062993rem) {
   body {
-    font-size: 14px;
     padding: 4rem 1rem;
   }
 }
@@ -76,7 +89,6 @@ h4,
 h5,
 h6 {
   font-weight: bold;
-  line-height: 1;
   margin-top: 1em;
   margin-bottom: 1rem;
 }
@@ -170,15 +182,20 @@ dl dd {
   margin-left: 2rem;
 }
 pre,
+code,
+pre * {
+  font-family: "Consolas", "Menlo", "monospace";
+  overflow-wrap: normal;
+  word-break: keep-all;
+  white-space: pre;
+  overflow: scroll !important;
+  text-overflow: ellipsis;
+}
+pre,
 code {
-  font-size: 0.75rem;
-  border-radius: 0.2rem;
+  font-size: 0.7rem;
   background-color: #f8f8f8;
   border: 1px solid #ddd;
-  font-family: "Consolas", "Menlo", "monospace";
-  word-wrap: normal;
-  word-break: keep-all;
-  overflow: scroll !important;
 }
 @media print {
   pre,
@@ -188,16 +205,16 @@ code {
   }
 }
 code {
+  border-radius: 0.2rem;
   padding: 0.1rem 0.2rem;
 }
 pre {
+  border-radius: 0.4rem;
   padding: 0.7rem;
-  line-height: 1.5;
 }
 pre > code {
   padding: 0;
   border: 0;
-  white-space: pre;
 }
 pre > span.kw {
   color: #a26;
