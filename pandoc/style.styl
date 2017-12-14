@@ -1,10 +1,26 @@
 *
   box-sizing: border-box
 
+font-size = 10pt
+margin-top-bottom = 1in
+margin-left-right = 1in
+a4-width = 210mm
+threshold-width = unit((a4-width / font-size) * 1.1, 'rem')
+
+:root
+  @media screen
+    @media (min-width: threshold-width)
+      font-size: 16px
+    @media (max-width: threshold-width)
+      font-size: 14px
+
+  @media print
+    font-size: font-size
+
 @media print
   @page
     size: A4
-    margin: 30mm 25mm
+    margin: margin-top-bottom margin-left-right
 
   img, pre, blockquote, table, figure
     page-break-inside: avoid
@@ -21,26 +37,22 @@ body
   background-color: #fff
   color: #333
   font-family: "Helvetica", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
-  line-height: 1.6
+  line-height: 1.5
   word-wrap: break-word
     
   @media screen
-    threshold-width = 900px
-
     @media (min-width: threshold-width)
-      font-size: 15px
-      width: 850px
+      width: unit(a4-width / font-size, 'rem')
       margin: 0.5rem auto
-      padding: 4rem
+      padding: unit(margin-top-bottom / font-size, 'rem') unit(margin-left-right / font-size, 'rem')
       box-shadow: 0 0 0 1px #ddd, 0 0 0 4px #eee
       border-radius: 0.5rem
 
     @media (max-width: threshold-width)
-      font-size: 14px
       padding: 4rem 1rem
 
   @media print
-    font-size: 10.5pt
+    width: a4-width - margin-left-right * 2
     color: #000
 
 main
@@ -64,7 +76,6 @@ p
 
 h1, h2, h3, h4, h5, h6
   font-weight: bold
-  line-height: 1
   margin-top: 1em
   margin-bottom: 1rem
 
@@ -151,31 +162,34 @@ dl
   dd
     margin-left: 2rem
 
+pre, code, pre *
+  font-family: "Consolas", "Menlo", "monospace"
+  overflow-wrap: normal
+  word-break: keep-all
+  white-space: pre
+  overflow: scroll !important
+  text-overflow: ellipsis
+
 pre, code
-  font-size: 0.75rem
-  border-radius: 0.2rem
+  font-size: 0.7rem
   background-color: #f8f8f8
   border: 1px solid #ddd
-  font-family: "Consolas", "Menlo", "monospace"
-  word-wrap: normal
-  word-break: keep-all
-  overflow: scroll !important
 
   @media print
     background-color: #eee
     border-color: #ccc
 
 code
+  border-radius: 0.2rem
   padding: 0.1rem 0.2rem
 
 pre
+  border-radius: 0.4rem
   padding: 0.7rem
-  line-height: 1.5
 
   & > code
     padding: 0
     border: 0
-    white-space: pre
 
   & > span.kw { color: #a26; } // Key Word
   & > span.dt { color: #08b; } // Data Type
