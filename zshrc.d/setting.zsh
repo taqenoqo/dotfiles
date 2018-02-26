@@ -1,3 +1,8 @@
+autoload -Uz run-help
+autoload -Uz run-help-git
+autoload -Uz run-help-openssl
+autoload -Uz run-help-sudo
+
 export WORDCHARS='*?_.[]~=&;!#$%^(){}<>' #区切り文字
 setopt list_packed #リストを詰めて表示
 setopt auto_pushd #cdのときにpushdする
@@ -7,13 +12,16 @@ stty stop undef #C-s の無効化
 setopt nolistbeep
 setopt nobeep
 
-bindkey -v #emacs的キーバインド
+bindkey -v # vim風キーバインド
 bindkey -v '^?' backward-delete-char
 bindkey -v '^a' beginning-of-line
 bindkey -v '^e' end-of-line
+bindkey -v '^e' end-of-line
+bindkey -v '^_' run-help
 
 setopt glob #グロブ
 setopt extendedglob #拡張グロブ
 
 setopt auto_cd #ディレクトリ名を打つと自動でcd
+
 
