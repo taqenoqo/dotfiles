@@ -53,11 +53,12 @@ hi Error guifg=#FF0000 guibg=NONE guisp=NONE gui=bold,underline ctermfg=196 cter
 hi Folded guifg=#505050 guibg=#FFFFFF gui=NONE ctermfg=239 ctermbg=231 cterm=bold
 
 " 改行やタブなどの記号
-hi NonText guifg=#AAAAAA gui=NONE ctermfg=249 cterm=NONE
-hi SpecialKey guifg=#AAAAAA gui=NONE ctermfg=249 cterm=NONE
+hi NonText guifg=#AAAAAA gui=NONE ctermfg=250 cterm=NONE
+hi SpecialKey guifg=#AAAAAA gui=NONE ctermfg=250 cterm=NONE
 
 " 行番号
-hi LineNr guifg=#505050 guibg=#FFFFFF guisp=NONE gui=NONE ctermfg=239 ctermbg=255 cterm=NONE
+hi LineNr guifg=#505050 guibg=#F0F0F0 guisp=NONE gui=NONE ctermfg=239 ctermbg=255 cterm=NONE
+hi SignColumn guifg=#505050 guibg=#F0F0F0 guisp=NONE gui=NONE ctermfg=239 ctermbg=231 cterm=NONE
 
 " カーソル下の括弧と対応する括弧
 hi MatchParen ctermfg=NONE ctermbg=NONE cterm=bold,underline
