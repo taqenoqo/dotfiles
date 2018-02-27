@@ -47,6 +47,18 @@ if neobundle#tap('vim-indent-guides')
     call neobundle#untap()
 endif
 
+NeoBundle 'folti/ShowMarks'
+if neobundle#tap('ShowMarks')
+    let g:showmarks_textlower=" "
+    let g:showmarks_textupper=" "
+    let g:showmarks_textother=" "
+
+    hi ShowMarksHLl ctermbg=153 ctermfg=69 cterm=BOLD
+    hi ShowMarksHLu ctermbg=224 ctermfg=210 cterm=BOLD
+    hi ShowMarksHLo ctermbg=231 ctermfg=250
+    hi ShowMarksHLm ctermbg=224 ctermfg=210 cterm=BOLD
+endif
+
 NeoBundleLazy 'h1mesuke/vim-alignta'
 if neobundle#tap('vim-alignta')
     call neobundle#config({
