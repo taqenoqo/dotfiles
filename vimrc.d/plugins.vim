@@ -56,7 +56,7 @@ if neobundle#tap('ShowMarks')
     hi ShowMarksHLl ctermbg=153 ctermfg=69 cterm=BOLD
     hi ShowMarksHLu ctermbg=224 ctermfg=210 cterm=BOLD
     hi ShowMarksHLo ctermbg=231 ctermfg=250
-    hi ShowMarksHLm ctermbg=224 ctermfg=210 cterm=BOLD
+    hi ShowMarksHLm ctermbg=228 ctermfg=208 cterm=BOLD,UNDERLINE
 endif
 
 NeoBundleLazy 'h1mesuke/vim-alignta'
@@ -248,7 +248,7 @@ if neobundle#tap('vim-quickrun')
     call neobundle#untap()
 endif
 
-NeoBundleLazy 'TAK3N0K0/vim-markdown', 'my-custom'
+NeoBundleLazy 'TAK3N0K0/vim-markdown', 'tex-math-dollars'
 if neobundle#tap('vim-markdown')
     call neobundle#config({
         \ 'autoload': {
@@ -275,6 +275,7 @@ if neobundle#tap('vim-markdown')
         call add(g:markdown_fenced_languages, 'perl')
         hi link markdownCodeDelimiter Delimiter
         hi link markdownListMarker Identifier
+        let g:markdown_fenced_tex = 1
     endfunction
 
     call neobundle#untap()
