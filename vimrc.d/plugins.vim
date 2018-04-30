@@ -400,7 +400,7 @@ if neobundle#tap('tsuquyomi')
     \ })
 
     function! neobundle#tapped.hooks.on_source(bundle)
-        setlocal omnifunc=necoghc#omnifunc
+        setlocal omnifunc=necoghc#omnifunc "バグでは?
         if !exists('g:neocomplete#force_omni_input_patterns')
             let g:neocomplete#force_omni_input_patterns = {}
         endif
@@ -480,6 +480,23 @@ if neobundle#tap('prolog.vim')
     call neobundle#untap()
 endif
 
+NeoBundleLazy 'TAK3N0K0/vim2hs', 'double-indent-option'
+if neobundle#tap('vim2hs')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'filename_patterns': ['.*\.hs', '.*\.hsc']
+        \ }
+    \ })
+
+    function! neobundle#tapped.hooks.on_source(bundle)
+        let g:haskell_conceal_wide = 0
+        let g:haskell_conceal = 0
+        let g:haskell_indent_double = 0
+    endfunction
+
+    call neobundle#untap()
+endif
+
 NeoBundleLazy 'ujihisa/neco-ghc'
 if neobundle#tap('neco-ghc')
     call neobundle#config({
@@ -497,7 +514,7 @@ if neobundle#tap('neco-ghc')
     call neobundle#untap()
 endif
 
-NeoBundleLazy 'eagletmt/ghcmod-vim'
+NeoBundleLazy 'TAK3N0K0/ghcmod-vim', 'using-stack'
 if neobundle#tap('ghcmod-vim')
     call neobundle#config({
         \ 'autoload': {
@@ -506,6 +523,8 @@ if neobundle#tap('ghcmod-vim')
     \ })
 
     function! neobundle#tapped.hooks.on_source(bundle)
+        let g:ghcmod_use_stack = 1
+
         noremap <Leader>h<Enter> :GhcModType!<CR>
         noremap <Leader>ht :GhcModType!<CR>
         noremap <Leader>hi :GhcModInfo!<CR>
@@ -569,22 +588,6 @@ if neobundle#tap('vim-swift')
             let g:markdown_fenced_languages = []
         endif
         call add(g:markdown_fenced_languages, 'swift')
-    endfunction
-
-    call neobundle#untap()
-endif
-
-NeoBundleLazy 'dag/vim2hs'
-if neobundle#tap('vim2hs')
-    call neobundle#config({
-        \ 'autoload': {
-            \ 'filename_patterns': ['.*\.hs', '.*\.hsc']
-        \ }
-    \ })
-
-    function! neobundle#tapped.hooks.on_source(bundle)
-        let g:haskell_conceal_wide = 0
-        let g:haskell_conceal = 0
     endfunction
 
     call neobundle#untap()
