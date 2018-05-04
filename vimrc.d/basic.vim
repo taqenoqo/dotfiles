@@ -4,7 +4,7 @@ colorscheme takenocolor
 
 " タブ、改行などの表示
 set list
-set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+set listchars=tab:»-,trail:-,eol:⏎,extends:»,precedes:«,nbsp:%
 
 " 言語環境の設定
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932
@@ -41,9 +41,6 @@ set wildmenu
 
 " 折り返さない
 set nowrap
-
-" 全角文字の文字幅を正しくする
-set ambiwidth=double
 
 " ビープ音の代わりに画面をフラッシュ
 set visualbell
