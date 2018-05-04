@@ -52,7 +52,7 @@ function change_prompt() {
 
     local c_prompt
     c_prompt="$aa_color
-     ∧ ∧
+     ∧  ∧
     (*ﾟーﾟ) %m:%~
     /  .|   %1v
 ～（＿＿ﾉ
