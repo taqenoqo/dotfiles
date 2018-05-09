@@ -600,6 +600,8 @@ if neobundle#tap('latex-unicoder.vim')
     let g:unicoder_cancel_visual = 1
     let g:unicoder_no_map = 1
     inoremap <C-u> <Esc>:call unicoder#start(1)<CR>
+
+    call neobundle#untap()
 endif
 
 NeoBundleLazy 'TAK3N0K0/tex-conceal.vim', 'my-custom'
@@ -615,6 +617,8 @@ if neobundle#tap('tex-conceal.vim')
         set conceallevel=2
         let g:tex_conceal="abdgm"
     endfunction
+
+    call neobundle#untap()
 endif
 
 NeoBundle 'gtags.vim'
@@ -625,12 +629,27 @@ if neobundle#tap('tex-conceal.vim')
     nnoremap <Leader>gi :Gtags<CR>
     nnoremap <Leader>gn :cn<CR>
     nnoremap <Leader>gp :cp<CR>
+
+    call neobundle#untap()
 endif
 
 NeoBundle 'zebult/auto-gtags.vim'
 if neobundle#tap('tex-conceal.vim')
     nnoremap <Leader>gg :GtagsCreate<CR>
     let g:auto_gtags = 1
+
+    call neobundle#untap()
+endif
+
+NeoBundleLazy 'DrawIt'
+if neobundle#tap('DrawIt')
+    call neobundle#config({
+        \ 'autoload': {
+            \ 'mappings': '<Leader>di',
+        \ }
+    \ })
+
+    call neobundle#untap()
 endif
 
 call neobundle#end()
