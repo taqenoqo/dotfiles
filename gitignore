@@ -3,4 +3,5 @@ GTAGS
 GRTAGS
 GPATH
 *.dSYM/
+.stack-work/
 
