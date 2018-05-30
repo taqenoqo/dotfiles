@@ -653,13 +653,17 @@ if neobundle#tap('tex-conceal.vim')
     call neobundle#untap()
 endif
 
-NeoBundleLazy 'DrawIt'
-if neobundle#tap('DrawIt')
-    call neobundle#config({
-        \ 'autoload': {
-            \ 'mappings': '<Leader>di',
-        \ }
-    \ })
+NeoBundle 'gyim/vim-boxdraw'
+if neobundle#tap('vim-boxdraw')
+    nnoremap <Leader>dd :call ToggleFlag('virtualedit', 'all')<CR>
+    function ToggleFlag(option,flag)
+        exec ('let lopt = &' . a:option)
+        if lopt =~ (".*" . a:flag . ".*")
+            exec ('set ' . a:option . '-=' . a:flag)
+        else
+            exec ('set ' . a:option . '+=' . a:flag)
+        endif
+    endfunction
 
     call neobundle#untap()
 endif
