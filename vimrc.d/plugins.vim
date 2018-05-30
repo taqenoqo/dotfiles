@@ -219,29 +219,41 @@ if neobundle#tap('vim-quickrun')
                 \ '%c %o %a %s'
             \ ]
         \ }
+        let l:pandoc_opt =
+            \ '--from=markdown_strict' .
+            \ '+tex_math_dollars' .
+            \ '+tex_math_double_backslash' .
+            \ '+fenced_code_blocks' .
+            \ '+fenced_code_attributes' .
+            \ '+backtick_code_blocks' .
+            \ '+definition_lists' .
+            \ '+pipe_tables' .
+            \ '+markdown_in_html_blocks' .
+            \ ' --to=html5' .
+            \ ' --template="$HOME/.pandoc/template.html"' .
+            \ ' --mathjax="$HOME/.pandoc/dynload.js"' .
+            \ ' --css="$HOME/.pandoc/style.css"' .
+            \ ' --include-in-header="$HOME/.pandoc/mathjax_config.html"' .
+            \ ' --self-contained' .
+            \ ' --standalone' .
+            \ ' --variable=pagetitle:%{expand("%:t")}'
+        let l:pandoc_ditaa_filter_cmd = 'pandoc-ditaa-filter'
+        let l:pandoc_ditaa_filter_opts = '--ditaa-opts="-E --svg" --img-ext="svg"'
+        let l:pandoc_exec = '%c %o %a %s'
+        if executable(l:pandoc_ditaa_filter_cmd)
+            let l:pandoc_exec = '%c %o -t json %a %s | ' . 
+                \ l:pandoc_ditaa_filter_cmd . ' ' . l:pandoc_ditaa_filter_opts .
+                \ ' | %c %o -f json %a'
+        endif
         let g:quickrun_config['markdown'] = {
             \ 'type': 'pandoc',
             \ 'outputter': 'error',
             \ 'outputter/error/success': 'browser',
             \ 'outputter/error/error': 'buffer',
-            \ 'cmdopt': '--from=markdown_strict' . 
-                \ '+tex_math_dollars' .
-                \ '+tex_math_double_backslash' .
-                \ '+fenced_code_blocks' .
-                \ '+fenced_code_attributes' .
-                \ '+backtick_code_blocks' .
-                \ '+definition_lists' .
-                \ '+pipe_tables' .
-                \ '+markdown_in_html_blocks' .
-                \ ' --to=html5' .
-                \ ' --template="$HOME/.pandoc/template.html"' .
-                \ ' --mathjax="$HOME/.pandoc/dynload.js"' .
-                \ ' --css="$HOME/.pandoc/style.css"' .
-                \ ' --include-in-header="$HOME/.pandoc/mathjax_config.html"' .
-                \ ' --self-contained' .
-                \ ' --standalone' .
-                \ ' --variable=pagetitle:%{expand("%:t")}'
-                \ ,
+            \ 'cmdopt': l:pandoc_opt,
+            \ 'exec': [
+                \ l:pandoc_exec
+            \ ]
         \ }
     endfunction
 
