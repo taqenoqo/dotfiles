@@ -30,3 +30,7 @@ alias be='bundle exec'
 
 alias back='popd'
 
+if type -p thefuck >/dev/null 2>&1; then
+    eval $(thefuck --alias)
+fi
+
