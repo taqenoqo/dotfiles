@@ -129,10 +129,41 @@ hook_post_source = '''
 repo = 'rking/ag.vim'
 on_cmd = 'Ag'
 
-# [[plugins]]
-# repo = 'taiansu/nerdtree-ag'
-# depends = ['nerdtree', 'ag.vim']
-# on_source = 'nerdtree'
+[[plugins]]
+repo = 'taiansu/nerdtree-ag'
+depends = ['nerdtree', 'ag.vim']
+on_source = 'nerdtree'
+
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+depends = ['nerdtree']
+on_source = 'nerdtree'
+hook_source = '''
+   let g:NERDTreeIndicatorMapCustom = {
+        \ "Untracked" : "!",
+        \ "Modified"  : "*",
+        \ "Dirty"     : "*",
+        \ "Staged"    : "+",
+        \ "Renamed"   : ">",
+        \ "Unmerged"  : "!",
+        \ "Deleted"   : "X",
+        \ "Clean"     : "-",
+        \ 'Ignored'   : '-',
+        \ "Unknown"   : "?"
+        \ } 
+
+    hi NERDTreeFlags ctermfg=249
+    hi NERDTreeGitStatusUntracked ctermfg=206
+    hi NERDTreeGitStatusModified ctermfg=208
+    hi NERDTreeGitStatusStaged ctermfg=077
+    hi NERDTreeGitStatusRenamed ctermfg=69
+    hi NERDTreeGitStatusUnmerged ctermfg=206
+    hi NERDTreeGitStatusStaged ctermfg=077
+    hi NERDTreeGitStatusDeleted ctermfg=197
+    hi NERDTreeGitStatusClean ctermfg=249
+    hi NERDTreeGitStatusIgnored ctermfg=249
+    hi NERDTreeGitStatusUnknown ctermfg=249
+'''
 
 [[plugins]]
 repo = 'Shougo/neocomplete'
