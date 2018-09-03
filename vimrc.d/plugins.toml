@@ -470,3 +470,7 @@ hook_source = '''
     let g:tex_conceal="abdgm"
 '''
 
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_path = '.*\.toml'
+
