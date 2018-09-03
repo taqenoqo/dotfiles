@@ -2,3 +2,6 @@
 	path = vim/bundle/neobundle.vim
 	url = https://github.com/Shougo/neobundle.vim
 	branch = master
+[submodule "vim/dein.vim"]
+	path = vim/dein.vim
+	url = https://github.com/Shougo/dein.vim
