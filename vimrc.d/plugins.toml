@@ -166,6 +166,12 @@ hook_source = '''
 '''
 
 [[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
 repo = 'Shougo/neocomplete'
 on_event = 'InsertEnter'
 hook_source = '''
