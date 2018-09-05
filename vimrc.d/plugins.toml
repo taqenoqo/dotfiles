@@ -48,18 +48,18 @@ hook_add = '''
 [[plugins]]
 repo = 'vim-scripts/gtags.vim'
 hook_add = '''
-    nnoremap <Leader>g<Enter> :Gtags <C-r><C-w><CR>
-    nnoremap <Leader>gr :Gtags -r <C-r><C-w><CR>
-    nnoremap <Leader>gl :Gtags -f %<CR>
-    nnoremap <Leader>gi :Gtags<CR>
-    nnoremap <Leader>gn :cn<CR>
-    nnoremap <Leader>gp :cp<CR>
+    nnoremap <Leader>G<Enter> :Gtags <C-r><C-w><CR>
+    nnoremap <Leader>Gr :Gtags -r <C-r><C-w><CR>
+    nnoremap <Leader>Gl :Gtags -f %<CR>
+    nnoremap <Leader>Gi :Gtags<CR>
+    nnoremap <Leader>Gn :cn<CR>
+    nnoremap <Leader>Gp :cp<CR>
 '''
 
 [[plugins]]
 repo = 'zebult/auto-gtags.vim'
 hook_add = '''
-    nnoremap <Leader>gg :GtagsCreate<CR>
+    nnoremap <Leader>Gg :GtagsCreate<CR>
     let g:auto_gtags = 1
 '''
 
@@ -167,6 +167,12 @@ hook_source = '''
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+hook_add = '''
+    nmap <Leader>gc :Gcommit<CR>
+    nmap <Leader>gs :Gstatus<CR>
+    nmap <Leader>gg :Gstatus<CR>
+    nmap <Leader>g<Enter> :Gstatus<CR>
+'''
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
