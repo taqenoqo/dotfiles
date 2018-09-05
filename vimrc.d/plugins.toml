@@ -76,7 +76,7 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'TAK3N0K0/vim-indent-guides'
+repo = 'taqenoqo/vim-indent-guides'
 rev = 'right-align'
 hook_add = '''
     let g:indent_guides_enable_on_vim_startup = 1
@@ -293,7 +293,7 @@ hook_source = '''
 '''
 
 [[plugins]]
-repo = 'TAK3N0K0/vim-markdown'
+repo = 'taqenoqo/vim-markdown'
 rev = 'tex-math-dollars'
 on_ft = 'markdown'
 hook_source = '''
@@ -425,14 +425,14 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'TAK3N0K0/vim2hs'
-rev = 'double-indent-option'
+repo = 'taqenoqo/vim2hs'
 on_path = ['.*\.hs', '.*\.hsc']
 hook_source = '''
     vunmap ao
     vunmap io
-    let g:haskell_conceal_wide = 0
-    let g:haskell_conceal = 0
+    let g:haskell_conceal_wide = 1
+    let g:haskell_conceal_bad = 1
+    let g:haskell_conceal = 1
     let g:haskell_indent_double = 0
 '''
 
@@ -467,7 +467,7 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'TAK3N0K0/tex-conceal.vim'
+repo = 'taqenoqo/tex-conceal.vim'
 rev = 'my-custom'
 on_path = ['.*\.md', '.*\.tex']
 hook_source = '''
