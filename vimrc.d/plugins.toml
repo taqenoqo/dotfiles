@@ -32,7 +32,7 @@ hook_add = '''
 [[plugins]]
 repo = 'gyim/vim-boxdraw'
 hook_add = '''
-    nnoremap <Leader>dd :call ToggleFlag('virtualedit', 'all')<CR>
+    nnoremap <Leader>d :call ToggleFlag('virtualedit', 'all')<CR>
     function ToggleFlag(option,flag)
         exec ('let lopt = &' . a:option)
         if lopt =~ (".*" . a:flag . ".*")
@@ -447,8 +447,50 @@ repo = 'ujihisa/neco-ghc'
 on_ft = 'haskell'
 hook_source = '''
     setlocal omnifunc=necoghc#omnifunc
+    if !exists('g:neocomplete#force_omni_input_patterns')
+        let g:neocomplete#force_omni_input_patterns = {}
+    endif
+    let g:neocomplete#force_omni_input_patterns['haskell'] = '\w'
     let g:necoghc_enable_detailed_browse = 1
     let g:necoghc_use_stack = 1
+'''
+
+[[plugins]]
+repo = 'autozimu/LanguageClient-neovim'
+rev = 'next'
+build = 'bash install.sh'
+hook_add = '''
+    let g:LanguageClient_serverCommands = { 'haskell': ['hie-wrapper'] }
+    let g:LanguageClient_diagnosticsDisplay =
+        \ {
+            \ 1: {
+                \ "name": "Error",
+                \ "texthl": "ALEError",
+                \ "signText": "X",
+                \ "signTexthl": "ALEErrorSign",
+            \ },
+            \ 2: {
+                \ "name": "Warning",
+                \ "texthl": "ALEWarning",
+                \ "signText": "!",
+                \ "signTexthl": "ALEWarningSign",
+            \ },
+            \ 3: {
+                \ "name": "Information",
+                \ "texthl": "ALEInfo",
+                \ "signText": "i",
+                \ "signTexthl": "ALEInfoSign",
+            \ },
+            \ 4: {
+                \ "name": "Hint",
+                \ "texthl": "ALEInfo",
+                \ "signText": ">",
+                \ "signTexthl": "ALEInfoSign",
+            \ },
+        \ }
+    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> <Leader>t :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> <Leader>n :call LanguageClient#textDocument_rename()<CR>
 '''
 
 [[plugins]]
