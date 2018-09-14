@@ -440,6 +440,7 @@ hook_source = '''
     let g:haskell_conceal_bad = 1
     let g:haskell_conceal = 1
     let g:haskell_indent_double = 0
+    let g:haskell_indent_offside = 0
 '''
 
 [[plugins]]
