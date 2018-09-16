@@ -178,67 +178,24 @@ hook_add = '''
 repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
-repo = 'Shougo/neocomplete'
+repo = 'roxma/vim-hug-neovim-rpc'
+
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+depends = ['vim-hug-neovim-rpc', 'nvim-yarp']
 on_event = 'InsertEnter'
 hook_source = '''
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#enable_smart_case = 1
-    let g:neocomplete#auto_completion_start_length = 1
-    let g:neocomplete#enable_fuzzy_completion = 1
-    let g:neocomplete#skip_auto_completion_time = '0.1'
-    let g:neocomplete#use_vimproc = 1
-    if !exists('g:neocomplete#sources#omni#input_patterns')
-        let g:neocomplete#sources#omni#input_patterns = {}
-    endif
-    let g:neocomplete#sources#omni#input_patterns['php'] = '\w'
-    if !exists('g:neocomplete#force_omni_input_patterns')
-        let g:neocomplete#force_omni_input_patterns = {}
-    endif
-    let g:neocomplete#force_omni_input_patterns['ruby'] = '\w'
+    let g:deoplete#enable_at_startup = 1
 
-    inoremap <expr> <C-n> neocomplete#start_manual_complete()
     inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-    inoremap <expr> <C-h> neocomplete#smart_close_popup()."\<C-h>"
-    inoremap <expr> <BS> neocomplete#smart_close_popup()."\<C-h>"
-    inoremap <expr> <C-y> neocomplete#close_popup()
-    inoremap <expr> <C-e> neocomplete#cancel_popup()
-    inoremap <expr> <CR> <SID>cr_neocomplete()
-    inoremap <expr> <TAB> <SID>tab_neocomplete()
-
-    function! s:cr_neocomplete()
-        return pumvisible() ? neocomplete#close_popup() : "\<Return>"
-    endfunction
-
-    function! s:tab_neocomplete()
-        return pumvisible() ? "\<C-n>" : "\<TAB>"
-    endfunction
+    inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+    inoremap <expr> <CR> pumvisible() ? deoplete#close_popup() : "\<CR>"
+    inoremap <expr> <BS> deoplete#smart_close_popup() . "\<BS>"
 '''
-
-[[plugins]]
-repo = 'Shougo/neosnippet'
-depends = 'neocomplete'
-on_source = 'neocomplete'
-hook_source = '''
-    let g:neosnippet#snippets_directory = '~/.vim/snippets/'
-    let g:neosnippet#enable_preview = 1
-
-    smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
-    imap <expr> <CR> <SID>cr_neosnippet()
-    imap <expr> <TAB> <SID>tab_neosnippet()
-
-    function! s:cr_neosnippet()
-        return pumvisible() && neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : s:cr_neocomplete()
-    endfunction
-
-    function! s:tab_neosnippet()
-        return !pumvisible() && neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : s:tab_neocomplete()
-    endfunction
-'''
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-depends = 'neosnippet'
-on_source = 'neosnippet'
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
@@ -387,12 +344,6 @@ repo = 'Quramy/tsuquyomi'
 depends = 'Shougo/vimproc.vim'
 on_ft = 'typescript'
 hook_source = '''
-    setlocal omnifunc=necoghc#omnifunc "バグでは?
-    if !exists('g:neocomplete#force_omni_input_patterns')
-        let g:neocomplete#force_omni_input_patterns = {}
-    endif
-    let g:neocomplete#force_omni_input_patterns['typescript'] = '\w'
-
     augroup typescript
         autocmd FileType typescript nmap <buffer> <Leader><Return> : <C-u>echo tsuquyomi#hint()<CR>
         autocmd FileType typescript nmap <buffer> <Leader>c <Plug>(TsuquyomiRenameSymbolC)
@@ -448,10 +399,6 @@ repo = 'ujihisa/neco-ghc'
 on_ft = 'haskell'
 hook_source = '''
     setlocal omnifunc=necoghc#omnifunc
-    if !exists('g:neocomplete#force_omni_input_patterns')
-        let g:neocomplete#force_omni_input_patterns = {}
-    endif
-    let g:neocomplete#force_omni_input_patterns['haskell'] = '\w'
     let g:necoghc_enable_detailed_browse = 1
     let g:necoghc_use_stack = 1
 '''
