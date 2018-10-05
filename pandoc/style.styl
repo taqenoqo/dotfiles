@@ -79,20 +79,20 @@ h1, h2, h3, h4, h5, h6
   margin-top: 1em
   margin-bottom: 1rem
 
-heading-base = 1.2
+heading-base = 1.35
 
 h1
-  font-size: (heading-base ** 4)rem
-  border-bottom: 1px solid #ddd
+  font-size: (heading-base ** 3)rem
+  border-bottom: 1px solid #bbb
   padding-bottom: 0.5rem
 
   @media print
-    border-color: #ccc
+    border-color: #aaa
 
 h2
-  font-size: (heading-base ** 3)rem
+  font-size: (heading-base ** 2)rem
   border-bottom: 1px solid #ddd
-  padding-bottom: 0.5rem
+  padding-bottom: 0.25rem
 
   @media print
     border-color: #ccc
@@ -100,14 +100,26 @@ h2
 h3
   font-size: (heading-base ** 2)rem
 
+h3::before
+  content: "■"
+  color: #444
+  margin-right: 0.5rem;
+
 h4
   font-size: (heading-base ** 1)rem
 
+h4::before
+  content: "●"
+  color: #222
+  margin-right: 0.5rem;
+
 h5
-  font-size: (heading-base ** 0)rem
+  font-size: (heading-base ** 1)rem
+  margin-left: 1rem;
 
 h6
   font-size: (heading-base ** 0)rem
+  margin-left: 1rem;
 
 
 blockquote

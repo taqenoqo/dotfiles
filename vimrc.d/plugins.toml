@@ -437,8 +437,15 @@ hook_add = '''
             \ },
         \ }
     nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> <Leader>m :call LanguageClient_contextMenu()<CR>
     nnoremap <silent> <Leader>t :call LanguageClient#textDocument_hover()<CR>
     nnoremap <silent> <Leader>n :call LanguageClient#textDocument_rename()<CR>
+
+    hi link ALEError Error
+    hi link ALEWarning SpellBad
+    hi link ALEInfo SpellRare
+    
+    let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
 '''
 
 [[plugins]]
