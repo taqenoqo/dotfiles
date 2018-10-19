@@ -17,6 +17,10 @@ build = 'make'
 
 [[plugins]]
 repo = 'vim-scripts/open-browser.vim'
+hook_add = '''
+    nmap <Leader>b <Plug>(openbrowser-smart-search)
+    vmap <Leader>b <Plug>(openbrowser-smart-search)
+'''
 
 [[plugins]]
 repo = 'vim-scripts/surround.vim'
