@@ -240,7 +240,7 @@ hook_source = '''
         \ ' --standalone' .
         \ ' --variable=pagetitle:%{expand("%:t")}'
     let l:pandoc_ditaa_filter_cmd = 'pandoc-ditaa-filter'
-    let l:pandoc_ditaa_filter_opts = '--ditaa-opts="-E --svg" --img-ext="svg"'
+    let l:pandoc_ditaa_filter_opts = '--ditaa-opts="-E -S --svg" --img-ext="svg"'
     let l:pandoc_exec = '%c %o %a %s'
     if executable(l:pandoc_ditaa_filter_cmd)
         let l:pandoc_exec = '%c %o -t json %a %s | ' . 
