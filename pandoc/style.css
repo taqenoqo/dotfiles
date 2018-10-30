@@ -94,9 +94,10 @@ h6 {
   margin-bottom: 1rem;
 }
 h1 {
-  font-size: 2.460375rem;
+  font-size: 2.48832rem;
   border-bottom: 1px solid #bbb;
   padding-bottom: 0.5rem;
+  color: #000;
 }
 @media print {
   h1 {
@@ -104,9 +105,10 @@ h1 {
   }
 }
 h2 {
-  font-size: 1.8225rem;
+  font-size: 2.0736rem;
   border-bottom: 1px solid #ddd;
   padding-bottom: 0.25rem;
+  color: #111;
 }
 @media print {
   h2 {
@@ -114,7 +116,8 @@ h2 {
   }
 }
 h3 {
-  font-size: 1.8225rem;
+  font-size: 1.728rem;
+  color: #222;
 }
 h3::before {
   content: "■";
@@ -123,7 +126,8 @@ h3::before {
   margin-right: 0.5rem;
 }
 h4 {
-  font-size: 1.35rem;
+  font-size: 1.44rem;
+  color: #333;
 }
 h4::before {
   content: "●";
@@ -131,13 +135,14 @@ h4::before {
   margin-right: 0.5rem;
 }
 h5 {
-  font-size: 1.35rem;
+  font-size: 1.2rem;
   margin-left: 0.5rem;
+  color: #444;
 }
 h6 {
   font-size: 1rem;
   margin-left: 1rem;
-  color: #333;
+  color: #555;
 }
 blockquote {
   padding: 0 1rem;
@@ -160,9 +165,11 @@ blockquote > :last-child {
 ul,
 ol {
   padding-left: 2rem;
+  margin-left: 0.5rem;
+  margin-right: 1rem;
 }
 table {
-  margin: 1rem 0;
+  margin: 1rem;
   border-collapse: collapse;
 }
 table tr {
@@ -189,6 +196,8 @@ hr {
 }
 dl {
   margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 dl dt {
   text-decoration: underline #333;
@@ -226,6 +235,8 @@ code {
 pre {
   border-radius: 0.4rem;
   padding: 0.7rem;
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
 }
 pre > code {
   padding: 0;

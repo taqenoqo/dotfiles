@@ -80,26 +80,29 @@ h1, h2, h3, h4, h5, h6
   margin-top: 1rem
   margin-bottom: 1rem
 
-heading-base = 1.35
+heading-base = 1.2
 
 h1
-  font-size: (heading-base ** 3)rem
+  font-size: (heading-base ** 5)rem
   border-bottom: 1px solid #bbb
   padding-bottom: 0.5rem
+  color: #000
 
   @media print
     border-color: #aaa
 
 h2
-  font-size: (heading-base ** 2)rem
+  font-size: (heading-base ** 4)rem
   border-bottom: 1px solid #ddd
   padding-bottom: 0.25rem
+  color: #111
 
   @media print
     border-color: #ccc
 
 h3
-  font-size: (heading-base ** 2)rem
+  font-size: (heading-base ** 3)rem
+  color: #222
 
 h3::before
   content: "■"
@@ -108,7 +111,8 @@ h3::before
   margin-right: 0.5rem
 
 h4
-  font-size: (heading-base ** 1)rem
+  font-size: (heading-base ** 2)rem
+  color: #333
 
 h4::before
   content: "●"
@@ -118,11 +122,12 @@ h4::before
 h5
   font-size: (heading-base ** 1)rem
   margin-left: 0.5rem
+  color: #444
 
 h6
   font-size: (heading-base ** 0)rem
   margin-left: 1rem
-  color: #333
+  color: #555
 
 
 blockquote
@@ -143,9 +148,11 @@ blockquote
 
 ul, ol
   padding-left: 2rem
+  margin-left: 0.5rem
+  margin-right: 1rem
 
 table
-  margin: 1rem 0
+  margin: 1rem
   border-collapse: collapse
 
   tr
@@ -171,6 +178,8 @@ hr
 
 dl
   margin-top: 1rem
+  margin-left: 1rem
+  margin-right: 1rem
   dt
     text-decoration: underline #333
 
@@ -201,6 +210,8 @@ code
 pre
   border-radius: 0.4rem
   padding: 0.7rem
+  margin-left: 1rem !important
+  margin-right: 1rem !important
 
   & > code
     padding: 0
