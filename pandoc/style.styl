@@ -84,21 +84,15 @@ heading-base = 1.2
 
 h1
   font-size: (heading-base ** 5)rem
-  border-bottom: 1px solid #bbb
-  padding-bottom: 0.5rem
+  border-bottom: 1px solid #aaa
+  padding-bottom: 0.1em
   color: #000
-
-  @media print
-    border-color: #aaa
 
 h2
   font-size: (heading-base ** 4)rem
-  border-bottom: 1px solid #ddd
-  padding-bottom: 0.25rem
+  border-bottom: 1px solid #ccc
+  padding-bottom: 0.1em
   color: #111
-
-  @media print
-    border-color: #ccc
 
 h3
   font-size: (heading-base ** 3)rem
@@ -107,8 +101,9 @@ h3
 h3::before
   content: "■"
   color: #666
-  font-size: 3rem
   margin-right: 0.5rem
+  font-size: 1.75em
+  vertical-align: -2.5%
 
 h4
   font-size: (heading-base ** 2)rem
@@ -118,6 +113,7 @@ h4::before
   content: "●"
   color: #555
   margin-right: 0.5rem
+  vertical-align: 2.5%
 
 h5
   font-size: (heading-base ** 1)rem
