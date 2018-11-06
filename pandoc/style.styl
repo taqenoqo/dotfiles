@@ -77,8 +77,11 @@ p
 
 h1, h2, h3, h4, h5, h6
   font-weight: bold
-  margin-top: 1rem
-  margin-bottom: 1rem
+  margin-top: 1.25em
+  margin-bottom: 0.75em
+
+  & + *:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6)
+    margin-top: 0
 
 heading-base = 1.2
 
@@ -104,6 +107,7 @@ h3::before
   margin-right: 0.5rem
   font-size: 1.75em
   vertical-align: -2.5%
+  line-height: 0
 
 h4
   font-size: (heading-base ** 2)rem
@@ -114,6 +118,7 @@ h4::before
   color: #555
   margin-right: 0.5rem
   vertical-align: 2.5%
+  line-height: 0
 
 h5
   font-size: (heading-base ** 1)rem
