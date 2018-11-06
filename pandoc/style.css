@@ -95,25 +95,15 @@ h6 {
 }
 h1 {
   font-size: 2.48832rem;
-  border-bottom: 1px solid #bbb;
-  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #aaa;
+  padding-bottom: 0.1em;
   color: #000;
-}
-@media print {
-  h1 {
-    border-color: #aaa;
-  }
 }
 h2 {
   font-size: 2.0736rem;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 0.25rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.1em;
   color: #111;
-}
-@media print {
-  h2 {
-    border-color: #ccc;
-  }
 }
 h3 {
   font-size: 1.728rem;
@@ -122,8 +112,9 @@ h3 {
 h3::before {
   content: "■";
   color: #666;
-  font-size: 3rem;
   margin-right: 0.5rem;
+  font-size: 1.75em;
+  vertical-align: -2.5%;
 }
 h4 {
   font-size: 1.44rem;
@@ -133,6 +124,7 @@ h4::before {
   content: "●";
   color: #555;
   margin-right: 0.5rem;
+  vertical-align: 2.5%;
 }
 h5 {
   font-size: 1.2rem;
