@@ -108,6 +108,9 @@ autocmd BufReadPost *
     \   exe "normal! g'\"" |
     \ endif
 
+" DiffOrig コマンド
+command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
+
 " dein 関連設定
 set runtimepath+=~/.vim/dein.vim
 let s:script_dir = expand('<sfile>:p:h')
