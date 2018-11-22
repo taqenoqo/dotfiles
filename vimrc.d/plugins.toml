@@ -239,14 +239,22 @@ hook_source = '''
         \ ' --self-contained' .
         \ ' --standalone' .
         \ ' --variable=pagetitle:%{expand("%:t")}'
+    let l:pandoc_pre_exec = '%c %o -t json %a %s | '
+    let l:pandoc_post_exec = '%c %o -f json %a'
+    let l:pandoc_filter = ''
+
     let l:pandoc_ditaa_filter_cmd = 'pandoc-ditaa-filter'
     let l:pandoc_ditaa_filter_opts = '--ditaa-opts="-E -S --svg" --img-ext="svg"'
-    let l:pandoc_exec = '%c %o %a %s'
     if executable(l:pandoc_ditaa_filter_cmd)
-        let l:pandoc_exec = '%c %o -t json %a %s | ' . 
-            \ l:pandoc_ditaa_filter_cmd . ' ' . l:pandoc_ditaa_filter_opts .
-            \ ' | %c %o -f json %a'
+        let l:pandoc_filter = l:pandoc_filter . l:pandoc_ditaa_filter_cmd . ' ' . l:pandoc_ditaa_filter_opts . ' | '
     endif
+
+    let l:diagrams_pandoc_cmd = 'diagrams-pandoc'
+    if executable(l:diagrams_pandoc_cmd)
+        let l:pandoc_filter = l:pandoc_filter . 'stack exec --resolver lts-12.14 ' . l:diagrams_pandoc_cmd . ' -- --backend SVG 2> >( sed -E "s/^[O.]+//" >\&2 ) | '
+    endif
+
+    let l:pandoc_exec = l:pandoc_pre_exec . l:pandoc_filter . l:pandoc_post_exec
     let g:quickrun_config['markdown'] = {
         \ 'type': 'pandoc',
         \ 'outputter': 'error',
