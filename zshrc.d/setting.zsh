@@ -18,6 +18,8 @@ bindkey -v '^a' beginning-of-line
 bindkey -v '^e' end-of-line
 bindkey -v '^e' end-of-line
 bindkey -v '^_' run-help
+bindkey -v '^y' history-search-forward
+bindkey -v '^h' history-search-backward
 
 setopt glob #グロブ
 setopt extendedglob #拡張グロブ
