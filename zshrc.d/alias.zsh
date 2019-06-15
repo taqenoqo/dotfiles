@@ -34,3 +34,9 @@ if type -p thefuck >/dev/null 2>&1; then
     eval $(thefuck --alias)
 fi
 
+alias stbuild='stack build'
+alias stghci='stack ghci'
+alias stexec='stack exec'
+alias sthoogle='stack hoogle -- --color'
+alias stdoc='() { stack hoogle -- --color --info $@ | less -R }'
+
