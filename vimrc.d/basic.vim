@@ -100,7 +100,10 @@ function MyFoldText()
 endfunction
 
 " C-Lでハイライトもクリア
-nnoremap <silent> <C-L> :noh<CR><C-L>
+nnoremap <silent> <C-L> :noh \| :pclose<CR><C-L>
+
+" dm でマーク全削除
+nnoremap <silent> dm :delmarks! \| delm A-Z0-9<CR>
 
 " ファイルを開いたときに以前のカーソル位置に移動
 autocmd BufReadPost *
