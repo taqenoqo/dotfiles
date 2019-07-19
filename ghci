@@ -1,2 +1,4 @@
 :set prompt "\n%s\nGHCi> "
+:def hoogle \x -> return $ ":!hoogle \"" ++ x ++ "\""
+:def doc \x -> return $ ":!hoogle --info \"" ++ x ++ "\""
 
