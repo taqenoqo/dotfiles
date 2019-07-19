@@ -231,6 +231,8 @@ hook_source = '''
         \ '+definition_lists' .
         \ '+pipe_tables' .
         \ '+markdown_in_html_blocks' .
+        \ '+footnotes' .
+        \ '+inline_notes' .
         \ ' --to=html5' .
         \ ' --template="$HOME/.pandoc/template.html"' .
         \ ' --mathjax="$HOME/.pandoc/dynload.js"' .
@@ -406,14 +408,18 @@ hook_source = '''
     let g:haskell_indent_offside = 0
 '''
 
-[[plugins]]
-repo = 'ujihisa/neco-ghc'
-on_ft = 'haskell'
-hook_source = '''
-    setlocal omnifunc=necoghc#omnifunc
-    let g:necoghc_enable_detailed_browse = 1
-    let g:necoghc_use_stack = 1
-'''
+#[[plugins]]
+#repo = 'ujihisa/neco-ghc'
+#on_ft = 'haskell'
+#hook_source = '''
+#    let g:haskellmode_completion_ghc = 0
+#    augroup Haskell
+#        autocmd!
+#        autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+#    augroup END
+#    let g:necoghc_enable_detailed_browse = 1
+#    let g:necoghc_use_stack = 1
+#'''
 
 [[plugins]]
 repo = 'autozimu/LanguageClient-neovim'
