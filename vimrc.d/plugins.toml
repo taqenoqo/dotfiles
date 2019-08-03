@@ -408,19 +408,6 @@ hook_source = '''
     let g:haskell_indent_offside = 0
 '''
 
-#[[plugins]]
-#repo = 'ujihisa/neco-ghc'
-#on_ft = 'haskell'
-#hook_source = '''
-#    let g:haskellmode_completion_ghc = 0
-#    augroup Haskell
-#        autocmd!
-#        autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-#    augroup END
-#    let g:necoghc_enable_detailed_browse = 1
-#    let g:necoghc_use_stack = 1
-#'''
-
 [[plugins]]
 repo = 'autozimu/LanguageClient-neovim'
 rev = 'next'
@@ -450,7 +437,7 @@ hook_add = '''
             \ 4: {
                 \ "name": "Hint",
                 \ "texthl": "ALEInfo",
-                \ "signText": ">",
+                \ "signText": "i",
                 \ "signTexthl": "ALEInfoSign",
             \ },
         \ }
@@ -459,9 +446,9 @@ hook_add = '''
     nnoremap <silent> <Leader>t :call LanguageClient#textDocument_hover()<CR>
     nnoremap <silent> <Leader>n :call LanguageClient#textDocument_rename()<CR>
 
-    hi link ALEError Error
-    hi link ALEWarning SpellBad
-    hi link ALEInfo SpellRare
+    hi link ALEErrorSign Error
+    hi link ALEWarningSign Warning
+    hi link ALEInfoSign Info
     
     let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
 '''
