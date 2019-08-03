@@ -47,7 +47,9 @@ hi Todo guifg=#CC0000 guibg=NONE guisp=NONE gui=bold,underline ctermfg=160 cterm
 hi Title guifg=#3300CC guibg=NONE guisp=NONE gui=bold ctermfg=56 ctermbg=NONE cterm=bold
 
 " エラー
-hi Error guifg=#FF0000 guibg=NONE guisp=NONE gui=bold,underline ctermfg=196 ctermbg=NONE cterm=bold,underline
+hi Error guifg=#FF3333 guibg=#FFCCCC guisp=NONE gui=bold ctermfg=203 ctermbg=224 cterm=bold
+hi Warning guifg=#FF6600 guibg=#FFFF66 guisp=NONE gui=bold ctermfg=208 ctermbg=228 cterm=bold
+hi Info guifg=#009933 guibg=#CCFFCC guisp=NONE gui=bold ctermfg=035 ctermbg=194 cterm=bold
 
 " 折り畳み
 hi Folded guifg=#505050 guibg=#FFFFFF gui=NONE ctermfg=239 ctermbg=231 cterm=bold
