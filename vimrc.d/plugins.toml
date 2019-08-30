@@ -316,6 +316,11 @@ hook_source = '''
         if exists("g:outline_prev_bufnr") && bufnr("%") == g:outline_prev_bufnr
             return 
         endif
+        " ウインドウの総数が減っていればウインドウが閉じられたとみなす
+        if exists("g:outline_prev_win_num") && g:outline_prev_win_num > winnr("$")
+            let g:outline_delayed_open = 1
+            return
+        endif
         call s:outline_open()
     endfunction
 
@@ -329,20 +334,39 @@ hook_source = '''
         if &foldmethod == 'marker'
             silent UniteClose
             execute l:prev_winnr "wincmd w"
-            Unite -profile-name=outline outline:folding
+            silent Unite -profile-name=outline outline:folding
             execute l:prev_winnr "wincmd w"
         elseif unite#sources#outline#get_outline_info(&filetype) != {}
             silent UniteClose
             execute l:prev_winnr "wincmd w"
-            Unite -profile-name=outline outline
+            silent Unite -profile-name=outline outline
             execute l:prev_winnr "wincmd w"
         endif
+    endfunction
+
+    " ウィンドウが閉じられたのか判定するために、ウインドウを離れるときのウインドウの総数を記憶する
+    function! s:outline_on_leave_window()
+        let g:outline_prev_win_num = winnr("$")
+    endfunction
+
+    function! s:outline_delayed_open()
+        if !exists("g:outline_delayed_open") || !g:outline_delayed_open
+            return
+        endif
+        let g:outline_delayed_open = 0
+        call s:outline_open()
     endfunction
 
     function! s:outline_start()
         augroup outline
             autocmd!
+            " WinEnter の後に BufEnter が呼ばれる。 
+            " WinEnter ではなく BufEnter でないとバッファ番号 bufnr("%") が正しく取得できない。
             autocmd BufEnter * :call s:outline_on_move_window()
+            autocmd BufLeave * :call s:outline_on_leave_window()
+            " ウインドウを閉じることで別ウインドウに入った場合、
+            " BufEnterのタイミングでは、閉じている最中にアウトラインを開くことになり、画面分割のエラーになるため遅延させる。
+            autocmd CursorMoved * :call s:outline_delayed_open()
         augroup END
         call s:outline_open()
     endfunction
