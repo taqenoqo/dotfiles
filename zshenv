@@ -43,3 +43,5 @@ if (type -p opam >/dev/null 2>&1); then
     source "$HOME/.opam/opam-init/init.zsh"
 fi
 
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
+

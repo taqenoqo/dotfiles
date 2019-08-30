@@ -312,22 +312,39 @@ hook_source = '''
         \ 'hide_source_names': 1,
     \ })
 
-    function! s:outline()
+    function! s:outline_on_move_window()
+        if exists("g:outline_prev_bufnr") && bufnr("%") == g:outline_prev_bufnr
+            return 
+        endif
+        call s:outline_open()
+    endfunction
+
+    function! s:outline_open()
+        let l:buf_is_listed = getbufinfo("%")[0]['listed']
+        if !l:buf_is_listed
+            return 
+        endif
+        let g:outline_prev_bufnr = bufnr("%")
+        let l:prev_winnr = winnr()
         if &foldmethod == 'marker'
             silent UniteClose
+            execute l:prev_winnr "wincmd w"
             Unite -profile-name=outline outline:folding
+            execute l:prev_winnr "wincmd w"
         elseif unite#sources#outline#get_outline_info(&filetype) != {}
             silent UniteClose
+            execute l:prev_winnr "wincmd w"
             Unite -profile-name=outline outline
+            execute l:prev_winnr "wincmd w"
         endif
     endfunction
 
     function! s:outline_start()
         augroup outline
             autocmd!
-            autocmd BufWinEnter * Outline
+            autocmd BufEnter * :call s:outline_on_move_window()
         augroup END
-        call s:outline()
+        call s:outline_open()
     endfunction
 
     function! s:outline_stop()
@@ -337,7 +354,7 @@ hook_source = '''
         silent UniteClose
     endfunction
 
-    command! -nargs=0 Outline call s:outline()
+    command! -nargs=0 Outline call s:outline_open()
     command! -nargs=0 OutlineStart call s:outline_start()
     command! -nargs=0 OutlineStop call s:outline_stop()
 '''
