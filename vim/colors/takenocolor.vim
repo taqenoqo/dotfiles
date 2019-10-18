@@ -76,9 +76,14 @@ hi PMenuSel guifg=#FFFFFF guibg=#3366CC guisp=NONE gui=NONE ctermfg=15 ctermbg=6
 hi PMenuThumb guifg=#EDEDED guibg=#B7B7B7 guisp=NONE gui=NONE ctermfg=255 ctermbg=250 cterm=NONE
 
 " ステータスラインと境界線
-hi StatusLine guifg=#FFFFFF guibg=#006633 gui=NONE ctermfg=231 ctermbg=29 cterm=NONE
+hi StatusLine guifg=#FFFFFF guibg=#339966 gui=NONE ctermfg=231 ctermbg=72 cterm=NONE
 hi StatusLineNC guifg=#ffffff guibg=#99CC99 gui=NONE ctermfg=231 ctermbg=151 cterm=NONE
 hi VertSplit guifg=#99CC99 guibg=#99CC99 gui=NONE ctermfg=151 ctermbg=151 cterm=NONE
+
+" タブバー
+hi TabLineFill guifg=#505050 guibg=#339966 gui=NONE ctermfg=231 ctermbg=72 cterm=NONE
+hi TabLine guifg=NONE guibg=#99cc99 gui=NONE ctermfg=NONE ctermbg=151 cterm=NONE
+hi TabLineSel guifg=NONE guibg=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=bold
 
 " diff
 hi DiffAdd guifg=NONE guibg=#CCFFFF ctermfg=NONE ctermbg=195 cterm=NONE
