@@ -108,30 +108,28 @@ hook_add = '''
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
-#on_cmd = ['NERDTree']
-#hook_add = '''
-#    function! s:nerdtree_auto_start()
-#        if argc() == 0 && !exists("s:exists_std_in")
-#            NERDTree
-#        endif
-#    endfunction
-#
-#    augroup NerdtreeAutoStart
-#        autocmd!
-#        autocmd StdinReadPre * let s:exists_std_in = 1
-#        autocmd VimEnter * call s:nerdtree_auto_start()
-#    augroup END
-#'''
-hook_source = '''
+hook_add = '''
     let g:NERDTreeWinSize = 30
 '''
-
 
 [[plugins]]
 repo = 'jistr/vim-nerdtree-tabs'
 depends = ['nerdtree']
 hook_add = '''
-    let g:nerdtree_tabs_open_on_console_startup = 1
+    function! s:nerdtree_auto_start()
+        if argc() == 0 && !exists("s:exists_std_in")
+            let g:nerdtree_tabs_open_on_console_startup = 1
+        endif
+    endfunction
+
+    augroup NerdtreeAutoStart
+        autocmd!
+        autocmd StdinReadPre * let s:exists_std_in = 1
+        autocmd VimEnter * call s:nerdtree_auto_start()
+    augroup END
+
+    nnoremap <C-P> :tabprevious<CR>
+    nnoremap <C-N> :tabnext<CR>
 '''
 
 [[plugins]]
