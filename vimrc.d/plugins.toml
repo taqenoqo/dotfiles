@@ -108,25 +108,30 @@ hook_add = '''
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
-on_cmd = ['NERDTree']
-hook_add = '''
-    function! s:nerdtree_auto_start()
-        if argc() == 0 && !exists("s:exists_std_in")
-            NERDTree
-        endif
-    endfunction
-
-    augroup NerdtreeAutoStart
-        autocmd!
-        autocmd StdinReadPre * let s:exists_std_in = 1
-        autocmd VimEnter * call s:nerdtree_auto_start()
-    augroup END
-'''
+#on_cmd = ['NERDTree']
+#hook_add = '''
+#    function! s:nerdtree_auto_start()
+#        if argc() == 0 && !exists("s:exists_std_in")
+#            NERDTree
+#        endif
+#    endfunction
+#
+#    augroup NerdtreeAutoStart
+#        autocmd!
+#        autocmd StdinReadPre * let s:exists_std_in = 1
+#        autocmd VimEnter * call s:nerdtree_auto_start()
+#    augroup END
+#'''
 hook_source = '''
     let g:NERDTreeWinSize = 30
 '''
-hook_post_source = '''
-    call nerdtree#postSourceActions()
+
+
+[[plugins]]
+repo = 'jistr/vim-nerdtree-tabs'
+depends = ['nerdtree']
+hook_add = '''
+    let g:nerdtree_tabs_open_on_console_startup = 1
 '''
 
 [[plugins]]
@@ -136,13 +141,11 @@ on_cmd = 'Ag'
 [[plugins]]
 repo = 'taiansu/nerdtree-ag'
 depends = ['nerdtree', 'ag.vim']
-on_source = 'nerdtree'
 
 [[plugins]]
 repo = 'Xuyuanp/nerdtree-git-plugin'
 depends = ['nerdtree']
-on_source = 'nerdtree'
-hook_source = '''
+hook_add = '''
    let g:NERDTreeIndicatorMapCustom = {
         \ "Untracked" : "!",
         \ "Modified"  : "*",

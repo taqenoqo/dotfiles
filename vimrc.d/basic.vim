@@ -115,6 +115,7 @@ autocmd BufReadPost *
 command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 
 " dein 関連設定
+let g:dein#auto_recache = 1
 set runtimepath+=~/.vim/dein.vim
 let s:script_dir = expand('<sfile>:p:h')
 if dein#load_state('~/.dein')
