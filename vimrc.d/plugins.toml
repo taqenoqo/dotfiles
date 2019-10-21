@@ -96,9 +96,10 @@ hook_add = '''
 [[plugins]]
 repo = 'folti/ShowMarks'
 hook_add = '''
-    let g:showmarks_textlower=" "
-    let g:showmarks_textupper=" "
-    let g:showmarks_textother=" "
+    let g:showmarks_textlower = " "
+    let g:showmarks_textupper = " "
+    let g:showmarks_textother = " "
+    let g:showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     hi ShowMarksHLl ctermbg=153 ctermfg=69 cterm=BOLD
     hi ShowMarksHLu ctermbg=224 ctermfg=210 cterm=BOLD
