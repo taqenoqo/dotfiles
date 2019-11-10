@@ -177,6 +177,7 @@ hook_add = '''
     nmap <Leader>gc :Gcommit<CR>
     nmap <Leader>gs :Gstatus<CR>
     nmap <Leader>gd :Gdiff<CR>
+    nmap <Leader>gl :Glog \| copen<CR>
     nmap ]h <Plug>GitGutterNextHunk
     nmap [h <Plug>GitGutterPrevHunk
 '''
