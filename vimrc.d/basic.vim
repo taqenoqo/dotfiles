@@ -42,9 +42,6 @@ set wildmenu
 " 折り返さない
 set nowrap
 
-" ビープ音の代わりに画面をフラッシュ
-set visualbell
-
 " カーソルの上下に表示する最低行数
 set scrolloff=5
 
@@ -69,6 +66,10 @@ set nobackup
 if has('persistent_undo')
     set noundofile
 endif
+
+" マウス操作
+set mouse=a
+set ttymouse=xterm2
 
 " キーコードのタイムアウトをしない
 set notimeout
