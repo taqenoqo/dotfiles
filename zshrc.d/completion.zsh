@@ -1,3 +1,5 @@
+FPATH="$HOME/.zsh/completion/:$FPATH"
+
 autoload -Uz colors
 colors
 

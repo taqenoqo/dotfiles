@@ -31,7 +31,7 @@ if (type -p rbenv >/dev/null 2>&1); then
 fi
 
 if (type -p nodebrew >/dev/null 2>&1); then
-    export PATH=$HOME/.nodebrew/current/bin:$PATH
+    export PATH="$HOME/.nodebrew/current/bin:$PATH"
 fi
 
 if (type -p stack >/dev/null 2>&1); then
