@@ -430,7 +430,7 @@ hook_post_source = '''
 '''
 
 [[plugins]]
-repo = 'mgrabovsky/coq.vim'
+repo = 'jvoorhis/coq.vim'
 on_path = '.*\.v'
 
 [[plugins]]
