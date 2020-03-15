@@ -542,3 +542,7 @@ hook_source = '''
 repo = 'cespare/vim-toml'
 on_path = '.*\.toml'
 
+[[plugins]]
+repo = 'derekelkins/agda-vim'
+on_path = '.*\.agda'
+
