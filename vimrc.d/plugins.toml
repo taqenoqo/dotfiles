@@ -212,6 +212,13 @@ hook_source = '''
     inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
     inoremap <expr> <CR> pumvisible() ? deoplete#close_popup() : "\<CR>"
     inoremap <expr> <BS> deoplete#smart_close_popup() . "\<BS>"
+
+    call deoplete#custom#option('sources', {
+        \ '_': ['buffer', 'file', 'omni'],
+    \})
+    call deoplete#custom#var('omni', 'input_patterns', {
+        \ 'javascript': '.+',
+    \ })
 '''
 
 [[plugins]]
@@ -428,10 +435,6 @@ hook_post_source = '''
     endif
     call add(g:markdown_fenced_languages, 'typescript')
 '''
-
-[[plugins]]
-repo = 'jvoorhis/coq.vim'
-on_path = '.*\.v'
 
 [[plugins]]
 repo = 'vim-scripts/CoqIDE'
