@@ -17,6 +17,7 @@ set tabstop=4 shiftwidth=4 softtabstop=0
 
 " <Leader> の設定
 let mapleader = ' '
+let maplocalleader = ','
 
 " 大小文字を区別しない検索
 set ignorecase
