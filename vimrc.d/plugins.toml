@@ -548,4 +548,11 @@ on_path = '.*\.toml'
 [[plugins]]
 repo = 'derekelkins/agda-vim'
 on_path = '.*\.agda'
+on_ft = 'markdown'
+hook_add = '''
+    let g:agdavim_includeutf8_mapping = v:false
+'''
+hook_source = '''
+    runtime agda-utf8.vim
+'''
 
