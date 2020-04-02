@@ -101,6 +101,9 @@ function MyFoldText()
     return getline(v:foldstart)
 endfunction
 
+" C-Space 解除
+imap <Nul> <Nop>
+
 " C-Lでハイライトもクリア
 nnoremap <silent> <C-L> :noh \| :pclose<CR><C-L>
 
@@ -130,6 +133,7 @@ if dein#check_install()
   call dein#install()
 endif
 call map(dein#check_clean(), "delete(v:val, 'rf')")
+autocmd VimEnter * call dein#call_hook('post_source')
 
 filetype plugin indent on
 
