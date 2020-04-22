@@ -532,14 +532,13 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'taqenoqo/tex-conceal.vim'
+repo = 'KeitaNakamura/tex-conceal.vim'
 rev = 'my-custom'
 on_path = ['.*\.md', '.*\.tex']
 hook_source = '''
     hi clear Conceal
     set conceallevel=2
     let g:tex_conceal="abdgm"
-    let g:tex_conceal_mathfrak=1
 '''
 
 [[plugins]]
@@ -555,8 +554,7 @@ hook_add = '''
 '''
 hook_source = '''
     runtime agda-utf8.vim
-'''
-hook_post_source = '''
+
     function CloseSubWindow()
         let l:agdaWinNr = bufwinnr('__Agda__')
         if l:agdaWinNr != -1
@@ -564,20 +562,27 @@ hook_post_source = '''
         endif
     endfunction
 
-    nnoremap <buffer> <LocalLeader>l :call CloseSubWindow()<CR>:AgdaReload<CR>
-    nnoremap <buffer> <LocalLeader>t :cclose<CR>:call AgdaInfer()<CR>
-    nnoremap <buffer> <LocalLeader>r :cclose<CR>:call AgdaRefine("False")<CR>
-    nnoremap <buffer> <LocalLeader>R :cclose<CR>:call AgdaRefine("True")<CR>
-    nnoremap <buffer> <LocalLeader>g :cclose<CR>:call AgdaGive()<CR>
-    nnoremap <buffer> <LocalLeader>c :cclose<CR>:call AgdaMakeCase()<CR>
-    nnoremap <buffer> <LocalLeader>a :cclose<CR>:call AgdaAuto()<CR>
-    nnoremap <buffer> <LocalLeader>e :cclose<CR>:call AgdaContext()<CR>
-    nnoremap <buffer> <LocalLeader>n :cclose<CR>:call AgdaNormalize("IgnoreAbstract")<CR>
-    nnoremap <buffer> <LocalLeader>N :cclose<CR>:call AgdaNormalize("DefaultCompute")<CR>
-    nnoremap <buffer> <LocalLeader>M :cclose<CR>:call AgdaShowModule('')<CR>
-    nnoremap <buffer> <LocalLeader>y :cclose<CR>:call AgdaWhyInScope('')<CR>
-    nnoremap <buffer> <LocalLeader>h :cclose<CR>:call AgdaHelperFunction()<CR>
-    nnoremap <buffer> <LocalLeader>d :cclose<CR>:call AgdaGotoAnnotation()<CR>
-    nnoremap <buffer> <LocalLeader>m :cclose<CR>:AgdaMetas<CR>
+    function SetAgdaKeyMaps()
+        nnoremap <buffer> <LocalLeader>l :cclose<CR>:call CloseSubWindow()<CR>:AgdaReload<CR>
+        nnoremap <buffer> <LocalLeader>t :cclose<CR>:call CloseSubWindow()<CR>:call AgdaInfer()<CR>
+        nnoremap <buffer> <LocalLeader>r :cclose<CR>:call CloseSubWindow()<CR>:call AgdaRefine("False")<CR>
+        nnoremap <buffer> <LocalLeader>R :cclose<CR>:call CloseSubWindow()<CR>:call AgdaRefine("True")<CR>
+        nnoremap <buffer> <LocalLeader>g :cclose<CR>:call CloseSubWindow()<CR>:call AgdaGive()<CR>
+        nnoremap <buffer> <LocalLeader>c :cclose<CR>:call CloseSubWindow()<CR>:call AgdaMakeCase()<CR>
+        nnoremap <buffer> <LocalLeader>a :cclose<CR>:call CloseSubWindow()<CR>:call AgdaAuto()<CR>
+        nnoremap <buffer> <LocalLeader>e :cclose<CR>:call CloseSubWindow()<CR>:call AgdaContext()<CR>
+        nnoremap <buffer> <LocalLeader>n :cclose<CR>:call CloseSubWindow()<CR>:call AgdaNormalize("IgnoreAbstract")<CR>
+        nnoremap <buffer> <LocalLeader>N :cclose<CR>:call CloseSubWindow()<CR>:call AgdaNormalize("DefaultCompute")<CR>
+        nnoremap <buffer> <LocalLeader>M :cclose<CR>:call CloseSubWindow()<CR>:call AgdaShowModule('')<CR>
+        nnoremap <buffer> <LocalLeader>y :cclose<CR>:call CloseSubWindow()<CR>:call AgdaWhyInScope('')<CR>
+        nnoremap <buffer> <LocalLeader>h :cclose<CR>:call CloseSubWindow()<CR>:call AgdaHelperFunction()<CR>
+        nnoremap <buffer> <LocalLeader>d :cclose<CR>:call CloseSubWindow()<CR>:call AgdaGotoAnnotation()<CR>
+        nnoremap <buffer> <LocalLeader>m :cclose<CR>:call CloseSubWindow()<CR>:AgdaMetas<CR>
+    endfunction
+
+    augroup agda
+        autocmd!
+        autocmd FileType agda call SetAgdaKeyMaps()
+    augroup END
 '''
 

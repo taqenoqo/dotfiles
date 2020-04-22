@@ -58,6 +58,9 @@ set nojoinspaces
 " 行の最大文字数と自動改行の設定
 set textwidth=120
 
+" C-A や C-X で増減される対象
+set nrformats=bin,hex,alpha
+
 " swpファイル作らない
 set noswapfile
 
