@@ -271,11 +271,6 @@ hook_source = '''
         let l:pandoc_filter = l:pandoc_filter . l:pandoc_ditaa_filter_cmd . ' ' . l:pandoc_ditaa_filter_opts . ' | '
     endif
 
-    let l:diagrams_pandoc_cmd = 'diagrams-pandoc'
-    if executable(l:diagrams_pandoc_cmd)
-        let l:pandoc_filter = l:pandoc_filter . 'stack exec --resolver lts-12.14 ' . l:diagrams_pandoc_cmd . ' -- --backend SVG 2> >( sed -E "s/^[O.]+//" >\&2 ) | '
-    endif
-
     let l:pandoc_exec = l:pandoc_pre_exec . l:pandoc_filter . l:pandoc_post_exec
     let g:quickrun_config['markdown'] = {
         \ 'type': 'pandoc',
