@@ -573,6 +573,9 @@ hook_source = '''
         nnoremap <buffer> <LocalLeader>h :cclose<CR>:call CloseSubWindow()<CR>:call AgdaHelperFunction()<CR>
         nnoremap <buffer> <LocalLeader>d :cclose<CR>:call CloseSubWindow()<CR>:call AgdaGotoAnnotation()<CR>
         nnoremap <buffer> <LocalLeader>m :cclose<CR>:call CloseSubWindow()<CR>:AgdaMetas<CR>
+        nnoremap <buffer> <LocalLeader>sa :AgdaSetRewriteModeAsIs<CR>:cclose<CR>:call CloseSubWindow()<CR>:call AgdaContext()<CR>
+        nnoremap <buffer> <LocalLeader>sn :AgdaSetRewriteModeNormal<CR>:cclose<CR>:call CloseSubWindow()<CR>:call AgdaContext()<CR>
+        nnoremap <buffer> <LocalLeader>sh :AgdaSetRewriteModeHeadNormal<CR>:cclose<CR>:call CloseSubWindow()<CR>:call AgdaContext()<CR>
     endfunction
 
     augroup agda
