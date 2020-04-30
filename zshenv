@@ -43,5 +43,9 @@ if (type -p opam >/dev/null 2>&1); then
     source "$HOME/.opam/opam-init/init.zsh"
 fi
 
+if (type -p direnv >/dev/null 2>&1); then
+    eval "$(direnv hook zsh)"
+fi
+
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 
