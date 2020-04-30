@@ -4,4 +4,5 @@ GRTAGS
 GPATH
 *.dSYM/
 .stack-work/
-
+.env
+.envrc

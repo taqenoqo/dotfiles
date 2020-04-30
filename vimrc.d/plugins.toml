@@ -119,6 +119,7 @@ hook_add = '''
 repo = 'scrooloose/nerdtree'
 hook_add = '''
     let g:NERDTreeWinSize = 30
+    let g:NERDTreeShowHidden = 1
 '''
 
 [[plugins]]
