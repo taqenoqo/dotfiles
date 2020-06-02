@@ -581,7 +581,7 @@ hook_source = '''
 
     augroup agda
         autocmd!
-        autocmd FileType agda call SetAgdaKeyMaps()
+        autocmd BufReadPost *.agda call SetAgdaKeyMaps()
     augroup END
 '''
 
