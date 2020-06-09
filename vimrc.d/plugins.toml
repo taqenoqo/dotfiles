@@ -529,7 +529,6 @@ hook_add = '''
 
 [[plugins]]
 repo = 'KeitaNakamura/tex-conceal.vim'
-rev = 'my-custom'
 on_path = ['.*\.md', '.*\.tex']
 hook_source = '''
     hi clear Conceal
