@@ -214,11 +214,22 @@ hook_source = '''
     inoremap <expr> <CR> pumvisible() ? deoplete#close_popup() : "\<CR>"
     inoremap <expr> <BS> deoplete#smart_close_popup() . "\<BS>"
 
+    call deoplete#custom#option('min_pattern_length', 1)
     call deoplete#custom#option('sources', {
-        \ '_': ['buffer', 'file', 'omni'],
+        \ '_': ['buffer', 'file', 'omni', 'LanguageClient'],
     \})
+
+    " 非同期のオムニ補完パターン
+    " python の正規表現
+    " できるだけこちらを使うべき
     call deoplete#custom#var('omni', 'input_patterns', {
-        \ 'javascript': '.+',
+        \ '_': ['.+'],
+    \ })
+
+    " vim のオムニ補完パターン
+    " vim の正規表現
+    call deoplete#custom#option('omni_patterns', {
+        \ '_': ['.\+'],
     \ })
 '''
 
@@ -466,7 +477,7 @@ repo = 'autozimu/LanguageClient-neovim'
 rev = 'next'
 build = 'bash install.sh'
 hook_add = '''
-    let g:LanguageClient_serverCommands = { 'haskell': ['hie-wrapper'] }
+    let g:LanguageClient_serverCommands = { 'haskell': ['haskell-language-server-wrapper', '--lsp'] }
     let g:LanguageClient_diagnosticsDisplay =
         \ {
             \ 1: {
