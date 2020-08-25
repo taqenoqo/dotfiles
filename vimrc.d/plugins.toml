@@ -226,11 +226,11 @@ hook_source = '''
         \ '_': ['.+'],
     \ })
 
-    " vim のオムニ補完パターン
-    " vim の正規表現
-    call deoplete#custom#option('omni_patterns', {
-        \ '_': ['.\+'],
-    \ })
+    " " vim のオムニ補完パターン
+    " " vim の正規表現
+    " call deoplete#custom#option('omni_patterns', {
+    "     \ '_': ['.\+'],
+    " \ })
 '''
 
 [[plugins]]

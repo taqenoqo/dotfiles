@@ -83,6 +83,9 @@ set ttimeoutlen=0
 " conceal
 set conceallevel=2
 
+" 補完設定
+set completeopt=menuone,popup,noinsert,noselect
+
 " スペルチェック
 if v:version >= 704
     set spelllang+=cjk
