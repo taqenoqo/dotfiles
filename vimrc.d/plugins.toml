@@ -58,6 +58,83 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'vim-scripts/VOoM'
+hook_add = '''
+    let g:voom_python_versions = [3,2]
+    let g:voom_tree_placement = "right"
+    let g:voom_tree_width = 45
+    let g:voom_ft_modes = {
+        \ 'markdown': 'markdown',
+        \ 'tex': 'latex'
+    \ }
+    let g:voom_default_mode = 'asciidoc'
+
+    function! s:outline_on_move_window()
+        if exists("g:outline_prev_bufnr") && bufnr("%") == g:outline_prev_bufnr
+            return 
+        endif
+        " ウインドウの総数が減っていればウインドウが閉じられたとみなす
+        if exists("g:outline_prev_win_num") && g:outline_prev_win_num > winnr("$")
+            let g:outline_delayed_open = 1
+            return
+        endif
+        call s:outline_open()
+    endfunction
+
+    function! s:outline_open()
+        let l:buf_is_listed = getbufinfo("%")[0]['listed']
+        if !l:buf_is_listed
+            return 
+        endif
+        let g:outline_prev_bufnr = bufnr("%")
+        let l:prev_winnr = winnr()
+        if exists(":VoomQuitAll") == 2
+            silent VoomQuitAll
+        endif
+        execute l:prev_winnr "wincmd w"
+        silent Voom
+        execute l:prev_winnr "wincmd w"
+    endfunction
+
+    " ウィンドウが閉じられたのか判定するために、ウインドウを離れるときのウインドウの総数を記憶する
+    function! s:outline_on_leave_window()
+        let g:outline_prev_win_num = winnr("$")
+    endfunction
+
+    function! s:outline_delayed_open()
+        if !exists("g:outline_delayed_open") || !g:outline_delayed_open
+            return
+        endif
+        let g:outline_delayed_open = 0
+        call s:outline_open()
+    endfunction
+
+    function! s:outline_start()
+        augroup outline
+            autocmd!
+            " WinEnter の後に BufEnter が呼ばれる。 
+            " WinEnter ではなく BufEnter でないとバッファ番号 bufnr("%") が正しく取得できない。
+            autocmd BufEnter * :call s:outline_on_move_window()
+            autocmd BufLeave * :call s:outline_on_leave_window()
+            " ウインドウを閉じることで別ウインドウに入った場合、
+            " BufEnterのタイミングでは、閉じている最中にアウトラインを開くことになり、画面分割のエラーになるため遅延させる。
+            autocmd CursorMoved * :call s:outline_delayed_open()
+        augroup END
+        call s:outline_open()
+    endfunction
+
+    function! s:outline_stop()
+        augroup outline
+            autocmd!
+        augroup END
+        silent VoomQuitAll
+    endfunction
+
+    command! -nargs=0 OutlineStart call s:outline_start()
+    command! -nargs=0 OutlineStop call s:outline_stop()
+'''
+
+[[plugins]]
 repo = 'vim-scripts/gtags.vim'
 hook_add = '''
     nnoremap <Leader>G<Enter> :Gtags <C-r><C-w><CR>
@@ -201,7 +278,6 @@ repo = 'roxma/vim-hug-neovim-rpc'
 [[plugins]]
 repo = 'roxma/nvim-yarp'
 
-
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
 depends = ['vim-hug-neovim-rpc', 'nvim-yarp']
@@ -320,94 +396,6 @@ hook_source = '''
     hi link markdownCodeDelimiter Delimiter
     hi link markdownListMarker Identifier
     let g:markdown_fenced_tex = 1
-'''
-
-[[plugins]]
-repo = 'Shougo/unite.vim'
-on_cmd = 'Unite'
-
-[[plugins]]
-repo = 'Shougo/unite-outline'
-depends = 'unite.vim'
-on_cmd = ['Outline', 'OutlineStart', 'OutlineStop']
-hook_source = '''
-    call unite#custom#profile('outline', 'context', {
-        \ 'no_quit': 1,
-        \ 'vertical': 1,
-        \ 'winwidth': 40,
-        \ 'direction': 'botright',
-        \ 'hide_source_names': 1,
-    \ })
-
-    function! s:outline_on_move_window()
-        if exists("g:outline_prev_bufnr") && bufnr("%") == g:outline_prev_bufnr
-            return 
-        endif
-        " ウインドウの総数が減っていればウインドウが閉じられたとみなす
-        if exists("g:outline_prev_win_num") && g:outline_prev_win_num > winnr("$")
-            let g:outline_delayed_open = 1
-            return
-        endif
-        call s:outline_open()
-    endfunction
-
-    function! s:outline_open()
-        let l:buf_is_listed = getbufinfo("%")[0]['listed']
-        if !l:buf_is_listed
-            return 
-        endif
-        let g:outline_prev_bufnr = bufnr("%")
-        let l:prev_winnr = winnr()
-        if &foldmethod == 'marker'
-            silent UniteClose
-            execute l:prev_winnr "wincmd w"
-            silent Unite -profile-name=outline outline:folding
-            execute l:prev_winnr "wincmd w"
-        elseif unite#sources#outline#get_outline_info(&filetype) != {}
-            silent UniteClose
-            execute l:prev_winnr "wincmd w"
-            silent Unite -profile-name=outline outline
-            execute l:prev_winnr "wincmd w"
-        endif
-    endfunction
-
-    " ウィンドウが閉じられたのか判定するために、ウインドウを離れるときのウインドウの総数を記憶する
-    function! s:outline_on_leave_window()
-        let g:outline_prev_win_num = winnr("$")
-    endfunction
-
-    function! s:outline_delayed_open()
-        if !exists("g:outline_delayed_open") || !g:outline_delayed_open
-            return
-        endif
-        let g:outline_delayed_open = 0
-        call s:outline_open()
-    endfunction
-
-    function! s:outline_start()
-        augroup outline
-            autocmd!
-            " WinEnter の後に BufEnter が呼ばれる。 
-            " WinEnter ではなく BufEnter でないとバッファ番号 bufnr("%") が正しく取得できない。
-            autocmd BufEnter * :call s:outline_on_move_window()
-            autocmd BufLeave * :call s:outline_on_leave_window()
-            " ウインドウを閉じることで別ウインドウに入った場合、
-            " BufEnterのタイミングでは、閉じている最中にアウトラインを開くことになり、画面分割のエラーになるため遅延させる。
-            autocmd CursorMoved * :call s:outline_delayed_open()
-        augroup END
-        call s:outline_open()
-    endfunction
-
-    function! s:outline_stop()
-        augroup outline
-            autocmd!
-        augroup END
-        silent UniteClose
-    endfunction
-
-    command! -nargs=0 Outline call s:outline_open()
-    command! -nargs=0 OutlineStart call s:outline_start()
-    command! -nargs=0 OutlineStop call s:outline_stop()
 '''
 
 [[plugins]]
