@@ -461,11 +461,21 @@ hook_source = '''
 '''
 
 [[plugins]]
+repo = 'bfrg/vim-qf-diagnostics'
+hook_add = '''
+    nmap <Leader>e <plug>(qf-diagnostics-popup-quickfix)
+    let g:qfdiagnostics = {
+        \ 'popup_border': [1, 1, 1, 1],
+        \ }
+'''
+
+[[plugins]]
 repo = 'autozimu/LanguageClient-neovim'
 rev = 'next'
 build = 'bash install.sh'
 hook_add = '''
     let g:LanguageClient_serverCommands = { 'haskell': ['haskell-language-server-wrapper', '--lsp'] }
+    let g:LanguageClient_hoverPreview = "Always"
     let g:LanguageClient_diagnosticsDisplay =
         \ {
             \ 1: {
