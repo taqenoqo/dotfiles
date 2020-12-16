@@ -9,7 +9,6 @@
 	br = branch
 	graph = log --graph --all --date=iso --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%ad%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(white)― %an%C(reset)' --abbrev-commit
 	unstage = reset HEAD --
-    vimdiff = difftool --tool=vimdiff
 [push]
 	default = simple
 [user]
@@ -19,3 +18,12 @@
 	path = .gitconfig.local
 [github]
 	user = tak3n0k0
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[difftool "vimdiff"]
+	cmd = vim -f -d -c \"wincmd l\" -c 'cd \"$GIT_PREFIX\"' \"$LOCAL\" \"$REMOTE\"
+

@@ -24,16 +24,6 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]]
-repo = 'junegunn/fzf'
-build = './install --all'
-merged = 0
-rtp = ''
-
-[[plugins]]
-repo = 'junegunn/fzf.vim'
-depends = 'fzf'
-
-[[plugins]]
 repo = 'vim-scripts/open-browser.vim'
 hook_add = '''
     nmap <Leader>b <Plug>(openbrowser-smart-search)
@@ -228,6 +218,10 @@ hook_add = '''
     nnoremap <C-P> :tabprevious<CR>
     nnoremap <C-N> :tabnext<CR>
 '''
+
+[[plugins]]
+repo = 'rking/ag.vim'
+on_cmd = 'Ag'
 
 [[plugins]]
 repo = 'taiansu/nerdtree-ag'
