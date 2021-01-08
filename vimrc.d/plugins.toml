@@ -71,7 +71,7 @@ hook_add = '''
     let g:voom_create_devel_commands = 1
 
     function! s:outline_on_enter_buffer()
-        if s:window_was_closed()
+        if s:outline_window_was_closed()
             let g:outline_delayed_open = 1
             return
         endif
@@ -83,13 +83,25 @@ hook_add = '''
         let g:outline_delayed_open = 1
     endfunction
 
-    function! s:window_was_closed()
+    function! s:outline_window_was_closed()
         return exists("g:outline_prev_win_num") && g:outline_prev_win_num > winnr("$")
     endfunction
 
+    function! s:outline_buf_is_hidden()
+        return !getbufinfo("%")[0]['listed']
+    endfunction
+
+    function! s:outline_last_win_is_voom()
+        return get(g:, "outline_last_win_is_voom", 0)
+    endfunction
+
     function! s:outline_open()
-        let l:buf_is_listed = getbufinfo("%")[0]['listed']
-        if !l:buf_is_listed
+        if s:outline_last_win_is_voom()
+            let g:outline_last_win_is_voom = &ft == "voomtree"
+            return
+        endif
+        if s:outline_buf_is_hidden()
+            let g:outline_last_win_is_voom = &ft == "voomtree"
             return 
         endif
         let l:prev_winnr = winnr()
