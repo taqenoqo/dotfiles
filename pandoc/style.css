@@ -8,12 +8,12 @@
 }
 @media screen and (min-width: 65.48031496062993rem) {
   :root {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 @media screen and (max-width: 65.48031496062993rem) {
   :root {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 @media print {
@@ -28,19 +28,12 @@
   figure {
     page-break-inside: avoid;
   }
-  hr {
-    page-break-after: always;
-    visibility: hidden;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    height: 0;
-  }
 }
 body {
   background-color: #fff;
-  color: #333;
-  font-family: "Helvetica", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #111;
+  font-family: "Hiragino Mincho ProN";
+  font-weight: 300;
   line-height: 1.5;
   word-wrap: break-word;
 }
@@ -76,12 +69,21 @@ main > :last-child {
 a {
   color: #47c;
 }
+figure {
+  text-align: center;
+  margin: 2rem 0.5rem;
+}
+figure > img {
+  margin: 1rem auto;
+}
 img {
-  max-width: 100%;
+  max-width: 60%;
   display: block;
+  margin: 2rem auto;
 }
 p {
-  margin: 1rem;
+  margin: 1rem 1rem;
+  text-indent: 1em;
 }
 h1,
 h2,
@@ -89,7 +91,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: bold;
+  font-family: "Hiragino Sans";
+  font-weight: 500;
   margin-top: 1.25em;
   margin-bottom: 0.75em;
 }
@@ -102,49 +105,52 @@ h6 + *:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
   margin-top: 0;
 }
 h1 {
-  font-size: 2.48832rem;
-  border-bottom: 1px solid #aaa;
-  padding-bottom: 0.1em;
+  font-size: 2.073599999999999rem;
+  border-bottom: 1px solid #888;
   color: #000;
 }
 h2 {
-  font-size: 2.0736rem;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 0.1em;
+  font-size: 1.728rem;
+  border-bottom: 1px solid #aaa;
   color: #111;
 }
 h3 {
-  font-size: 1.728rem;
+  font-size: 1.44rem;
   color: #222;
 }
 h3::before {
-  content: "■";
-  color: #666;
-  margin-right: 0.5rem;
-  font-size: 1.75em;
-  vertical-align: -2.5%;
-  line-height: 0;
+  content: "";
+  display: inline-block;
+  background-color: #555;
+  height: 0.75em;
+  width: 0.75em;
+  margin-right: 0.4rem;
+  vertical-align: 0.025em;
 }
 h4 {
-  font-size: 1.44rem;
+  font-size: 1.2rem;
+  margin-left: 0.333333333333333rem;
   color: #333;
 }
 h4::before {
-  content: "●";
-  color: #555;
-  margin-right: 0.5rem;
-  vertical-align: 2.5%;
-  line-height: 0;
+  content: "";
+  display: inline-block;
+  background-color: #555;
+  height: 0.6em;
+  width: 0.6em;
+  margin-right: 0.6rem;
+  vertical-align: 0.1em;
+  border-radius: 50%;
 }
 h5 {
-  font-size: 1.2rem;
-  margin-left: 0.5rem;
-  color: #444;
+  font-size: 1rem;
+  margin-left: 0.666666666666667rem;
+  color: #333;
 }
 h6 {
-  font-size: 1rem;
+  font-size: 0.833333333333333rem;
   margin-left: 1rem;
-  color: #555;
+  color: #444;
 }
 blockquote {
   padding: 0 1rem;
@@ -167,8 +173,34 @@ blockquote > :last-child {
 ul,
 ol {
   padding-left: 2rem;
-  margin-left: 0.5rem;
-  margin-right: 1rem;
+  margin: 1rem;
+}
+ul > :first-child,
+ol > :first-child {
+  margin-top: 0;
+}
+ul > :last-child,
+ol > :last-child {
+  margin-bottom: 0;
+}
+li {
+  margin: 0.5rem 0;
+}
+li > * {
+  margin: 0.5rem 0;
+}
+li > :not(ul:first-child,
+li ol):first-child {
+  text-indent: 0;
+  margin-top: 0;
+}
+li > :not(ul:last-child,
+li ol):last-child {
+  margin-bottom: 0;
+}
+li > :not(ul:not(:first-child),
+li ol):not(:first-child) {
+  padding-left: 0.5rem;
 }
 table {
   margin: 1rem;
@@ -192,7 +224,7 @@ table th {
 hr {
   border: none;
   border-top: 1px solid;
-  color: #ddd;
+  color: #aaa;
   padding: 0;
   margin: 2rem 0;
 }
@@ -202,7 +234,7 @@ dl {
   margin-right: 1rem;
 }
 dl dt {
-  text-decoration: underline #333;
+  text-decoration: underline #222;
 }
 dl dd {
   margin-left: 2rem;
@@ -210,7 +242,7 @@ dl dd {
 pre,
 code,
 pre * {
-  font-family: "Consolas", "Menlo", "monospace";
+  font-family: "Courier New";
   overflow-wrap: normal;
   word-break: keep-all;
   white-space: pre;
@@ -219,7 +251,7 @@ pre * {
 }
 pre,
 code {
-  font-size: 0.7rem;
+  font-size: 0.9em;
   background-color: #f8f8f8;
   border: 1px solid #ddd;
 }
@@ -233,16 +265,18 @@ code {
 code {
   border-radius: 0.2rem;
   padding: 0.1rem 0.2rem;
+  vertical-align: 0.2em;
 }
 pre {
   border-radius: 0.4rem;
-  padding: 0.7rem;
+  padding: 0.6rem 0.8rem;
   margin-left: 1rem !important;
   margin-right: 1rem !important;
 }
 pre > code {
   padding: 0;
   border: 0;
+  vertical-align: baseline;
 }
 pre > span.kw {
   color: #a26;
@@ -281,4 +315,17 @@ pre > span.fu {
 pre > span.er {
   color: #f00;
   font-weight: bold;
+}
+section.footnotes a.footnote-back {
+  text-decoration: none;
+  margin-left: 0.5rem;
+}
+a.footnote-ref {
+  text-decoration: none;
+}
+a.footnote-ref > sup::before {
+  content: "[";
+}
+a.footnote-ref > sup::after {
+  content: "]";
 }
