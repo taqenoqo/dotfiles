@@ -73,11 +73,25 @@ hook_add = '''
     function! s:outline_on_enter_buffer()
         if s:outline_window_was_closed()
             let g:outline_delayed_open = 1
+
+            if !s:outline_tab_has_normal_window()
+                tabclose
+            endif
+
             return
         endif
         call s:outline_open()
     endfunction
     
+    function! s:outline_tab_has_normal_window()
+        for buf in tabpagebuflist()
+            if getbufvar(buf, "&buftype") == ""
+                return 1
+            endif
+        endfor
+        return 0
+    endfunction
+
     " タブ移動時は NERDtree-tabs との相性の問題から、遅延して開く
     function! s:outline_on_enter_tab()
         let g:outline_delayed_open = 1
@@ -97,19 +111,21 @@ hook_add = '''
 
     function! s:outline_open()
         if s:outline_last_win_is_voom()
-            let g:outline_last_win_is_voom = &ft == "voomtree"
+            let g:outline_last_win_is_voom = &filetype == "voomtree"
             return
         endif
-        if s:outline_buf_is_hidden()
-            let g:outline_last_win_is_voom = &ft == "voomtree"
+        " 特殊な用途のバッファのときアウトラインを開かない
+        " NERDtree から split で開いたときなども特殊用途のバッファに一度遷移するため、これをはじくことは重要
+        if &buftype != ""
+            let g:outline_last_win_is_voom = &filetype == "voomtree"
             return 
         endif
         let l:prev_winnr = winnr()
         if exists(":VoomQuitAll") == 2
-            silent VoomQuitAll
+            silent! VoomQuitAll
         endif
         execute l:prev_winnr "wincmd w"
-        silent Voom
+        silent! Voom
         execute "wincmd L"
         execute g:voom_tree_width . "wincmd |"
         execute l:prev_winnr "wincmd w"
@@ -148,7 +164,7 @@ hook_add = '''
         augroup outline
             autocmd!
         augroup END
-        silent VoomQuitAll
+        silent! VoomQuitAll
     endfunction
 
     command! -nargs=0 OutlineStart call s:outline_start()
@@ -291,6 +307,9 @@ hook_add = '''
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
+hook_add = '''
+    let g:gitgutter_sign_priority = 5
+'''
 
 [[plugins]]
 repo = 'roxma/vim-hug-neovim-rpc'
@@ -360,7 +379,9 @@ hook_source = '''
         \ '+pipe_tables' .
         \ '+markdown_in_html_blocks' .
         \ '+footnotes' .
+        \ '+implicit_figures' .
         \ '+inline_notes' .
+        \ '+link_attributes' .
         \ ' --to=html5' .
         \ ' --template="$HOME/.pandoc/template.html"' .
         \ ' --mathjax="$HOME/.pandoc/dynload.js"' .
