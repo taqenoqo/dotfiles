@@ -338,13 +338,13 @@ hook_source = '''
     " python の正規表現
     " できるだけこちらを使うべき
     call deoplete#custom#var('omni', 'input_patterns', {
-        \ '_': ['.+'],
+        \ '_': ['\S+'],
     \ })
 
     " " vim のオムニ補完パターン
     " " vim の正規表現
     " call deoplete#custom#option('omni_patterns', {
-    "     \ '_': ['.\+'],
+    "     \ '_': ['\S\+'],
     " \ })
 '''
 
@@ -470,6 +470,38 @@ hook_post_source = '''
         let g:markdown_fenced_languages = []
     endif
     call add(g:markdown_fenced_languages, 'typescript')
+'''
+
+[[plugins]]
+repo = "OmniSharp/omnisharp-vim"
+on_ft = ["cs"]
+build = "xbuild server/OmniSharp.sln"
+hook_source = '''
+    let g:OmniSharp_server_use_mono = 1
+    let g:OmniSharp_popup_mappings = {
+        \ 'close': ['<Esc>', 'gq'],
+        \ 'lineDown': '<C-j>',
+        \ 'lineUp': '<C-k>'
+        \}
+    let g:ale_linters = { 'cs': ['OmniSharp'] }
+
+    nnoremap <silent> <Leader>t :OmniSharpDocumentation<CR>
+    nnoremap <silent> <Leader>u :OmniSharpFindUsage<CR>
+    nnoremap <silent> <Leader>d :OmniSharpPreviewDefinition<CR>
+    nnoremap <silent> <Leader>a :OmniSharpGetCodeActions<CR>
+    nnoremap <silent> <Leader>n :OmniSharpRename<CR>
+    nnoremap <silent> <Leader>R :OmniSharpRestartServer<CR>
+'''
+
+[[plugins]]
+repo = "dense-analysis/ale"
+hook_add = '''
+    let g:ale_sign_column_always = 1
+    let g:ale_sign_error = 'X'
+    let g:ale_sign_warning = '!'
+    let g:ale_sign_info = 'i'
+    let g:ale_sign_style_error = 'i'
+    let g:ale_sign_style_warning = 'i'
 '''
 
 [[plugins]]
