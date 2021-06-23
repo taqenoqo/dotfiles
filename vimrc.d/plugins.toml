@@ -16,8 +16,11 @@ repo = 'vim-scripts/sudo.vim'
 repo = 'Konfekt/FastFold'
 
 [[plugins]]
-repo = 'h1mesuke/vim-alignta'
-on_cmd = 'Alignta'
+repo = 'junegunn/vim-easy-align'
+hook_add = '''
+    xmap <Leader>a <Plug>(EasyAlign)
+    nmap <Leader>a <Plug>(EasyAlign)
+'''
 
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
@@ -192,9 +195,6 @@ hook_add = '''
 [[plugins]]
 repo = 'vim-scripts/camelcasemotion'
 hook_add = '''
-    nmap <silent> w <Plug>CamelCaseMotion_w
-    nmap <silent> b <Plug>CamelCaseMotion_b
-    nmap <silent> e <Plug>CamelCaseMotion_e
     omap <silent> ic <Plug>CamelCaseMotion_ie
     vmap <silent> ic <Plug>CamelCaseMotion_ie
     omap <silent> ac <Plug>CamelCaseMotion_iw
@@ -234,7 +234,11 @@ repo = 'scrooloose/nerdtree'
 hook_add = '''
     let g:NERDTreeWinSize = 30
     let g:NERDTreeShowHidden = 1
+    let g:NERDTreeIgnore = ['^\.DS_Store$[[file]]', '\~$']
 '''
+
+[[plugins]]
+repo = 'dsimidzija/vim-nerdtree-ignore'
 
 [[plugins]]
 repo = 'jistr/vim-nerdtree-tabs'
@@ -488,7 +492,7 @@ hook_source = '''
     nnoremap <silent> <Leader>t :OmniSharpDocumentation<CR>
     nnoremap <silent> <Leader>u :OmniSharpFindUsage<CR>
     nnoremap <silent> <Leader>d :OmniSharpPreviewDefinition<CR>
-    nnoremap <silent> <Leader>a :OmniSharpGetCodeActions<CR>
+    nnoremap <silent> <Leader>M :OmniSharpGetCodeActions<CR>
     nnoremap <silent> <Leader>n :OmniSharpRename<CR>
     nnoremap <silent> <Leader>R :OmniSharpRestartServer<CR>
 '''
