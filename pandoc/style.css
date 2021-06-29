@@ -329,3 +329,13 @@ a.footnote-ref > sup::before {
 a.footnote-ref > sup::after {
   content: "]";
 }
+@media print {
+  .page-break {
+    page-break-after: always;
+    visibility: hidden;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    height: 0;
+  }
+}
