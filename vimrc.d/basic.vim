@@ -61,15 +61,36 @@ set textwidth=120
 " C-A や C-X で増減される対象
 set nrformats=bin,hex,alpha
 
-" swpファイル作らない
-set noswapfile
+function s:SetupCacheFiles()
+    let l:cache_dir = $HOME . '/.vimcache'
+    let l:swap_dir = l:cache_dir . '/swap'
+    let l:backup_dir = l:cache_dir . '/backup'
+    let l:undo_dir = l:cache_dir . '/undo'
+    let l:viminfo_path = l:cache_dir . '/viminfo'
+    if !isdirectory(l:cache_dir) | call mkdir(l:cache_dir) | endif
+    if !isdirectory(l:swap_dir) | call mkdir(l:swap_dir) | endif
+    if !isdirectory(l:backup_dir) | call mkdir(l:backup_dir) | endif
+    if !isdirectory(l:undo_dir) | call mkdir(l:undo_dir) | endif
 
-" チルダファイル作らない
-set nobackup
+    " スワップファイル (クラッシュしたとき用のファイル)
+    set swapfile
+    execute 'set directory=' . l:swap_dir
 
-if has('persistent_undo')
-    set noundofile
-endif
+    " チルダファイル (バックアップファイル)
+    " 上書き前にバックアップを作り、上書き後もそのファイルを残す
+    set backup
+    execute 'set backupdir=' . l:backup_dir
+
+    " undo ファイル
+    if has('persistent_undo')
+        set undofile
+        execute 'set undodir=' . l:undo_dir
+    endif
+
+    " viminfoファイル
+    execute 'set viminfo+=n' . l:viminfo_path
+endfunction
+call s:SetupCacheFiles()
 
 " マウス操作
 set mouse=a
