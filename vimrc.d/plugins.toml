@@ -377,7 +377,6 @@ hook_source = '''
         \ '+tex_math_dollars' .
         \ '+tex_math_double_backslash' .
         \ '+fenced_code_blocks' .
-        \ '+fenced_code_attributes' .
         \ '+backtick_code_blocks' .
         \ '+definition_lists' .
         \ '+pipe_tables' .
@@ -385,7 +384,12 @@ hook_source = '''
         \ '+footnotes' .
         \ '+implicit_figures' .
         \ '+inline_notes' .
+        \ '+header_attributes' .
+        \ '+fenced_code_attributes' .
+        \ '+inline_code_attributes' .
         \ '+link_attributes' .
+        \ '+fenced_divs' .
+        \ '+bracketed_spans' .
         \ ' --to=html5' .
         \ ' --template="$HOME/.pandoc/template.html"' .
         \ ' --mathjax="$HOME/.pandoc/dynload.js"' .

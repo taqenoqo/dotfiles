@@ -211,14 +211,6 @@ hr
   padding: 0
   margin: 2rem 0
   
-  //@media print
-  //  page-break-after: always
-  //  visibility: hidden
-  //  margin: 0
-  //  padding: 0
-  //  border: 0
-  //  height: 0
-
 dl
   margin-top: 1rem
   margin-left: 1rem
@@ -292,4 +284,13 @@ a.footnote-ref
 
     &::after
       content: "]"
+
+.page-break
+  @media print
+    page-break-after: always
+    visibility: hidden
+    margin: 0
+    padding: 0
+    border: 0
+    height: 0
 
