@@ -105,7 +105,7 @@ set ttimeoutlen=0
 set conceallevel=2
 
 " 補完設定
-set completeopt=menuone,popup,noinsert,noselect
+set completeopt=menuone,noinsert,noselect
 
 " スペルチェック
 if v:version >= 704
