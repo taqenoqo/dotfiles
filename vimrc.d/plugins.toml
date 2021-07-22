@@ -271,7 +271,7 @@ depends = ['nerdtree', 'ag.vim']
 repo = 'Xuyuanp/nerdtree-git-plugin'
 depends = ['nerdtree']
 hook_add = '''
-   let g:NERDTreeIndicatorMapCustom = {
+   let g:NERDTreeGitStatusIndicatorMapCustom = {
         \ "Untracked" : "!",
         \ "Modified"  : "*",
         \ "Dirty"     : "*",
