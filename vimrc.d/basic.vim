@@ -58,6 +58,9 @@ set nojoinspaces
 " 行の最大文字数と自動改行の設定
 set textwidth=120
 
+" sign バー常時表示
+set signcolumn=yes
+
 " C-A や C-X で増減される対象
 set nrformats=bin,hex,alpha
 
@@ -104,8 +107,12 @@ set ttimeoutlen=0
 " conceal
 set conceallevel=2
 
+" CursorHold autocmd の待ち時間
+set updatetime=100
+
 " 補完設定
 set completeopt=menuone,noinsert,noselect
+set shortmess+=c
 
 " スペルチェック
 if v:version >= 704
