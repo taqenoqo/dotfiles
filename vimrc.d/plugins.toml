@@ -43,7 +43,7 @@ hook_add = '''
 repo = 'gyim/vim-boxdraw'
 hook_add = '''
     nnoremap <Leader>d :call ToggleFlag('virtualedit', 'all')<CR>
-    function ToggleFlag(option,flag)
+    function! ToggleFlag(option,flag)
         exec ('let lopt = &' . a:option)
         if lopt =~ (".*" . a:flag . ".*")
             exec ('set ' . a:option . '-=' . a:flag)
@@ -468,6 +468,8 @@ hook_source = '''
             \ l:pandoc_exec
         \ ]
     \ }
+
+    nmap <leader>r <Plug>(quickrun)
 '''
 
 # 言語別プラグイン
