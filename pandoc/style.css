@@ -32,7 +32,7 @@
 body {
   background-color: #fff;
   color: #111;
-  font-family: "Hiragino Mincho ProN";
+  font-family: "Hiragino Mincho ProN", "Noto Serif CJK JP";
   font-weight: 300;
   line-height: 1.5;
   word-wrap: break-word;
@@ -91,7 +91,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Hiragino Sans";
+  font-family: "Hiragino Sans", "Noto Sans CJK JP";
   font-weight: 500;
   margin-top: 1.25em;
   margin-bottom: 0.75em;
@@ -338,4 +338,7 @@ a.footnote-ref > sup::after {
     border: 0;
     height: 0;
   }
+}
+.right {
+  text-align: right;
 }
