@@ -473,7 +473,7 @@ hook_source = '''
 '''
 
 # 言語別プラグイン
-#
+
 [[plugins]]
 repo = 'KeitaNakamura/tex-conceal.vim'
 on_path = ['.*\.md', '.*\.tex']
@@ -649,3 +649,6 @@ hook_source = '''
     augroup END
 '''
 
+[[plugins]]
+repo = 'udalov/kotlin-vim'
+on_path = ['.*\.kt']
