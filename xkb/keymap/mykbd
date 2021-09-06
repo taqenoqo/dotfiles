@@ -1,0 +1,8 @@
+xkb_keymap {
+    xkb_keycodes { include "mykbd(macbookpro_jis)" };
+    xkb_types { include "complete" };
+    xkb_compat { include "complete" };
+    xkb_symbols { include "mykbd" };
+    xkb_geometry { include "mykbd(macbookpro)" };
+};
+

@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+xkbcomp -I$HOME/.xkb $HOME/.xkb/keymap/mykbd $DISPLAY

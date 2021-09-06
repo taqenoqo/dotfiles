@@ -1,0 +1,215 @@
+xkb_geometry "macbookpro" {
+
+    width=       280.5;
+    height=      108;
+
+    baseColor=   "white";
+    labelColor=  "black";
+    xfont=       "-*-helvetica-medium-r-normal--*-80-*-*-*-*-iso8859-1";
+    description= "My MacBook Pro";
+
+    shape "NORM" {
+        corner= 1,
+        { [  15.5,  15 ] }
+    };
+    shape "FUNC" {
+        corner= 1,
+        { [  16,   9 ] }
+    };
+    shape "FUNS" {
+        corner= 1,
+        { [  15.5,  9 ] }
+    };
+    shape "KEY1" {
+        corner= 1,
+        { [  24.5,  15 ] }
+    };
+    shape "BKSP" {
+        corner= 1,
+        { [  15.5,  15 ] }
+    };
+    shape "TAB" {
+        corner= 1,
+        { [  15.5,  15 ] }
+    };
+    shape "RTRN" {
+        corner= 1,
+        { [   0,   0 ], [  24.5  ,   0 ], [  24.5  ,  33.5 ], [   4.5,  33.5 ],
+          [   4.5,  15 ], [   0,  15 ] }
+    };
+    shape "CAPS" {
+        corner= 1,
+        { [  15.5,  15 ] }
+    };
+    shape "LCTL" {
+        corner= 1,
+        { [  20,  15 ] }
+    };
+    shape "LALT" {
+        corner= 1,
+        { [  15.5,  15 ] }
+    };
+    shape "LMTA" {
+        corner= 1,
+        { [  20,  15 ] }
+    };
+    shape "LFSH" {
+        corner= 1,
+        { [  29.5,  15 ] }
+    };
+    shape "EISU" {
+        corner= 1,
+        { [  20,  15 ] }
+    };
+    shape "RMTA" {
+        corner= 1,
+        { [  20,  15 ] }
+    };
+    shape "RTSH" {
+        corner= 1,
+        { [  29.5,  15 ] }
+    };
+    shape "KANA" {
+        corner= 1,
+        { [  20,  15 ] }
+    };
+    shape "SPCE" {
+        corner= 1,
+        { [ 64,  15 ] }
+    };
+    shape "UP" {
+        corner= 1,
+        { [  15.5,  7 ] }
+    };
+    shape "DOWN" {
+        corner= 1,
+        { [  15.5,  7 ] }
+    };
+    shape "LED" { 
+        corner= 0.5,
+        { [   1.5,   1.5 ] }
+    };
+
+    section "Function" {
+        key.color= "white";
+        priority=  7;
+        top=       4.5;
+        left=      5;
+        width=     271.5;
+        height=    10;
+        row {
+            top=  0;
+            left= 0;
+            keys {
+                {  <ESC>, "FUNC",   8.0 },
+                { <FK01>, "FUNC",   4.5 },
+                { <FK02>, "FUNC",   3.5 },
+                { <FK03>, "FUNC",   3.5 },
+                { <FK04>, "FUNC",   3.5 },
+                { <FK05>, "FUNC",   3.5 },
+                { <FK06>, "FUNC",   3.5 },
+                { <FK07>, "FUNC",   3.5 },
+                { <FK08>, "FUNC",   3.5 },
+                { <FK09>, "FUNC",   3.5 },
+                { <FK10>, "FUNC",   3.5 },
+                { <FK11>, "FUNC",   3.5 },
+                { <FK12>, "FUNC",   3.5 }
+            };
+        };
+    }; // End of "Function" section
+
+    section "Alpha" {
+        key.color= "white";
+        priority=  8;
+        top=       17;
+        left=      5;
+        width=     271.5;
+        height=    89;
+        row {
+            top=  0;
+            left= 0;
+            keys {
+                { <AE01>, "KEY1",   0 },
+                { <AE02>, "NORM",   3.5 }, { <AE03>, "NORM",   3.5 },
+                { <AE04>, "NORM",   3.5 }, { <AE05>, "NORM",   3.5 },
+                { <AE06>, "NORM",   3.5 }, { <AE07>, "NORM",   3.5 },
+                { <AE08>, "NORM",   3.5 }, { <AE09>, "NORM",   3.5 },
+                { <AE10>, "NORM",   3.5 }, { <AE11>, "NORM",   3.5 },
+                { <AE12>, "NORM",   3.5 }, { <AE13>, "NORM",   3.5 },
+                { <BKSP>, "BKSP",   3.5 }
+            };
+        };
+        row {
+            top=  18.5;
+            left= 0;
+            keys {
+                {  <TAB>,  "TAB",   0 },   { <AD01>, "NORM",   3.5 },
+                { <AD02>, "NORM",   3.5 }, { <AD03>, "NORM",   3.5 },
+                { <AD04>, "NORM",   3.5 }, { <AD05>, "NORM",   3.5 },
+                { <AD06>, "NORM",   3.5 }, { <AD07>, "NORM",   3.5 },
+                { <AD08>, "NORM",   3.5 }, { <AD09>, "NORM",   3.5 },
+                { <AD10>, "NORM",   3.5 }, { <AD11>, "NORM",   3.5 },
+                { <AD12>, "NORM",   3.5 }, { <RTRN>, "RTRN",   3.5 }
+            };
+        };
+        row {
+            top=  37;
+            left= 0;
+            keys {
+                { <LCTL>, "LCTL",   0 },   { <AC01>, "NORM",   3.5 },
+                { <AC02>, "NORM",   3.5 }, { <AC03>, "NORM",   3.5 },
+                { <AC04>, "NORM",   3.5 }, { <AC05>, "NORM",   3.5 },
+                { <AC06>, "NORM",   3.5 }, { <AC07>, "NORM",   3.5 },
+                { <AC08>, "NORM",   3.5 }, { <AC09>, "NORM",   3.5 },
+                { <AC10>, "NORM",   3.5 }, { <AC11>, "NORM",   3.5 },
+                { <AC12>, "NORM",   3.5 }
+            };
+        };
+        row {
+            top=  55.5;
+            left= 0;
+            keys {
+                { <LFSH>, "LFSH",   0 }, 
+                { <AB01>, "NORM",   3.5 }, { <AB02>, "NORM",   3.5 },
+                { <AB03>, "NORM",   3.5 }, { <AB04>, "NORM",   3.5 },
+                { <AB05>, "NORM",   3.5 }, { <AB06>, "NORM",   3.5 },
+                { <AB07>, "NORM",   3.5 }, { <AB08>, "NORM",   3.5 },
+                { <AB09>, "NORM",   3.5 }, { <AB10>, "NORM",   3.5 },
+                { <AB11>, "NORM",   3.5 }, { <RTSH>, "RTSH",   3.5 }
+            };
+        };
+        row {
+            top=  74;
+            left= 0;
+            keys {
+                { <CAPS>, "CAPS",   0 },
+                { <LALT>, "LALT",   3.5 },
+                { <LMTA>, "LMTA",   3.5 },
+                { <EISU>, "EISU",   3.5 },
+                { <SPCE>, "SPCE",   3.5 },
+                { <KANA>, "KANA",   3.5 },
+                { <RMTA>, "RMTA",   3.5 },
+                { <LEFT>, "NORM",   22 },  
+                { <UP>,   "UP",   3.5 },
+                { <RGHT>, "NORM",   3.5 }
+            };
+        };
+        row {
+            top= 82;
+            left= 237;
+            keys {
+                { <DOWN>, "DOWN", 0 }
+            };
+        };
+    }; // End of "Alpha" section
+
+    indicator "Caps Lock" {
+        top=      95;
+        left=     9;
+        priority= 2;
+        onColor= "green";
+        offColor= "gray";
+        shape= "LED";
+    };
+
+};
