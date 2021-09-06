@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -n "$XRDP_SESSION" ]; then
+    setxkbmap jp -model jp109
+    $HOME/.xkb/mykbd
+else
+    setxkbmap jp -model jp109 -option 'ctrl:nocaps'
+fi
+
