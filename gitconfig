@@ -28,3 +28,5 @@
 	cmd = vim -f -d -c \"wincmd l\" -c 'cd \"$GIT_PREFIX\"' \"$LOCAL\" \"$REMOTE\"
 [include]
 	path = ~/.gitconfig.local
+[pager]
+	show = vim -
