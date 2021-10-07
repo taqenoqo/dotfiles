@@ -30,3 +30,5 @@
 	path = ~/.gitconfig.local
 [pager]
 	show = vim -
+[pull]
+	ff = only
