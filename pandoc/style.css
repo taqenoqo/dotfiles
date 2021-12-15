@@ -105,7 +105,7 @@ h6 + *:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
   margin-top: 0;
 }
 h1 {
-  font-size: 2.073599999999999rem;
+  font-size: 2.0736rem;
   border-bottom: 1px solid #888;
   color: #000;
 }
@@ -248,6 +248,13 @@ pre * {
   white-space: pre;
   overflow: scroll !important;
   text-overflow: ellipsis;
+}
+@media print {
+  pre,
+  code,
+  pre * {
+    overflow: hidden !important;
+  }
 }
 pre,
 code {
