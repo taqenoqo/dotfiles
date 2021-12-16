@@ -28,6 +28,6 @@
 [include]
 	path = ~/.gitconfig.local
 [pager]
-	show = vim -
+	show = less
 [pull]
 	ff = only
