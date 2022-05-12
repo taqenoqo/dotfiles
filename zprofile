@@ -1,8 +1,8 @@
 export EDITOR=vim
 export LANG=ja_JP.UTF-8
 
-if [ -f ~/.zshenv.local ]; then
-    source ~/.zshenv.local
+if [ -f ~/.zprofile.local ]; then
+    source ~/.zprofile.local
 fi
 
 if [ -e "/usr/local/share/zsh-completions" ]; then
@@ -34,10 +34,10 @@ if (type -p nodebrew >/dev/null 2>&1); then
     export PATH="$HOME/.nodebrew/current/bin:$PATH"
 fi
 
-if (type -p stack >/dev/null 2>&1); then
-    export PATH="$(stack path --compiler-bin):$PATH"
-    export PATH="$(stack path --local-bin):$PATH"
-fi
+#if (type -p stack >/dev/null 2>&1); then
+#    export PATH="$(stack path --compiler-bin):$PATH"
+#    export PATH="$(stack path --local-bin):$PATH"
+#fi
 
 if (type -p opam >/dev/null 2>&1); then
     source "$HOME/.opam/opam-init/init.zsh"
@@ -46,6 +46,8 @@ fi
 if (type -p direnv >/dev/null 2>&1); then
     eval "$(direnv hook zsh)"
 fi
+
+[ -f "/Users/takenoko/.ghcup/env" ] && source "/Users/takenoko/.ghcup/env"
 
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 
