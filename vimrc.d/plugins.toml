@@ -505,6 +505,7 @@ hook_source = '''
     call add(g:markdown_fenced_languages, 'conf')
     call add(g:markdown_fenced_languages, 'pfmain')
     call add(g:markdown_fenced_languages, 'perl')
+    call add(g:markdown_fenced_languages, 'xml')
     hi link markdownCodeDelimiter Delimiter
     hi link markdownListMarker Identifier
     let g:markdown_fenced_tex = 1
