@@ -3,6 +3,9 @@ FPATH="$HOME/.zsh/completion/:$FPATH"
 autoload -Uz colors
 colors
 
+autoload bashcompinit
+bashcompinit
+
 autoload -Uz compinit
 compinit
 
@@ -65,4 +68,8 @@ bindkey -M menuselect '\e[Z' up-line-or-history
 bindkey -M menuselect '^e' send-break
 bindkey -M menuselect '^[' send-break
 bindkey -M menuselect '^w' backward-kill-word
+
+if (type -p aws_completer >/dev/null 2>&1); then
+    complete -C "$(which aws_completer)" aws
+fi
 
