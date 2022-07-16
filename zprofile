@@ -1,3 +1,8 @@
+if [ -x /usr/libexec/path_helper ]; then
+    PATH=''
+    eval `/usr/libexec/path_helper -s`
+fi
+
 export EDITOR=vim
 export LANG=ja_JP.UTF-8
 
@@ -21,13 +26,7 @@ if (type -p brew >/dev/null 2>&1); then
 fi
 
 if (type -p rbenv >/dev/null 2>&1); then
-    eval "$(rbenv init -)"
-    () {
-        local rbenv_completion="/usr/local/opt/coreutils/libexec/completions/rbenv.zsh"
-        if [ -r $rbenv_completion ]; then
-            source "$rbenv_completion"
-        fi
-    }
+    eval "$(rbenv init - zsh)"
 fi
 
 if (type -p nodebrew >/dev/null 2>&1); then
