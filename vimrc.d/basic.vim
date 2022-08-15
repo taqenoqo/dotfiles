@@ -144,6 +144,9 @@ nnoremap <silent> <C-L> :noh \| :pclose<CR><C-L>
 " dm でマーク全削除
 nnoremap <silent> dm :delmarks! \| delm A-Z0-9<CR>
 
+nnoremap <C-P> :tabprevious<CR>
+nnoremap <C-N> :tabnext<CR>
+
 " ファイルを開いたときに以前のカーソル位置に移動
 autocmd BufReadPost *
     \ if line("'\"") > 0 && line ("'\"") <= line("$") |

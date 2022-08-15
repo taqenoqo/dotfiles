@@ -251,9 +251,6 @@ hook_add = '''
         autocmd StdinReadPre * let s:exists_std_in = 1
         autocmd VimEnter * call s:nerdtree_auto_start()
     augroup END
-
-    nnoremap <C-P> :tabprevious<CR>
-    nnoremap <C-N> :tabnext<CR>
 '''
 
 [[plugins]]
