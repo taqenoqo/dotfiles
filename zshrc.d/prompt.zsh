@@ -56,7 +56,7 @@ function change_prompt() {
     (*ﾟーﾟ) %m:%~
     /  .|   %1v
 ～（＿＿ﾉ
-%n${WINDOW:+"[$WINDOW]"}$prompt_color%# %{[38;5;00m%}"
+%n${WINDOW:+"[$WINDOW]"}$prompt_color%# %{[0m%}"
 
     if [ $PS1 = $c_prompt ]; then
         PS1=$simple_prompt
