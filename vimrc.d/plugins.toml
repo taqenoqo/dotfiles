@@ -461,6 +461,10 @@ hook_source = '''
         let l:pandoc_filter = l:pandoc_filter . l:pandoc_ditaa_filter_cmd . ' ' . l:pandoc_ditaa_filter_opts . ' | '
     endif
 
+    if executable('mermaid-filter')
+        let l:pandoc_filter = l:pandoc_filter . 'mermaid-filter | '
+    endif
+
     let l:pandoc_exec = l:pandoc_pre_exec . l:pandoc_filter . l:pandoc_post_exec
     let g:quickrun_config['markdown'] = {
         \ 'type': 'pandoc',
