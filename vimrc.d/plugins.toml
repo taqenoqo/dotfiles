@@ -150,7 +150,15 @@ hook_add = '''
         \ 'coc-json', 
         \ 'coc-git',
         \ 'coc-vimlsp',
-        \ 'coc-emoji'
+        \ 'coc-emoji',
+        \ 'coc-yaml',
+        \ 'coc-actions',
+        \ 'coc-diagnostic',
+        \ 'coc-lists',
+        \ 'coc-markdownlint',
+        \ 'coc-pairs',
+        \ 'coc-spell-checker',
+        \ 'coc-java'
         \ ]
 
     let g:coc_config_home = "~/.vim/coc/"
@@ -194,17 +202,6 @@ hook_add = '''
         vnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0, 1) : "\<C-k>"
     endif
 
-    " nnoremap <silent> K :call <SID>show_documentation()<CR>
-    " function! s:show_documentation()
-    "   if (index(['vim','help'], &filetype) >= 0)
-    "     execute 'h '.expand('<cword>')
-    "   elseif (coc#rpc#ready())
-    "     call CocActionAsync('doHover')
-    "   else
-    "     execute '!' . &keywordprg . " " . expand('<cword>')
-    "   endif
-    " endfunction
-
     nnoremap <silent> K :call ShowDocumentation()<CR>
     function! ShowDocumentation()
       if CocAction('hasProvider', 'hover')
@@ -219,6 +216,8 @@ hook_add = '''
     nmap <leader>n <Plug>(coc-rename)
     xmap <leader>A <Plug>(coc-codeaction-selected)
     nmap <leader>A <Plug>(coc-codeaction-cursor)
+    xmap <leader>M <Plug>(coc-codeaction-selected)
+    nmap <leader>M <Plug>(coc-codeaction-cursor)
     nmap <silent> <leader>d <Plug>(coc-definition)
     nmap <silent> <leader>t <Plug>(coc-type-definition)
     nmap <silent> <leader>i <Plug>(coc-implementation)
@@ -479,6 +478,9 @@ hook_source = '''
 
     nmap <leader>r <Plug>(quickrun)
 '''
+
+[[plugins]]
+repo = 'liuchengxu/vista.vim'
 
 # 言語別プラグイン
 
