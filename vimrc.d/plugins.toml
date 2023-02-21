@@ -144,7 +144,7 @@ hook_add = '''
 
 [[plugins]]
 repo = 'neoclide/coc.nvim'
-rev = 'release'
+rev = 'master'
 hook_add = '''
     let g:coc_global_extensions = [
         \ 'coc-json', 
