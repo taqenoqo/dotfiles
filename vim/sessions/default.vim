@@ -2,12 +2,19 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-inoremap <silent> <expr> <BS> coc#_insert_key('request', 'iPGJzPg==0')
-inoremap <silent> <Plug>CocRefresh =coc#_complete()
+inoremap <nowait> <silent> <expr> <BS> coc#_insert_key('request', 'i-PGJzPg==', 0)
+inoremap <silent> <expr> <PageUp> coc#pum#visible() ? coc#pum#scroll(0) : "\<PageUp>"
+inoremap <silent> <expr> <PageDown> coc#pum#visible() ? coc#pum#scroll(1) : "\<PageDown>"
+inoremap <silent> <expr> <C-Y> coc#pum#visible() ? coc#pum#confirm() : "\"
+inoremap <silent> <expr> <C-E> coc#pum#visible() ? coc#pum#cancel() : "\"
+inoremap <silent> <expr> <Up> coc#pum#visible() ? coc#pum#prev(0) : "\<Up>"
+inoremap <silent> <expr> <Down> coc#pum#visible() ? coc#pum#next(0) : "\<Down>"
+inoremap <silent> <expr> <C-P> coc#pum#visible() ? coc#pum#prev(1) : "\"
+inoremap <silent> <expr> <C-N> coc#pum#visible() ? coc#pum#next(1) : "\"
 inoremap <nowait> <silent> <expr> <C-K> coc#float#has_scroll() ? "\=coc#float#scroll(0, 1)\" : "\"
 inoremap <nowait> <silent> <expr> <C-J> coc#float#has_scroll() ? "\=coc#float#scroll(1, 1)\" : "\<NL>"
 inoremap <silent> <expr> <C-@> coc#refresh()
-inoremap <expr> <S-Tab> pumvisible() ? "\" : "\"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\"
 inoremap <C-U> :call unicoder#start(1)
 inoremap <silent> <expr> <Nul> coc#refresh()
 map! <D-v> *
@@ -27,11 +34,13 @@ map <silent>  ma :ShowMarksClearAll
 map <silent>  mh :ShowMarksClearMark
 map <silent>  mo :ShowMarksOn
 map <silent>  mt :ShowMarksToggle
-xnoremap <silent>  r :call dein#autoload#_on_map('<Leader>r', 'vim-quickrun','x')
-nnoremap <silent>  r :call dein#autoload#_on_map('<Leader>r', 'vim-quickrun','n')
-nmap <silent>  R <Plug>(coc-references)
-nmap <silent>  i <Plug>(coc-implementation)
-nmap <silent>  t <Plug>(coc-type-definition)
+nnoremap  Gp :cp
+nnoremap  Gn :cn
+nnoremap  Gi :Gtags
+nnoremap  Gl :Gtags -f %
+nnoremap  Gr :Gtags -r 
+nnoremap  G :Gtags 
+nnoremap  Gg :GtagsCreate
 nmap  M <Plug>(coc-codeaction-cursor)
 xmap  M <Plug>(coc-codeaction-selected)
 nmap  A <Plug>(coc-codeaction-cursor)
@@ -39,24 +48,19 @@ xmap  A <Plug>(coc-codeaction-selected)
 nmap  n <Plug>(coc-rename)
 nmap  f <Plug>(coc-format-selected)
 xmap  f <Plug>(coc-format-selected)
-nnoremap  Gg :GtagsCreate
-nnoremap  Gp :cp
-nnoremap  Gn :cn
-nnoremap  Gi :Gtags
-nnoremap  Gl :Gtags -f %
-nnoremap  Gr :Gtags -r 
-nnoremap  G :Gtags 
+nnoremap  d :call ToggleFlag('virtualedit', 'all')
 nmap  gb :Gblame
 nmap  ga :Gwrite
 nmap  gl :Glog | copen
 nmap  gd :Gdiff
 nmap  gs :Gstatus
 nmap  gc :Gcommit
-nmap <silent>  d <Plug>(coc-definition)
-vmap  b <Plug>(openbrowser-smart-search)
-nmap  b <Plug>(openbrowser-smart-search)
 nmap  a <Plug>(LiveEasyAlign)
 xmap  a <Plug>(LiveEasyAlign)
+vmap  b <Plug>(openbrowser-smart-search)
+nmap  b <Plug>(openbrowser-smart-search)
+xnoremap <silent>  r :call dein#autoload#_on_map('<Leader>r', 'vim-quickrun','x')
+nnoremap <silent>  r :call dein#autoload#_on_map('<Leader>r', 'vim-quickrun','n')
 vnoremap +| :call boxdraw#Draw("+|", [])
 vnoremap +_ :call boxdraw#Draw("+_", [])
 vnoremap +- :call boxdraw#Draw("+-", [])
@@ -109,6 +113,10 @@ nmap ds <Plug>Dsurround
 nnoremap <silent> dm :delmarks! | delm A-Z0-9
 xmap gx <Plug>NetrwBrowseXVis
 nmap gx <Plug>NetrwBrowseX
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gd <Plug>(coc-definition)
 xmap i,b <Plug>CamelCaseMotion_ib
 omap i,b <Plug>CamelCaseMotion_ib
 vnoremap io :call boxdraw#Select("io")
@@ -117,19 +125,20 @@ omap <silent> ic <Plug>CamelCaseMotion_ie
 vnoremap ib :call boxdraw#Select("io")
 xmap s <Plug>VSurround
 nmap s <Plug>Ysurround
-xnoremap <silent> <Plug>(coc-git-chunk-outer) :call coc#rpc#request('doKeymap', ['git-chunk-outer'])
-onoremap <silent> <Plug>(coc-git-chunk-outer) :call coc#rpc#request('doKeymap', ['git-chunk-outer'])
-xnoremap <silent> <Plug>(coc-git-chunk-inner) :call coc#rpc#request('doKeymap', ['git-chunk-inner'])
-onoremap <silent> <Plug>(coc-git-chunk-inner) :call coc#rpc#request('doKeymap', ['git-chunk-inner'])
-nnoremap <silent> <Plug>(coc-git-commit) :call coc#rpc#notify('doKeymap', ['git-commit'])
-nnoremap <silent> <Plug>(coc-git-chunkinfo) :call coc#rpc#notify('doKeymap', ['git-chunkinfo'])
-nnoremap <silent> <Plug>(coc-git-keepboth) :call coc#rpc#notify('doKeymap', ['git-keepboth'])
-nnoremap <silent> <Plug>(coc-git-keepincoming) :call coc#rpc#notify('doKeymap', ['git-keepincoming'])
-nnoremap <silent> <Plug>(coc-git-keepcurrent) :call coc#rpc#notify('doKeymap', ['git-keepcurrent'])
-nnoremap <silent> <Plug>(coc-git-prevconflict) :call coc#rpc#notify('doKeymap', ['git-prevconflict'])
-nnoremap <silent> <Plug>(coc-git-nextconflict) :call coc#rpc#notify('doKeymap', ['git-nextconflict'])
-nnoremap <silent> <Plug>(coc-git-prevchunk) :call coc#rpc#notify('doKeymap', ['git-prevchunk'])
-nnoremap <silent> <Plug>(coc-git-nextchunk) :call coc#rpc#notify('doKeymap', ['git-nextchunk'])
+xnoremap <silent> <Plug>(coc-git-chunk-outer) :call coc#rpc#request('doKeymap', ['coc-git-chunk-outer'])
+onoremap <silent> <Plug>(coc-git-chunk-outer) :call coc#rpc#request('doKeymap', ['coc-git-chunk-outer'])
+xnoremap <silent> <Plug>(coc-git-chunk-inner) :call coc#rpc#request('doKeymap', ['coc-git-chunk-inner'])
+onoremap <silent> <Plug>(coc-git-chunk-inner) :call coc#rpc#request('doKeymap', ['coc-git-chunk-inner'])
+nnoremap <silent> <Plug>(coc-git-showblamedoc) :call coc#rpc#notify('doKeymap', ['coc-git-showblamedoc'])
+nnoremap <silent> <Plug>(coc-git-commit) :call coc#rpc#notify('doKeymap', ['coc-git-commit'])
+nnoremap <silent> <Plug>(coc-git-chunkinfo) :call coc#rpc#notify('doKeymap', ['coc-git-chunkinfo'])
+nnoremap <silent> <Plug>(coc-git-keepboth) :call coc#rpc#notify('doKeymap', ['coc-git-keepboth'])
+nnoremap <silent> <Plug>(coc-git-keepincoming) :call coc#rpc#notify('doKeymap', ['coc-git-keepincoming'])
+nnoremap <silent> <Plug>(coc-git-keepcurrent) :call coc#rpc#notify('doKeymap', ['coc-git-keepcurrent'])
+nnoremap <silent> <Plug>(coc-git-prevconflict) :call coc#rpc#notify('doKeymap', ['coc-git-prevconflict'])
+nnoremap <silent> <Plug>(coc-git-nextconflict) :call coc#rpc#notify('doKeymap', ['coc-git-nextconflict'])
+nnoremap <silent> <Plug>(coc-git-prevchunk) :call coc#rpc#notify('doKeymap', ['coc-git-prevchunk'])
+nnoremap <silent> <Plug>(coc-git-nextchunk) :call coc#rpc#notify('doKeymap', ['coc-git-nextchunk'])
 xnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(netrw#GX(),netrw#CheckIfRemote(netrw#GX()))
 nnoremap <silent> <Plug>SurroundRepeat .
@@ -187,11 +196,14 @@ nnoremap <silent> <Plug>(coc-diagnostic-next) :call       CocActionAsync('diag
 nnoremap <silent> <Plug>(coc-diagnostic-info) :call       CocActionAsync('diagnosticInfo')
 nnoremap <silent> <Plug>(coc-format) :call       CocActionAsync('format')
 nnoremap <silent> <Plug>(coc-rename) :call       CocActionAsync('rename')
-nnoremap <Plug>(coc-codeaction-cursor) :call       CocActionAsync('codeAction',         'cursor')
-nnoremap <Plug>(coc-codeaction-line) :call       CocActionAsync('codeAction',         'line')
-nnoremap <Plug>(coc-codeaction) :call       CocActionAsync('codeAction',         '')
-vnoremap <silent> <Plug>(coc-codeaction-selected) :call       CocActionAsync('codeAction',         visualmode())
-vnoremap <silent> <Plug>(coc-format-selected) :call       CocActionAsync('formatSelected',     visualmode())
+nnoremap <Plug>(coc-codeaction-source) :call       CocActionAsync('codeAction', '', ['source'], v:true)
+nnoremap <Plug>(coc-codeaction-refactor) :call       CocActionAsync('codeAction', 'cursor', ['refactor'], v:true)
+nnoremap <Plug>(coc-codeaction-cursor) :call       CocActionAsync('codeAction', 'cursor')
+nnoremap <Plug>(coc-codeaction-line) :call       CocActionAsync('codeAction', 'currline')
+nnoremap <Plug>(coc-codeaction) :call       CocActionAsync('codeAction', '')
+vnoremap <Plug>(coc-codeaction-refactor-selected) :call       CocActionAsync('codeAction', visualmode(), ['refactor'], v:true)
+vnoremap <silent> <Plug>(coc-codeaction-selected) :call       CocActionAsync('codeAction', visualmode())
+vnoremap <silent> <Plug>(coc-format-selected) :call       CocActionAsync('formatSelected', visualmode())
 nnoremap <Plug>(coc-codelens-action) :call       CocActionAsync('codeLensAction')
 nnoremap <Plug>(coc-range-select) :call       CocActionAsync('rangeSelect',     '', v:true)
 vnoremap <silent> <Plug>(coc-range-select-backward) :call       CocActionAsync('rangeSelect',     visualmode(), v:false)
@@ -225,20 +237,25 @@ vmap <D-x> "*d
 vmap <D-c> "*y
 vmap <D-v> "-d"*P
 nmap <D-v> "*P
+inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#cancel() : "\"
+inoremap <silent> <expr> 	 coc#pum#visible() ? coc#pum#next(1) : CheckBackspace() ? "\	" : coc#refresh()
 inoremap <nowait> <silent> <expr> <NL> coc#float#has_scroll() ? "\=coc#float#scroll(1, 1)\" : "\<NL>"
 inoremap <nowait> <silent> <expr>  coc#float#has_scroll() ? "\=coc#float#scroll(0, 1)\" : "\"
+inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#next(1) : "\"
+inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#prev(1) : "\"
 inoremap  :call unicoder#start(1)
-inoremap <silent> <expr> " coc#_insert_key('request', 'iIg==0')
-inoremap <silent> <expr> ' coc#_insert_key('request', 'iJw==0')
-inoremap <silent> <expr> ( coc#_insert_key('request', 'iKA==0')
-inoremap <silent> <expr> ) coc#_insert_key('request', 'iKQ==0')
-inoremap <silent> <expr> < coc#_insert_key('request', 'iPA==0')
-inoremap <silent> <expr> > coc#_insert_key('request', 'iPg==0')
-inoremap <silent> <expr> [ coc#_insert_key('request', 'iWw==0')
-inoremap <silent> <expr> ] coc#_insert_key('request', 'iXQ==0')
-inoremap <silent> <expr> ` coc#_insert_key('request', 'iYA==0')
-inoremap <silent> <expr> { coc#_insert_key('request', 'iew==0')
-inoremap <silent> <expr> } coc#_insert_key('request', 'ifQ==0')
+inoremap <silent> <expr>  coc#pum#visible() ? coc#pum#confirm() : "\"
+inoremap <nowait> <silent> <expr> " coc#_insert_key('request', 'i-Ig==', 1)
+inoremap <nowait> <silent> <expr> ' coc#_insert_key('request', 'i-Jw==', 1)
+inoremap <nowait> <silent> <expr> ( coc#_insert_key('request', 'i-KA==', 1)
+inoremap <nowait> <silent> <expr> ) coc#_insert_key('request', 'i-KQ==', 1)
+inoremap <nowait> <silent> <expr> < coc#_insert_key('request', 'i-PA==', 1)
+inoremap <nowait> <silent> <expr> > coc#_insert_key('request', 'i-Pg==', 1)
+inoremap <nowait> <silent> <expr> [ coc#_insert_key('request', 'i-Ww==', 1)
+inoremap <nowait> <silent> <expr> ] coc#_insert_key('request', 'i-XQ==', 1)
+inoremap <nowait> <silent> <expr> ` coc#_insert_key('request', 'i-YA==', 1)
+inoremap <nowait> <silent> <expr> { coc#_insert_key('request', 'i-ew==', 1)
+inoremap <nowait> <silent> <expr> } coc#_insert_key('request', 'i-fQ==', 1)
 let &cpo=s:cpo_save
 unlet s:cpo_save
 set autoindent
@@ -260,7 +277,7 @@ set laststatus=2
 set listchars=tab:»-,trail:-,eol:↓,extends:»,precedes:«,nbsp:%
 set mouse=a
 set nrformats=bin,hex,alpha
-set runtimepath=~/.vim,/usr/local/share/vim/vimfiles,~/.dein/repos/github.com/Shougo/vimproc.vim,~/.dein/.cache/.vimrc/.dein,/usr/local/share/vim/vim82,~/.dein/.cache/.vimrc/.dein/after,/usr/local/share/vim/vimfiles/after,~/.vim/after,~/.vim/dein.vim
+set runtimepath=~/.vim,/opt/homebrew/share/vim/vimfiles,~/.dein/repos/github.com/Shougo/vimproc.vim,~/.dein/.cache/.vimrc/.dein,/opt/homebrew/share/vim/vim90,~/.dein/.cache/.vimrc/.dein/after,/opt/homebrew/share/vim/vimfiles/after,~/.vim/after,~/.vim/dein.vim
 set scrolloff=5
 set shiftwidth=4
 set shortmess=filnxtToOSc
@@ -276,33 +293,35 @@ set ttimeoutlen=0
 set undodir=~/.vimcache/undo
 set undofile
 set updatetime=100
-set viminfo='100,<50,s10,h,n/Users/takenoko/.vimcache/viminfo
+set viminfo='100,<50,s10,h,n/Users/okamoto_n/.vimcache/viminfo
 set wildmenu
 let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/Playground
+cd ~/dotfiles
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
-set shortmess=aoO
-badd +0 hoge.rb
+if &shortmess =~ 'A'
+  set shortmess=aoOA
+else
+  set shortmess=aoO
+endif
+badd +0 .gitignore
 argglobal
 %argdel
-$argadd hoge.rb
-edit hoge.rb
+$argadd .gitignore
+edit .gitignore
 argglobal
 let s:cpo_save=&cpo
 set cpo&vim
-cmap <buffer> <C-R><C-F> <Plug><cfile>
 nmap <buffer>  hp <Plug>(GitGutterPreviewHunk)
 nmap <buffer>  hu <Plug>(GitGutterUndoHunk)
 nmap <buffer>  hs <Plug>(GitGutterStageHunk)
 xmap <buffer>  hs <Plug>(GitGutterStageHunk)
 nmap <buffer> [c <Plug>(GitGutterPrevHunk)
 nmap <buffer> ]c <Plug>(GitGutterNextHunk)
-cmap <buffer>  <Plug><cfile>
 let &cpo=s:cpo_save
 unlet s:cpo_save
 setlocal keymap=
@@ -319,6 +338,7 @@ setlocal buftype=
 setlocal nocindent
 setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
+setlocal cinscopedecls=public,protected,private
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
 setlocal comments=:#
@@ -340,9 +360,10 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'ruby'
-setlocal filetype=ruby
+if &filetype != 'gitignore'
+setlocal filetype=gitignore
 endif
+setlocal fillchars=
 setlocal fixendofline
 setlocal foldcolumn=0
 setlocal foldenable
@@ -359,21 +380,22 @@ setlocal foldnestmax=2
 set foldtext=MyFoldText()
 setlocal foldtext=MyFoldText()
 setlocal formatexpr=
-setlocal formatoptions=croql
+setlocal formatoptions=roql
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=-1
-setlocal include=^\\s*\\<\\(load\\>\\|require\\>\\|autoload\\s*:\\=[\"']\\=\\h\\w*[\"']\\=,\\)
+setlocal include=
 setlocal includeexpr=
-setlocal indentexpr=GetRubyIndent(v:lnum)
-setlocal indentkeys=0{,0},0),0],!^F,o,O,e,:,.,=end,=else,=elsif,=when,=ensure,=rescue,==begin,==end,=private,=protected,=public
+setlocal indentexpr=
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=ri
+setlocal keywordprg=
 setlocal nolinebreak
 setlocal nolisp
+setlocal lispoptions=
 setlocal lispwords=
 set list
 setlocal list
@@ -387,8 +409,8 @@ setlocal nrformats=bin,hex,alpha
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=rubycomplete#Complete
-setlocal path=/usr/local/Cellar/rbenv/1.2.0/rbenv.d/exec/gem-rehash,/Library/Ruby/Site/2.6.0,/Library/Ruby/Site/2.6.0/x86_64-darwin21,/Library/Ruby/Site/2.6.0/universal-darwin21,/Library/Ruby/Site,/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/vendor_ruby/2.6.0,/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/vendor_ruby/2.6.0/x86_64-darwin21,/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/vendor_ruby/2.6.0/universal-darwin21,/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/vendor_ruby,/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0,/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/x86_64-darwin21,/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/universal-darwin21
+setlocal omnifunc=
+setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
@@ -398,30 +420,31 @@ setlocal norightleft
 setlocal rightleftcmd=search
 setlocal noscrollbind
 setlocal scrolloff=-1
-setlocal shiftwidth=2
+setlocal shiftwidth=4
 setlocal noshortname
 setlocal showbreak=
 setlocal sidescrolloff=-1
 set signcolumn=yes
 setlocal signcolumn=yes
-setlocal nosmartindent
+setlocal smartindent
+setlocal nosmoothscroll
 setlocal softtabstop=0
 setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en,cjk
 setlocal spelloptions=
-setlocal statusline=\ %t%m\ %y[%{&fenc},\ %{&ff}]\ %r%h%w\ %{coc#status()}%=%{GetCursorSyntax()}\ (%p%%)\ %l,%c\ =\ 0x%B\ |ﾟーﾟ)ﾉｨｮｩ\ 
-setlocal suffixesadd=.rb
+setlocal statusline=\ %t%m\ %y[%{&fenc},\ %{&ff}]\ %r%h%w%=%{GetCursorSyntax()}\ (%p%%)\ %l,%c\ =\ 0x%B\ |ﾟーﾟ)ﾉｨｮｩ\ 
+setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != 'ruby'
-setlocal syntax=ruby
+if &syntax != 'gitignore'
+setlocal syntax=gitignore
 endif
-setlocal tabstop=2
+setlocal tabstop=4
 setlocal tagcase=
 setlocal tagfunc=
-setlocal tags=./tags,tags,/usr/local/Cellar/rbenv/1.2.0/rbenv.d/exec/gem-rehash/tags,/Library/Ruby/Site/2.6.0/tags,/Library/Ruby/Site/2.6.0/x86_64-darwin21/tags,/Library/Ruby/Site/2.6.0/universal-darwin21/tags,/Library/Ruby/Site/tags,/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/vendor_ruby/2.6.0/tags,/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/vendor_ruby/2.6.0/x86_64-darwin21/tags,/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/vendor_ruby/2.6.0/universal-darwin21/tags,/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/vendor_ruby/tags,/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/tags,/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/x86_64-darwin21/tags,/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/universal-darwin21/tags
+setlocal tags=
 setlocal termwinkey=
 setlocal termwinscroll=10000
 setlocal termwinsize=
@@ -439,18 +462,19 @@ setlocal nowinfixwidth
 set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
-let s:l = 1 - ((0 * winheight(0) + 24) / 49)
+let s:l = 5 - ((4 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 5
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=1 winwidth=20 shortmess=filnxtToOSc
+set winheight=1 winwidth=20
+set shortmess=filnxtToOSc
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
