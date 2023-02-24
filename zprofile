@@ -17,12 +17,31 @@ fi
 if (type -p brew >/dev/null 2>&1); then
     export PATH="$(brew --prefix)/sbin:$PATH"
     () {
-        local libexec="/usr/local/opt/coreutils/libexec"
-        if [ -d $libexec ]; then
+        if [ -d "/usr/local/opt/coreutils/libexec" ]; then
+            local libexec="/usr/local/opt/coreutils/libexec"
+        elif [ -d "/opt/homebrew/opt/coreutils/libexec" ]; then
+            local libexec="/opt/homebrew/opt/coreutils/libexec"
+        fi
+        if [[ -v libexec ]]; then
             export PATH=$libexec/gnubin:$PATH
             export MANPATH=$libexec/gnuman:$MANPATH
         fi
     }
+    () {
+        if [ -d "/usr/local/opt/grep/libexec" ]; then
+            local libexec="/usr/local/opt/grep/libexec"
+        elif [ -d "/opt/homebrew/opt/grep/libexec" ]; then
+            local libexec="/opt/homebrew/opt/grep/libexec"
+        fi
+        if [[ -v libexec ]]; then
+            export PATH=$libexec/gnubin:$PATH
+            export MANPATH=$libexec/gnuman:$MANPATH
+        fi
+    }
+fi
+
+if (type -p anyenv >/dev/null 2>&1); then
+    eval "$(anyenv init -)"
 fi
 
 if (type -p rbenv >/dev/null 2>&1); then
