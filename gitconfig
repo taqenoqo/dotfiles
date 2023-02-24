@@ -1,5 +1,3 @@
-[core]
-	excludesfile = /Users/Takenoko/.gitignore
 [color]
 	ui = true
 [alias]
@@ -16,7 +14,7 @@
 [include]
 	path = .gitconfig.local
 [github]
-	user = tak3n0k0
+	user = taqenoqo
 [diff]
 	tool = vimdiff
 [merge]
