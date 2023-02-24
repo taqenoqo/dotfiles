@@ -13,7 +13,9 @@
         },
         "no-multiple-blanks": {
             "maximum": 2
-        }
+        },
+        "header-style": false,
+        "fenced-code-language": false
     },
     "languageserver": {
         "haskell": {
