@@ -12,7 +12,10 @@ function GetCursorSyntax()
 endfunction
 
 function UpdateStatusLine(...)
-    let l:left = '\ %t%m\ %y[%{&fenc},\ %{&ff}]\ %r%h%w\ %{coc#status()}'
+    let l:left = '\ %t%m\ %y[%{&fenc},\ %{&ff}]\ %r%h%w'
+    if exists('*coc#status')
+        let l:left = l:left . '\ %{coc#status()}'
+    endif
     let l:right = '%{GetCursorSyntax()}\ (%p%%)\ %l,%c\ =\ 0x%B\ ' . b:statusline_face . '\ '
     exec 'setlocal statusline=' . l:left . '%=' . l:right
 endfunction
