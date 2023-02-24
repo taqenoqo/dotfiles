@@ -14,7 +14,7 @@ if type -p dircolors >/dev/null 2>&1; then
 fi
 
 export ZLS_COLORS=$LS_COLORS
-zstyle ':completion:*' completer _expand _complete _correct _approximate _history _external_pwds
+zstyle ':completion:*' completer _expand _complete _approximate _history _external_pwds
 zstyle ':completion:*' use-cache true                                                                   # キャッシュの有効化
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'                                               # 通常の補完に失敗した場合大小文字を区別せずに補完
 zstyle ':completion:*' group-name ''                                                                    # 補完グループ名の表示 (タグ名による表示)
