@@ -1,5 +1,5 @@
 .*
 !.gitignore
 !.gitmodules
-/vim/sessions/default.vim
+/vim/sessions/
 
