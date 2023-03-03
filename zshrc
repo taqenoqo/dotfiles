@@ -10,7 +10,7 @@ if [ -f ~/.zshrc.local ]; then
 fi
 
 # tmuxで開始する
-if (type -p tmux >/dev/null 2>&1) && [ $SHLVL -le 1 -a $TERM != "screen" ]; then
+if (type -p tmux >/dev/null 2>&1) && [[ $SHLVL -le 1 && ! $TERM =~ "^screen.*" ]]; then
     if $(tmux has-session); then
         tmux attach
     else
