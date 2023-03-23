@@ -7,7 +7,7 @@
 	br = branch
 	graph = log --graph --all --date=format-local:'%Y/%m/%d %H:%M' --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%ad%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n          %C(white)%s ― %an%C(reset)' --abbrev-commit
 [push]
-	default = simple
+	default = upstream
 [user]
 	name = takenoko
 	email = ttaakkee@gmail.com
