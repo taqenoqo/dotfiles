@@ -31,6 +31,16 @@
                     "formattingProvider": "stylish-haskell"
                 }
             }
-        }
+        },
+        "terraform": {
+            "command": "terraform-lsp",
+            "args": ["serve"],
+            "filetypes": [
+                "terraform",
+                "tf"
+            ],
+            "initializationOptions": {},
+            "settings": {}
+        } 
     }
 }

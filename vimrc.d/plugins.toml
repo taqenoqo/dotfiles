@@ -81,20 +81,20 @@ hook_add = '''
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 hook_add = '''
-    nmap <Leader>gc :Gcommit<CR>
-    nmap <Leader>gs :Gstatus<CR>
-    nmap <Leader>gd :Gdiff<CR>
-    nmap <Leader>gl :Glog \| copen<CR>
-    nmap <Leader>ga :Gwrite<CR>
-    nmap <Leader>gb :Gblame<CR>
-    nmap ]h <Plug>GitGutterNextHunk
-    nmap [h <Plug>GitGutterPrevHunk
+    nmap <Leader>gc :Git commit<CR>
+    nmap <Leader>gs :Git<CR>
+    nmap <Leader>gd :Git diff<CR>
+    nmap <Leader>gl :Git log --paginate<CR>
+    nmap <Leader>ga :Git add<CR>
+    nmap <Leader>gb :Git blame<CR>
 '''
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
 hook_add = '''
     let g:gitgutter_sign_priority = 5
+    nmap ]h <Plug>GitGutterNextHunk
+    nmap [h <Plug>GitGutterPrevHunk
 '''
 
 
@@ -670,4 +670,8 @@ hook_post_source = '''
     endif
     call add(g:markdown_fenced_languages, 'kotlin')
 '''
+
+[[plugins]]
+repo = 'hashivim/vim-terraform'
+on_path = ['.*\.tf']
 
