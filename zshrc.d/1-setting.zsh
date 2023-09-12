@@ -36,4 +36,6 @@ setopt extendedglob #拡張グロブ
 
 setopt auto_cd #ディレクトリ名を打つと自動でcd
 
+unsetopt correct # コマンドのスペルミスの補完しない
+unsetopt correct_all # コマンドのスペルミスの補完しない
 
