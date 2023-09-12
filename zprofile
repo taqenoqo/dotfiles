@@ -38,6 +38,17 @@ if (type -p brew >/dev/null 2>&1); then
             export MANPATH=$libexec/gnuman:$MANPATH
         fi
     }
+    () {
+        if [ -d "/usr/local/opt/gnu-sed/libexec" ]; then
+            local libexec="/usr/local/opt/gnu-sed/libexec"
+        elif [ -d "/opt/homebrew/opt/gnu-sed/libexec" ]; then
+            local libexec="/opt/homebrew/opt/gnu-sed/libexec"
+        fi
+        if [[ -v libexec ]]; then
+            export PATH=$libexec/gnubin:$PATH
+            export MANPATH=$libexec/gnuman:$MANPATH
+        fi
+    }
 fi
 
 if (type -p anyenv >/dev/null 2>&1); then
