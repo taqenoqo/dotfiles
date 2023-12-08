@@ -1,46 +1,49 @@
 {
-    "suggest.noselect": true,
-    "diagnostic.errorSign": "X",
-    "diagnostic.warningSign": "!",
-    "diagnostic.infoSign": "i",
-    "diagnostic.hintSign": "i",
-    "markdownlint.config": {
-        "ul-indent": {
-            "indent": 4
-        },
-        "ul-style": {
-            "style": "sublist"
-        },
-        "no-multiple-blanks": {
-            "maximum": 2
-        },
-        "header-style": false,
-        "fenced-code-language": false,
-        "line-length": {
-            "line_length": 120
-        }
+  "https.rejectUnauthorized": false,
+  "http.proxyStrictSSL": false,
+  "suggest.noselect": true,
+  "diagnostic.errorSign": "X",
+  "diagnostic.warningSign": "!",
+  "diagnostic.infoSign": "i",
+  "diagnostic.hintSign": "i",
+  "markdownlint.config": {
+    "ul-indent": {
+      "indent": 4
     },
-    "languageserver": {
-        "haskell": {
-            "command": "haskell-language-server-wrapper",
-            "args": ["--lsp"],
-            "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
-            "filetypes": ["haskell", "lhaskell"],
-            "initializationOptions": {
-                "languageServerHaskell": {
-                    "formattingProvider": "stylish-haskell"
-                }
-            }
-        },
-        "terraform": {
-            "command": "terraform-lsp",
-            "args": ["serve"],
-            "filetypes": [
-                "terraform",
-                "tf"
-            ],
-            "initializationOptions": {},
-            "settings": {}
-        } 
+    "ul-style": {
+      "style": "sublist"
+    },
+    "no-multiple-blanks": {
+      "maximum": 2
+    },
+    "header-style": false,
+    "fenced-code-language": false,
+    "line-length": {
+      "line_length": 120
     }
+  },
+  "languageserver": {
+    "haskell": {
+      "command": "haskell-language-server-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+      "filetypes": ["haskell", "lhaskell"],
+      "initializationOptions": {
+        "languageServerHaskell": {
+          "formattingProvider": "stylish-haskell"
+        }
+      }
+    },
+    "terraform": {
+      "command": "terraform-lsp",
+      "args": ["serve"],
+      "filetypes": [
+        "terraform",
+        "tf"
+      ],
+      "initializationOptions": {},
+      "settings": {}
+    } 
+  },
+  "java.import.gradle.java.home": "/opt/homebrew/Cellar/openjdk@11/11.0.20.1/libexec/openjdk.jdk/Contents/Home"
 }
