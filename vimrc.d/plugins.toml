@@ -155,10 +155,10 @@ hook_add = '''
         \ 'coc-actions',
         \ 'coc-diagnostic',
         \ 'coc-lists',
-        \ 'coc-markdownlint',
         \ 'coc-pairs',
         \ 'coc-spell-checker',
-        \ 'coc-java'
+        \ 'coc-java',
+        \ '@yaegassy/coc-marksman'
         \ ]
 
     let g:coc_config_home = "~/.vim/coc/"
@@ -228,12 +228,13 @@ hook_add = '''
 repo = 'liuchengxu/vista.vim'
 depends = ['coc.nvim']
 hook_add = '''
-    let g:vista_default_executive = 'coc'
-    let g:vista_executive_for = {
-    \ }
+    hi VistaIcon ctermfg=198 cterm=bold
+    hi link VistaLineNr SpecialKey
+
+    let g:vista_default_executive = "coc"
+    let g:vista_enable_markdown_extension = 0
     let g:vista_sidebar_width = 40
     let g:vista#renderer#enable_icon = 1
-    hi VistaIcon ctermfg=198 cterm=bold
     let g:vista#renderer#icons = {
       \ 'func': "𝑓",
       \ 'function': "𝑓",
@@ -331,6 +332,7 @@ hook_add = '''
     hi NERDTreeFlags ctermfg=249
     hi NERDTreeGitStatusUntracked ctermfg=206
     hi NERDTreeGitStatusModified ctermfg=208
+    hi NERDTreeGitStatusDirty ctermfg=208
     hi NERDTreeGitStatusStaged ctermfg=077
     hi NERDTreeGitStatusRenamed ctermfg=69
     hi NERDTreeGitStatusUnmerged ctermfg=206
@@ -340,121 +342,6 @@ hook_add = '''
     hi NERDTreeGitStatusIgnored ctermfg=249
     hi NERDTreeGitStatusUnknown ctermfg=249
 '''
-
-[[plugins]]
-repo = 'taqenoqo/VOoM'
-hook_add = '''
-    let g:voom_python_versions = [3,2]
-    let g:voom_tree_placement = "right"
-    let g:voom_tree_width = 45
-    let g:voom_ft_modes = {
-        \ 'markdown': 'markdown',
-        \ 'tex': 'latex'
-    \ }
-    let g:voom_default_mode = 'asciidoc'
-    let g:voom_create_devel_commands = 1
-
-    function! s:outline_on_enter_buffer()
-        if s:outline_window_was_closed()
-            let g:outline_delayed_open = 1
-
-            if !s:outline_tab_has_normal_window()
-                tabclose
-            endif
-
-            return
-        endif
-        call s:outline_open()
-    endfunction
-    
-    function! s:outline_tab_has_normal_window()
-        for buf in tabpagebuflist()
-            if getbufvar(buf, "&buftype") == ""
-                return 1
-            endif
-        endfor
-        return 0
-    endfunction
-
-    " タブ移動時は NERDtree-tabs との相性の問題から、遅延して開く
-    function! s:outline_on_enter_tab()
-        let g:outline_delayed_open = 1
-    endfunction
-
-    function! s:outline_window_was_closed()
-        return exists("g:outline_prev_win_num") && g:outline_prev_win_num > winnr("$")
-    endfunction
-
-    function! s:outline_buf_is_hidden()
-        return !getbufinfo("%")[0]['listed']
-    endfunction
-
-    function! s:outline_last_win_is_voom()
-        return get(g:, "outline_last_win_is_voom", 0)
-    endfunction
-
-    function! s:outline_open()
-        if s:outline_last_win_is_voom()
-            let g:outline_last_win_is_voom = &filetype == "voomtree"
-            return
-        endif
-        " 特殊な用途のバッファのときアウトラインを開かない
-        " NERDtree から split で開いたときなども特殊用途のバッファに一度遷移するため、これをはじくことは重要
-        if &buftype != ""
-            let g:outline_last_win_is_voom = &filetype == "voomtree"
-            return 
-        endif
-        let l:prev_winnr = winnr()
-        if exists(":VoomQuitAll") == 2
-            silent! VoomQuitAll
-        endif
-        execute l:prev_winnr "wincmd w"
-        silent! Voom
-        execute "wincmd L"
-        execute g:voom_tree_width . "wincmd |"
-        execute l:prev_winnr "wincmd w"
-    endfunction
-
-    " ウィンドウが閉じられたのか判定するために、ウインドウを離れるときのウインドウの総数を記憶する
-    function! s:outline_on_leave_window()
-        let g:outline_prev_win_num = winnr("$")
-    endfunction
-
-    function! s:outline_delayed_open()
-        if !exists("g:outline_delayed_open") || !g:outline_delayed_open
-            return
-        endif
-        let g:outline_delayed_open = 0
-        call s:outline_open()
-    endfunction
-
-    function! s:outline_start()
-        augroup outline
-            autocmd!
-            " WinEnter の後に BufEnter が呼ばれる。 
-            " WinEnter ではなく BufEnter でないとバッファ番号 bufnr("%") が正しく取得できない。
-            autocmd BufEnter * :call s:outline_on_enter_buffer()
-            autocmd TabEnter * :call s:outline_on_enter_tab()
-            autocmd BufLeave * :call s:outline_on_leave_window()
-            " ウインドウを閉じることで別ウインドウに入った場合、
-            " BufEnterのタイミングでは、閉じている最中にアウトラインを開くことになり、
-            " 画面分割のエラーになるため遅延させる。
-            autocmd CursorMoved * :call s:outline_delayed_open()
-        augroup END
-        call s:outline_open()
-    endfunction
-
-    function! s:outline_stop()
-        augroup outline
-            autocmd!
-        augroup END
-        silent! VoomQuitAll
-    endfunction
-
-    command! -nargs=0 OutlineStart call s:outline_start()
-    command! -nargs=0 OutlineStop call s:outline_stop()
-'''
-
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
