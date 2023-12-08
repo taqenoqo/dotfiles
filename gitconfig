@@ -53,10 +53,9 @@
 	user = taqenoqo
 [diff]
 	tool = vimdiff
+    algorithm = minimal
 [merge]
 	tool = vimdiff
-[difftool]
-	prompt = false
 [difftool "vimdiff"]
 	cmd = vim -f -d -c \"wincmd l\" -c 'cd \"$GIT_PREFIX\"' \"$LOCAL\" \"$REMOTE\"
 [include]
