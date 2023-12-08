@@ -125,6 +125,9 @@ autocmd FileType * setlocal formatoptions=roql
 " バックアップを作成しないファイル
 set backupskip=/tmp/*,/private/tmp/*
 
+" diff 設定
+set diffopt=filler,context:10,iwhite,closeoff,internal,algorithm:minimal
+
 " 折り畳み設定
 set foldlevel=2
 set foldnestmax=2
