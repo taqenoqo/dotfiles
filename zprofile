@@ -6,49 +6,49 @@ fi
 export EDITOR=vim
 export LANG=ja_JP.UTF-8
 
-if [ -f ~/.zprofile.local ]; then
-    source ~/.zprofile.local
-fi
-
 if [ -e "/usr/local/share/zsh-completions" ]; then
     FPATH="/usr/local/share/zsh-completions:$FPATH"
 fi
 
+if (type -p /opt/homebrew/bin/brew >/dev/null 2>&1); then
+  eval $(/opt/homebrew/bin/brew shellenv)
+fi
+
 if (type -p brew >/dev/null 2>&1); then
-    export PATH="$(brew --prefix)/sbin:$PATH"
+    local brew_dir="$(brew --prefix)"
+    
     () {
-        if [ -d "/usr/local/opt/coreutils/libexec" ]; then
-            local libexec="/usr/local/opt/coreutils/libexec"
-        elif [ -d "/opt/homebrew/opt/coreutils/libexec" ]; then
-            local libexec="/opt/homebrew/opt/coreutils/libexec"
-        fi
-        if [[ -v libexec ]]; then
+        if [ -d "$brew_dir/opt/coreutils/libexec" ]; then
+            local libexec="$brew_dir/opt/coreutils/libexec"
             export PATH=$libexec/gnubin:$PATH
             export MANPATH=$libexec/gnuman:$MANPATH
         fi
     }
+
     () {
-        if [ -d "/usr/local/opt/grep/libexec" ]; then
-            local libexec="/usr/local/opt/grep/libexec"
-        elif [ -d "/opt/homebrew/opt/grep/libexec" ]; then
-            local libexec="/opt/homebrew/opt/grep/libexec"
-        fi
-        if [[ -v libexec ]]; then
+        if [ -d "$brew_dir/opt/grep/libexec" ]; then
+            local libexec="$brew_dir/opt/grep/libexec"
             export PATH=$libexec/gnubin:$PATH
             export MANPATH=$libexec/gnuman:$MANPATH
         fi
     }
+
     () {
-        if [ -d "/usr/local/opt/gnu-sed/libexec" ]; then
-            local libexec="/usr/local/opt/gnu-sed/libexec"
-        elif [ -d "/opt/homebrew/opt/gnu-sed/libexec" ]; then
-            local libexec="/opt/homebrew/opt/gnu-sed/libexec"
-        fi
-        if [[ -v libexec ]]; then
+        if [ -d "$brew_dir/opt/gnu-sed/libexec" ]; then
+            local libexec="$brew_dir/opt/gnu-sed/libexec"
             export PATH=$libexec/gnubin:$PATH
             export MANPATH=$libexec/gnuman:$MANPATH
         fi
     }
+
+    () {
+        if [ -d "$brew_dir/opt/openjdk" ]; then
+            local openjdk="$brew_dir/opt/openjdk"
+            export PATH="$openjdk/bin:$PATH"
+            export CPPFLAGS="-I$openjdk/include"
+        fi
+    }
+
 fi
 
 if (type -p anyenv >/dev/null 2>&1); then
@@ -57,6 +57,11 @@ fi
 
 if (type -p rbenv >/dev/null 2>&1); then
     eval "$(rbenv init - zsh)"
+fi
+
+if (type -p jenv >/dev/null 2>&1); then
+    export PATH="$HOME/.jenv/bin:$PATH"
+    eval "$(jenv init -)"
 fi
 
 if (type -p nodebrew >/dev/null 2>&1); then
@@ -79,4 +84,8 @@ fi
 [ -f "/Users/takenoko/.ghcup/env" ] && source "/Users/takenoko/.ghcup/env"
 
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+if [ -f ~/.zprofile.local ]; then
+    source ~/.zprofile.local
+fi
 
