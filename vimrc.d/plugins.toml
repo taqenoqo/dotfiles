@@ -225,6 +225,58 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'liuchengxu/vista.vim'
+depends = ['coc.nvim']
+hook_add = '''
+    let g:vista_default_executive = 'coc'
+    let g:vista_executive_for = {
+    \ }
+    let g:vista_sidebar_width = 40
+    let g:vista#renderer#enable_icon = 1
+    hi VistaIcon ctermfg=198 cterm=bold
+    let g:vista#renderer#icons = {
+      \ 'func': "𝑓",
+      \ 'function': "𝑓",
+      \ 'functions': "𝑓",
+      \ 'var': "𝑥",
+      \ 'variable': "𝑥",
+      \ 'variables': "𝑥",
+      \ 'const': "𝑥",
+      \ 'constant': "𝑥",
+      \ 'constructor': "𝑓",
+      \ 'method': "𝑓",
+      \ 'package': "ℙ",
+      \ 'packages': "ℙ",
+      \ 'enum': "𝔼",
+      \ 'enummember': "𝑚",
+      \ 'enumerator': "𝑒",
+      \ 'module': "𝕄",
+      \ 'modules': "𝕄",
+      \ 'type': "𝕋",
+      \ 'typedef': "𝕋",
+      \ 'types': "𝕋",
+      \ 'field': "𝑥",
+      \ 'fields': "𝑥",
+      \ 'macro': "ℳ",
+      \ 'macros': "ℳ",
+      \ 'map': "𝓂",
+      \ 'class': "ℂ",
+      \ 'augroup': "𝔸",
+      \ 'struct': "𝕊",
+      \ 'union': "𝕌",
+      \ 'member': "𝑚",
+      \ 'target': "𝓉",
+      \ 'property': "𝑥",
+      \ 'interface': "𝕀",
+      \ 'namespace': "ℕ",
+      \ 'subroutine': "𝑠",
+      \ 'implementation': "𝐼",
+      \ 'typeParameter': "𝑡",
+      \ 'default': "+"
+    \}
+'''
+
+[[plugins]]
 repo = 'scrooloose/nerdtree'
 hook_add = '''
     let g:NERDTreeWinSize = 30
