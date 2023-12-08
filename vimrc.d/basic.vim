@@ -13,7 +13,7 @@ set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932
 set autoindent
 set smartindent
 set expandtab
-set tabstop=2 shiftwidth=2 softtabstop=0
+set tabstop=4 shiftwidth=4 softtabstop=0
 
 " <Leader> の設定
 let mapleader = ' '
