@@ -418,9 +418,6 @@ hook_source = '''
     nmap <leader>r <Plug>(quickrun)
 '''
 
-[[plugins]]
-repo = 'liuchengxu/vista.vim'
-
 # 言語別プラグイン
 
 [[plugins]]
