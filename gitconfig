@@ -8,40 +8,31 @@
   diffw = diff --word-diff=color --minimal
 	graph0 = log --graph --date=format-local:'%Y/%m/%d %H:%M' --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%ad%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n          %C(white)%s ― %an%C(reset)'
 	graph = graph0 \
-    --glob="refs/heads/*" \
-    --glob="refs/stash" \
-    --glob="refs/replace/*" \
-    --glob="refs/tags/*" \
-    --glob="refs/remotes/*/main*" \
-    --glob="refs/remotes/*/master*" \
-    --glob="refs/remotes/*/develop*" \
-    --glob="refs/remotes/*/release*" \
-    --glob="refs/remotes/*/staging*" \
-    --glob="refs/remotes/*/stage*" \
-    --glob="refs/remotes/*/feature*" \
-    --glob="refs/remotes/*/support*" \
-    --glob="refs/remotes/*/issue*" \
-    --glob="refs/remotes/*/ticket*" \
-    --glob=HEAD
-  graphs = graph \
-    --simplify-by-decoration \
-    --decorate-refs="refs/heads/*" \
-    --decorate-refs="refs/stash" \
-    --decorate-refs="refs/replace/*" \
-    --decorate-refs="refs/tags/*" \
-    --decorate-refs="refs/remotes/*/main*" \
-    --decorate-refs="refs/remotes/*/master*" \
-    --decorate-refs="refs/remotes/*/develop*" \
-    --decorate-refs="refs/remotes/*/release*" \
-    --decorate-refs="refs/remotes/*/staging*" \
-    --decorate-refs="refs/remotes/*/stage*" \
-    --decorate-refs="refs/remotes/*/feature*" \
-    --decorate-refs="refs/remotes/*/support*" \
-    --decorate-refs="refs/remotes/*/issue*" \
-    --decorate-refs="refs/remotes/*/ticket*" \
-    --decorate-refs=HEAD
-	grapha = graph0 --all
-	graphas = grapha --simplify-by-decoration
+		--glob="refs/heads/*" \
+		--glob="refs/stash" \
+		--glob="refs/replace/*" \
+		--glob="refs/tags/*" \
+		--glob="refs/remotes/*/main" \
+		--glob="refs/remotes/*/master" \
+		--glob="refs/remotes/*/develop*" \
+		--glob="refs/remotes/*/release*" \
+		--glob="refs/remotes/*/staging*" \
+		--glob="refs/remotes/*/stage*" \
+		--glob="refs/remotes/*/support*" \
+		--glob=HEAD \
+		--decorate-refs="refs/heads/*" \
+		--decorate-refs="refs/stash" \
+		--decorate-refs="refs/replace/*" \
+		--decorate-refs="refs/tags/*" \
+		--decorate-refs="refs/remotes/*/main" \
+		--decorate-refs="refs/remotes/*/master" \
+		--decorate-refs="refs/remotes/*/develop*" \
+		--decorate-refs="refs/remotes/*/release*" \
+		--decorate-refs="refs/remotes/*/staging*" \
+		--decorate-refs="refs/remotes/*/stage*" \
+		--decorate-refs="refs/remotes/*/support*" \
+		--decorate-refs=HEAD
+	graphs = graph --simplify-by-decoration
 [push]
 	default = upstream
 [user]
