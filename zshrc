@@ -5,8 +5,8 @@
     done
 }
 
-if [ -f ~/.zshrc.local ]; then
-    source ~/.zshrc.local
+if [ -f ~/.local/zshrc ]; then
+    source ~/.local/zshrc
 fi
 
 # tmuxで開始する

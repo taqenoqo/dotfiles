@@ -85,7 +85,10 @@ fi
 
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 
-if [ -f ~/.zprofile.local ]; then
-    source ~/.zprofile.local
+export PATH="$HOME/.local/bin:$PATH"
+export FPATH="$HOME/.local/completion:$FPATH"
+
+if [ -f ~/.local/zprofile ]; then
+    source ~/.local/zprofile
 fi
 
