@@ -152,7 +152,6 @@ hook_add = '''
         \ 'coc-vimlsp',
         \ 'coc-emoji',
         \ 'coc-yaml',
-        \ 'coc-actions',
         \ 'coc-diagnostic',
         \ 'coc-lists',
         \ 'coc-spell-checker',
@@ -274,6 +273,18 @@ hook_add = '''
 repo = 'liuchengxu/vista.vim'
 depends = ['coc.nvim']
 hook_add = '''
+    function! s:vista_auto_start()
+        if argc() == 0 && !exists("s:exists_std_in")
+            Vista coc
+        endif
+    endfunction
+
+    augroup VistaAutoStart
+        autocmd!
+        autocmd StdinReadPre * let s:exists_std_in = 1
+        autocmd VimEnter * call s:vista_auto_start()
+    augroup END
+
     hi VistaIcon ctermfg=198 cterm=bold
     hi link VistaLineNr SpecialKey
 
