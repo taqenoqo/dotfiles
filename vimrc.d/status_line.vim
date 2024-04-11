@@ -1,7 +1,7 @@
 augroup emoticon_status_line
     autocmd!
     autocmd BufEnter * let b:statusline_face = '\|ﾟーﾟ)ﾉｨｮｩ'
-    autocmd CursorMoved * let b:statusline_face = '\|ﾟーﾟ)ﾉｨｮｩ'
+    autocmd CursorMoved * let b:statusline_face = '(*ﾟーﾟ)'
     autocmd InsertLeave * let b:statusline_face = 'ε＝(ﾉ*ﾟーﾟ)ﾉ'
     autocmd InsertEnter * let b:statusline_face = '(σ*ﾟーﾟ)σ'
     autocmd BufWritePost * let b:statusline_face = '(*ﾟーﾟ*)♪'

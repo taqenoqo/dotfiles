@@ -155,7 +155,6 @@ hook_add = '''
         \ 'coc-actions',
         \ 'coc-diagnostic',
         \ 'coc-lists',
-        \ 'coc-pairs',
         \ 'coc-spell-checker',
         \ 'coc-java',
         \ '@yaegassy/coc-marksman'
@@ -168,19 +167,25 @@ hook_add = '''
     hi link CocWarningSign Warning
     hi link CocInfoSign Info
     hi link CocHintSign Info
-    hi link CocErrorFloat Pmenu
-    hi link CocWarningFloat Pmenu
-    hi link CocInfoFloat Pmenu
-    hi link CocHintFloat Pmenu
     hi link CocErrorHighlight CocErrorSign
     hi link CocWarningHighlight CocWarningSign
     hi link CocInfoHighlight CocInfoSign
     hi link CocHintHighlight CocHintSign
+    hi link CocMenuSel PmenuSel
+    hi link CocFloating Pmenu
+    hi link CocFloatThumb PmenuThumb
+    hi link CocFloatSbar PmenuSbar
 
+    inoremap <silent><expr> <C-n> 
+        \ coc#pum#visible() ? coc#pum#next(1) :
+        \ coc#refresh()
+    inoremap <silent><expr> <C-p> 
+        \ coc#pum#visible() ? coc#pum#prev(1) :
+        \ coc#refresh()
     inoremap <silent><expr> <TAB>
-          \ coc#pum#visible() ? coc#pum#next(1) :
-          \ CheckBackspace() ? "\<Tab>" :
-          \ coc#refresh()
+        \ coc#pum#visible() ? coc#pum#next(1) :
+        \ CheckBackspace() ? "\<Tab>" :
+        \ coc#refresh()
     inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
     function! CheckBackspace() abort
         let col = col('.') - 1
@@ -204,13 +209,26 @@ hook_add = '''
 
     nnoremap <silent> K :call ShowDocumentation()<CR>
     function! ShowDocumentation()
-      if CocAction('hasProvider', 'hover')
-        call CocActionAsync('doHover')
-      else
-        call feedkeys('K', 'in')
-      endif
+        if CocAction('hasProvider', 'hover')
+            call CocActionAsync('doHover')
+        else
+            call feedkeys('K', 'in')
+        endif
     endfunction
 
+    function! ShowHover()
+        if !get(g:, 'coc_service_initialized', 0) || !CocAction('hasProvider', 'hover') || CocAction('getHover') == []
+            return
+        endif
+        call CocActionAsync('doHover', { err -> execute('echom "hoge"') })
+    endfunction
+
+    augroup coc_hover
+        autocmd!
+        autocmd CursorHold * call ShowHover()
+        autocmd CursorHoldI * call CocActionAsync('showSignatureHelp')
+    augroup END
+ 
     xmap <leader>f <Plug>(coc-format-selected)
     nmap <leader>f <Plug>(coc-format-selected)
     nmap <leader>n <Plug>(coc-rename)
@@ -218,10 +236,21 @@ hook_add = '''
     nmap <leader>A <Plug>(coc-codeaction-cursor)
     xmap <leader>M <Plug>(coc-codeaction-selected)
     nmap <leader>M <Plug>(coc-codeaction-cursor)
+    nmap <silent> [g <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]g <Plug>(coc-diagnostic-next)
     nmap <silent> gd <Plug>(coc-definition)
     nmap <silent> gt <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gI <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
+
+    xmap if <Plug>(coc-funcobj-i)
+    omap if <Plug>(coc-funcobj-i)
+    xmap af <Plug>(coc-funcobj-a)
+    omap af <Plug>(coc-funcobj-a)
+    xmap ic <Plug>(coc-classobj-i)
+    omap ic <Plug>(coc-classobj-i)
+    xmap ac <Plug>(coc-classobj-a)
+    omap ac <Plug>(coc-classobj-a)
 '''
 
 [[plugins]]
