@@ -108,7 +108,7 @@ set ttimeoutlen=0
 set conceallevel=2
 
 " CursorHold autocmd の待ち時間
-set updatetime=100
+set updatetime=500
 
 " 補完設定
 set completeopt=menuone,noinsert,noselect
