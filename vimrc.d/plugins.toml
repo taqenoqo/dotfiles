@@ -217,16 +217,31 @@ hook_add = '''
     endfunction
 
     function! ShowHover()
+        if get(g:, 'skip_next_coc_float', 0)
+            let g:skip_next_coc_float = 0
+            return
+        endif
         if !get(g:, 'coc_service_initialized', 0) || !CocAction('hasProvider', 'hover') || CocAction('getHover') == []
             return
         endif
-        call CocActionAsync('doHover', { err -> execute('echom "hoge"') })
+        call CocActionAsync('doHover')
+    endfunction
+
+    function! ShowSignature()
+        if get(g:, 'skip_next_coc_float', 0)
+            let g:skip_next_coc_float = 0
+            return
+        endif
+        if !get(g:, 'coc_service_initialized', 0) || !CocAction('hasProvider', 'signature')
+            return
+        endif
+        call CocActionAsync('showSignatureHelp')
     endfunction
 
     augroup coc_hover
         autocmd!
         autocmd CursorHold * call ShowHover()
-        autocmd CursorHoldI * call CocActionAsync('showSignatureHelp')
+        autocmd CursorHoldI * call ShowSignature()
     augroup END
  
     xmap <leader>f <Plug>(coc-format-selected)
@@ -242,6 +257,8 @@ hook_add = '''
     nmap <silent> gt <Plug>(coc-type-definition)
     nmap <silent> gI <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
+    nnoremap <silent> <C-L> :noh \| :pclose \| :let g:skip_next_coc_float = 1 \| :call coc#float#close_all()<CR><C-L>
+    inoremap <silent> <C-L> <C-\><C-o>:noh \| :pclose \| :let g:skip_next_coc_float = 1 \| :call coc#float#close_all()<CR><C-\><C-o><C-L>
 
     xmap if <Plug>(coc-funcobj-i)
     omap if <Plug>(coc-funcobj-i)
