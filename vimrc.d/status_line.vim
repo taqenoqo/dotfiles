@@ -16,7 +16,8 @@ function UpdateStatusLine(...)
     if exists('*coc#status')
         let l:left = l:left . '\ %{coc#status()}'
     endif
-    let l:right = '%{GetCursorSyntax()}\ (%p%%)\ %l,%c\ =\ 0x%B\ ' . b:statusline_face . '\ '
+    let l:face = get(b:, 'statusline_face', '\|ーﾟ)')
+    let l:right = '%{GetCursorSyntax()}\ (%p%%)\ %l,%c\ =\ 0x%B\ ' . l:face . '\ '
     exec 'setlocal statusline=' . l:left . '%=' . l:right
 endfunction
 
