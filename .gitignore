@@ -2,4 +2,5 @@
 !.gitignore
 !.gitmodules
 /vim/sessions/**
+/vim/plugged/**
 
