@@ -45,10 +45,10 @@ xmap if <Plug>(coc-funcobj-i)
 omap if <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
 omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
+xmap iC <Plug>(coc-classobj-i)
+omap iC <Plug>(coc-classobj-i)
+xmap aC <Plug>(coc-classobj-a)
+omap aC <Plug>(coc-classobj-a)
 nnoremap <silent> <C-L> :noh \| :pclose \| :let g:skip_next_coc_float = 1 \| :call coc#float#close_all()<CR><C-L>
 inoremap <silent> <C-L> <C-\><C-o>:noh \| :pclose \| :let g:skip_next_coc_float = 1 \| :call coc#float#close_all()<CR><C-\><C-o><C-L>
 
