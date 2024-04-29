@@ -1,7 +1,7 @@
 if ls --color >/dev/null 2>&1; then
-    alias ls='ls -Flh -N --color=auto --time-style +%Y-%m-%d\ %H:%M'
+    alias ls='ls -Flh -N --color=auto --time-style +%Y-%m-%d\ %H:%M --group-directories-first'
 elif ls -G >/dev/null 2>&1; then
-    alias ls='ls -GFlh --group-directories-first'
+    alias ls='ls -GFlh'
 fi
 
 alias cp='cp -i'
