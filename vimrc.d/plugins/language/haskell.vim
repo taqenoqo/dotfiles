@@ -1,3 +1,3 @@
 Plug 'enomsg/vim-haskellConcealPlus'
 
-let g:hscoptions = "Arh∴"
+    let g:hscoptions = "Arh∴"
