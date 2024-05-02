@@ -97,7 +97,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
             let g:skip_next_coc_float = 0
             return
         endif
-        if !get(g:, 'coc_service_initialized', 0) || !CocAction('hasProvider', 'hover') || CocAction('getHover') == []
+        if !get(g:, 'coc_service_initialized', 0) || !CocAction('hasProvider', 'hover') || coc#float#has_float()
             return
         endif
         call CocActionAsync('doHover')
