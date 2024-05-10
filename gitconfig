@@ -52,6 +52,12 @@
 [include]
 	path = ~/.gitconfig.local
 [pager]
-	show = less
+    diff = delta
+	log = delta
+	reflog = delta
+	show = delta
 [pull]
 	ff = only
+[delta]
+	line-numbers = true
+	side-by-side = true
