@@ -45,5 +45,5 @@
       "settings": {}
     } 
   },
-  "java.import.gradle.java.home": "/opt/homebrew/Cellar/openjdk@11/11.0.20.1/libexec/openjdk.jdk/Contents/Home"
+  "java.import.gradle.java.home": "/opt/homebrew/Cellar/openjdk@11/11.0.22/libexec/openjdk.jdk/Contents/Home"
 }
