@@ -25,20 +25,7 @@ if is-at-least 4.3.10; then
 fi
 
 function change_prompt() {
-    local aa_color
-    case $(hostname -s) in
-    "takenoko-macbook" )
-        aa_color="%{[38;5;172m%}"
-        ;;
-    "tak3n0k0" )
-        aa_color="%{[38;5;26m%}"
-        ;;
-    * )
-        aa_color="%{[38;5;198m%}"
-        echo $(hostname -s)
-        ;;
-    esac
-
+    local aa_color="%{[38;5;${PROMPT_AA_COLOR:-69}m%}"
     local prompt_color
     if [[ $UID -eq 0 ]]; then
         prompt_color="%{[38;5;197m%}"
