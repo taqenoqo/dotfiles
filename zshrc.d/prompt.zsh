@@ -13,15 +13,20 @@ if is-at-least 4.3.10; then
     zstyle ':vcs_info:*' use-simple true
     zstyle ':vcs_info:*' check-for-changes true
 
-    function updateMessage() {
+    function update_prompt_data() {
         psvar=()
         LANG=en_US.UTF-8 vcs_info
         if [[ -n "$vcs_info_msg_0_" ]]; then
             psvar[1]="$vcs_info_msg_0_"
         fi
+
+        docker_context=$(docker context show 2>/dev/null)
+        if [[ -n "$docker_context" && "$docker_context" != "default" ]]; then
+            psvar[2]="docker: $docker_context"
+        fi
     }
 
-    add-zsh-hook precmd updateMessage
+    add-zsh-hook precmd update_prompt_data
 fi
 
 function change_prompt() {
@@ -42,7 +47,7 @@ function change_prompt() {
      ∧  ∧
     (*ﾟーﾟ) %m:%~
     /  .|   %1v
-～（＿＿ﾉ
+～（＿＿ﾉ   %2v
 %n${WINDOW:+"[$WINDOW]"}$prompt_color%# %{[0m%}"
 
     if [ $PS1 = $c_prompt ]; then
