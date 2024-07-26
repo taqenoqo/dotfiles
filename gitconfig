@@ -5,8 +5,8 @@
 	st = status
 	ci = commit
 	br = branch
-  diffw = diff --word-diff=color --minimal
 	graph0 = log --graph --date=format-local:'%Y/%m/%d %H:%M' --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%ad%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n          %C(white)%s ― %an%C(reset)'
+	diffw = diff --word-diff=color --minimal
 	graph = graph0 \
 		--glob="refs/heads/*" \
 		--glob="refs/stash" \
@@ -44,7 +44,7 @@
 	user = taqenoqo
 [diff]
 	tool = vimdiff
-    algorithm = minimal
+	algorithm = minimal
 [merge]
 	tool = vimdiff
 [difftool "vimdiff"]
@@ -52,7 +52,7 @@
 [include]
 	path = ~/.gitconfig.local
 [pager]
-    diff = delta
+	diff = delta
 	log = delta
 	reflog = delta
 	show = delta
@@ -61,3 +61,4 @@
 [delta]
 	line-numbers = true
 	side-by-side = true
+	light = true
