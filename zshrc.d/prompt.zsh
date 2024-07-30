@@ -44,10 +44,10 @@ function change_prompt() {
 
     local c_prompt
     c_prompt="$aa_color
-     ∧  ∧
+     ∧  ∧   %2v
     (*ﾟーﾟ) %m:%~
     /  .|   %1v
-～（＿＿ﾉ   %2v
+～（＿＿ﾉ
 %n${WINDOW:+"[$WINDOW]"}$prompt_color%# %{[0m%}"
 
     if [ $PS1 = $c_prompt ]; then
