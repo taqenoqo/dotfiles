@@ -12,6 +12,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
         \ 'coc-lists',
         \ 'coc-spell-checker',
         \ 'coc-java',
+        \ 'coc-tsserver',
         \ '@yaegassy/coc-marksman'
     \ ]
 
