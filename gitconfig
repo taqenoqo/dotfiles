@@ -62,3 +62,5 @@
 	line-numbers = true
 	side-by-side = true
 	light = true
+[core]
+	excludesfile = ~/.gitignore
