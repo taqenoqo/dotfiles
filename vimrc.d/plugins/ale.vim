@@ -3,7 +3,7 @@ let g:ale_fixers = {
     \ '*': ['remove_trailing_lines', 'trim_whitespace'],
     \ 'kotlin': ['ktlint'],
 \}
-"let g:ale_set_highlights = 1
+let g:ale_set_highlights = 0
 
 highlight! link ALEVirtualTextError NonText
 highlight! link ALEVirtualTextWarning NonText

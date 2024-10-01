@@ -1,1 +1,8 @@
-
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+StringLiterals:
+  EnforcedStyle: double_quotes
+Documentation:
+  Enabled: false
