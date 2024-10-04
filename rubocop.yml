@@ -3,6 +3,8 @@ Style/FrozenStringLiteralComment:
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
 StringLiterals:
-  EnforcedStyle: double_quotes
+  Enabled: false
 Documentation:
+  Enabled: false
+ClassAndModuleChildren:
   Enabled: false
