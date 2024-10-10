@@ -5,6 +5,9 @@ let g:ale_fixers = {
 \}
 let g:ale_set_highlights = 0
 
+let g:ale_markdown_markdownlint_executable = 'markdownlint-cli2'
+let g:ale_markdown_markdownlint_options = '--config ~/.markdownlint.json'
+
 highlight! link ALEVirtualTextError NonText
 highlight! link ALEVirtualTextWarning NonText
 highlight! link ALEVirtualTextInfo NonText
