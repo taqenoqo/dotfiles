@@ -81,6 +81,10 @@ if (type -p direnv >/dev/null 2>&1); then
     eval "$(direnv hook zsh)"
 fi
 
+if (type -p delta >/dev/null 2>&1); then
+    export GH_PAGER="delta"
+fi
+
 [ -f "/Users/takenoko/.ghcup/env" ] && source "/Users/takenoko/.ghcup/env"
 
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
