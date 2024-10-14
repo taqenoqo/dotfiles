@@ -1,4 +1,6 @@
 {
   "default": true,
-  "MD007": { "indent": 4 }
+  "MD003": false,
+  "MD007": { "indent": 4 },
+  "MD012": { "maximum": 2 }
 }
