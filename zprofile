@@ -51,6 +51,10 @@ if (type -p brew >/dev/null 2>&1); then
 
 fi
 
+if (type -p asdf >/dev/null 2>&1); then
+    . /usr/local/opt/asdf/libexec/asdf.sh
+fi
+
 if (type -p anyenv >/dev/null 2>&1); then
     eval "$(anyenv init -)"
 fi
