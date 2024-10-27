@@ -13,6 +13,7 @@ Plug 'taiansu/nerdtree-ag'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
     let g:NERDTreeGitStatusShowIgnored = 1
+    let g:NERDTreeGitStatusConcealBrackets = 1
     let g:NERDTreeGitStatusIndicatorMapCustom = {
         \ "Untracked" : "!",
         \ "Modified"  : "*",
@@ -38,6 +39,14 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
     hi NERDTreeGitStatusClean ctermfg=249
     hi NERDTreeGitStatusIgnored ctermfg=249
     hi NERDTreeGitStatusUnknown ctermfg=249
+
+    function! MyFilter(params)
+        let l:flags = a:params['path'].flagSet._flags
+        let l:index = index(l:flags['git'], ' - ')
+        return l:index != -1
+    endfunction
+
+    autocmd! VimEnter * call NERDTreeAddPathFilter('MyFilter')
 
 Plug 'jistr/vim-nerdtree-tabs'
 
