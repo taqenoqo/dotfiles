@@ -8,3 +8,5 @@ Documentation:
   Enabled: false
 ClassAndModuleChildren:
   Enabled: false
+# Style/RedundantReturn:
+#   Enabled: false
