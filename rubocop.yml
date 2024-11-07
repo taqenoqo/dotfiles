@@ -1,5 +1,5 @@
-Style/FrozenStringLiteralComment:
-  Enabled: false
+#Style/FrozenStringLiteralComment:
+#  Enabled: false
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
 StringLiterals:
