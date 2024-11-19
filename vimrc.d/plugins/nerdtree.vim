@@ -42,6 +42,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
     function! MyFilter(params)
         let l:flags = a:params['path'].flagSet._flags
+        if !has_key(l:flags, 'git')
+            return v:true
+        endif
         let l:index = index(l:flags['git'], ' - ')
         return l:index != -1
     endfunction
