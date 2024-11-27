@@ -54,7 +54,7 @@ if (command -v rbenv >/dev/null 2>&1); then
     eval "$(rbenv init - zsh)"
 fi
 
-if (commadn -v jenv >/dev/null 2>&1); then
+if (command -v jenv >/dev/null 2>&1); then
     export PATH="$HOME/.jenv/bin:$PATH"
     eval "$(jenv init -)"
 fi
@@ -68,16 +68,20 @@ fi
 #    export PATH="$(stack path --local-bin):$PATH"
 #fi
 
-if (type -p opam >/dev/null 2>&1); then
+if (command -v opam >/dev/null 2>&1); then
     source "$HOME/.opam/opam-init/init.zsh"
 fi
 
-if (type -p direnv >/dev/null 2>&1); then
+if (command -v direnv >/dev/null 2>&1); then
     eval "$(direnv hook zsh)"
 fi
 
-if (type -p delta >/dev/null 2>&1); then
+if (command -v delta >/dev/null 2>&1); then
     export GH_PAGER="delta"
+fi
+
+if (command -v gh >/dev/null 2>&1); then
+    export GLAMOUR_STYLE="light"
 fi
 
 if [ -f "$HOME/.ghcup/env" ]; then
