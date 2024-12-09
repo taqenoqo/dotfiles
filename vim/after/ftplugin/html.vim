@@ -1,2 +1,1 @@
-setlocal ts=2 sts=0 sw=2
-
+setlocal ts=2
