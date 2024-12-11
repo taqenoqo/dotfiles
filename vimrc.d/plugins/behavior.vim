@@ -59,5 +59,6 @@ Plug 'gyim/vim-boxdraw'
     vnoremap ib :<C-u>call boxdraw#Select("io")<CR>
 
 Plug 'editorconfig/editorconfig-vim'
-
+  
     let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
