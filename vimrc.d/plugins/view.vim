@@ -20,4 +20,5 @@ Plug 'taqenoqo/vim-indent-guides', { 'branch': 'right-align' }
 
     hi IndentGuidesOdd  ctermbg=195 ctermfg=145
     hi IndentGuidesEven ctermbg=195 ctermfg=145
-
+    
+Plug 'obcat/vim-sclow'
