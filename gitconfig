@@ -62,6 +62,8 @@
 	line-numbers = true
 	side-by-side = true
 	light = true
+	hunk-header-style = omit
+	file-decoration-style = box blue
 [core]
 	excludesfile = ~/.gitignore
 [filter "lfs"]
