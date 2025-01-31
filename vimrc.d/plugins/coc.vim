@@ -30,8 +30,8 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     hi link CocFloatThumb PmenuThumb
     hi link CocFloatSbar PmenuSbar
 
-    xmap <leader>f <Plug>(coc-format-selected)
-    nmap <leader>f <Plug>(coc-format-selected)
+    xmap <leader>= <Plug>(coc-format-selected)
+    nmap <leader>= <Plug>(coc-format-selected)
     nmap <leader>n <Plug>(coc-rename)
     xmap <leader>A <Plug>(coc-codeaction-selected)
     nmap <leader>A <Plug>(coc-codeaction-cursor)
