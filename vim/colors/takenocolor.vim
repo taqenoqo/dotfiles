@@ -69,6 +69,9 @@ hi MatchParen ctermfg=NONE ctermbg=NONE cterm=bold,underline
 hi Search guifg=#FFFFCC guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=229 cterm=NONE
 hi IncSearch guifg=#FFCC00 guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=220 cterm=NONE
 
+" 桁数の限界を示すバー
+hi ColorColumn guibg=#CCFFFF ctermbg=195
+
 " 補完ウインドウ
 hi PMenu guifg=#505050 guibg=#EAE8E2 guisp=NONE gui=NONE ctermfg=239 ctermbg=253 cterm=NONE
 hi PMenuSbar guifg=#B7B7B7 guibg=#EDEDED guisp=NONE gui=NONE ctermfg=250 ctermbg=253 cterm=NONE

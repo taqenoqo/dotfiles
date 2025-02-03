@@ -18,7 +18,7 @@ Plug 'taqenoqo/vim-indent-guides', { 'branch': 'right-align' }
     let g:indent_guides_right_align = 1
     let g:indent_guides_default_mapping = 0
 
-    hi IndentGuidesOdd  ctermbg=195 ctermfg=145
-    hi IndentGuidesEven ctermbg=195 ctermfg=145
+    hi link IndentGuidesOdd ColorColumn
+    hi link IndentGuidesEven ColorColumn
     
 Plug 'obcat/vim-sclow'
