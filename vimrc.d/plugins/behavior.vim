@@ -62,3 +62,8 @@ Plug 'editorconfig/editorconfig-vim'
   
     let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
+Plug 'skanehira/translate.vim'
+
+    vmap <Leader>tj :Translate<CR>
+    vmap <Leader>te :Translate!<CR>
+
