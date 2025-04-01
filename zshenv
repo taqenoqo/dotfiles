@@ -1,7 +1,4 @@
-if [ -x /usr/libexec/path_helper ]; then
-    export PATH=''
-    eval `/usr/libexec/path_helper -s`
-fi
+unsetopt GLOBAL_RCS
 
 export EDITOR=vim
 export LANG=ja_JP.UTF-8
