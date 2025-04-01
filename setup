@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 builtin setopt -o NO_UNSET -o ERR_EXIT
 
