@@ -46,6 +46,10 @@ if (command -v brew >/dev/null 2>&1); then
     fi
 fi
 
+if [[ -f "$HOME/.asdf/plugins/java/set-java-home.zsh" ]]; then
+    . "$HOME/.asdf/plugins/java/set-java-home.zsh"
+fi
+
 if (command -v anyenv >/dev/null 2>&1); then
     eval "$(anyenv init -)"
 fi
