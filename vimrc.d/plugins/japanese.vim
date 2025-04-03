@@ -17,10 +17,10 @@ Plug 'deton/jasegment.vim'
     nnoremap b <Plug>JaSegmentMoveNB
     nnoremap w <Plug>JaSegmentMoveNW
     nnoremap e <Plug>JaSegmentMoveNE
-    xnoremap b <Plug>JaSegmentMoveNB
-    xnoremap w <Plug>JaSegmentMoveNW
-    xnoremap e <Plug>JaSegmentMoveNE
-    onoremap b <Plug>JaSegmentMoveNB
-    onoremap w <Plug>JaSegmentMoveNW
-    onoremap e <Plug>JaSegmentMoveNE
+    xnoremap b <Plug>JaSegmentMoveVB
+    xnoremap w <Plug>JaSegmentMoveVW
+    xnoremap e <Plug>JaSegmentMoveVE
+    onoremap b <Plug>JaSegmentMoveOB
+    onoremap w <Plug>JaSegmentMoveOW
+    onoremap e <Plug>JaSegmentMoveOE
 
