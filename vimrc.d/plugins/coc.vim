@@ -21,9 +21,13 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     hi link CocWarningSign WarningSign
     hi link CocInfoSign InfoSign
     hi link CocHintSign InfoSign
+
     hi link CocErrorHighlight Error
     hi link CocWarningHighlight Warning
     hi link CocInfoHighlight Info
+    hi CocErrorFloat ctermfg=203 ctermbg=253 cterm=none
+    hi CocWarningFloat ctermfg=208 ctermbg=253 cterm=none
+    hi CocInfoFloat ctermfg=032 ctermbg=253 cterm=none
     hi link CocHintHighlight Info
     hi link CocMenuSel PmenuSel
     hi link CocFloating Pmenu
