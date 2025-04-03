@@ -1,7 +1,3 @@
-Plug 'airblade/vim-gitgutter'
-
-    let g:gitgutter_sign_priority = 5
-
 Plug 'tpope/vim-fugitive'
 
     function! GitDiffFromInput()
