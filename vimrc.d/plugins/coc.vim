@@ -17,14 +17,14 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
         \ '@yaegassy/coc-marksman'
     \ ]
 
-    hi link CocErrorSign Error
-    hi link CocWarningSign Warning
-    hi link CocInfoSign Info
-    hi link CocHintSign Info
-    hi link CocErrorHighlight CocErrorSign
-    hi link CocWarningHighlight CocWarningSign
-    hi link CocInfoHighlight CocInfoSign
-    hi link CocHintHighlight CocHintSign
+    hi link CocErrorSign ErrorSign
+    hi link CocWarningSign WarningSign
+    hi link CocInfoSign InfoSign
+    hi link CocHintSign InfoSign
+    hi link CocErrorHighlight Error
+    hi link CocWarningHighlight Warning
+    hi link CocInfoHighlight Info
+    hi link CocHintHighlight Info
     hi link CocMenuSel PmenuSel
     hi link CocFloating Pmenu
     hi link CocFloatThumb PmenuThumb

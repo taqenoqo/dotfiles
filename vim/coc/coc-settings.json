@@ -6,6 +6,11 @@
   "diagnostic.warningSign": "!",
   "diagnostic.infoSign": "i",
   "diagnostic.hintSign": "i",
+  "git.addedSign.hlGroup": "DiffAddSign",
+  "git.changedSign.hlGroup": "DiffChangeSign",
+  "git.removedSign.hlGroup": "DiffDeleteSign",
+  "git.topRemovedSign.hlGroup": "DIffDeleteSign",
+  "git.changeRemovedSign.hlGroup": "DiffDeleteSign",
   "languageserver": {
     "haskell": {
       "command": "haskell-language-server-wrapper",
