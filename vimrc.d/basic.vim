@@ -159,23 +159,27 @@ autocmd BufReadPost *
 " DiffOrig コマンド
 command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 
-" dein 関連設定
-"let g:dein#auto_recache = 1
-"set runtimepath+=~/.vim/dein.vim
-"let s:script_dir = expand('<sfile>:p:h')
-"if dein#load_state('~/.dein')
-"    call dein#begin('~/.dein')
-"    call dein#load_toml(s:script_dir . '/plugins.toml')
-"    call dein#end()
-"    call dein#save_state()
-"endif
-"if dein#check_install()
-"  call dein#install()
-"endif
-"call map(dein#check_clean(), "delete(v:val, 'rf')")
-"autocmd VimEnter * call dein#call_hook('post_source')
+function ShowHighlightGroup()
+  let hlgroup = synIDattr(synID(line('.'), col('.'), 1), 'name')
+  let groupChain = []
+
+  while hlgroup !=# ''
+    call add(groupChain, hlgroup)
+    let hlgroup = matchstr(trim(execute('highlight ' . hlgroup)), '\<links\s\+to\>\s\+\zs\w\+$')
+  endwhile
+
+  if empty(groupChain)
+    echo 'No highlight groups'
+    return
+  endif
+
+  for group in groupChain
+    execute 'highlight' group
+  endfor
+endfunction
+
+nnoremap <Leader>h :call ShowHighlightGroup()<CR>
 
 filetype plugin indent on
 
 silent! source ~/.vimrc.local
-
