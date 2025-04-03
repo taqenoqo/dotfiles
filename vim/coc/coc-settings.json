@@ -6,22 +6,6 @@
   "diagnostic.warningSign": "!",
   "diagnostic.infoSign": "i",
   "diagnostic.hintSign": "i",
-  "markdownlint.config": {
-    "ul-indent": {
-      "indent": 4
-    },
-    "ul-style": {
-      "style": "sublist"
-    },
-    "no-multiple-blanks": {
-      "maximum": 2
-    },
-    "header-style": false,
-    "fenced-code-language": false,
-    "line-length": {
-      "line_length": 120
-    }
-  },
   "languageserver": {
     "haskell": {
       "command": "haskell-language-server-wrapper",
@@ -45,5 +29,23 @@
       "settings": {}
     } 
   },
-  "java.import.gradle.java.home": "/opt/homebrew/Cellar/openjdk@11/11.0.22/libexec/openjdk.jdk/Contents/Home"
+  "markdownlint.config": {
+    "ul-indent": {
+      "indent": 4
+    },
+    "ul-style": {
+      "style": "sublist"
+    },
+    "no-multiple-blanks": {
+      "maximum": 2
+    },
+    "header-style": false,
+    "fenced-code-language": false,
+    "line-length": {
+      "line_length": 120
+    }
+  },
+  "cSpell.userWords": [
+    "fullscreen"
+  ]
 }
