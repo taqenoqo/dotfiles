@@ -3,12 +3,13 @@ unsetopt GLOBAL_RCS
 export EDITOR=vim
 export LANG=ja_JP.UTF-8
 
-if [ -e "/usr/local/share/zsh-completions" ]; then
-    FPATH="/usr/local/share/zsh-completions:$FPATH"
+if [ -x "/opt/homebrew/bin/brew" ]; then
+    eval $(/opt/homebrew/bin/brew shellenv)
+    export PATH=/usr/local/bin:$PATH
 fi
 
-if [ -x "/opt/homebrew/bin/brew" ]; then
-  eval $(/opt/homebrew/bin/brew shellenv)
+if [ -e "/usr/local/share/zsh-completions" ]; then
+    FPATH="/usr/local/share/zsh-completions:$FPATH"
 fi
 
 if (command -v brew >/dev/null 2>&1); then
