@@ -50,9 +50,9 @@ hi Title ctermfg=56 ctermbg=NONE cterm=bold
 hi ErrorSign ctermfg=203 ctermbg=224 cterm=bold
 hi WarningSign ctermfg=208 ctermbg=229 cterm=bold
 hi InfoSign ctermfg=032 ctermbg=195 cterm=bold
-hi Error ctermbg=224
-hi Warning ctermbg=229
-hi Info ctermbg=195
+hi Error ctermfg=203 ctermbg=224
+hi Warning ctermfg=208 ctermbg=229
+hi Info ctermfg=032 ctermbg=195
 
 " 折り畳み
 hi Folded ctermfg=239 ctermbg=231 cterm=bold
