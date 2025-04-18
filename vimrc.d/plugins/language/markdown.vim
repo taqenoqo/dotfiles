@@ -1,6 +1,7 @@
 Plug 'taqenoqo/vim-markdown', { 'branch': 'tex-math-dollars' }
 
     let g:markdown_fenced_tex = 1
+    let g:markdown_syntax_conceal = 0
     let g:markdown_fenced_languages = [
         \ 'zsh',
         \ 'c',
