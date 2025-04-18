@@ -41,6 +41,15 @@ Plug 'yuttie/comfortable-motion.vim'
 
 Plug 'junegunn/vim-easy-align'
 
+    let g:easy_align_delimiters = 
+    \ {
+        \ '/': {
+            \ 'pattern':         '//\+\|/\*\|\*/',
+            \ 'delimiter_align': 'l',
+            \ 'ignore_groups':   ['!Comment'] 
+        \ }
+    \ }
+
     xmap <Leader>a <Plug>(LiveEasyAlign)
     nmap <Leader>a <Plug>(LiveEasyAlign)
 
