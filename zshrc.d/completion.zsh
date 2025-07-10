@@ -9,7 +9,7 @@ bashcompinit
 autoload -Uz compinit
 compinit
 
-if type -p dircolors >/dev/null 2>&1; then
+if command -v dircolors >/dev/null 2>&1; then
     eval `dircolors`
 fi
 
@@ -33,9 +33,6 @@ zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters             
 zstyle ':completion:*:manuals' separate-sections true                                                   # manの補完をセクションごとに
 
 zmodload zsh/complist # menuselect の bindkey のための mod
-bindkey '^d' self-insert
-bindkey '^q' self-insert
-bindkey '^r' self-insert
 bindkey '\t' menu-expand-or-complete
 bindkey '^n' down-line-or-history
 bindkey '^p' up-line-or-history
@@ -50,7 +47,13 @@ bindkey -M menuselect '^e' send-break
 bindkey -M menuselect '^[' send-break
 bindkey -M menuselect '^w' backward-kill-word
 
-if (type -p aws_completer >/dev/null 2>&1); then
+if command -v fzf >/dev/null 2>&1; then
+    bindkey "^R" fzf-history-widget
+    bindkey "^F" fzf-file-widget
+fi
+
+
+if command -v aws_completer >/dev/null 2>&1; then
     complete -C "$(which aws_completer)" aws
 fi
 
