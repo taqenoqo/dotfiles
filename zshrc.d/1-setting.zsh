@@ -24,6 +24,7 @@ bindkey -v '^h' history-search-backward
 bindkey -v '^r' history-incremental-search-backward
 bindkey -v '^s' history-incremental-search-forward
 
+
 # ヒストリー設定
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=1000

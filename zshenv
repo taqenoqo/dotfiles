@@ -42,6 +42,10 @@ if (command -v brew >/dev/null 2>&1); then
     if [ -x "$brew_dir/bin/asdf" ]; then
         source "$brew_dir/opt/asdf/libexec/asdf.sh"
     fi
+
+    if [ -x "$brew_dir/bin/fzf" ]; then
+        export FZF_BASE="$brew_dir/opt/fzf"
+    fi
 fi
 
 if [[ -f "$HOME/.asdf/plugins/java/set-java-home.zsh" ]]; then

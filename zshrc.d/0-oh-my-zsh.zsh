@@ -70,7 +70,7 @@ HIST_STAMPS="yyyy/mm/dd"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose aws terraform gh tmux stack ssh ruby rake rails node pip mvn brew npm)
+plugins=(git docker docker-compose aws terraform gh tmux stack ssh ruby rake rails node pip mvn brew npm fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -99,3 +99,4 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
