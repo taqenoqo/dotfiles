@@ -1,0 +1,27 @@
+let mapleader = ' '
+let g:surround_no_mappings = 1
+
+set visualbell
+set scrolloff=5
+set ignorecase
+set incsearch
+set hlsearch
+set showmode
+set showcmd
+
+set nerdtree
+nnoremap <C-w>h :NERDTreeFind<CR>
+
+set surround
+nmap ds <Plug>DSurround
+nmap cs <Plug>CSurround
+nmap s <Plug>YSurround
+xmap s <Plug>VSurround
+
+nmap <C-n> <Action>(NextTab)
+nmap <C-p> <Action>(PreviousTab)
+nmap <leader>r <Action>(Run)
+nmap <leader>n <Action>(RenameElement)
+nnoremap gt :action GotoTypeDeclaration<CR>
+nnoremap gr :action ShowUsages<CR>
+nnoremap gi :action QuickImplementations<CR>
