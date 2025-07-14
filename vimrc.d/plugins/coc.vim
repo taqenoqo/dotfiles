@@ -94,13 +94,13 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
     augroup coc_hover
         autocmd!
-        autocmd CursorHold * call ShowHover()
-        autocmd CursorHoldI * call ShowSignature()
+        autocmd CursorHold * call s:ShowHover()
+        autocmd CursorHoldI * call s:ShowSignature()
     augroup END
 
-    function! ShowHover()
-        if get(g:, 'skip_next_coc_float', 0)
-            let g:skip_next_coc_float = 0
+    function! s:ShowHover()
+        if get(g:, 'skip_next_hover', 0)
+            let g:skip_next_hover = 0
             return
         endif
         if !get(g:, 'coc_service_initialized', 0) || !CocAction('hasProvider', 'hover') || coc#float#has_float()
@@ -109,9 +109,9 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
         call CocActionAsync('doHover')
     endfunction
 
-    function! ShowSignature()
-        if get(g:, 'skip_next_coc_float', 0)
-            let g:skip_next_coc_float = 0
+    function! s:ShowSignature()
+        if get(g:, 'skip_next_hover', 0)
+            let g:skip_next_hover = 0
             return
         endif
         if !get(g:, 'coc_service_initialized', 0) || !CocAction('hasProvider', 'signature')
