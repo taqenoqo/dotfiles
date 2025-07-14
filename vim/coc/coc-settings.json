@@ -6,6 +6,7 @@
   "diagnostic.warningSign": "!",
   "diagnostic.infoSign": "i",
   "diagnostic.hintSign": "i",
+  "diagnostic.displayByAle": true,
   "git.addedSign.hlGroup": "DiffAddSign",
   "git.changedSign.hlGroup": "DiffChangeSign",
   "git.removedSign.hlGroup": "DiffDeleteSign",
@@ -24,7 +25,7 @@
       }
     },
     "terraform": {
-      "command": "terraform-lsp",
+      "command": "terraform-ls",
       "args": ["serve"],
       "filetypes": [
         "terraform",
