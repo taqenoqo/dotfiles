@@ -13,8 +13,8 @@ Plug 'dense-analysis/ale'
     let g:ale_floating_preview = 1
     let g:ale_markdown_markdownlint_executable = 'markdownlint-cli2'
     let g:ale_markdown_markdownlint_options = '--config ~/.markdownlint.json'
-    let g:ale_virtualtext_column = 40
-    let g:ale_virtualtext_maxcolumn = 80
+    let g:ale_virtualtext_column = 80
+    let g:ale_virtualtext_maxcolumn = 100
 
     highlight! link ALEVirtualTextError NonText
     highlight! link ALEVirtualTextWarning NonText
