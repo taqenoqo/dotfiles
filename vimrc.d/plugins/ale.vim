@@ -22,6 +22,9 @@ Plug 'dense-analysis/ale'
     highlight! ALEErrorSign ctermfg=203
     highlight! ALEWarningSign ctermfg=208
     highlight! ALEInfoSign ctermfg=035
+    highlight! link ALEError Error
+    highlight! link ALEWarning Warning
+    highlight! link ALEInfo Info
 
     nmap <leader>f :ALEFix<CR>
     nmap <leader>e :ALEDetail<CR>
