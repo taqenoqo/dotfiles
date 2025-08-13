@@ -12,6 +12,9 @@ stty stop undef #C-s の無効化
 setopt nolistbeep
 setopt nobeep
 
+# C-d で終了させない
+setopt ignoreeof
+
 bindkey -v # vim風キーバインド
 bindkey -v '^?' backward-delete-char
 bindkey -v '^a' beginning-of-line
