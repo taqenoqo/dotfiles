@@ -5,8 +5,10 @@
 	st = status
 	ci = commit
 	br = branch
-	graph0 = log --graph --date=format-local:'%Y/%m/%d %H:%M' --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%ad%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n          %C(white)%s ― %an%C(reset)'
 	diffw = diff --word-diff=color --minimal
+	pushf = push --force-with-lease --force-if-includes
+	delete-gone = "!git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D"
+	graph0 = log --graph --date=format-local:'%Y/%m/%d %H:%M' --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%ad%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n          %C(white)%s ― %an%C(reset)'
 	graph = graph0 \
 		--glob="refs/heads/*" \
 		--glob="refs/stash" \
@@ -33,7 +35,6 @@
 		--decorate-refs="refs/remotes/*/support*" \
 		--decorate-refs=HEAD
 	graphs = graph --simplify-by-decoration
-	pushf = push --force-with-lease --force-if-includes
 [push]
 	default = upstream
 [user]
