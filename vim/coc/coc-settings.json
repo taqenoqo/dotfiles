@@ -1,4 +1,5 @@
 {
+  "coc.preferences.jumpCommand": "split",
   "https.rejectUnauthorized": false,
   "http.proxyStrictSSL": false,
   "suggest.noselect": true,
@@ -12,6 +13,12 @@
   "git.removedSign.hlGroup": "DiffDeleteSign",
   "git.topRemovedSign.hlGroup": "DIffDeleteSign",
   "git.changeRemovedSign.hlGroup": "DiffDeleteSign",
+  "typescript.inlayHints.parameterNames.enabled": "none",
+  "typescript.inlayHints.parameterTypes.enabled": false,
+  "typescript.inlayHints.variableTypes.enabled": false,
+  "typescript.inlayHints.propertyDeclarationTypes.enabled": false,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": false,
+  "typescript.inlayHints.enumMemberValues.enabled": false,
   "languageserver": {
     "haskell": {
       "command": "haskell-language-server-wrapper",
@@ -33,7 +40,7 @@
       ],
       "initializationOptions": {},
       "settings": {}
-    } 
+    }
   },
   "markdownlint.config": {
     "ul-indent": {
