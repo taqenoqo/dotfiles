@@ -33,6 +33,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     hi link CocFloating Pmenu
     hi link CocFloatThumb PmenuThumb
     hi link CocFloatSbar PmenuSbar
+    hi CocInlayHint ctermfg=188 ctermbg=NONE cterm=NONE
 
     xmap <leader>= <Plug>(coc-format-selected)
     nmap <leader>= <Plug>(coc-format-selected)
