@@ -3,6 +3,10 @@ unsetopt GLOBAL_RCS
 export EDITOR=vim
 export LANG=ja_JP.UTF-8
 
+if [ -x /usr/libexec/path_helper ]; then
+	eval `/usr/libexec/path_helper -s`
+fi
+
 if [ -x "/opt/homebrew/bin/brew" ]; then
     eval $(/opt/homebrew/bin/brew shellenv)
     export PATH=/usr/local/bin:$PATH
@@ -19,6 +23,11 @@ if (command -v brew >/dev/null 2>&1); then
         local libexec="$brew_dir/opt/coreutils/libexec"
         export PATH=$libexec/gnubin:$PATH
         export MANPATH=$libexec/gnuman:$MANPATH
+    fi
+
+    if [ -d "$brew_dir/opt/findutils/libexec" ]; then
+        local libexec="$brew_dir/opt/findutils/libexec"
+        export PATH=$libexec/gnubin:$PATH
     fi
 
     if [ -d "$brew_dir/opt/grep/libexec" ]; then
