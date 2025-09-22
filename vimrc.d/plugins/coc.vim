@@ -1,4 +1,4 @@
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'neoclide/coc.nvim', { 'tag': 'v0.0.82' }
 
     let g:coc_config_home = "~/.vim/coc/"
     let g:coc_data_home = "~/.vimcache/coc/"
@@ -86,7 +86,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
     nnoremap <silent> K :call ShowDocumentation()<CR>
     function! ShowDocumentation()
-        if CocAction('hasProvider', 'hover')
+        if CocHasProvider('hover')
             call CocActionAsync('doHover')
         else
             call feedkeys('K', 'in')
@@ -104,7 +104,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
             let g:skip_next_hover = 0
             return
         endif
-        if !get(g:, 'coc_service_initialized', 0) || !CocAction('hasProvider', 'hover') || coc#float#has_float()
+        if !get(g:, 'coc_service_initialized', 0) || !CocHasProvider('hover') || coc#float#has_float()
             return
         endif
         call CocActionAsync('doHover')
@@ -115,7 +115,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
             let g:skip_next_hover = 0
             return
         endif
-        if !get(g:, 'coc_service_initialized', 0) || !CocAction('hasProvider', 'signature')
+        if !get(g:, 'coc_service_initialized', 0) || !CocHasProvider('signature')
             return
         endif
         call CocActionAsync('showSignatureHelp')
