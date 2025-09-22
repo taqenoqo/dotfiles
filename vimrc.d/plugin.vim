@@ -1,15 +1,15 @@
-function s:InstallPluginIfChanged()
-    let plugs = values(g:plugs)
-    if len(filter(plugs, { -> !isdirectory(v:val.dir) })) > 0
-        PlugInstall --sync
-        source $MYVIMRC
-    endif
-endfunction
+"function s:InstallPluginIfChanged()
+"    let plugs = values(g:plugs)
+"    if len(filter(plugs, { -> !isdirectory(v:val.dir) })) > 0
+"        PlugInstall --sync
+"        source $MYVIMRC
+"    endif
+"endfunction
 
-augroup plugin_loading
-    autocmd!
-    autocmd VimEnter * call s:InstallPluginIfChanged()
-augroup END
+"augroup plugin_loading
+"    autocmd!
+"    autocmd VimEnter * call s:InstallPluginIfChanged()
+"augroup END
 
 call plug#begin()
 
