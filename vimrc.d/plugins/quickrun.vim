@@ -11,9 +11,16 @@ Plug 'thinca/vim-quickrun'
         \ 'outputter': 'error',
         \ 'outputter/error/success': 'null',
         \ 'outputter/error/error': 'buffer',
-        \ 'exec': [
-            \ '%c %o %a %s'
-        \ ]
+        \ 'exec': [ '%c %o %a %s' ]
+    \ }
+    let g:quickrun_config['plantuml'] = {
+        \ 'command': 'plantuml',
+        \ 'cmdopt': '-svg -p',
+        \ 'outputter': 'error',
+        \ 'outputter/error/success': 'browser',
+        \ 'outputter/error/error': 'buffer',
+        \ 'outputter/browser/name': '%{tempname()}.svg',
+        \ 'exec': [ '%c %o %a <%s' ]
     \ }
     let s:pandoc_opt =
         \ '--from=markdown_strict' .
