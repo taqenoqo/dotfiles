@@ -45,7 +45,7 @@ Plug 'thinca/vim-quickrun'
         \ ' --mathjax="$HOME/.pandoc/dynload.js"' .
         \ ' --css="$HOME/.pandoc/style.css"' .
         \ ' --include-in-header="$HOME/.pandoc/mathjax_config.html"' .
-        \ ' --self-contained' .
+        \ ' --embed-resources' .
         \ ' --standalone' .
         \ ' --variable=pagetitle:%{expand("%:t")}'
     let s:pandoc_pre_exec = '%c %o -t json %a %s | '
