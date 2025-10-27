@@ -71,8 +71,9 @@ Plug 'editorconfig/editorconfig-vim'
   
     let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-Plug 'skanehira/translate.vim'
+Plug 'voldikss/vim-translator'
 
-    vmap <Leader>tj :Translate<CR>
-    vmap <Leader>te :Translate!<CR>
-
+    let g:translator_default_engines = ['google']
+    let g:translator_target_lang = 'ja'
+    vmap <Leader>te :TranslateR --target_lang=en<CR>
+    vmap <Leader>tj :TranslateR --target_lang=ja<CR>
