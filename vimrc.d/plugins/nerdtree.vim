@@ -1,19 +1,26 @@
 Plug 'scrooloose/nerdtree'
 
     let g:NERDTreeIgnore = ['^\.DS_Store$[[file]]', '\~$']
-    let g:NERDTreeWinSize = 30
+    let g:NERDTreeWinSize = 40
     let g:NERDTreeShowHidden = 1
     let g:NERDTreeMinimalUI = 1
     let g:NERDTreeAutoDeleteBuffer = 1
+    
+    augroup NerdtreeSettings
+        autocmd!
+        autocmd FileType nerdtree setlocal signcolumn=no
+    augroup END
 
 Plug 'rking/ag.vim'
 
 Plug 'taiansu/nerdtree-ag'
 
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'taqenoqo/nerdtree-git-plugin'
 
     let g:NERDTreeGitStatusShowIgnored = 1
     let g:NERDTreeGitStatusConcealBrackets = 1
+    let g:NERDTreeGitStatusConcealFormat = '%s '
+    let g:NERDTreeGitStatusAlignIfConceal = 1
     let g:NERDTreeGitStatusIndicatorMapCustom = {
         \ "Untracked" : "!",
         \ "Modified"  : "*",
@@ -23,7 +30,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
         \ "Unmerged"  : "!",
         \ "Deleted"   : "X",
         \ "Clean"     : "-",
-        \ 'Ignored'   : '-',
+        \ 'Ignored'   : "-",
         \ "Unknown"   : "?"
     \ } 
 
@@ -45,7 +52,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
         if !has_key(l:flags, 'git')
             return v:true
         endif
-        let l:index = index(l:flags['git'], ' - ')
+        let l:substituted = printf(g:NERDTreeGitStatusConcealFormat , g:NERDTreeGitStatusIndicatorMapCustom['Ignored'])
+        let l:index = index(l:flags['git'], l:substituted)
         return l:index != -1
     endfunction
 
