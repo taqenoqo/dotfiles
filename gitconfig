@@ -7,7 +7,9 @@
 	br = branch
 	diffw = diff --word-diff=color --minimal
 	pushf = push --force-with-lease --force-if-includes
-	delete-gone = "!git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D"
+	poi = "!git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D"
+	logp = log --date=format-local:'%Y/%m/%d %H:%M' --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%ad%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%n%C(bold red)%s%C(reset) ― %C(bold magenta)%an%n%n%C(reset)%w(0,1,1)%b%n'
+	showp = show --stat -p --date=format-local:'%Y/%m/%d %H:%M' --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%ad%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%n%C(bold red)%s%C(reset) ― %C(bold magenta)%an%n%n%C(reset)%w(0,1,1)%b%n'
 	graph0 = log --graph --date=format-local:'%Y/%m/%d %H:%M' --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%ad%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n          %C(white)%s ― %an%C(reset)'
 	graph = graph0 \
 		--glob="refs/heads/*" \

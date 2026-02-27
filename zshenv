@@ -97,6 +97,8 @@ fi
 
 if (command -v gh >/dev/null 2>&1); then
     export GLAMOUR_STYLE="light"
+    export GH_NOTIFY_MARK_READ_KEY="ctrl-r"
+    export GH_NOTIFY_RELOAD_KEY="ctrl-l"
 fi
 
 if [ -f "$HOME/.ghcup/env" ]; then
