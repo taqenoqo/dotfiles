@@ -25,3 +25,4 @@ nmap <leader>n <Action>(RenameElement)
 nnoremap gt :action GotoTypeDeclaration<CR>
 nnoremap gr :action ShowUsages<CR>
 nnoremap gi :action QuickImplementations<CR>
+nnoremap gh :action ShowHoverInfo<CR>
