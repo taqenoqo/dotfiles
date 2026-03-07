@@ -18,7 +18,7 @@ fi
 
 if (command -v brew >/dev/null 2>&1); then
     local brew_dir="$(brew --prefix)"
-    
+
     if [ -d "$brew_dir/opt/coreutils/libexec" ]; then
         local libexec="$brew_dir/opt/coreutils/libexec"
         export PATH=$libexec/gnubin:$PATH
