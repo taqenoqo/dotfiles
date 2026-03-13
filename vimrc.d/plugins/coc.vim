@@ -1,4 +1,5 @@
-Plug 'neoclide/coc.nvim', { 'branch': 'release'}
+"Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'neoclide/coc.nvim', { 'tag': 'v0.0.82' }
     let g:coc_config_home = "~/.vim/coc/"
     let g:coc_data_home = "~/.vimcache/coc/"
     let g:coc_global_extensions = [
