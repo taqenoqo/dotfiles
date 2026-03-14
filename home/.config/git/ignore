@@ -7,3 +7,4 @@ GPATH
 .env
 .envrc
 .vimrc.local
+**/.claude/settings.local.json
