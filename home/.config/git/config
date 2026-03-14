@@ -43,7 +43,7 @@
 	name = takenoko
 	email = ttaakkee@gmail.com
 [include]
-	path = .gitconfig.local
+	path = ~/.config/git/config.local
 [github]
 	user = taqenoqo
 [diff]
@@ -53,8 +53,6 @@
 	tool = vimdiff
 [difftool "vimdiff"]
 	cmd = vim -f -d -c \"wincmd l\" -c 'cd \"$GIT_PREFIX\"' \"$LOCAL\" \"$REMOTE\"
-[include]
-	path = ~/.gitconfig.local
 [pager]
 	diff = delta
 	log = delta
@@ -68,8 +66,6 @@
 	light = true
 	hunk-header-style = omit
 	file-decoration-style = box blue
-[core]
-	excludesfile = ~/.gitignore
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
