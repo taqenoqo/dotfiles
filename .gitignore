@@ -1,6 +1,3 @@
-.*
-!.gitignore
-!.gitmodules
-/vim/sessions/**
-/vim/plugged/**
+/home/.vim/sessions/**
+/home/.vim/plugged/**
 
