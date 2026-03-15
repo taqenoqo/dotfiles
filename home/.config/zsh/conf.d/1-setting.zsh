@@ -29,7 +29,7 @@ bindkey -v '^s' history-incremental-search-forward
 
 
 # ヒストリー設定
-export HISTFILE=$HOME/.zsh_history
+export HISTFILE=$XDG_STATE_HOME/zsh/history
 export HISTSIZE=1000
 export SAVEHIST=100000
 setopt EXTENDED_HISTORY # ヒストリーにコマンドの時刻も記録
