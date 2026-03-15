@@ -41,10 +41,10 @@ Plug 'thinca/vim-quickrun'
         \ '+fenced_divs' .
         \ '+bracketed_spans' .
         \ ' --to=html5' .
-        \ ' --template="$HOME/.pandoc/template.html"' .
-        \ ' --mathjax="$HOME/.pandoc/dynload.js"' .
-        \ ' --css="$HOME/.pandoc/style.css"' .
-        \ ' --include-in-header="$HOME/.pandoc/mathjax_config.html"' .
+        \ ' --template="$XDG_DATA_HOME/pandoc/template.html"' .
+        \ ' --mathjax="$XDG_DATA_HOME/pandoc/dynload.js"' .
+        \ ' --css="$XDG_DATA_HOME/pandoc/style.css"' .
+        \ ' --include-in-header="$XDG_DATA_HOME/pandoc/mathjax_config.html"' .
         \ ' --embed-resources' .
         \ ' --standalone' .
         \ ' --variable=pagetitle:%{expand("%:t")}'
