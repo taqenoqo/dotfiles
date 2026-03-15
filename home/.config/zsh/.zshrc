@@ -1,6 +1,6 @@
 () {
     local src
-    for src in $HOME/.zshrc.d/*.zsh; do
+    for src in $ZDOTDIR/conf.d/*.zsh; do
         source $src
     done
 }
@@ -24,4 +24,3 @@ if (type -p tmux >/dev/null 2>&1) && [[ $SHLVL -le 1 && ! $TERM =~ "^screen.*" ]
         tmux attach
     fi
 fi
-
