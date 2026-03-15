@@ -8,15 +8,20 @@ if [[ ! -f "$MANIFEST_PATH" ]]; then
   exit 1
 fi
 
-while IFS=$'\t' read -r type path; do
-  case "$type" in
-    link)
-      [[ -L "$path" ]] && rm "$path"
-      ;;
-    dir)
-      rmdir "$path" 2>/dev/null || true
-      ;;
-  esac
+while IFS= read -r link; do
+  if [[ -L "$link" ]]; then
+    rm "$link"
+  elif [[ -e "$link" ]]; then
+    echo "警告: $link はシンボリックリンクではないためスキップします。" >&2
+  fi
+
+  cur_dir="$(dirname "$link")"
+  while [[ "$cur_dir" != "$HOME" && "$cur_dir" != "/" ]]; do
+    if ! rmdir "$cur_dir" 2>/dev/null; then
+      break
+    fi
+    cur_dir="$(dirname "$cur_dir")"
+  done
 done < "$MANIFEST_PATH"
 
 rm "$MANIFEST_PATH"

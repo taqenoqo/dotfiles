@@ -6,24 +6,22 @@ MANIFEST_PATH="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/manifest"
 
 cd "$DIR"
 
-# 再インストール時は旧マニフェストで古いリンクを先に削除
 if [[ -f "$MANIFEST_PATH" ]]; then
   "$DIR/uninstall"
 fi
 
-stow --no-folding -t ~ home
-
 mkdir -p "$(dirname "$MANIFEST_PATH")"
+: > "$MANIFEST_PATH"
 
-{
-  find home -type f | while read -r src; do
-    link="$HOME/${src#home/}"
-    [[ -L "$link" ]] && printf "link\t%s\n" "$link"
-  done
+while IFS= read -r src; do
+  link="$HOME/${src#home/}"
 
-  # 子を先に処理できるよう深い順で記録
-  find home -mindepth 1 -type d | sort -r | while read -r dir; do
-    target="$HOME/${dir#home/}"
-    [[ -d "$target" ]] && printf "dir\t%s\n" "$target"
-  done
-} > "$MANIFEST_PATH"
+  if [[ -e "$link" && ! -L "$link" ]]; then
+    echo "エラー: $link は管理外のファイルです。手動で確認してください。" >&2
+    exit 1
+  fi
+
+  mkdir -p "$(dirname "$link")"
+  ln -sf "$DIR/$src" "$link"
+  printf "%s\n" "$link" >> "$MANIFEST_PATH"
+done < <(find home \( -type f -o -type l \))
