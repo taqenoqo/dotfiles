@@ -11,7 +11,7 @@
 "    autocmd VimEnter * call s:InstallPluginIfChanged()
 "augroup END
 
-call plug#begin()
+call plug#begin($XDG_DATA_HOME . '/vim/plugged')
 
 for s:src in split(glob(expand('<sfile>:p:h') . '/plugins/*.vim'), '\n')
     execute 'source ' . s:src
