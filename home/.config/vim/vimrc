@@ -1,0 +1,16 @@
+set encoding=utf-8
+scriptencoding utf-8
+
+" +xdg_basedir 非対応 Vim のために runtimepath を手動設定
+if stridx(&runtimepath, $XDG_CONFIG_HOME . '/vim') == -1
+    let &runtimepath = $XDG_CONFIG_HOME . '/vim,' . &runtimepath . ',' . $XDG_CONFIG_HOME . '/vim/after'
+endif
+
+for s:src in split(glob(expand('<sfile>:p:h') . '/vimrc.d/*.vim'), '\n')
+    execute 'source ' . s:src
+endfor
+
+let s:local_rc = expand('~/.vimrc.local')
+if filereadable(s:local_rc)
+    execute 'source ' . s:local_rc
+endif

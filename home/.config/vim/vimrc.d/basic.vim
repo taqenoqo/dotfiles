@@ -65,7 +65,7 @@ set signcolumn=yes
 set nrformats=bin,hex,alpha
 
 function s:SetupCacheFiles()
-    let l:cache_dir = expand('~/.vimcache')
+    let l:cache_dir = expand($XDG_CACHE_HOME . '/vim')
     let l:swap_dir = l:cache_dir . '/swap'
     let l:backup_dir = l:cache_dir . '/backup'
     let l:undo_dir = l:cache_dir . '/undo'
