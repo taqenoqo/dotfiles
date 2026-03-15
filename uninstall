@@ -1,20 +1,22 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd "$(dirname "$0")"
+MANIFEST_PATH="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/manifest"
 
-remove_empty_dirs() {
-  # 子を先に処理しないと親の rmdir が失敗するため、深い順（sort -r）で走査する
-  local dirs
-  dirs=$(find home -mindepth 1 -type d | sort -r)
+if [[ ! -f "$MANIFEST_PATH" ]]; then
+  echo "マニフェストが見つかりません: $MANIFEST_PATH" >&2
+  exit 1
+fi
 
-  while read -r dir; do
-    target="$HOME/${dir#home/}"
-    if [[ -d "$target" && -z "$(ls -A "$target")" ]]; then
-      rmdir "$target"
-    fi
-  done <<< "$dirs"
-}
+while IFS=$'\t' read -r type path; do
+  case "$type" in
+    link)
+      [[ -L "$path" ]] && rm "$path"
+      ;;
+    dir)
+      rmdir "$path" 2>/dev/null || true
+      ;;
+  esac
+done < "$MANIFEST_PATH"
 
-stow --no-folding -D -t ~ home
-remove_empty_dirs
+rm "$MANIFEST_PATH"
