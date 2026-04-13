@@ -13,6 +13,7 @@ pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
     co: pr checkout
+    cow: '!gh pr checkout "$1" && branch=$(git branch --show-current) && git switch - && git worktree add "$(git rev-parse --show-toplevel)/../$branch"'
     i: issue
     issue mine: issue list -a @me
     issue minep: "!gh issue list -a @me --json 'number,title,projectItems' --jq 'sort_by(.projectItems[0].status.name) | .[] | [.number, .title, .projectItems[0].status.name] | @tsv' | column -t -s $'\\t'"
@@ -20,7 +21,7 @@ aliases:
     reqr: search prs --state=open --draft=false --review-requested=@me
     reqm: search prs --state=open --draft=false --author=@me --review=approved
     reqt: '!gh project item-list "$GH_DEFAULT_PROJECT_NUM" --owner "$GH_DEFAULT_PROJECT_OWNER" --query "-status:completed verifier:*$GH_MY_NAME*"'
-    develop: 'issue develop "$1" -cn "issue-$1"'
+    develop: '!gh issue develop "$1" -cn "issue-$1" && git switch - && git worktree add "$(git rev-parse --show-toplevel)/../issue-$1"'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.
