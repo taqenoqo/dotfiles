@@ -1,5 +1,4 @@
-"Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'neoclide/coc.nvim', { 'tag': 'v0.0.82' }
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     let g:coc_config_home = $XDG_CONFIG_HOME . '/vim/coc/'
     let g:coc_data_home = $XDG_CACHE_HOME . '/vim/coc/'
     let g:coc_global_extensions = [
