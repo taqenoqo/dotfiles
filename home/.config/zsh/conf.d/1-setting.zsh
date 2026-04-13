@@ -29,6 +29,7 @@ bindkey -v '^s' history-incremental-search-forward
 
 
 # ヒストリー設定
+mkdir -p $XDG_STATE_HOME/zsh
 export HISTFILE=$XDG_STATE_HOME/zsh/history
 export HISTSIZE=1000
 export SAVEHIST=100000
