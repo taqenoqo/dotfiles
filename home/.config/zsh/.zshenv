@@ -68,9 +68,9 @@ if [[ -f "$HOME/.asdf/plugins/java/set-java-home.zsh" ]]; then
     . "$HOME/.asdf/plugins/java/set-java-home.zsh"
 fi
 
-if (command -v anyenv >/dev/null 2>&1); then
-    eval "$(anyenv init -)"
-fi
+#if (command -v anyenv >/dev/null 2>&1); then
+#    eval "$(anyenv init -)"
+#fi
 
 if (command -v rbenv >/dev/null 2>&1); then
     eval "$(rbenv init - zsh)"
