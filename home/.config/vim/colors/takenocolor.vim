@@ -82,7 +82,7 @@ hi PMenuSel ctermfg=15 ctermbg=68 cterm=NONE
 hi PMenuThumb ctermfg=255 ctermbg=250 cterm=NONE
 
 " ステータスラインと境界線
-hi StatusLine ctermfg=231 ctermbg=110 cterm=NONE
+hi StatusLine ctermfg=231 ctermbg=104 cterm=bold
 hi StatusLineNC ctermfg=231 ctermbg=153 cterm=NONE
 hi VertSplit ctermfg=153 ctermbg=153 cterm=NONE
 
