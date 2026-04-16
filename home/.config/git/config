@@ -36,6 +36,7 @@
 		--decorate-refs="refs/remotes/*/stage*" \
 		--decorate-refs="refs/remotes/*/support*" \
 		--decorate-refs=HEAD
+	grapha = graph0 --all
 	graphs = graph --simplify-by-decoration
 [push]
 	default = upstream
@@ -77,3 +78,5 @@
 	keepBackup = false
 [checkout]
 	guess = false
+[log]
+	date = format:%Y/%m/%d %H:%M:%S
