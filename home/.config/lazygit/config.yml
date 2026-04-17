@@ -568,10 +568,10 @@ keybinding:
     nextItem: <down>
     prevItem-alt: k
     nextItem-alt: j
-    prevPage: ','
-    nextPage: .
-    scrollLeft: H
-    scrollRight: L
+    prevPage: <c-u>
+    nextPage: <c-d>
+    scrollLeft: h
+    scrollRight: l
     gotoTop: <
     gotoBottom: '>'
     gotoTop-alt: <home>
@@ -581,8 +581,8 @@ keybinding:
     rangeSelectUp: <s-up>
     prevBlock: <left>
     nextBlock: <right>
-    prevBlock-alt: h
-    nextBlock-alt: l
+    prevBlock-alt: <c-p>
+    nextBlock-alt: <c-n>
     nextBlock-alt2: <tab>
     prevBlock-alt2: <backtab>
     jumpToBlock:
@@ -604,9 +604,9 @@ keybinding:
     confirmSuggestion: <enter>
     confirmInEditor: <a-enter>
     confirmInEditor-alt: <c-s>
-    remove: d
-    new: "n"
-    edit: e
+    remove: ""
+    new: ""
+    edit: ""
     openFile: o
     scrollUpMain: <pgup>
     scrollDownMain: <pgdown>
@@ -615,121 +615,121 @@ keybinding:
     scrollUpMain-alt2: <c-u>
     scrollDownMain-alt2: <c-d>
     executeShellCommand: ':'
-    createRebaseOptionsMenu: m
+    createRebaseOptionsMenu: ""
 
     # 'Files' appended for legacy reasons
-    pushFiles: P
+    pushFiles: ""
 
     # 'Files' appended for legacy reasons
-    pullFiles: p
+    pullFiles: <disabled>
     refresh: R
-    createPatchOptionsMenu: <c-p>
-    nextTab: ']'
-    prevTab: '['
+    createPatchOptionsMenu: ''
+    nextTab: L
+    prevTab: H
     nextScreenMode: +
     prevScreenMode: _
     cyclePagers: '|'
-    undo: z
-    redo: Z
-    filteringMenu: <c-s>
-    diffingMenu: W
-    diffingMenu-alt: <c-e>
-    copyToClipboard: <c-o>
-    openRecentRepos: <c-r>
+    undo: u
+    redo: <c-r>
+    filteringMenu: <disabled>
+    diffingMenu: <disabled>
+    diffingMenu-alt: <disabled>
+    copyToClipboard: y
+    openRecentRepos: <disabled>
     submitEditorText: <enter>
-    extrasMenu: '@'
-    toggleWhitespaceInDiffView: <c-w>
+    extrasMenu: "@"
+    toggleWhitespaceInDiffView: W
     increaseContextInDiffView: '}'
     decreaseContextInDiffView: '{'
     increaseRenameSimilarityThreshold: )
     decreaseRenameSimilarityThreshold: (
-    openDiffTool: <c-t>
+    openDiffTool: D
   status:
     checkForUpdate: u
     recentRepos: <enter>
     allBranchesLogGraph: a
     allBranchesLogGraphReverse: A
   files:
-    commitChanges: c
-    commitChangesWithoutHook: w
-    amendLastCommit: A
+    commitChanges: <disabled>
+    commitChangesWithoutHook: <disabled>
+    amendLastCommit: <disabled>
     commitChangesWithEditor: C
-    findBaseCommitForFixup: <c-f>
+    findBaseCommitForFixup: F
     confirmDiscard: x
-    ignoreFile: i
+    ignoreFile: <disabled>
     refreshFiles: r
-    stashAllChanges: s
+    stashAllChanges: <disabled>
     viewStashOptions: S
-    toggleStagedAll: a
-    viewResetOptions: D
+    toggleStagedAll: A
+    viewResetOptions: <c-r>
     fetch: f
     toggleTreeView: '`'
     openMergeOptions: M
-    openStatusFilter: <c-b>
-    copyFileInfoToClipboard: "y"
+    openStatusFilter: S
+    copyFileInfoToClipboard: y
     collapseAll: '-'
     expandAll: =
   branches:
-    createPullRequest: o
-    viewPullRequestOptions: O
-    openPullRequestInBrowser: G
-    copyPullRequestURL: <c-y>
+    createPullRequest: <disabled>
+    viewPullRequestOptions: P
+    openPullRequestInBrowser: <disabled>
+    copyPullRequestURL: y
     checkoutBranchByName: c
-    forceCheckoutBranch: F
+    forceCheckoutBranch: <disabled>
     checkoutPreviousBranch: '-'
-    rebaseBranch: r
+    rebaseBranch: <disabled>
     renameBranch: R
-    mergeIntoCurrentBranch: M
-    moveCommitsToNewBranch: "N"
-    viewGitFlowOptions: i
-    fastForward: f
-    createTag: T
-    pushTag: P
-    setUpstream: u
+    mergeIntoCurrentBranch: <disabled>
+    moveCommitsToNewBranch: <disabled>
+    viewGitFlowOptions: <disabled>
+    fastForward: <disabled>
+    createTag: <disabled>
+    pushTag: <disabled>
+    setUpstream: <disabled>
     fetchRemote: f
-    addForkRemote: F
+    addForkRemote: <disabled>
     sortOrder: s
   worktrees:
-    viewWorktreeOptions: w
+    viewWorktreeOptions: W
   commits:
-    squashDown: s
-    renameCommit: r
-    renameCommitWithEditor: R
-    viewResetOptions: g
-    markCommitAsFixup: f
-    setFixupMessage: c
-    createFixupCommit: F
-    squashAboveCommits: S
+    squashDown: <disabled>
+    renameCommit: <disabled>
+    renameCommitWithEditor: <disabled>
+    viewResetOptions: <disabled>
+    markCommitAsFixup: <disabled>
+    setFixupMessage: <disabled>
+    createFixupCommit: <disabled>
+    squashAboveCommits: <disabled>
     moveDownCommit: <c-j>
     moveUpCommit: <c-k>
-    amendToCommit: A
-    resetCommitAuthor: a
-    pickCommit: p
-    revertCommit: t
-    cherryPickCopy: C
-    pasteCommits: V
-    markCommitAsBaseForRebase: B
-    tagCommit: T
-    checkoutCommit: <space>
-    resetCherryPick: <c-R>
-    copyCommitAttributeToClipboard: "y"
-    openLogMenu: <c-l>
-    openInBrowser: o
-    openPullRequestInBrowser: G
-    viewBisectOptions: b
-    startInteractiveRebase: i
-    selectCommitsOfCurrentBranch: '*'
+    amendToCommit: <disabled>
+    resetCommitAuthor: <disabled>
+    pickCommit: <disabled>
+    revertCommit: <disabled>
+    cherryPickCopy: <disabled>
+    pasteCommits: <disabled>
+    markCommitAsBaseForRebase: <disabled>
+    tagCommit: <disabled>
+    checkoutCommit: C
+    resetCherryPick: <disabled>
+    copyCommitAttributeToClipboard: y
+    openLogMenu: M
+    openInBrowser: B
+    openPullRequestInBrowser: <disabled>
+    viewBisectOptions: B
+    startInteractiveRebase: <disabled>
+    selectCommitsOfCurrentBranch: <disabled>
   amendAttribute:
     resetAuthor: a
     setAuthor: A
     addCoAuthor: c
   stash:
-    popStash: g
+    popStash: s
     renameStash: r
   commitFiles:
     checkoutCommitFile: c
   main:
-    toggleSelectHunk: a
+    toggleSelectHunk: t
     pickBothHunks: b
     editSelectHunk: E
   submodules:
