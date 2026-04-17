@@ -117,6 +117,6 @@ export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export FPATH="$HOME/.local/completion:$FPATH"
 
-if [ -f ~/.local/.zshenv ]; then
-    source ~/.local/.zshenv
+if [ -f "$ZDOTDIR/.zshenv.local" ]; then
+    source "$ZDOTDIR/.zshenv.local"
 fi
