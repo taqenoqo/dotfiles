@@ -34,10 +34,12 @@ Plug 'yuttie/comfortable-motion.vim'
     let g:comfortable_motion_interval = 1000.0/60
     let g:comfortable_motion_scroll_down_key = "j"
     let g:comfortable_motion_scroll_up_key = "k"
-    nnoremap <silent> <C-d> :call comfortable_motion#flick(100)<CR>
-    nnoremap <silent> <C-u> :call comfortable_motion#flick(-100)<CR>
-    let g:comfortable_motion_friction = 20.0
-    let g:comfortable_motion_air_drag = 4.0
+    let g:comfortable_motion_no_default_key_mappings = 1
+    let g:comfortable_motion_friction = 550.0
+    let g:comfortable_motion_air_drag = 2.5
+
+    nnoremap <silent> <C-d> :call comfortable_motion#flick(200.0)<CR>
+    nnoremap <silent> <C-u> :call comfortable_motion#flick(-200.0)<CR>
 
 Plug 'junegunn/vim-easy-align'
 
