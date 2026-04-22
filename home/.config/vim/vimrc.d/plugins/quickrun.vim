@@ -74,5 +74,14 @@ Plug 'thinca/vim-quickrun'
         \ ]
     \ }
 
+    let g:quickrun_config['marp'] = {
+        \ 'command': 'marp',
+        \ 'cmdopt': '--preview --theme ' . shellescape(expand('$XDG_CONFIG_HOME/marp/themes/my-theme.css')),
+        \ 'outputter': 'error',
+        \ 'outputter/error/success': 'null',
+        \ 'outputter/error/error': 'buffer',
+        \ 'exec': '%c %o %s'
+    \ }
+
     nmap <leader>r <Plug>(quickrun)
 
