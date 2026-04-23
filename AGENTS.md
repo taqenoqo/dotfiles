@@ -1,26 +1,8 @@
-# CLAUDE.md
-
-このファイルは、Claude Code (claude.ai/code) がこのリポジトリで作業する際のガイダンスを提供します。
+# AGENTS.md
 
 ## 概要
 
-パーソナルな dotfiles。`home/` 以下にすべてのドットファイルを置き、`install` スクリプトで `~` にシンボリックリンクを作成する。
-
-## インストール
-
-```bash
-./install
-```
-
-`home/` 以下のファイル・シンボリックリンクをファイル単位で `~` にリンクする。
-インストール済みの場合は先に `uninstall` を実行してから再インストールする。
-作成したリンクのパスは `$XDG_STATE_HOME/dotfiles/manifest` に記録される。
-
-```bash
-./uninstall
-```
-
-マニフェストを元にリンクを削除し、空になったディレクトリを親に向かって辿って削除する。
+パーソナルな dotfiles。`home/` 以下にすべてのドットファイルを置き、`install` スクリプトで `~` にファイル単位でシンボリックリンクを作成する。作成したリンクのパスは `$XDG_STATE_HOME/dotfiles/manifest` に記録される。
 
 ## リポジトリ構成
 
@@ -30,8 +12,12 @@
   - `.config/vim/` — Vim 設定（XDG）
   - `.config/tmux/` — Tmux 設定（XDG）
   - `.config/git/` — Git 設定（XDG）
+  - `.config/gh/` — GitHub CLI 設定（XDG）
+  - `.config/lazygit/` — lazygit 設定（XDG）
+  - `.config/marp/` — Marp（Markdown スライド）テーマ設定（XDG）
   - `.local/share/pandoc/` — Pandoc の HTML テンプレートとスタイル（XDG）
   - `.asdfrc` — asdf バージョンマネージャー設定
+  - `.desktopinit` — デスクトップ環境初期化スクリプト
   - `.ghci` — GHCi（Haskell REPL）設定
   - `.gvimrc` — GVim 設定
   - `.ideavimrc` — IdeaVim（JetBrains IDE）設定
@@ -67,11 +53,6 @@
 
 ### Tmux
 - プレフィックス: `Ctrl-T`
-- Vi スタイルのキーバインド、マウス操作有効
-
-### Git
-- diff ページャー: `delta`（ライトテーマ、行番号表示、サイドバイサイド）
-- マージ/diff ツール: `vimdiff`
 
 ## Git サブモジュール
 
