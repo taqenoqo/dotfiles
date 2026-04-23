@@ -54,6 +54,10 @@
 ### Tmux
 - プレフィックス: `Ctrl-T`
 
+## コミットメッセージ
+
+日本語で書いてよい。
+
 ## Git サブモジュール
 
 `home/.config/vim/vim-plug` はサブモジュール（カスタムフォーク、`fix-branch-checkout` ブランチ）。クローン後に以下を実行:
