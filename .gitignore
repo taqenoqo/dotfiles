@@ -1,3 +1,5 @@
 /home/.vim/sessions/**
 /home/.vim/plugged/**
 
+.superpowers/
+.worktrees/
