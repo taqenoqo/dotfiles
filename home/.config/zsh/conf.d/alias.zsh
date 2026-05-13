@@ -42,3 +42,18 @@ alias stexec='stack exec'
 alias sthoogle='stack hoogle -- --color'
 alias stdoc='() { stack hoogle -- --color --info $@ | less -R }'
 
+alias copilot='copilot \
+    --add-dir "$HOME/.copilot/installed-plugins" \
+    --allow-tool="shell(mkdir)" \
+    --allow-tool="shell(echo)" \
+    --allow-tool="shell(printf)" \
+    --allow-tool="shell(test)" \
+    --allow-tool="shell(sed)" \
+    --allow-tool="shell(npm)" \
+    --allow-tool="shell(git add)" \
+    --allow-tool="shell(git commit)" \
+    --allow-tool="shell(git status)" \
+    --allow-tool="shell(git log)" \
+    --allow-tool="shell(git check-ignore)" \
+    --allow-tool="shell(git worktree)" \
+    --allow-tool="write"'
