@@ -40,6 +40,9 @@ set showcmd
 " 補完候補を表示する
 set wildmenu
 
+" ベルを鳴らさない
+set belloff=all
+
 " 折り返さない
 set nowrap
 
