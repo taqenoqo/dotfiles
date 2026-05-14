@@ -64,6 +64,9 @@ hi SpecialKey ctermfg=250 cterm=NONE
 " 桁数の限界を示すバー
 hi ColorColumn ctermfg=250 ctermbg=195
 
+" インデントライン
+hi IndentLine ctermfg=195 ctermbg=NONE
+
 " 行番号
 hi LineNr ctermfg=239 ctermbg=255 cterm=NONE
 hi SignColumn ctermfg=239 ctermbg=231 cterm=NONE
