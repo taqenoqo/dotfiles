@@ -10,15 +10,9 @@ Plug 'folti/ShowMarks'
     hi ShowMarksHLo ctermbg=231 ctermfg=250
     hi ShowMarksHLm ctermbg=228 ctermfg=208 cterm=BOLD,UNDERLINE
 
-Plug 'taqenoqo/vim-indent-guides', { 'branch': 'right-align' }
+Plug 'Yggdroot/indentLine'
 
-    let g:indent_guides_enable_on_vim_startup = 1
-    let g:indent_guides_guide_size = 1
-    let g:indent_guides_auto_colors = 0
-    let g:indent_guides_right_align = 1
-    let g:indent_guides_default_mapping = 0
-
-    hi link IndentGuidesOdd ColorColumn
-    hi link IndentGuidesEven ColorColumn
+let g:indentLine_defaultGroup = 'IndentLine'
+let g:indentLine_char = '▏'
     
 Plug 'obcat/vim-sclow'
