@@ -4,6 +4,11 @@ Plug 'dense-analysis/ale'
         \ '*': ['remove_trailing_lines', 'trim_whitespace'],
         \ 'kotlin': ['ktlint'],
         \ 'typescript': ['biome', 'prettier'],
+        \ 'typescriptreact': ['biome', 'prettier'],
+    \}
+    let g:ale_linters = {
+        \ 'typescript': ['biome'],
+        \ 'typescriptreact': ['biome'],
     \}
     let g:ale_linter_aliases = {
         \ 'bash': ['sh'],
