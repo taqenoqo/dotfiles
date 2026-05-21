@@ -55,14 +55,12 @@ if (command -v brew >/dev/null 2>&1); then
         export CPPFLAGS="-I$openjdk/include"
     fi
 
-    if [ -x "$brew_dir/bin/asdf" ]; then
-        source "$brew_dir/opt/asdf/libexec/asdf.sh"
-    fi
-
     if [ -x "$brew_dir/bin/fzf" ]; then
         export FZF_BASE="$brew_dir/opt/fzf"
     fi
 fi
+
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 if [[ -f "$HOME/.asdf/plugins/java/set-java-home.zsh" ]]; then
     . "$HOME/.asdf/plugins/java/set-java-home.zsh"
