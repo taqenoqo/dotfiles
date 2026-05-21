@@ -49,6 +49,7 @@ alias copilot='copilot \
     --allow-tool="shell(echo)" \
     --allow-tool="shell(printf)" \
     --allow-tool="shell(test)" \
+    --allow-tool="shell(find)" \
     --allow-tool="shell(sed)" \
     --allow-tool="shell(npm)" \
     --allow-tool="shell(jq)" \
