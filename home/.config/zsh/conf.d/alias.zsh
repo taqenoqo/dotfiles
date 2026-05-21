@@ -44,12 +44,14 @@ alias stdoc='() { stack hoogle -- --color --info $@ | less -R }'
 
 alias copilot='copilot \
     --add-dir "$HOME/.copilot/installed-plugins" \
+    --add-dir "/tmp" \
     --allow-tool="shell(mkdir)" \
     --allow-tool="shell(echo)" \
     --allow-tool="shell(printf)" \
     --allow-tool="shell(test)" \
     --allow-tool="shell(sed)" \
     --allow-tool="shell(npm)" \
+    --allow-tool="shell(jq)" \
     --allow-tool="shell(git add)" \
     --allow-tool="shell(git mv)" \
     --allow-tool="shell(git rm)" \
