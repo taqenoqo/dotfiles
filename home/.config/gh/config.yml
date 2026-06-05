@@ -13,7 +13,7 @@ pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
     co: pr checkout
-    cow: '!gh pr checkout "$1" && branch=$(git branch --show-current) && git switch - && git worktree add "$(git rev-parse --show-toplevel)/../$branch"'
+    cow: '!gh pr checkout "$1" && branch=$(git branch --show-current) && git switch - && git worktree add "$(git rev-parse --show-toplevel)/../$branch" "$branch"'
     i: issue
     issue mine: issue list -a @me
     issue minep: "!gh issue list -a @me --json 'number,title,projectItems' --jq 'sort_by(.projectItems[0].status.name) | .[] | [.number, .title, .projectItems[0].status.name] | @tsv' | column -t -s $'\\t'"
