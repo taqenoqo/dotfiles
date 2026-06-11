@@ -79,3 +79,4 @@ Plug 'voldikss/vim-translator'
     let g:translator_target_lang = 'ja'
     vmap <Leader>te :TranslateR --target_lang=en<CR>
     vmap <Leader>tj :TranslateR --target_lang=ja<CR>
+
