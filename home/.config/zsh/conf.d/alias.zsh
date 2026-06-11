@@ -44,6 +44,7 @@ alias stdoc='() { stack hoogle -- --color --info $@ | less -R }'
 
 alias copilot='copilot \
     --add-dir "$HOME/.copilot/installed-plugins" \
+    --add-dir "$HOME/.copilot/skills" \
     --add-dir "/tmp" \
     --allow-tool="shell(mkdir)" \
     --allow-tool="shell(echo)" \
@@ -62,6 +63,7 @@ alias copilot='copilot \
     --allow-tool="shell(git check-ignore)" \
     --allow-tool="shell(git worktree)" \
     --allow-tool="shell(git checkout)" \
+    --allow-tool="shell(git merge-base)" \
     --allow-tool="shell(node)" \
     --allow-tool="shell(python)" \
     --allow-tool="shell(python3)" \
