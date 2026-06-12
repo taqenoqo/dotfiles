@@ -53,6 +53,7 @@ alias copilot='copilot \
     --allow-tool="shell(find)" \
     --allow-tool="shell(sed)" \
     --allow-tool="shell(npm)" \
+    --allow-tool="shell(npm test)" \
     --allow-tool="shell(jq)" \
     --allow-tool="shell(git add)" \
     --allow-tool="shell(git mv)" \
