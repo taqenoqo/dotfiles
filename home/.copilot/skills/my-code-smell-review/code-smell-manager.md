@@ -35,6 +35,8 @@
 
 3. **発見した各コードの臭いのレビュー:**
 
+    ステップ2の各結果は `{WORK_DIR}/finder-{MODEL}.md` に入っているはずです。
+
     `./code-smell-reviewer.md` というテンプレートを読み込み、テンプレート内のプレースホルダを以下に置き換え、
     `{WORK_DIR}/prompt-{SUB_AGENT_NUMBER}.md` というファイルに書き出してください。
 
@@ -51,10 +53,11 @@
     + `{LINE_NUMBERS}`: コードの臭いが見つかった行番号 (例: `10-25`)
     + `{SMELL_FILE_CONTENT}`: コードの臭いの解説が書かれたファイルの内容をそのまま使用してください。ファイルは `./smells/` ディレクトリにあります。
     + `{DESCRIPTION}`: 2のレポートに書かれている説明をそのまま書いてください。
+    + `{SEVERITY_DEFINITIONS}`: `../shared/severity-definitions.md` の内容をそのまま使用してください。
 
 4. **最終レポートの作成:**
 
-    3の各結果は `{WORK_DIR}/result-{SUB_AGENT_NUMBER}.md` に入っているはずです。
+    ステップ3の各結果は `{WORK_DIR}/result-{SUB_AGENT_NUMBER}.md` に入っているはずです。
     それを元に、 `{WORK_DIR}/report.md` を作成してください。
     ここには、以下の形式で指摘事項を列挙した、最終的なレポートを書いてください。
 
