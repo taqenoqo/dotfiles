@@ -23,7 +23,7 @@
 
     `../my-architecture-research/architecture-researcher.md` というテンプレートを読み込み、テンプレート内のプレースホルダを以下に置き換え、
     それをサブエージェントへの指示として、サブエージェントを起動してください。
-    モデルは `../../shared/models.md` の **high-1** を使用してください。
+    モデルは `../shared/models.md` の **high-1** を使用してください。
     完了を待ってから次のステップに進んでください。
 
     **重要:** サブエージェントへの指示の冒頭に、以下を追加してください:
@@ -41,14 +41,14 @@
     `./architecture-review-finder.md` というテンプレートを読み込み、テンプレート内のプレースホルダを以下に置き換え、
     それをサブエージェントへの指示として、サブエージェントを起動してください。
 
-    サブエージェントは `../../shared/models.md` に定義された **high-1** と **high-2** の2種類のモデルで best effort で起動し、全ての結果を待ってください。
+    サブエージェントは `../shared/models.md` に定義された **high-1** と **high-2** の2種類のモデルで best effort で起動し、全ての結果を待ってください。
 
     **プレースホルダの置き換え:**
 
     * `{BASE_SHA}`: Base コミットハッシュをそのまま使用してください。
     * `{HEAD_SHA}`: Head コミットハッシュをそのまま使用してください。
     * `{WORK_DIR}`: WORK_DIR をそのまま使用してください。
-    * `{MODEL}`: モデルの種類（`../../shared/models.md` から読み取った high-1 または high-2 の値）。
+    * `{MODEL}`: モデルの種類（`../shared/models.md` から読み取った high-1 または high-2 の値）。
 
 4. **発見した各アーキテクチャ問題のレビュー:**
 
@@ -58,7 +58,7 @@
     `{WORK_DIR}/prompt-{SUB_AGENT_NUMBER}.md` というファイルに書き出してください。
 
     それをサブエージェントへの指示として、サブエージェントを起動してください。
-    モデルは `../../shared/models.md` の **standard** を使用してください。
+    モデルは `../shared/models.md` の **standard** を使用してください。
     全ての発見について、発見ごとにサブエージェントを並列起動してください。
 
     **プレースホルダの置き換え:**
@@ -100,4 +100,4 @@
 
 6. **レポートの検証:**
 
-    `../../shared/report-verification.md` の手順に従い、`{WORK_DIR}/report.md` 内のリンクと専門用語を検証・修正してください。
+    `../shared/report-verification.md` の手順に従い、`{WORK_DIR}/report.md` 内のリンクと専門用語を検証・修正してください。
