@@ -65,6 +65,7 @@ alias copilot='copilot \
     --allow-tool="shell(git worktree)" \
     --allow-tool="shell(git checkout)" \
     --allow-tool="shell(git merge-base)" \
+    --allow-tool="shell(git ls-tree)" \
     --allow-tool="shell(node)" \
     --allow-tool="shell(python)" \
     --allow-tool="shell(python3)" \
