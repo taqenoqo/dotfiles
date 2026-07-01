@@ -21,4 +21,13 @@ Plug 'taqenoqo/vim-indent-guides', { 'branch': 'right-align' }
     hi link IndentGuidesOdd ColorColumn
     hi link IndentGuidesEven ColorColumn
     
-Plug 'obcat/vim-sclow'
+Plug 'AndrewRadev/popup_scrollbar.vim'
+
+    let g:popup_scrollbar_auto = 1
+    let g:popup_scrollbar_shape = {
+        \ 'head': '█',
+        \ 'body': '█',
+        \ 'tail': '█',
+        \ }
+    let g:popup_scrollbar_highlight = 'PopupScrollbar'
+    highlight default PopupScrollbar ctermfg=111 ctermbg=NONE cterm=NONE
