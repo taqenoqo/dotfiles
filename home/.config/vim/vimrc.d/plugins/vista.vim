@@ -51,7 +51,7 @@ Plug 'liuchengxu/vista.vim'
     augroup VistaAutoStart
         autocmd!
         autocmd StdinReadPre * let s:exists_std_in = 1
-        autocmd VimEnter * call s:vista_auto_start()
+        autocmd User CocNvimInit call s:vista_auto_start()
     augroup END
 
     function! s:vista_auto_start()
@@ -59,4 +59,3 @@ Plug 'liuchengxu/vista.vim'
             Vista coc
         endif
     endfunction
-
