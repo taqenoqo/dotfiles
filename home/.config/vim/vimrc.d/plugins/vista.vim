@@ -50,12 +50,6 @@ Plug 'liuchengxu/vista.vim'
 
     augroup VistaAutoStart
         autocmd!
-        autocmd StdinReadPre * let s:exists_std_in = 1
-        autocmd User CocNvimInit call s:vista_auto_start()
+        autocmd User CocNvimInit Vista coc
+        autocmd TabEnter * Vista coc
     augroup END
-
-    function! s:vista_auto_start()
-        if argc() == 0 && !exists("s:exists_std_in")
-            Vista coc
-        endif
-    endfunction
