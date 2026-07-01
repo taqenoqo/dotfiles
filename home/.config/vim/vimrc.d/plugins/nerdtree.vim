@@ -67,9 +67,67 @@ Plug 'jistr/vim-nerdtree-tabs'
         endif
     endfunction
 
+    let s:closing_sidebar_tab = 0
+
+    function! s:is_sidebar_tab()
+        let l:sidebar_filetypes = ['nerdtree', 'vista', 'vista_kind']
+        let l:has_nerdtree = 0
+
+        for l:bufnr in tabpagebuflist()
+            let l:filetype = getbufvar(l:bufnr, '&filetype')
+            if l:filetype ==# 'nerdtree'
+                let l:has_nerdtree = 1
+            endif
+            if index(l:sidebar_filetypes, l:filetype) == -1
+                return 0
+            endif
+        endfor
+
+        return l:has_nerdtree
+    endfunction
+
+    function! s:close_sidebar_tab()
+        if tabpagenr('$') <= 1
+            return
+        endif
+
+        if !s:is_sidebar_tab()
+            return
+        endif
+
+        let s:closing_sidebar_tab = 1
+        try
+            tabclose
+        finally
+            let s:closing_sidebar_tab = 0
+        endtry
+    endfunction
+
+    function! s:request_sidebar_tab_close()
+        if s:closing_sidebar_tab
+            return
+        endif
+
+        let t:sidebar_tab_close_requested = 1
+    endfunction
+
+    function! s:close_requested_sidebar_tab()
+        if !get(t:, 'sidebar_tab_close_requested', 0)
+            return
+        endif
+
+        unlet t:sidebar_tab_close_requested
+        call s:close_sidebar_tab()
+    endfunction
+
     augroup NerdtreeAutoStart
         autocmd!
         autocmd StdinReadPre * let s:exists_std_in = 1
         autocmd VimEnter * call s:nerdtree_auto_start()
     augroup END
 
+    augroup NerdtreeSidebarOnlyTabClose
+        autocmd!
+        autocmd WinClosed * call s:request_sidebar_tab_close()
+        autocmd SafeState * call s:close_requested_sidebar_tab()
+    augroup END
