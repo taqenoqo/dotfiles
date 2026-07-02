@@ -1,7 +1,7 @@
 Plug 'scrooloose/nerdtree'
 
     let g:NERDTreeIgnore = ['^\.DS_Store$[[file]]', '\~$']
-    let g:NERDTreeWinSize = 40
+    let g:NERDTreeWinSize = 35
     let g:NERDTreeShowHidden = 1
     let g:NERDTreeMinimalUI = 1
     let g:NERDTreeAutoDeleteBuffer = 1
