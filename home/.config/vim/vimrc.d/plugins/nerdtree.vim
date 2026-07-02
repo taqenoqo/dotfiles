@@ -70,34 +70,32 @@ Plug 'jistr/vim-nerdtree-tabs'
     let s:closing_sidebar_tab = 0
 
     function! s:is_sidebar_tab()
-        let l:sidebar_filetypes = ['nerdtree', 'vista', 'vista_kind']
-        let l:has_nerdtree = 0
+        let l:sidebar_filetypes = ['nerdtree', 'vista', 'vista_kind', 'copilot_chat']
+        let l:has_sidebar = 0
 
         for l:bufnr in tabpagebuflist()
             let l:filetype = getbufvar(l:bufnr, '&filetype')
-            if l:filetype ==# 'nerdtree'
-                let l:has_nerdtree = 1
-            endif
             if index(l:sidebar_filetypes, l:filetype) == -1
                 return 0
             endif
+            let l:has_sidebar = 1
         endfor
 
-        return l:has_nerdtree
+        return l:has_sidebar
     endfunction
 
     function! s:close_sidebar_tab()
-        if tabpagenr('$') <= 1
-            return
-        endif
-
         if !s:is_sidebar_tab()
             return
         endif
 
         let s:closing_sidebar_tab = 1
         try
-            tabclose
+            if tabpagenr('$') <= 1
+                qall
+            else
+                tabclose
+            endif
         finally
             let s:closing_sidebar_tab = 0
         endtry
