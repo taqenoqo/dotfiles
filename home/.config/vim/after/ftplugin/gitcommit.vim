@@ -1,5 +1,21 @@
 setlocal spell
 
+function! s:recent_commit_subjects() abort
+  let l:subjects = systemlist([
+        \ 'git',
+        \ '--no-pager',
+        \ 'log',
+        \ '--no-merges',
+        \ '--format=%s',
+        \ '--max-count=20',
+        \ ])
+  if v:shell_error != 0
+    return []
+  endif
+
+  return filter(l:subjects, '!empty(v:val)')
+endfunction
+
 function! s:ask_commit_message() abort
   let l:diff_lines = systemlist([
         \ 'git',
@@ -19,8 +35,18 @@ function! s:ask_commit_message() abort
     return
   endif
 
-  let l:message = "以下の staged diff に対するコミット件名を英語で 1 行だけ書いてください。\n"
-        \ .. "候補や説明は不要です。\n\n"
+  let l:recent_subjects = s:recent_commit_subjects()
+  let l:message = "以下の staged diff に対するコミット件名を 1 行だけ書いてください。\n"
+        \ .. "候補や説明は不要です。\n"
+        \ .. "最近のコミット件名があれば、言語・語調・粒度・表記の雰囲気を合わせてください。\n\n"
+
+  if !empty(l:recent_subjects)
+    let l:message ..= "最近のコミット件名:\n"
+          \ .. join(map(copy(l:recent_subjects), '"- " .. v:val'), "\n")
+          \ .. "\n\n"
+  endif
+
+  let l:message ..= "staged diff:\n"
         \ .. join(l:diff_lines, "\n")
 
   call copilot_chat#OpenChat()
