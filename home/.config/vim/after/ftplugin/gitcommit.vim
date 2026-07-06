@@ -5,6 +5,7 @@ function! s:recent_commit_subjects() abort
         \ 'git',
         \ '--no-pager',
         \ 'log',
+        \ '--first-parent',
         \ '--no-merges',
         \ '--format=%s',
         \ '--max-count=20',
