@@ -1,10 +1,18 @@
 {
   "version": 1,
   "hooks": {
+    "agentStop": [
+      {
+        "type": "command",
+        "bash": "osascript -e 'display notification \"Copilot が応答しました🐙\" with title \"Copilot\" sound name \"Purr\"'",
+        "timeoutSec": 10
+      }
+    ],
     "notification": [
       {
         "type": "command",
-        "bash": "osascript -e 'display notification \"Copilot が処理を完了しました🐙\" with title \"Copilot\" sound name \"Purr\"'",
+        "matcher": "permission_prompt|elicitation_dialog",
+        "bash": "osascript -e 'display notification \"Copilot が入力待ちです🐙\" with title \"Copilot\" sound name \"Purr\"'",
         "timeoutSec": 10
       }
     ]
