@@ -1,4 +1,0 @@
-copilot-cli:
-  low: gpt-5-mini
-  medium: gpt-5.4
-  high: claude-opus-4.6
