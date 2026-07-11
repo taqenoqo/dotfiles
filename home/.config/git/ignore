@@ -8,3 +8,4 @@ GPATH
 .envrc
 .vimrc.local
 **/.claude/settings.local.json
+*.err
