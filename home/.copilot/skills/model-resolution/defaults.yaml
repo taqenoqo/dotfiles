@@ -2,3 +2,7 @@ copilot-cli:
   low: gpt-5.4-mini
   medium: gpt-5.4
   high: gpt-5.4
+claude-code:
+  low: sonnet
+  medium: opus
+  high: fable
