@@ -8,6 +8,6 @@
 
 ## ルール
 
-- マニフェスト類(package.json、Makefile、*.yml 等)は class=source なので本文を読んでよい。lockfile(class=generated)は読まない。
+- マニフェスト類 (package.json、Makefile、*.yml 等) は台帳に載っていれば本文を読んでよい。lockfile は台帳に載っていないので読まない。
 - コマンドは実行して確かめない。定義ファイルに書かれている事実だけを書く。
 - 「動くかどうか不明」なものはその旨を添えるか「未確定・質問」に送る。
