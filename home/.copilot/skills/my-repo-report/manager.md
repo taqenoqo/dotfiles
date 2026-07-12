@@ -19,11 +19,10 @@
     必ず `/tmp` のようなテンポラリディレクトリの下に WORK_DIR を作成してください。
     作成できない場合は直ちに処理を中止してください。
 
-2. **ファイル台帳・変更頻度の生成:**
+2. **ファイル台帳の生成:**
 
     ``` sh
     cd "{REPO_ROOT}" && bash "{SKILL_DIR}/scripts/inventory.sh" > "$WORK_DIR/inventory.tsv"
-    cd "{REPO_ROOT}" && bash "{SKILL_DIR}/scripts/churn.sh" > "$WORK_DIR/churn.tsv"
     ```
 
     台帳には lockfile やバイナリや巨大ファイルを取り除いたファイルがリストされています。
@@ -38,6 +37,7 @@
     * **プレースホルダ:**
 
         + `FILE_LIST`: チャンクに含まれるファイルパスの一覧 (1 行 1 パス)
+        + `REPO_ROOT`: {REPO_ROOT} をそのまま使用してください
         + `WORK_DIR`: WORK_DIR をそのまま使用してください
         + `CHUNK_ID`: `001` からの連番
 
@@ -47,10 +47,11 @@
     mkdir -p "$WORK_DIR/agg"
     cat "$WORK_DIR"/defs/*.tsv > "$WORK_DIR/agg/defs.tsv"
     cat "$WORK_DIR"/deps/*.tsv > "$WORK_DIR/agg/deps.tsv"
-    bash "{SKILL_DIR}/scripts/metrics.sh" "$WORK_DIR" > "$WORK_DIR/agg/metrics.md"
+    ruby "{SKILL_DIR}/scripts/metrics.rb" "$WORK_DIR/agg/defs.tsv" > "$WORK_DIR/agg/metrics.md"
     ```
 
     レポートに載せる数値はすべてこの集計由来とし、自分でもサブエージェントにも数え直させないでください。
+    定義や依存が 1 件もないリポジトリでは defs/ deps/ に TSV が存在せず cat が失敗しますが、空の agg ファイルができていればそのまま続行してください。
 
 5. **セクション執筆エージェントの起動 (モデル: `{MEDIUM_MODEL}`):**
 
@@ -58,6 +59,7 @@
 
     * **プレースホルダ:**
 
+        + `REPO_ROOT`: {REPO_ROOT} をそのまま使用してください
         + `WORK_DIR`: WORK_DIR をそのまま使用してください
         + `SECTION_NAME`: sections/ のファイル名から拡張子を除いたもの (例: `structure`)
         + `SECTION_SPEC`: 対応する `sections/*.md` の内容をそのまま埋め込んでください
@@ -68,7 +70,7 @@
     `$WORK_DIR/section-*.md` を `report-format.md` の契約どおりに統合し、`{REPO_ROOT}/.repo-report/gen.md` を書いてください。
 
     - セクション 1 (概要) はセクション執筆結果と台帳を踏まえてあなたが書く
-    - セクション 8 (規模メトリクス・ホットスポット) は、見出しの下に `$WORK_DIR/agg/metrics.md` を無編集で挿入する (執筆エージェントはいない)
+    - セクション 8 (規模メトリクス) は、見出しの下に `$WORK_DIR/agg/metrics.md` を無編集で挿入する (執筆エージェントはいない)
     - 各セクションの「未確定・質問」はセクション 9「人間への質問」に集約する
     - frontmatter に `generated_at: {HEAD_SHA}` と日付を書く
 

@@ -1,15 +1,16 @@
 # セクション執筆エージェント
 
 あなたは、リポジトリレポート生成のために起動されたサブエージェントです。
-あなたはメインの対話 agent ではありませんので、`using-superpowers` などのスキル実行は不要です。
+あなたはメインの対話 agent ではないため、他のスキルは一切起動しないでください。
 
 ## 入力
 
+- **対象リポジトリ:** `{REPO_ROOT}`(台帳・定義一覧・依存一覧のパスはここからの相対。ファイルを読むときはこのルートを基準にする)
 - **ファイル台帳:** `{WORK_DIR}/inventory.tsv`(列: path, lines)
 - **要約:** `{WORK_DIR}/extract/*.md`(台帳の全ファイルの 1 行要約)
 - **定義一覧:** `{WORK_DIR}/agg/defs.tsv`(列: path, kind, name, parent, visibility, exported, start, end, signature)
 - **依存一覧:** `{WORK_DIR}/agg/deps.tsv`(列: src, dep, scope)
-- **集計サマリ:** `{WORK_DIR}/agg/metrics.md`(規模・ホットスポット)
+- **集計サマリ:** `{WORK_DIR}/agg/metrics.md`(規模)
 - **人間による注記:**
 
 {NOTES}
