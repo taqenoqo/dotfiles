@@ -62,13 +62,6 @@ git_raw() {
     git -c core.quotepath=false "$@"
 }
 
-# git のバイナリ判定に委ねる。空ツリーとの diff で追加行数が "-" ならバイナリ。
-is_binary() {
-    local path=$1
-    [[ "$(git_raw diff --numstat "$EMPTY_TREE" -- "$path" | cut -f1)" == - ]] && return 0
-    return 1
-}
-
 # パスが除外対象ディレクトリのいずれかの配下にあるか。
 is_in_generated_dir() {
     local path=$1 dir
@@ -88,29 +81,24 @@ is_generated() {
 }
 
 # 下流エージェントが本文を読んでよいファイル(source)かを判定する。
-# vendored・生成物・バイナリ・巨大ファイルはいずれも除外する。
+# vendored・生成物・巨大ファイルはいずれも除外する(バイナリは呼び出し側で除外済み)。
 is_source() {
-    local path=$1 bytes=$2
-
+    local path=$1
     is_in_generated_dir "$path" && return 1
     is_generated "${path##*/}" && return 1
-
-    # バイナリは内容で、巨大ファイルはサイズで弾く
-    is_binary "$path" && return 1
-    [[ "$bytes" -gt "$SIZE_LIMIT" ]] && return 1
+    [[ "$(wc -c < "$path" | tr -d ' ')" -gt "$SIZE_LIMIT" ]] && return 1
     return 0
 }
 
 printf '# path\tlines\n'
 
-git_raw ls-files | while IFS= read -r path; do
+# 空ツリーとの numstat 1 回で、全 tracked ファイルの行数とバイナリ判定(行数が "-")を
+# まとめて得る。ファイルごとに git を起動すると大規模リポジトリで遅いため。
+git_raw diff --numstat "$EMPTY_TREE" | while IFS=$'\t' read -r lines _ path; do
     # サブモジュール・シンボリックリンク・レポート自身は台帳の対象外
     [[ ! -f "$path" || -L "$path" ]] && continue
     [[ "$path" == .repo-report/* ]] && continue
-
-    bytes=$(wc -c < "$path" | tr -d ' ')
-    is_source "$path" "$bytes" || continue
-
-    lines=$(wc -l < "$path" | tr -d ' ')
+    [[ "$lines" == - ]] && continue
+    is_source "$path" || continue
     printf '%s\t%s\n' "$path" "$lines"
 done

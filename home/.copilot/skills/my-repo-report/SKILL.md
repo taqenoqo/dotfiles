@@ -34,11 +34,11 @@ description: リポジトリのレポート (ディレクトリ責務・依存�
 
     * **プレースホルダ:**
 
-        + `{SKILL_DIR}`: このスキルのディレクトリの絶対パス
-        + `{REPO_ROOT}`: 手順 1 の REPO_ROOT
-        + `{HEAD_SHA}`: 手順 1 の HEAD_SHA
-        + `{LOW_MODEL}`: 手順 2 で解決した low のモデル名
-        + `{MEDIUM_MODEL}`: 手順 2 で解決した medium のモデル名
+        + `SKILL_DIR`: このスキルのディレクトリの絶対パス
+        + `REPO_ROOT`: 手順 1 の REPO_ROOT
+        + `HEAD_SHA`: 手順 1 の HEAD_SHA
+        + `LOW_MODEL`: 手順 2 で解決した low のモデル名
+        + `MEDIUM_MODEL`: 手順 2 で解決した medium のモデル名
 
 4. **結果の提示:**
 
