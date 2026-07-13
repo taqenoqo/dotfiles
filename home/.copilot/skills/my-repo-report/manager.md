@@ -31,7 +31,7 @@
 
 3. **構文抽出エージェントの起動 (モデル: `{LOW_MODEL}`):**
 
-    `$WORK_DIR/extract` `$WORK_DIR/defs` `$WORK_DIR/deps` の 3 ディレクトリを作成してください。
+    `$WORK_DIR/extract` `$WORK_DIR/defs` `$WORK_DIR/deps` `$WORK_DIR/outline` の 4 ディレクトリを作成してください。
     台帳の各行を、lines の合計が約 3,000 行になるまとまり (チャンク) に分けてください。
     チャンクごとに `{SKILL_DIR}/extractor.md` テンプレートのプレースホルダを埋め、サブエージェントを並列起動し、全サブエージェントの完了を待ってください。
 
@@ -48,11 +48,11 @@
     mkdir -p "$WORK_DIR/agg"
     cat "$WORK_DIR"/defs/*.tsv > "$WORK_DIR/agg/defs.tsv"
     cat "$WORK_DIR"/deps/*.tsv > "$WORK_DIR/agg/deps.tsv"
-    ruby "{SKILL_DIR}/scripts/metrics.rb" "$WORK_DIR/agg/defs.tsv" > "$WORK_DIR/agg/metrics.md"
+    cat "$WORK_DIR"/outline/*.md > "$WORK_DIR/agg/outline.md"
     ```
 
     レポートに載せる数値はすべてこの集計由来とし、自分でもサブエージェントにも数え直させないでください。
-    定義や依存が 1 件もないリポジトリでは defs/ deps/ に TSV が存在せず cat が失敗しますが、空の agg ファイルができていればそのまま続行してください。
+    定義や依存が 1 件もないリポジトリでは defs/ deps/ outline/ にファイルが存在せず cat が失敗しますが、空の agg ファイルができていればそのまま続行してください。
 
 5. **セクション執筆エージェントの起動 (モデル: `{MEDIUM_MODEL}`):**
 
@@ -71,7 +71,7 @@
     `$WORK_DIR/section-*.md` を `report-format.md` の契約どおりに統合し、`{REPO_ROOT}/.repo-report/gen.md` を書いてください。
 
     - セクション 1 (概要) はセクション執筆結果と台帳を踏まえてあなたが書く
-    - セクション 8 (規模メトリクス) は、見出しの下に `$WORK_DIR/agg/metrics.md` を無編集で挿入する (執筆エージェントはいない)
+    - セクション 8 (アウトライン) は、見出しの下に `$WORK_DIR/agg/outline.md` を無編集で挿入する (執筆エージェントはいない)
     - 各セクションの「未確定・質問」はセクション 9「人間への質問」に集約する
     - frontmatter に `generated_at: {HEAD_SHA}` と日付を書く
 
