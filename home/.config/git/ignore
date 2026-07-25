@@ -8,4 +8,5 @@ GPATH
 .envrc
 .vimrc.local
 **/.claude/settings.local.json
+**/.claude/.cc-writes/
 *.err
