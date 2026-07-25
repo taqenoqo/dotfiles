@@ -25,9 +25,14 @@ Plug 'tpope/vim-fugitive'
         call GitDiffFromMergeBase(l:input)
     endfunction
 
+    " rev が空なら Gvdiffsplit は引数なしと同じくインデックスと比較する
+    function! GitDiffFromReviewRef()
+        execute 'Gvdiffsplit ' . get(g:, 'NERDTreeGitStatusDiffRef', '')
+    endfunction
+
     nmap <Leader>gc :Git commit<CR>
     nmap <Leader>gs :Git<CR>
-    nmap <Leader>gd :Gvdiffsplit<CR>
+    nmap <Leader>gd :call GitDiffFromReviewRef()<CR>
     nmap <Leader>gD :call GitDiffFromInput()<CR>
     nmap <Leader>gM :call GitDiffFromMergeBaseInput()<CR>
     nmap <Leader>gl :GlLog<CR>
