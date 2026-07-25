@@ -59,6 +59,20 @@ Plug 'taqenoqo/nerdtree-git-plugin'
 
     autocmd! VimEnter * call NERDTreeAddPathFilter('MyFilter')
 
+    function! NERDTreeSetDiffRef()
+        let l:ref = input('Input rev to review: ')
+        execute 'NERDTreeGitStatusDiffRef ' . l:ref
+    endfunction
+
+    augroup NerdtreeGitDiffRef
+        autocmd!
+        autocmd VimEnter * call NERDTreeAddKeyMap({
+            \ 'key': 'gr',
+            \ 'scope': 'all',
+            \ 'callback': 'NERDTreeSetDiffRef',
+            \ 'quickhelpText': 'Set review base rev' })
+    augroup END
+
 Plug 'jistr/vim-nerdtree-tabs'
 
     function! s:nerdtree_auto_start()
