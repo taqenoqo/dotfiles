@@ -59,47 +59,6 @@ Plug 'taqenoqo/nerdtree-git-plugin'
 
     autocmd! VimEnter * call NERDTreeAddPathFilter('MyFilter')
 
-    " coc-git は 'git show <rev>:<path>' でファイルを取るため単一コミットしか解釈できない。
-    " 渡す先ごとに基準がずれないよう、入力をここで 1 つのコミットに解決しておく。
-    function! s:ResolveReviewBase(rev)
-        if a:rev =~# '\.\.\.'
-            let l:sides = map(split(a:rev, '\.\.\.', 1), 'empty(v:val) ? "HEAD" : v:val')
-            let l:cmd = 'git merge-base ' . shellescape(l:sides[0]) . ' ' . shellescape(l:sides[1])
-        else
-            let l:cmd = 'git rev-parse --verify ' . shellescape(a:rev)
-        endif
-
-        let l:resolved = systemlist(l:cmd)
-        if v:shell_error != 0 || empty(l:resolved)
-            echoerr 'Failed to resolve revision: ' . a:rev
-            return ''
-        endif
-        return l:resolved[0]
-    endfunction
-
-    function! NERDTreeSetDiffRef()
-        let l:rev = input('Input rev to review: ')
-        if !empty(l:rev)
-            let l:rev = s:ResolveReviewBase(l:rev)
-            if empty(l:rev)
-                return
-            endif
-        endif
-
-        execute 'NERDTreeGitStatusDiffRef ' . l:rev
-        call coc#config('git.diffRevision', l:rev)
-        silent! CocCommand git.refresh
-    endfunction
-
-    augroup NerdtreeGitDiffRef
-        autocmd!
-        autocmd VimEnter * call NERDTreeAddKeyMap({
-            \ 'key': 'gr',
-            \ 'scope': 'all',
-            \ 'callback': 'NERDTreeSetDiffRef',
-            \ 'quickhelpText': 'Set review base rev' })
-    augroup END
-
 Plug 'jistr/vim-nerdtree-tabs'
 
     function! s:nerdtree_auto_start()

@@ -53,7 +53,7 @@
 
 #### git レビューモード
 
-NERDTree 上で `gr` を押すと比較先の revision を尋ね、以下 3 つが同じ基準に切り替わる。
+`<Leader>gr` を押すと比較先の revision を尋ね、以下 3 つが同じ基準に切り替わる。
 空入力で通常表示（ワークツリー基準）に戻る。
 
 - NERDTree のファイルマーカー（`g:NERDTreeGitStatusDiffRef`）
@@ -63,6 +63,9 @@ NERDTree 上で `gr` を押すと比較先の revision を尋ね、以下 3 つ�
 入力は `s:ResolveReviewBase()` で 1 つのコミットに解決してから 3 箇所へ配る。三点記法は
 merge-base に、それ以外は `git rev-parse --verify` で解決する。渡す先ごとに revision の
 解釈が違い、そのまま配ると基準がずれるため（詳細は調査記録）。
+
+実装は `vimrc.d/plugins/git.vim` に置く。切り替え先が NERDTree に限らないため、
+`nerdtree.vim` 側には `g:NERDTreeGitStatus*` の設定だけを残している。
 
 `g:NERDTreeGitStatusDiffRef` は `taqenoqo/nerdtree-git-plugin` フォークで追加したオプション。
 このフォークは dotfiles の管理外（`$XDG_DATA_HOME/vim/plugged/`）にあるため、`PlugUpdate`
