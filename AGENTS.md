@@ -51,6 +51,23 @@
 - 設定はモジュール構成: `.config/vim/vimrc` が `.config/vim/vimrc.d/` 以下のファイルを source する
 - undo/swap/backup ファイルは `$XDG_CACHE_HOME/vim` に保存
 
+#### git レビューモード
+
+NERDTree 上で `gr` を押すと比較先の revision を尋ね、以下 3 つが同じ基準に切り替わる。
+空入力で通常表示（ワークツリー基準）に戻る。
+
+- NERDTree のファイルマーカー（`g:NERDTreeGitStatusDiffRef`）
+- `<Leader>gd` の差分先（`GitDiffFromReviewRef()`）
+- 行番号横の gutter（coc-git の `git.diffRevision`）
+
+入力は `s:ResolveReviewBase()` で 1 つのコミットに解決してから 3 箇所へ配る。三点記法は
+merge-base に、それ以外は `git rev-parse --verify` で解決する。渡す先ごとに revision の
+解釈が違い、そのまま配ると基準がずれるため（詳細は調査記録）。
+
+`g:NERDTreeGitStatusDiffRef` は `taqenoqo/nerdtree-git-plugin` フォークで追加したオプション。
+このフォークは dotfiles の管理外（`$XDG_DATA_HOME/vim/plugged/`）にあるため、`PlugUpdate`
+や再クローンで変更が失われる。フォークの master に取り込んでおくこと。
+
 ### Tmux
 - プレフィックス: `Ctrl-T`
 
@@ -71,6 +88,12 @@
 - low モデル (Haiku 4.5 で実測) が出力する定義の行番号は、Read ツールの行番号付き表示の転記なのでほぼ完璧 (2,863 行・128 関数のファイルで start / end ほぼ全一致)。行番号の精度を理由に決定的スクリプトを足す必要はない。
 - ただし low モデルの `end − start + 1` の算術は 1〜5% で off-by-one する。±1 が許容できない数値は LLM に計算させないこと。
 - 「〜は省略してよい」という許可の一文は、low モデルには「全項目で省略する」として作用する (アウトラインの説明の記入率が 100% → 0% に落ちた)。必須の出力は「全項目に書く」と書くこと。
+- `home/.config/vim/vimrc.d/plugins/nerdtree.vim` の `MyFilter` は gitignore 対象を隠すフィルタであって、変更のないファイルを隠すものではない。通常表示でも全ファイルが並ぶ。
+- coc-git は `git show <rev>:<path>` でファイルを取るため、`git.diffRevision` には単一コミットしか渡せない。`origin/main...` のような三点記法はエラーになるうえ握り潰され、gutter が古い基準のまま黙って残る。
+- fugitive の `Gvdiffsplit` は逆に三点記法を merge-base へ解決する。同じ文字列でも coc-git と解釈が食い違うので、revision は配る前に解決しておくこと。
+- fugitive の `Gvdiffsplit` は解決できない revision をエラーにせず、ファイルパスとして開く。タイポが静かに空バッファになる。
+- nerdtree-git-plugin の job コールバックは spawn 時点の revision でパースしなければならない。実行中に `g:NERDTreeGitStatusDiffRef` が変わると `git diff` の出力を porcelain パーサに渡して例外になる。job の opts に revision を持たせて照合している。
+- Vim は `-c` を VimEnter より後に実行する。`NERDTreeAddPathFilter` など VimEnter で登録される設定をヘッドレス検証するときは、`-c 'autocmd VimEnter * ...'` 経由にしないと空振りする。
 
 ## コミットメッセージ
 
