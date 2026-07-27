@@ -68,12 +68,22 @@ Plug 'taqenoqo/nerdtree-git-plugin'
         return has_key(s:ignored_paths, a:params['path'].str())
     endfunction
 
+    function! NERDTreeRefreshRootWithIgnored()
+        call s:RefreshIgnoredPaths(b:NERDTree.root.path.str())
+        NERDTreeRefreshRoot
+    endfunction
+
     autocmd! VimEnter * call NERDTreeAddPathFilter('MyFilter')
 
     augroup NerdtreeIgnoredPaths
         autocmd!
         autocmd User NERDTreeInit,NERDTreeNewRoot
                     \ call s:RefreshIgnoredPaths(b:NERDTree.root.path.str())
+        autocmd VimEnter * call NERDTreeAddKeyMap({
+            \ 'key': g:NERDTreeMapRefreshRoot,
+            \ 'scope': 'all',
+            \ 'callback': 'NERDTreeRefreshRootWithIgnored',
+            \ 'override': 1 })
     augroup END
 
 Plug 'jistr/vim-nerdtree-tabs'
