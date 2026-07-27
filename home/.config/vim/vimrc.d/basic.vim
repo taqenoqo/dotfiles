@@ -183,6 +183,25 @@ endfunction
 
 nnoremap <Leader>h :call ShowHighlightGroup()<CR>
 
+" AI エージェントは cwd をリポジトリルートに置くので、そこからの相対パスで渡す。
+function! s:AIRefPath()
+    let l:path = expand('%:p')
+    let l:root = systemlist('git -C ' . shellescape(expand('%:p:h')) . ' rev-parse --show-toplevel')
+    if v:shell_error != 0 || stridx(l:path, l:root[0] . '/') != 0
+        return l:path
+    endif
+    return l:path[len(l:root[0]) + 1:]
+endfunction
+
+function! YankAIRef() range
+    let l:lines = a:firstline == a:lastline ? a:firstline : a:firstline . '-' . a:lastline
+    let @+ = s:AIRefPath() . ':' . l:lines
+    echo 'Yanked: ' . @+
+endfunction
+
+nnoremap <Leader>y :call YankAIRef()<CR>
+xnoremap <Leader>y :call YankAIRef()<CR>
+
 filetype plugin indent on
 
 silent! source ~/.vimrc.local
