@@ -47,17 +47,44 @@ Plug 'taqenoqo/nerdtree-git-plugin'
     hi NERDTreeGitStatusIgnored ctermfg=249
     hi NERDTreeGitStatusUnknown ctermfg=249
 
-    function! MyFilter(params)
-        let l:flags = a:params['path'].flagSet._flags
-        if !has_key(l:flags, 'git')
-            return v:true
+    " 隠す対象は比較先の revision によらない。マーカーから読み取ると
+    " レビューモードで巻き添えになるので、git に直接聞く。
+    let s:ignored_paths = {}
+
+    function! s:RefreshIgnoredPaths(root)
+        let s:ignored_paths = {}
+        let l:relatives = systemlist('git -C ' . shellescape(a:root)
+                    \ . ' ls-files --others --ignored --exclude-standard --directory')
+        if v:shell_error != 0
+            return
         endif
-        let l:substituted = printf(g:NERDTreeGitStatusConcealFormat , g:NERDTreeGitStatusIndicatorMapCustom['Ignored'])
-        let l:index = index(l:flags['git'], l:substituted)
-        return l:index != -1
+
+        for l:relative in l:relatives
+            let s:ignored_paths[a:root . '/' . substitute(l:relative, '/$', '', '')] = 1
+        endfor
+    endfunction
+
+    function! MyFilter(params)
+        return has_key(s:ignored_paths, a:params['path'].str())
+    endfunction
+
+    function! NERDTreeRefreshRootWithIgnored()
+        call s:RefreshIgnoredPaths(b:NERDTree.root.path.str())
+        NERDTreeRefreshRoot
     endfunction
 
     autocmd! VimEnter * call NERDTreeAddPathFilter('MyFilter')
+
+    augroup NerdtreeIgnoredPaths
+        autocmd!
+        autocmd User NERDTreeInit,NERDTreeNewRoot
+                    \ call s:RefreshIgnoredPaths(b:NERDTree.root.path.str())
+        autocmd VimEnter * call NERDTreeAddKeyMap({
+            \ 'key': g:NERDTreeMapRefreshRoot,
+            \ 'scope': 'all',
+            \ 'callback': 'NERDTreeRefreshRootWithIgnored',
+            \ 'override': 1 })
+    augroup END
 
 Plug 'jistr/vim-nerdtree-tabs'
 
