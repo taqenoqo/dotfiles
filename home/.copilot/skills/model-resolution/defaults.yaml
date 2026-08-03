@@ -1,7 +1,7 @@
 copilot-cli:
-  low: gpt-5.4-mini
-  medium: gpt-5.4
-  high: gpt-5.4
+  low: gpt-5.6-luna
+  medium: gpt-5.6-terra
+  high: gpt-5.6-terra
 claude-code:
   low: sonnet
   medium: opus
