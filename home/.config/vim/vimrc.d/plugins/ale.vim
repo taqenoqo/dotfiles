@@ -52,7 +52,7 @@ Plug 'dense-analysis/ale'
         if empty(l:loc)
             return v:false
         endif
-        let @" = l:loc['text']
+        let @+ = l:loc['text']
         return v:true
     endfunction
 
