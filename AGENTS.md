@@ -50,6 +50,7 @@
 - LSP: CoC.nvim を **v0.0.82 に固定** — テストなしにアップグレードしないこと
 - 設定はモジュール構成: `.config/vim/vimrc` が `.config/vim/vimrc.d/` 以下のファイルを source する
 - undo/swap/backup ファイルは `$XDG_CACHE_HOME/vim` に保存
+- Visual mode 中は statusline に `wordcount().visual_chars` で選択文字数を表示する
 
 #### git レビューモード
 
