@@ -11,13 +11,20 @@ function GetCursorSyntax()
     return synIDattr(synID(line('.'), col('.'), 0), 'name')
 endfunction
 
+function GetVisualSelectionCount()
+    if mode() !~# '^[vVsS]' && mode() !=# "\<C-V>" && mode() !=# "\<C-S>"
+        return ''
+    endif
+    return printf('%d chars', get(wordcount(), 'visual_chars', 0))
+endfunction
+
 function UpdateStatusLine(...)
     let l:left = '\ %t%m\ %y[%{&fenc},\ %{&ff}]\ %r%h%w'
     if exists('*coc#status')
         let l:left = l:left . '\ %{coc#status()}'
     endif
     let l:face = get(b:, 'statusline_face', '\|ーﾟ)')
-    let l:right = '%{GetCursorSyntax()}\ (%p%%)\ %l,%c\ =\ 0x%B\ ' . l:face . '\ '
+    let l:right = '%{GetVisualSelectionCount()}\ %{GetCursorSyntax()}\ (%p%%)\ %l,%c\ =\ 0x%B\ ' . l:face . '\ '
     exec 'setlocal statusline=' . l:left . '%=' . l:right
 endfunction
 
