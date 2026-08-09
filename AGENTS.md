@@ -51,6 +51,7 @@
 - 設定はモジュール構成: `.config/vim/vimrc` が `.config/vim/vimrc.d/` 以下のファイルを source する
 - undo/swap/backup ファイルは `$XDG_CACHE_HOME/vim` に保存
 - Visual mode 中は statusline に `wordcount().visual_chars` で選択文字数を表示する
+- statusline のカーソル列は `%v` で表示幅を示す。全角文字は2列、タブは展開後の幅で数える。
 
 #### git レビューモード
 
