@@ -24,7 +24,7 @@ function UpdateStatusLine(...)
         let l:left = l:left . '\ %{coc#status()}'
     endif
     let l:face = get(b:, 'statusline_face', '\|ーﾟ)')
-    let l:right = '%{GetVisualSelectionCount()}\ %{GetCursorSyntax()}\ (%p%%)\ %l,%c\ =\ 0x%B\ ' . l:face . '\ '
+    let l:right = '%{GetVisualSelectionCount()}\ %{GetCursorSyntax()}\ (%p%%)\ %l,%v\ =\ 0x%B\ ' . l:face . '\ '
     exec 'setlocal statusline=' . l:left . '%=' . l:right
 endfunction
 
