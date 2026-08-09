@@ -67,12 +67,15 @@ merge-base に、それ以外は `git rev-parse --verify` で解決する。渡�
 解釈が違い、そのまま配ると基準がずれるため（詳細は調査記録）。
 
 実装は `vimrc.d/plugins/git.vim` に置く。切り替え先が NERDTree に限らないため、
-`nerdtree.vim` 側には `g:NERDTreeGitStatus*` の設定と表示フィルタだけを残している。
+`nerdtree.vim` 側には `g:NERDTreeGitStatus*` の設定、表示フィルタ、`R` の更新処理だけを残している。
 
 ツリーの表示には「隠す」と「マークする」の 2 軸があり、独立している。隠す対象（gitignore）は
 revision によらないので `MyFilter` が `git ls-files` へ直接聞き、プラグインのマーカーには
 依存しない。マーカー（差分）はプラグインが担当する。この 2 つを混ぜると、revision を変えた
 ときに隠す判定まで巻き添えになる。
+
+`R` は `NERDTreeRefreshRootWithIgnored()` を呼び、gitignoreキャッシュとツリーを更新した後、
+現在の `g:NERDTreeGitStatusDiffRef` を再指定してgitマーカーの非同期更新も起動する。
 
 `g:NERDTreeGitStatusDiffRef` は `taqenoqo/nerdtree-git-plugin` フォークで追加したオプション。
 このフォークは dotfiles の管理外（`$XDG_DATA_HOME/vim/plugged/`）にあるため、`PlugUpdate`
