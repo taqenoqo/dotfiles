@@ -71,6 +71,7 @@ Plug 'taqenoqo/nerdtree-git-plugin'
     function! NERDTreeRefreshRootWithIgnored()
         call s:RefreshIgnoredPaths(b:NERDTree.root.path.str())
         NERDTreeRefreshRoot
+        execute 'NERDTreeGitStatusDiffRef ' . get(g:, 'NERDTreeGitStatusDiffRef', '')
     endfunction
 
     autocmd! VimEnter * call NERDTreeAddPathFilter('MyFilter')
