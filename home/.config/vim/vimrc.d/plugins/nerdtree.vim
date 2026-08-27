@@ -5,6 +5,7 @@ Plug 'scrooloose/nerdtree'
     let g:NERDTreeShowHidden = 1
     let g:NERDTreeMinimalUI = 1
     let g:NERDTreeAutoDeleteBuffer = 1
+    nnoremap <silent> <Leader>F :NERDTreeFind<CR>
     
     augroup NerdtreeSettings
         autocmd!
