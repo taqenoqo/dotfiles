@@ -95,7 +95,7 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 
 ### Tmux
 - プレフィックス: `Ctrl-T`
-- 自動ウインドウ名はアクティブペインのカレントディレクトリの basename とする。`prefix+,` で手動変更した名前は維持される。
+- 自動ウインドウ名は、アクティブペインの論理カレントディレクトリをホーム自身なら `~`、ホーム直下なら `~/name`、それ以外なら `parent/name` とする。`conf.d/tmux.zsh` が `chpwd` 時にペインオプションへ `$PWD` を渡して自動リネーム中のウインドウだけ即時更新する。未設定時は tmux の物理パスを使う。`prefix+,` で手動変更した名前は維持される。
 - `prefix+c` は、新規ウインドウで使える幅が280文字セル以上のとき、新規ウインドウを開いて左右を 60:40 に分割し、左ペインを選択する。それ以外では1ペインの新規ウインドウを開く。
 - ターミナル起動時に新しい tmux セッションを作る場合も、起動元の画面幅が280文字セル以上なら最後の通常作業用ウインドウを左右 60:40 に分割し、左ペインを選択する。
 - 幅判定と新規ウインドウ作成は tmux の `smart-new-window` コマンドエイリアスに集約し、`prefix+c` とターミナル起動処理の両方から呼ぶ。起動時は attach 後に実行するため、確定した `client_width` で判定される。
@@ -134,6 +134,10 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 
 ## 調査記録
 
+- tmux の `automatic-rename-format` では、`b:` と `d:` がそれぞれ basename と dirname を返し、`#{HOME}` は tmux のグローバル環境の `HOME` を展開する。`#{b:#{d:pane_current_path}}` は二段階に適用されず dirname を返すため、末尾2階層の抽出には `s|^.*/([^/]+)/([^/]+)$|\1/\2|` を使う。
+- `#{pane_current_path}` はシンボリックリンクを解決した物理パスを返す。論理 `$PWD` を使うには zsh の `chpwd` からペイン固有のユーザーオプションへ渡す。
+- tmux の `rename-window` は `automatic-rename` を無効にする。zsh の論理パス更新では、自動リネーム中のウインドウだけを更新した後に同オプションを再有効化し、手動名は保持する。
+- 継承された `automatic-rename` は `show-options -w -v` では空になる。ペインの実効値は `tmux display-message -p '#{automatic-rename}'` で判定する。
 - `home/.config/zsh/conf.d/alias.zsh` の `copilot` alias は `--add-dir "$HOME/.config/ai"` と `--add-dir "$HOME/dotfiles/"` を付けている。したがって、これら配下への参照だけでは許可ダイアログの直接原因になりにくい。
 - Copilot の許可ダイアログに `.../Workspace/<repo>/.config/ai/AGENTS.md` のようなパスが出る場合は、リポジトリ相対の `.config/ai/AGENTS.md` を読もうとしている可能性を優先して疑う。
 - `TMPDIR` や `/tmp` を使う抽象指示は、親ディレクトリの解釈は安定しても、サブエージェントのファイル操作可否は安定しなかった。
