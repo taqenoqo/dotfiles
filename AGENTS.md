@@ -52,6 +52,7 @@
 - undo/swap/backup ファイルは `$XDG_CACHE_HOME/vim` に保存
 - Visual mode 中は statusline に `wordcount().visual_chars` で選択文字数を表示する
 - statusline のカーソル列は `%v` で表示幅を示す。全角文字は2列、タブは展開後の幅で数える。
+- `<Leader>F` は `NERDTreeFind` を実行し、現在のファイルをツリーで表示して NERDTree へフォーカスを移す。
 
 #### git レビューモード
 
