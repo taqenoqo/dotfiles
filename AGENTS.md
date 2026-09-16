@@ -142,6 +142,7 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 - 継承された `automatic-rename` は `show-options -w -v` では空になる。ペインの実効値は `tmux display-message -p '#{automatic-rename}'` で判定する。
 - `home/.config/zsh/conf.d/alias.zsh` の `copilot` alias は `--add-dir "$HOME/.config/ai"` と `--add-dir "$HOME/dotfiles/"` を付けている。したがって、これら配下への参照だけでは許可ダイアログの直接原因になりにくい。
 - Copilot の許可ダイアログに `.../Workspace/<repo>/.config/ai/AGENTS.md` のようなパスが出る場合は、リポジトリ相対の `.config/ai/AGENTS.md` を読もうとしている可能性を優先して疑う。
+- 導入済みの `DanBradbury/copilot-chat.vim` (`c7342e4`) は、`:CopilotChatModels` で `GET /models` の候補を選ばせて `g:copilot_chat_data_dir/config.json` の `model` に保存するが、送信は常に `/chat/completions` へ行う。`gpt-5.6-luna` のように一覧にあってもこのエンドポイントでは使えないモデルがあるため、選択画面だけで互換性を判断しない。この環境ではプラグインの既定値である `gpt-4o` が動作した。
 - `TMPDIR` や `/tmp` を使う抽象指示は、親ディレクトリの解釈は安定しても、サブエージェントのファイル操作可否は安定しなかった。
 - `my-repo-report` では `.repo-report/.work/` 配下を WORK_DIR にすると、複数回のサブエージェント実験で作成・読み書き・再利用・削除まで安定して成功した。
 - low モデル (Haiku 4.5 で実測) が出力する定義の行番号は、Read ツールの行番号付き表示の転記なのでほぼ完璧 (2,863 行・128 関数のファイルで start / end ほぼ全一致)。行番号の精度を理由に決定的スクリプトを足す必要はない。
