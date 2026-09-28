@@ -19,25 +19,21 @@ if (type -p tmux >/dev/null 2>&1) && [[ $SHLVL -le 1 && ! $TERM =~ "^screen.*" ]
         tmux_commands=(attach \;)
         if [[ -d ~/Note ]]; then
             tmux_commands+=(
-                smart-new-window \;
-                setw synchronize-panes on \;
+                new-window -a -c '#{pane_current_path}' \;
                 send-keys 'cd ~/Note' Enter \;
-                setw synchronize-panes off \;
                 send-keys vim Enter \;
             )
         fi
         if [[ -d ~/Memo ]]; then
             tmux_commands+=(
-                smart-new-window \;
-                setw synchronize-panes on \;
+                new-window -a -c '#{pane_current_path}' \;
                 send-keys 'cd ~/Memo' Enter \;
-                setw synchronize-panes off \;
                 send-keys vim Enter \;
             )
         fi
         tmux_commands+=(
             select-window -t "$window_id" \;
-            smart-new-window \;
+            new-window -a -c '#{pane_current_path}' \;
             kill-window -t "$window_id"
         )
         tmux "${tmux_commands[@]}"
