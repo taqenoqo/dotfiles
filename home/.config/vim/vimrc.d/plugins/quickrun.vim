@@ -24,6 +24,7 @@ Plug 'thinca/vim-quickrun'
     \ }
     let s:pandoc_opt =
         \ '--from=markdown_strict' .
+        \ '+space_in_atx_header' .
         \ '+tex_math_dollars' .
         \ '+tex_math_double_backslash' .
         \ '+fenced_code_blocks' .
