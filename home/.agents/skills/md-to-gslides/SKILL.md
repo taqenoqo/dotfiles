@@ -128,10 +128,12 @@ Meta+A で全選択してから、収まるまで Meta+Shift+Comma (1pt ずつ�
 ### 8. 後片付け
 
 コピーしたスライドの URL をユーザに伝えてから片付ける。
+`kill` には、`lsof` で調べた PID を数値で直接渡す (コマンド置換を使うと、ハーネスによっては実行を拒否される)。
 
 ```bash
 playwright-cli -s=gslides close
-kill $(lsof -ti tcp:9333 -sTCP:LISTEN)
+lsof -ti tcp:9333 -sTCP:LISTEN
+kill <上で表示された PID>
 rm -rf $WORK
 ```
 
