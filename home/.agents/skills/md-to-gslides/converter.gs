@@ -22,12 +22,37 @@ function inspect() {
 
 function build() {
   const pres = SlidesApp.getActivePresentation();
+  const store = PropertiesService.getDocumentProperties();
+  const built = store.getProperties();
   const oldSlides = pres.getSlides();
-  DECK.forEach(({ layout, texts }) => {
-    const slide = pres.appendSlide(pres.getLayouts().find(l => l.getObjectId() === layout));
-    placeholdersOf(slide).forEach((s, i) => fill(s.getText(), texts[i]));
+
+  const candidates = oldSlides.filter(s => s.getObjectId() in built);
+  const reused = DECK.map(entry => {
+    const i = candidates.findIndex(s => built[s.getObjectId()] === JSON.stringify(entry));
+    return i < 0 ? null : candidates.splice(i, 1)[0];
   });
-  oldSlides.forEach(s => s.remove());
+
+  // 手で足したスライドは、直前に残る生成済みスライドに付いていく。初回に残っているのはテンプレートの見本なので消す
+  const manual = Object.keys(built).length ? oldSlides.filter(s => !(s.getObjectId() in built)) : [];
+  const ownerOf = new Map();
+  let owner = null;
+  oldSlides.forEach(s => {
+    if (reused.includes(s)) owner = s;
+    else ownerOf.set(s, owner);
+  });
+  const followersOf = owner => manual.filter(s => ownerOf.get(s) === owner);
+
+  const slides = DECK.map((entry, i) => reused[i] ?? create(pres, entry));
+  const ordered = [...followersOf(null), ...slides.flatMap(s => [s, ...followersOf(s)])];
+  oldSlides.filter(s => !ordered.includes(s)).forEach(s => s.remove());
+  ordered.forEach((s, i) => s.move(i));
+  store.setProperties(Object.fromEntries(slides.map((s, i) => [s.getObjectId(), JSON.stringify(DECK[i])])), true);
+}
+
+function create(pres, { layout, texts }) {
+  const slide = pres.appendSlide(pres.getLayouts().find(l => l.getObjectId() === layout));
+  placeholdersOf(slide).forEach((s, i) => fill(s.getText(), texts[i]));
+  return slide;
 }
 
 function placeholdersOf(page) {
