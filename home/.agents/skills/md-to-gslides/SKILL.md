@@ -1,12 +1,15 @@
 ---
 name: md-to-gslides
-description: Markdown のスライド草案を、ユーザが指定した既存の Google スライドのデザインに沿った Google スライドに変換する。ユーザのブラウザに Playwright で接続し、テンプレートのコピーに紐づく Apps Script でスライドを生成する。
+description: Markdown のスライド草案を、ユーザが指定した既存の Google スライドのデザインに沿った Google スライドに変換する。生成済みのスライドへ草案の変更を反映することもできる。ユーザのブラウザに Playwright で接続し、テンプレートのコピーに紐づく Apps Script でスライドを生成する。
 ---
 
 # Markdown 草案から Google スライドを作る
 
 テンプレート (デザインの手本にしたい既存の Google スライド) をコピーし、そのコピーに紐づく Apps Script で、
 テンプレートのレイアウトを使ったスライドを生成する。最後に見た目を確認し、はみ出しなどを直す。
+
+生成したデッキの URL は草案に書き残す。草案を直して再び実行すると、同じデッキの変わったページだけを作り直す。
+変わっていないページに Google スライド上で加えた手直しは残り、スクリプトの承認もやり直さずに済む。
 
 Google Cloud プロジェクトを作れない環境や、Playwright が起動したブラウザでは Google にログインできない環境でも動くように、
 通常の Chrome をデバッグポート付きで起動して接続し、Apps Script もエディタの画面から実行する。
@@ -21,7 +24,8 @@ Google Cloud プロジェクトを作れない環境や、Playwright が起動�
 
 ### 1. 入力を確認して作業ディレクトリを作る
 
-草案の Markdown と、テンプレートの URL をユーザに確認する。
+草案の Markdown を確認する。front matter に `gslides:` (生成済みのデッキの URL) があれば、そのデッキへの反映になる。
+無ければ新規作成なので、テンプレートの URL をユーザに確認する。
 
 作業ディレクトリにはログイン済みの Chrome プロファイルが入るため、最後に必ず消す。
 
@@ -32,12 +36,12 @@ echo '{"browser":{"cdpEndpoint":"http://127.0.0.1:9333","isolated":false}}' > $W
 
 ### 2. Chrome を起動してログインしてもらう
 
-テンプレートのコピー画面 (URL の `/edit...` を `/copy` に置き換えたもの) を開いた Chrome をバックグラウンドで起動する。
+Chrome をバックグラウンドで起動する。`{URL}` は、新規ならテンプレートのコピー画面 (URL の `/edit...` を `/copy` に置き換えたもの)、
+反映なら `gslides:` の URL。
 
 ```bash
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --user-data-dir=$WORK/profile \
-  --remote-debugging-port=9333 --no-first-run --no-default-browser-check \
-  "https://docs.google.com/presentation/d/{TEMPLATE_ID}/copy"
+  --remote-debugging-port=9333 --no-first-run --no-default-browser-check "{URL}"
 ```
 
 ユーザにログインしてもらい、完了の返事を待ってから接続する。
@@ -47,7 +51,13 @@ echo '{"browser":{"cdpEndpoint":"http://127.0.0.1:9333","isolated":false}}' > $W
 cd $WORK && playwright-cli -s=gslides open --config=$WORK/cli.config.json
 ```
 
+組織が管理するプロファイルでは、拡張機能やお知らせのタブが勝手に開き、タブの番号がずれる。
+タブを切り替えるときは毎回 `playwright-cli -s=gslides tab-list` で番号を確かめてから `tab-select` する。
+`chrome://` のタブは閉じようとすると固まるので閉じない。まず Google スライドのタブを選ぶ。
+
 ### 3. テンプレートをコピーする
+
+新規のときだけ行う。
 
 ```bash
 playwright-cli -s=gslides run-code "async page => {
@@ -70,10 +80,19 @@ playwright-cli -s=gslides run-code "async page => {
   const editor = await editorOpened;
   await editor.waitForFunction(() => window.monaco, null, { timeout: 60000 });
 }"
-playwright-cli -s=gslides tab-select 1
 ```
 
+開いたら Apps Script のタブを選ぶ。
+
 ### 5. テンプレートのレイアウトを調べる
+
+反映のときは、先にエディタから前回の `DECK` を `$WORK/deck.js` に取り出す (`inspect` を実行すると上書きされるため)。
+前回の `DECK` に無いレイアウトが要るときだけ、この後の `inspect` を行う。
+
+```bash
+playwright-cli -s=gslides run-code "async page => page.evaluate(() => monaco.editor.getModels().find(m => m.uri.path.endsWith('.js')).getValue())" \
+  | awk '/^### Result$/ { f = 1; next } /^### / { f = 0 } f' | jq -r . | sed -n '/^const DECK/,$p' > $WORK/deck.js
+```
 
 [converter.gs](converter.gs) だけを流し込み、`inspect` を実行する (「Apps Script の実行方法」参照)。
 
@@ -90,6 +109,8 @@ playwright-cli -s=gslides tab-select 1
 
 草案の各スライドに合うレイアウトを選び、`$WORK/deck.js` に書く。
 テンプレートで実際に使われているレイアウトと、`example` でのプレースホルダの使い方を手本にする。
+反映のときは、取り出した前回の `DECK` のうち、草案で変わったページの要素だけを書き換える。
+変わっていないページの要素は一字も変えない (変えると作り直しになり、手直しが消える)。
 
 ```js
 const DECK = [
@@ -102,14 +123,17 @@ const DECK = [
   - 文字列: そのまま入れる。改行は段落になる。
   - 文字列の配列: 箇条書きにする。先頭のタブの数が階層になる。
   - `null` または省略: 触らない。スライド番号 (`SLIDE_NUMBER`) などはこれにする。
-- `build` は、その時点でデッキにある全スライドを、`DECK` から生成したスライドで置き換える。
-  テンプレートに元からあるスライドも消える。`DECK` を直して何度でも実行し直せるが、手順 7 の手直しも消える。
+- `build` は、前回の `build` と同じ要素のページを作り直さずに残し、`DECK` の順に並べ直す。手直しも残る。
+  - それ以外の要素からは新しくページを作る。前回から変わったページや無くなったページは消え、その手直しも消える。
+  - 生成の記録が無いページ (Google スライド上で手で足したページ) は残し、直前に残る生成済みページの後ろに付ける。
+  - 初回だけは、テンプレートに元からあるページを全部消す。
 
 converter.gs と deck.js を連結して流し込み、`build` を実行する。
+新規のときは、生成できたら草案の front matter に `gslides: <コピーしたデッキの URL>` を書き足す (front matter が無ければ作る)。
 
 ### 7. 見た目を確認して直す
 
-Google スライドのタブ (`tab-select 0`) に戻る。生成結果はリロードしなくても反映されている。
+Google スライドのタブに戻る。生成結果はリロードしなくても反映されている。
 
 スライドを 1 枚ずつスクリーンショットで確認する。フィルムストリップは表示中のサムネイルしか DOM に無いので、
 先頭のサムネイルをクリックして Home を押してから、ArrowDown で 1 枚ずつ移動する。
