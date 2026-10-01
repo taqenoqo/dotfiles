@@ -44,9 +44,12 @@ function build() {
 
   const slides = DECK.map((entry, i) => reused[i] ?? create(pres, entry));
   const ordered = [...followersOf(null), ...slides.flatMap(s => [s, ...followersOf(s)])];
-  oldSlides.filter(s => !ordered.includes(s)).forEach(s => s.remove());
+  const removed = oldSlides.filter(s => !ordered.includes(s));
+  removed.forEach(s => s.remove());
   ordered.forEach((s, i) => s.move(i));
   store.setProperties(Object.fromEntries(slides.map((s, i) => [s.getObjectId(), JSON.stringify(DECK[i])])), true);
+  const reusedCount = reused.filter(Boolean).length;
+  console.log(`再利用 ${reusedCount} 枚 / 新規 ${DECK.length - reusedCount} 枚 / 削除 ${removed.length} 枚 / 手動 ${manual.length} 枚`);
 }
 
 function create(pres, { layout, texts }) {
@@ -62,7 +65,32 @@ function placeholdersOf(page) {
     .sort((a, b) => a.getTop() - b.getTop() || a.getLeft() - b.getLeft());
 }
 
-function fill(text, value) {
-  if (typeof value === 'string') text.setText(value);
-  if (Array.isArray(value)) text.setText(value.join('\n')).getListStyle().applyListPreset(SlidesApp.ListPreset.DISC_CIRCLE_SQUARE);
+function fill(text, markdown) {
+  if (markdown == null) return;
+  const lines = markdown.split('\n').map(line => line.match(/^(\t*)(?:(-|\d+\.) )?(.*)$/));
+  text.setText(lines.map(([, tabs, , body]) => tabs + body).join('\n'));
+  text.find('`[^`\n]+`').reverse().forEach(code => {
+    code.getTextStyle().setFontFamily('Roboto Mono');
+    code.clear(code.getLength() - 1, code.getLength());
+    code.clear(0, 1);
+  });
+  // リストにすると行頭のタブが消えて後ろの段落の位置がずれるので、段落は毎回取り直す
+  listRuns(lines).forEach(({ numbered, first, last }) => {
+    const paragraphs = text.getParagraphs();
+    text.getRange(paragraphs[first].getRange().getStartIndex(), paragraphs[last].getRange().getEndIndex())
+      .getListStyle().applyListPreset(numbered ? SlidesApp.ListPreset.DIGIT_ALPHA_ROMAN : SlidesApp.ListPreset.DISC_CIRCLE_SQUARE);
+  });
+}
+
+// 連続するリストの行を 1 つのリストにまとめる。番号が途切れないよう、入れ子の行は記号が違っても親のリストに入れる
+function listRuns(lines) {
+  const runs = [];
+  lines.forEach(([, tabs, marker], i) => {
+    if (!marker) return;
+    const numbered = marker !== '-';
+    const run = runs[runs.length - 1];
+    if (run?.last === i - 1 && (tabs || run.numbered === numbered)) run.last = i;
+    else runs.push({ numbered, first: i, last: i });
+  });
+  return runs;
 }
