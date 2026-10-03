@@ -49,8 +49,15 @@ Plug 'liuchengxu/vista.vim'
     hi VistaIcon ctermfg=198 cterm=bold
     hi link VistaLineNr SpecialKey
 
+    function s:OpenVistaWhenReady(timer) abort
+        if !empty(CocAction('documentSymbols'))
+            call timer_stop(a:timer)
+            Vista coc
+        endif
+    endfunction
+
     augroup VistaAutoStart
         autocmd!
-        autocmd User CocNvimInit Vista coc
+        autocmd User CocNvimInit call timer_start(100, function('s:OpenVistaWhenReady'), {'repeat': 50})
         autocmd TabEnter * Vista coc
     augroup END
