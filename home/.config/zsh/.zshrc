@@ -32,7 +32,7 @@ if (type -p tmux >/dev/null 2>&1) && [[ $SHLVL -le 1 && ! $TERM =~ "^screen.*" ]
         fi
         tmux_commands+=(
             select-window -t "$window_id" \;
-            new-window -a -c '#{pane_current_path}' \;
+            new-window -c '#{pane_current_path}' \;
             kill-window -t "$window_id"
         )
         tmux "${tmux_commands[@]}"
