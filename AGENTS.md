@@ -17,6 +17,7 @@
   - `.config/marp/` — Marp（Markdown スライド）テーマ設定（XDG）
   - `.local/share/pandoc/` — Pandoc の HTML テンプレートとスタイル（XDG）
   - `.asdfrc` — asdf バージョンマネージャー設定
+  - `.default-npm-packages` — asdf-nodejs が Node.js のインストール直後に入れる npm グローバルパッケージの一覧
   - `.desktopinit` — デスクトップ環境初期化スクリプト
   - `.ghci` — GHCi（Haskell REPL）設定
   - `.gvimrc` — GVim 設定
@@ -230,6 +231,8 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 - 上の実測では、消費の 93% がキャッシュの読み直しで、量は「抱えている文脈の大きさ × ターン数」で決まっていた。執筆エージェントは索引 (約 52 万バイト) を読み込んで 7 万〜20 万トークンの文脈を抱え、そのまま grep やシェルを何十回も呼ぶ。「命名・コード慣習」の 1 体は 98 ターンで、キャッシュ読みだけで 1,196 万トークン (全体の 36%) を使った (外れ値かは未確認)。全数読みは全体の 19% に過ぎない。数える仕事や検索の繰り返しを、大きな文脈を抱えたエージェントにやらせないこと。
 - Claude Code のサブエージェントは、既定でさらにサブエージェントを起動できる (メイン会話の下 3 段まで。公式ドキュメントの sub-agents)。起動役 → manager → 抽出・執筆という入れ子はそのまま動く。
 - 段ごとの消費は、段ごとに使うモデルを分けておけば `claude -p --output-format json` の `modelUsage` から読める (サブエージェントの分も含まれる)。エージェント別に分けるときは `~/.claude/projects/<cwd のパスを - でつないだ名前>/<session>/subagents/agent-*.jsonl` を読み、assistant メッセージの `usage` をメッセージ id で重複を除いて合計する。キャッシュの読み書きはモデル別の合計と完全に一致した。`output_tokens` は途中の値しか残らず、合計しても合わないので使えない。
+- `home/.local/share/pandoc/style.css` は `style.styl` から生成したファイル。直接編集せず、`stylus home/.local/share/pandoc/style.styl` で再生成する。`stylus` は `home/.default-npm-packages` 経由で asdf の Node.js に入る (入れた直後は `asdf reshim nodejs` が要る)。
+- Stylus (0.64.0) は `:not(ul,ol)` のカンマをセレクタの区切りとして扱う。`&` を入れ子にすると `li > :not(ul:first-child, li ol):first-child` のように崩れた形で出力される。`style.styl` の `li` の `:first-child` と `:last-child` がこの状態で残っている。
 
 ## コミットメッセージ
 
