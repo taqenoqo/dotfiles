@@ -198,8 +198,7 @@ li > :not(ul:last-child,
 li ol):last-child {
   margin-bottom: 0;
 }
-li > :not(ul:not(:first-child),
-li ol):not(:first-child) {
+li > p:not(:first-child) {
   padding-left: 0.5rem;
 }
 table {
@@ -349,4 +348,3 @@ a.footnote-ref > sup::after {
 .right {
   text-align: right;
 }
-
