@@ -15,7 +15,7 @@
   - `.config/gh/` — GitHub CLI 設定（XDG）
   - `.config/lazygit/` — lazygit 設定（XDG）
   - `.config/marp/` — Marp（Markdown スライド）テーマ設定（XDG）
-  - `.local/share/pandoc/` — Pandoc の HTML テンプレートとスタイル（XDG）
+  - `.local/share/pandoc/` — Pandoc の HTML テンプレート、スタイル、Lua フィルタ、スタイル確認用の `sample.md`（XDG）
   - `.asdfrc` — asdf バージョンマネージャー設定
   - `.default-npm-packages` — asdf-nodejs が Node.js のインストール直後に入れる npm グローバルパッケージの一覧
   - `.desktopinit` — デスクトップ環境初期化スクリプト
@@ -157,6 +157,12 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 - 起動処理で `send-keys` を使ってシェルにコマンドを打ち込まない。シェルの初期化中に端末を触るコマンドが1つでもあると、送った入力が黙って捨てられる (詳細は調査記録)。
 - tmux の動作検証をユーザの tmux サーバで行わない (`kill-server` などで作業中のセッションを壊した実例がある)。`TMUX_TMPDIR=/tmp/<dir>` でソケットごと分離し、`script -q /dev/null zsh -i` でログイン直後の起動を再現する。
 
+### Pandoc
+
+- Mermaid の図はブラウザ側で描画する。`mermaid.lua` がコードブロックを `div.mermaid` に置き換え、`template.html` が CDN の Mermaid を読み込む。数式の MathJax も CDN から読むので、同じ方式に揃えている。
+- `mermaid-filter` で変換時に SVG へ焼き込む方式は不採用。同梱の Chromium が x86_64 用で arm64 では起動せず、図が黙って消えていた (詳細は調査記録)。
+- 図の入れ物は `pre` ではなく `div` にする。公式の例は `pre.mermaid` だが、`style.css` のコードブロック用の枠・等幅フォント・スクロール指定が図にもかかるため。
+
 ## 調査記録
 
 - tmux の `automatic-rename-format` では、`b:` と `d:` がそれぞれ basename と dirname を返し、`#{HOME}` は tmux のグローバル環境の `HOME` を展開する。`#{b:#{d:pane_current_path}}` は二段階に適用されず dirname を返すため、末尾2階層の抽出には `s|^.*/([^/]+)/([^/]+)$|\1/\2|` を使う。
@@ -233,6 +239,9 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 - 段ごとの消費は、段ごとに使うモデルを分けておけば `claude -p --output-format json` の `modelUsage` から読める (サブエージェントの分も含まれる)。エージェント別に分けるときは `~/.claude/projects/<cwd のパスを - でつないだ名前>/<session>/subagents/agent-*.jsonl` を読み、assistant メッセージの `usage` をメッセージ id で重複を除いて合計する。キャッシュの読み書きはモデル別の合計と完全に一致した。`output_tokens` は途中の値しか残らず、合計しても合わないので使えない。
 - `home/.local/share/pandoc/style.css` は `style.styl` から生成したファイル。直接編集せず、`stylus home/.local/share/pandoc/style.styl` で再生成する。`stylus` は `home/.default-npm-packages` 経由で asdf の Node.js に入る (入れた直後は `asdf reshim nodejs` が要る)。
 - Stylus (0.64.0) は `:not(ul,ol)` のカンマをセレクタの区切りとして扱う。`&` を入れ子にすると `li > :not(ul:first-child, li ol):first-child` のように崩れた形で出力される。`style.styl` の `li` の `:first-child` と `:last-child` がこの状態で残っている。
+- `mermaid-filter` (1.4.7) は mermaid-cli の 10 系に固定で、puppeteer が入れる Chromium は x86_64 用。arm64 では `spawn Unknown system error -86` で起動に失敗する。旧 Lua フィルタは失敗したブロックを削除していたため、pandoc は正常終了し、正しい図まで消えていた。実行したディレクトリに `mermaid-filter.err` も残る。
+- 親の `font-weight` が 300 のとき、`strong` の既定値 `bolder` は 400 にしかならない。ヒラギノ明朝 ProN には W3 と W6 しか無く、300 も 400 も W3 で表示されるので、太字にならない。`body` に 300 を指定しないこと。
+- Playwright の MCP ツールは `file:` の URL を開けない。生成した HTML の表示確認は、出力先のディレクトリを `python3 -m http.server --bind 127.0.0.1` で配信して開く。作業ファイルはリポジトリ直下の `.playwright-mcp/` に作られるので、確認後に消す。
 
 ## コミットメッセージ
 
