@@ -57,7 +57,7 @@ body {
   }
 }
 main {
-  overflow: scroll;
+  container-type: inline-size;
 }
 main > :first-child {
   margin-top: 0;
@@ -200,9 +200,22 @@ li ol):last-child {
 li > p:not(:first-child) {
   padding-left: 0.5rem;
 }
-table {
+.table-wrap {
   margin: 1rem;
+}
+@media screen {
+  .table-wrap {
+    overflow-x: auto;
+  }
+}
+table {
   border-collapse: collapse;
+  font-size: 0.85em;
+}
+@media screen {
+  table {
+    width: max-content;
+  }
 }
 table tr {
   background-color: #fff;
@@ -215,9 +228,15 @@ table th,
 table td {
   border: 1px solid #ccc;
   padding: 0.4rem 0.8rem;
+  max-width: 35cqi;
+  overflow-wrap: break-word;
 }
 table th {
   font-weight: bold;
+}
+table code {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 hr {
   border: none;
