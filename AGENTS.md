@@ -171,7 +171,9 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 - `mermaid-filter` で変換時に SVG へ焼き込む方式は不採用。同梱の Chromium が x86_64 用で arm64 では起動せず、図が黙って消えていた (詳細は調査記録)。
 - 図の入れ物は `pre` ではなく `div` にする。公式の例は `pre.mermaid` だが、`style.css` のコードブロック用の枠・等幅フォント・スクロール指定が図にもかかるため。
 - 表は `table.lua` で `div.table-wrap` に包み、div をスクロールの枠、表を `width: max-content` にする。列は中身の幅になり、上限で折り返し、はみ出した分は表ごとに横スクロールする。表そのものをスクロールの枠 (`display: block; overflow-x: auto`) にすると、ブラウザが列を縮めてページ幅に押し込むので採らない。
-- 列幅の上限は `main` の幅に対する割合 (`cqi`) で指定する。`main` に `container-type: inline-size` を付けているのはこのため。
+- 列幅の上限は、スクロールの枠 (`div.table-wrap`) の幅に対する割合 (`cqi`) で指定し、「40% と、100% ÷ 列数 の大きい方」とする。列数は `table.lua` が `--cols` として div に渡す。`div.table-wrap` に `container-type: inline-size` を付けているのはこのため。上限を列数によらない固定値にすると、2 列の表はセルが長くても枠の 7 割ほどで止まり、右が余る。
+- 「短い列 + 長い列」の 2 列の表では、長い列が 50% で止まり余りが残る (未解決)。
+- 上限をセルではなく表全体に掛ける方式 (`table` に `max-width: max(100%, 列数 × 20cqi)`) は試して不採用にした。再提案しない。列幅の配分がブラウザ任せになり、中身の長い列へ幅が寄って、短い列が 2 文字幅まで潰れる。
 - 列が潰れるのを折り返しの規則で防ぐ方法は、どちらも試して不採用にした。再提案しない。
     - `word-break: keep-all` (句読点の間で折り返さない): 句が上限を超えると強制的な折り返しになり、禁則が効かず「。」だけの行ができる。
     - `word-break: auto-phrase` (文節で折り返す): 列が多いと各列が 8 字ほどまで縮む。Chrome 限定で、HTML に `lang="ja"` も要る。
@@ -265,6 +267,9 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 - Playwright の MCP ツールは `file:` の URL を開けない。生成した HTML の表示確認は、出力先のディレクトリを `python3 -m http.server --bind 127.0.0.1` で配信して開く。作業ファイルはリポジトリ直下の `.playwright-mcp/` に作られるので、確認後に消す。
 - pandoc は、パイプテーブルのソースに `--columns` (既定 72) を超える行があると、表を全幅にし、列幅を区切り行のダッシュの本数の比で固定する (`<colgroup>` を出力する)。中身と無関係な配分になるので、`md2html` で `--columns=100000` を渡して止めている。
 - 表のセルの `max-width` は Chrome で効く (仕様上は未定義)。`%` は表自身の幅が基準になり循環するので使えない。`cqi` はコンテナのコンテンツ領域 (padding を除く) が基準。
+- 表のセルの `max-width` は、Chrome では `box-sizing: border-box` に従う (padding と枠線を含めた幅が上限になる)。
+- `border-collapse: collapse` の表は、列幅の合計より 1px 広くなる (外周の枠線の半分ずつがはみ出す)。列幅の合計を枠の幅ちょうどにすると、1px 分の横スクロールが出る。
+- Stylus は `max()` と `min()` を組み込み関数として評価し、`calc()` や `var()` を渡すと `cannot coerce … to unit` で失敗する。CSS の関数として出力するには `unquote("max(…)")` と書く。
 - `overflow-wrap: anywhere` は列の最小幅も 1 文字にするので、表の中の短いコードまで単語の途中で切れる。`break-word` は最小幅に影響しないので、入りきらないときだけ折り返す。
 - `table.lua` が包むのは Markdown 記法の表だけ。HTML で直接書いた `<table>` は pandoc が表として解釈しないので包まれず、余白もスクロールも付かない。
 - quickrun は、設定に `command` が無ければ `type` の値をコマンド名に使う。`g:quickrun_config['markdown']` の `type` を消すと、既定の `markdown` → `markdown/pandoc` が引かれ、その `exec` (`%c --from=markdown --to=html …`) を継承してしまう。`'type': 'md2html'` はこれを避けつつコマンドを指定している。
