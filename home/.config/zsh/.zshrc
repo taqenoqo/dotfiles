@@ -5,8 +5,8 @@
     done
 }
 
-if [ -f ~/.local/zshrc ]; then
-    source ~/.local/zshrc
+if [ -f "$ZDOTDIR/.zshrc.local" ]; then
+    source "$ZDOTDIR/.zshrc.local"
 fi
 
 # tmux の new-window -e で渡されたコマンドを初期化後に実行する。子シェルで再実行しないよう消す
