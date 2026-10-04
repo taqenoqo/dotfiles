@@ -54,6 +54,7 @@
 - Visual mode 中は statusline に `wordcount().visual_chars` で選択文字数を表示する
 - statusline のカーソル列は `%v` で表示幅を示す。全角文字は2列、タブは展開後の幅で数える。
 - `<Leader>F` は `NERDTreeFind` を実行し、現在のファイルをツリーで表示して NERDTree へフォーカスを移す。
+- Vista (outline) は、バッファの表示時とタブ移動時に、言語サーバがシンボルを返すのを最大 5 秒待って自動で開く。`g:vista_auto_open = 0` で止まる。手で閉じても、次にファイルを開けばまた開く。
 
 #### git レビューモード
 
@@ -152,6 +153,11 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 
 - 関数定義に `!` を付けない (`function` を使う)。`!` なしでも同じスクリプトの再 source は例外扱いで黙って置き換わるため、vimrc を読み直しても困らない。一方 `!` を付けると別スクリプトの同名関数を黙って上書きし、衝突に気づけなくなる (詳細は調査記録)。
 
+### Vista
+
+- 自動で開くきっかけを Vim の起動 (`User CocNvimInit`) に結び付けない。tmux の Note ウインドウのようにファイルなしで起動すると、待ち時間が NERDTree 相手に空振りして終わり、後からファイルを開いても Vista が開かなかった。きっかけは「シンボルを返せるバッファが表示されたこと」(`BufWinEnter`) にする。
+- 待ち処理 (ポーリング) 自体は外さない。言語サーバは最初の対象ファイルを開いてから起動するので、表示の時点ではまだシンボルを返せない (marksman で約 1.5 秒)。`Vista coc` はシンボルが空だとウインドウを開かず、再試行もしない。
+
 ### Tmux
 
 - 起動処理で `send-keys` を使ってシェルにコマンドを打ち込まない。シェルの初期化中に端末を触るコマンドが1つでもあると、送った入力が黙って捨てられる (詳細は調査記録)。
@@ -195,6 +201,9 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 - nerdtree-git-plugin の job コールバックは spawn 時点の revision でパースしなければならない。実行中に `g:NERDTreeGitStatusDiffRef` が変わると `git diff` の出力を porcelain パーサに渡して例外になる。job の opts に revision を持たせて照合している。
 - Vim は `-c` を VimEnter より後に実行する。`NERDTreeAddPathFilter` など VimEnter で登録される設定をヘッドレス検証するときは、`-c 'autocmd VimEnter * ...'` 経由にしないと空振りする。
 - Vim の `-c` は 10 個までしか受け付けない。超えた分は黙って無視され、末尾の `qa!` も実行されないためハングしたように見える。ヘッドレス検証でコマンドを多く流すときは `-S <script>` を使う。
+- ヘッドレス検証でタイマーから `execute("edit …")` を呼ぶと `E930: Cannot use :redir inside execute()` で失敗し、ファイルが開かれなかった。`feedkeys(":edit …\<CR>")` なら通る。
+- 端末が要る Vim の検証は `script -q <log> vim …` で起動できるが、サンドボックス内では `openpty: Operation not permitted` で失敗する。サンドボックスを外すと `$TMPDIR` も別の場所になるので、ログの読み出しも同じ側で行う。
+- coc の初期化前に `CocAction` を呼ぶと `coc.nvim not ready when invoke CocAction` の例外になる (E605)。起動直後から呼び得る場所では `g:coc_service_initialized` を先に確かめる。これを怠った版では、ファイルを直接開いても Vista が一度も開かなかった。
 - Vim の `function` は `!` なしでも、同じスクリプトを再 source したときだけは例外として黙って置き換わる (`userfunc.txt` の "There is one exception")。E122 で止まるのは別スクリプトが同名を定義したときだけ。`!` を付けないことによる不便は無く、衝突の検出だけが得られる。
 - Vim 組み込みの `syntax/stylus.vim` (patch 9.1.0386 で `wavded/vim-stylus` から取り込まれた) には、色の定義 (`hi def link`) も土台の CSS 構文の読み込みも無い。`.styl` は `filetype=stylus` と判定され構文グループも作られるのに、色が一切付かない。Vim 9.2.0167 でも、2026-10 時点の Vim の master でも同じ。
 - 組み込みの `syntax/stylus.vim` には読み込み済みの判定 (`b:current_syntax` のチェック) も無い。構文ファイルは `runtimepath` 上の同名ファイルがすべて読まれ、組み込み版はプラグインの後に読まれるので、同じグループ名を使う別実装を上書きする。`iloginow/vim-stylus` は単体なら最も細かく色が付くが、この上書きで単語のほとんどが `stylusVariable` になり、`wavded/vim-stylus` より悪くなる。wavded が無事なのは、組み込み版がその一部を写したもので定義が同じだから。
