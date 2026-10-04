@@ -244,7 +244,7 @@ table th,
 table td {
   border: 1px solid #ccc;
   padding: 0.4rem 0.8rem;
-  max-width: 35cqi;
+  max-width: max(35cqi, calc((100cqi - 2rem - 1px) / var(--cols)));
   overflow-wrap: break-word;
 }
 table th {

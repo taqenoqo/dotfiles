@@ -214,7 +214,8 @@ table
   th, td
     border: 1px solid #ccc
     padding: 0.4rem 0.8rem
-    max-width: 35cqi
+    // 100% ÷ 列数 の側は、列の合計が枠に収まるよう、枠の margin と表の外へはみ出す枠線を引く
+    max-width: unquote("max(35cqi, calc((100cqi - 2rem - 1px) / var(--cols)))")
     overflow-wrap: break-word
 
   th
