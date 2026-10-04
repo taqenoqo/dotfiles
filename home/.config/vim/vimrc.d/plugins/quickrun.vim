@@ -50,20 +50,13 @@ Plug 'thinca/vim-quickrun'
         \ ' --standalone' .
         \ ' --variable=pagetitle:%{expand("%:t")}'
     let s:pandoc_pre_exec = '%c %o -t json %a %s | '
-    let s:pandoc_post_exec = '%c %o -f json %a'
+    let s:pandoc_post_exec = '%c %o -f json %a --lua-filter="$XDG_DATA_HOME/pandoc/mermaid.lua"'
     let s:pandoc_filter = ''
-    let s:mermaid_lua_filter = expand('$XDG_DATA_HOME/pandoc/mermaid-ignore-errors.lua')
 
     let s:pandoc_ditaa_filter_cmd = 'pandoc-ditaa-filter'
     let s:pandoc_ditaa_filter_opts = '--ditaa-opts="-E -S --svg" --img-ext="svg"'
     if executable(s:pandoc_ditaa_filter_cmd)
         let s:pandoc_filter = s:pandoc_filter . s:pandoc_ditaa_filter_cmd . ' ' . s:pandoc_ditaa_filter_opts . ' | '
-    endif
-
-    if executable('mermaid-filter') && filereadable(s:mermaid_lua_filter)
-        let s:pandoc_post_exec = s:pandoc_post_exec
-            \ . ' --lua-filter='
-            \ . shellescape(s:mermaid_lua_filter)
     endif
 
     let s:pandoc_exec = s:pandoc_pre_exec . s:pandoc_filter . s:pandoc_post_exec
