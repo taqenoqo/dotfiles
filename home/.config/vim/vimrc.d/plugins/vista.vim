@@ -50,14 +50,23 @@ Plug 'liuchengxu/vista.vim'
     hi link VistaLineNr SpecialKey
 
     function s:OpenVistaWhenReady(timer) abort
-        if !empty(CocAction('documentSymbols'))
+        if !get(g:, 'vista_auto_open', 1) || vista#sidebar#IsOpen()
+            call timer_stop(a:timer)
+        elseif get(g:, 'coc_service_initialized', 0) && !empty(CocAction('documentSymbols'))
             call timer_stop(a:timer)
             Vista coc
         endif
     endfunction
 
+    let s:timer = 0
+
+    " 言語サーバは最初のファイルを開いてから起動するので、シンボルを返せるまで待つ
+    function s:WaitForSymbols() abort
+        call timer_stop(s:timer)
+        let s:timer = timer_start(100, function('s:OpenVistaWhenReady'), {'repeat': 50})
+    endfunction
+
     augroup VistaAutoStart
         autocmd!
-        autocmd User CocNvimInit call timer_start(100, function('s:OpenVistaWhenReady'), {'repeat': 50})
-        autocmd TabEnter * Vista coc
+        autocmd BufWinEnter,TabEnter * call s:WaitForSymbols()
     augroup END
