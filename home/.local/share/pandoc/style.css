@@ -72,6 +72,9 @@ body {
     padding: 4rem 1rem;
   }
 }
+main {
+  container-type: inline-size;
+}
 main > :first-child {
   margin-top: 0;
 }
@@ -215,7 +218,6 @@ li > p:not(:first-child) {
 }
 .table-wrap {
   margin: 1rem;
-  container-type: inline-size;
 }
 @media screen {
   .table-wrap {
@@ -242,8 +244,7 @@ table th,
 table td {
   border: 1px solid #ccc;
   padding: 0.4rem 0.8rem;
-  box-sizing: border-box;
-  max-width: max(40cqi, calc((100cqi - 1px) / var(--cols)));
+  max-width: max(35cqi, calc((100cqi - 2rem - 1px) / var(--cols)));
   overflow-wrap: break-word;
 }
 table th {
