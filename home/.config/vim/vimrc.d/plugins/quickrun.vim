@@ -42,6 +42,8 @@ Plug 'thinca/vim-quickrun'
         \ '+fenced_divs' .
         \ '+bracketed_spans' .
         \ ' --to=html5' .
+        "\ 長い行のある表の列幅を、区切り行のダッシュの比で固定させない
+        \ ' --columns=100000' .
         \ ' --template="$XDG_DATA_HOME/pandoc/template.html"' .
         \ ' --mathjax="$XDG_DATA_HOME/pandoc/dynload.js"' .
         \ ' --css="$XDG_DATA_HOME/pandoc/style.css"' .
@@ -50,7 +52,9 @@ Plug 'thinca/vim-quickrun'
         \ ' --standalone' .
         \ ' --variable=pagetitle:%{expand("%:t")}'
     let s:pandoc_pre_exec = '%c %o -t json %a %s | '
-    let s:pandoc_post_exec = '%c %o -f json %a --lua-filter="$XDG_DATA_HOME/pandoc/mermaid.lua"'
+    let s:pandoc_post_exec = '%c %o -f json %a' .
+        \ ' --lua-filter="$XDG_DATA_HOME/pandoc/mermaid.lua"' .
+        \ ' --lua-filter="$XDG_DATA_HOME/pandoc/table.lua"'
     let s:pandoc_filter = ''
 
     let s:pandoc_ditaa_filter_cmd = 'pandoc-ditaa-filter'
