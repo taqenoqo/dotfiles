@@ -194,6 +194,8 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 - Vim は `-c` を VimEnter より後に実行する。`NERDTreeAddPathFilter` など VimEnter で登録される設定をヘッドレス検証するときは、`-c 'autocmd VimEnter * ...'` 経由にしないと空振りする。
 - Vim の `-c` は 10 個までしか受け付けない。超えた分は黙って無視され、末尾の `qa!` も実行されないためハングしたように見える。ヘッドレス検証でコマンドを多く流すときは `-S <script>` を使う。
 - Vim の `function` は `!` なしでも、同じスクリプトを再 source したときだけは例外として黙って置き換わる (`userfunc.txt` の "There is one exception")。E122 で止まるのは別スクリプトが同名を定義したときだけ。`!` を付けないことによる不便は無く、衝突の検出だけが得られる。
+- Vim 組み込みの `syntax/stylus.vim` (patch 9.1.0386 で `wavded/vim-stylus` から取り込まれた) には、色の定義 (`hi def link`) も土台の CSS 構文の読み込みも無い。`.styl` は `filetype=stylus` と判定され構文グループも作られるのに、色が一切付かない。Vim 9.2.0167 でも、2026-10 時点の Vim の master でも同じ。
+- 組み込みの `syntax/stylus.vim` には読み込み済みの判定 (`b:current_syntax` のチェック) も無い。構文ファイルは `runtimepath` 上の同名ファイルがすべて読まれ、組み込み版はプラグインの後に読まれるので、同じグループ名を使う別実装を上書きする。`iloginow/vim-stylus` は単体なら最も細かく色が付くが、この上書きで単語のほとんどが `stylusVariable` になり、`wavded/vim-stylus` より悪くなる。wavded が無事なのは、組み込み版がその一部を写したもので定義が同じだから。
 - サンドボックス下の Vim は `@+` (クリップボード) への書き込みが黙って失敗し、レジスタが空のまま読める。クリップボードを触る検証はサンドボックスを外し、実行の前後で退避・復元すること。
 - Claude Code も Copilot CLI も `@path` でファイルを参照する記法は持つが、行範囲を指定する公式の記法は無い。`@file#L76-82` は claude-code の Issue #26993 に出てくるだけで、ドキュメント化されていない。
 - dotfiles 配下は asdf に python のバージョンが設定されておらず `python3` が起動しない。評価スクリプト等を回すときは `~/.asdf/installs/python/<ver>/bin/python3` を直接叩く。
