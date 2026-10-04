@@ -70,5 +70,8 @@
     "instanceof",
     "piyo",
     "typeof"
-  ]
+  ],
+  "json.schemaDownload.trustedDomains": {
+    "https://raw.githubusercontent.com": true
+  }
 }
