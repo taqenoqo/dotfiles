@@ -29,6 +29,12 @@ main-indent = 1rem
   img, pre, blockquote, table, figure
     page-break-inside: avoid
 
+  h1, h2, h3, h4, h5, h6
+    page-break-after: avoid
+
+    & + p
+      page-break-after: avoid
+
 
 body
   background-color: #fff

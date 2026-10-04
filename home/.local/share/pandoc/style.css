@@ -28,6 +28,22 @@
   figure {
     page-break-inside: avoid;
   }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+  }
+  h1 + p,
+  h2 + p,
+  h3 + p,
+  h4 + p,
+  h5 + p,
+  h6 + p {
+    page-break-after: avoid;
+  }
 }
 body {
   background-color: #fff;
