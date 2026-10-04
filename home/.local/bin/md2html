@@ -1,0 +1,49 @@
+#!/bin/sh
+# Markdown を自分用のスタイルの単一 HTML に変換し、標準出力へ書き出す。
+# 使い方: md2html <file.md> [HTML を書き出す側の pandoc に渡すオプション...]
+
+src=$1
+shift
+
+ditaa_filter() {
+    if command -v pandoc-ditaa-filter >/dev/null; then
+        pandoc-ditaa-filter --ditaa-opts="-E -S --svg" --img-ext="svg"
+    else
+        cat
+    fi
+}
+
+# 長い行のある表の列幅を、区切り行のダッシュの比で固定させない
+columns=--columns=100000
+from=markdown_strict
+from=$from+space_in_atx_header
+from=$from+tex_math_dollars
+from=$from+tex_math_double_backslash
+from=$from+fenced_code_blocks
+from=$from+backtick_code_blocks
+from=$from+definition_lists
+from=$from+pipe_tables
+from=$from+markdown_in_html_blocks
+from=$from+footnotes
+from=$from+implicit_figures
+from=$from+inline_notes
+from=$from+header_attributes
+from=$from+fenced_code_attributes
+from=$from+inline_code_attributes
+from=$from+link_attributes
+from=$from+fenced_divs
+from=$from+bracketed_spans
+
+pandoc --from="$from" --to=json "$columns" "$src" |
+    ditaa_filter |
+    pandoc --from=json --to=html5 "$columns" \
+        --template="$XDG_DATA_HOME/pandoc/template.html" \
+        --mathjax="$XDG_DATA_HOME/pandoc/dynload.js" \
+        --css="$XDG_DATA_HOME/pandoc/style.css" \
+        --include-in-header="$XDG_DATA_HOME/pandoc/mathjax_config.html" \
+        --embed-resources \
+        --standalone \
+        --variable=pagetitle:"$(basename "$src")" \
+        --lua-filter="$XDG_DATA_HOME/pandoc/mermaid.lua" \
+        --lua-filter="$XDG_DATA_HOME/pandoc/table.lua" \
+        "$@"
