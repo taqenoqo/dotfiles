@@ -22,57 +22,11 @@ Plug 'thinca/vim-quickrun'
         \ 'outputter/browser/name': '%{tempname()}.svg',
         \ 'exec': [ '%c %o %a <%s' ]
     \ }
-    let s:pandoc_opt =
-        \ '--from=markdown_strict' .
-        \ '+space_in_atx_header' .
-        \ '+tex_math_dollars' .
-        \ '+tex_math_double_backslash' .
-        \ '+fenced_code_blocks' .
-        \ '+backtick_code_blocks' .
-        \ '+definition_lists' .
-        \ '+pipe_tables' .
-        \ '+markdown_in_html_blocks' .
-        \ '+footnotes' .
-        \ '+implicit_figures' .
-        \ '+inline_notes' .
-        \ '+header_attributes' .
-        \ '+fenced_code_attributes' .
-        \ '+inline_code_attributes' .
-        \ '+link_attributes' .
-        \ '+fenced_divs' .
-        \ '+bracketed_spans' .
-        \ ' --to=html5' .
-        "\ 長い行のある表の列幅を、区切り行のダッシュの比で固定させない
-        \ ' --columns=100000' .
-        \ ' --template="$XDG_DATA_HOME/pandoc/template.html"' .
-        \ ' --mathjax="$XDG_DATA_HOME/pandoc/dynload.js"' .
-        \ ' --css="$XDG_DATA_HOME/pandoc/style.css"' .
-        \ ' --include-in-header="$XDG_DATA_HOME/pandoc/mathjax_config.html"' .
-        \ ' --embed-resources' .
-        \ ' --standalone' .
-        \ ' --variable=pagetitle:%{expand("%:t")}'
-    let s:pandoc_pre_exec = '%c %o -t json %a %s | '
-    let s:pandoc_post_exec = '%c %o -f json %a' .
-        \ ' --lua-filter="$XDG_DATA_HOME/pandoc/mermaid.lua"' .
-        \ ' --lua-filter="$XDG_DATA_HOME/pandoc/table.lua"'
-    let s:pandoc_filter = ''
-
-    let s:pandoc_ditaa_filter_cmd = 'pandoc-ditaa-filter'
-    let s:pandoc_ditaa_filter_opts = '--ditaa-opts="-E -S --svg" --img-ext="svg"'
-    if executable(s:pandoc_ditaa_filter_cmd)
-        let s:pandoc_filter = s:pandoc_filter . s:pandoc_ditaa_filter_cmd . ' ' . s:pandoc_ditaa_filter_opts . ' | '
-    endif
-
-    let s:pandoc_exec = s:pandoc_pre_exec . s:pandoc_filter . s:pandoc_post_exec
     let g:quickrun_config['markdown'] = {
-        \ 'type': 'pandoc',
+        \ 'type': 'md2html',
         \ 'outputter': 'error',
         \ 'outputter/error/success': 'browser',
         \ 'outputter/error/error': 'buffer',
-        \ 'cmdopt': s:pandoc_opt,
-        \ 'exec': [
-            \ s:pandoc_exec
-        \ ]
     \ }
 
     let g:quickrun_config['marp'] = {
