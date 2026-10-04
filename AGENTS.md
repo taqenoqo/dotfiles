@@ -15,6 +15,7 @@
   - `.config/gh/` — GitHub CLI 設定（XDG）
   - `.config/lazygit/` — lazygit 設定（XDG）
   - `.config/marp/` — Marp（Markdown スライド）テーマ設定（XDG）
+  - `.local/bin/md2html` — Markdown を自分用のスタイルの単一 HTML に変換するコマンド。Vim の `<leader>r` もこれを呼ぶ
   - `.local/share/pandoc/` — Pandoc の HTML テンプレート、スタイル、Lua フィルタ、スタイル確認用の `sample.md`（XDG）
   - `.asdfrc` — asdf バージョンマネージャー設定
   - `.default-npm-packages` — asdf-nodejs が Node.js のインストール直後に入れる npm グローバルパッケージの一覧
@@ -165,6 +166,7 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 
 ### Pandoc
 
+- pandoc のオプションは `home/.local/bin/md2html` だけに書く。`quickrun.vim` は `md2html` を呼ぶだけにし、シェルから叩いたときと `<leader>r` とで結果が食い違わないようにする。HTML は標準出力へ書き出し、ファイル名より後ろの引数は HTML を書き出す側の pandoc に渡す。
 - Mermaid の図はブラウザ側で描画する。`mermaid.lua` がコードブロックを `div.mermaid` に置き換え、`template.html` が CDN の Mermaid を読み込む。数式の MathJax も CDN から読むので、同じ方式に揃えている。
 - `mermaid-filter` で変換時に SVG へ焼き込む方式は不採用。同梱の Chromium が x86_64 用で arm64 では起動せず、図が黙って消えていた (詳細は調査記録)。
 - 図の入れ物は `pre` ではなく `div` にする。公式の例は `pre.mermaid` だが、`style.css` のコードブロック用の枠・等幅フォント・スクロール指定が図にもかかるため。
@@ -261,10 +263,12 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 - `mermaid-filter` (1.4.7) は mermaid-cli の 10 系に固定で、puppeteer が入れる Chromium は x86_64 用。arm64 では `spawn Unknown system error -86` で起動に失敗する。旧 Lua フィルタは失敗したブロックを削除していたため、pandoc は正常終了し、正しい図まで消えていた。実行したディレクトリに `mermaid-filter.err` も残る。
 - 親の `font-weight` が 300 のとき、`strong` の既定値 `bolder` は 400 にしかならない。ヒラギノ明朝 ProN には W3 と W6 しか無く、300 も 400 も W3 で表示されるので、太字にならない。`body` に 300 を指定しないこと。
 - Playwright の MCP ツールは `file:` の URL を開けない。生成した HTML の表示確認は、出力先のディレクトリを `python3 -m http.server --bind 127.0.0.1` で配信して開く。作業ファイルはリポジトリ直下の `.playwright-mcp/` に作られるので、確認後に消す。
-- pandoc は、パイプテーブルのソースに `--columns` (既定 72) を超える行があると、表を全幅にし、列幅を区切り行のダッシュの本数の比で固定する (`<colgroup>` を出力する)。中身と無関係な配分になるので、`quickrun.vim` で `--columns=100000` を渡して止めている。
+- pandoc は、パイプテーブルのソースに `--columns` (既定 72) を超える行があると、表を全幅にし、列幅を区切り行のダッシュの本数の比で固定する (`<colgroup>` を出力する)。中身と無関係な配分になるので、`md2html` で `--columns=100000` を渡して止めている。
 - 表のセルの `max-width` は Chrome で効く (仕様上は未定義)。`%` は表自身の幅が基準になり循環するので使えない。`cqi` はコンテナのコンテンツ領域 (padding を除く) が基準。
 - `overflow-wrap: anywhere` は列の最小幅も 1 文字にするので、表の中の短いコードまで単語の途中で切れる。`break-word` は最小幅に影響しないので、入りきらないときだけ折り返す。
 - `table.lua` が包むのは Markdown 記法の表だけ。HTML で直接書いた `<table>` は pandoc が表として解釈しないので包まれず、余白もスクロールも付かない。
+- quickrun は、設定に `command` が無ければ `type` の値をコマンド名に使う。`g:quickrun_config['markdown']` の `type` を消すと、既定の `markdown` → `markdown/pandoc` が引かれ、その `exec` (`%c --from=markdown --to=html …`) を継承してしまう。`'type': 'md2html'` はこれを避けつつコマンドを指定している。
+- ヘッドレスの `vim -es` は `cpoptions` に `C` が入り、autoload の行継続が `E697` で失敗する。スクリプトの先頭で `set cpo&vim` する。
 - `quickrun.vim` の設定は Vim の起動時に読まれる。変更後は Vim を読み込み直すまで `<leader>r` に反映されない。`home/` に新しいファイルを足したときは、`./install` でリンクするまで `~` 側から見えない。
 - macOS の既定設定では、トラックパッド使用時にスクロールバーがスクロール中しか出ない。スクロールできる表が、右端で切れているだけに見える。
 - Chrome は、紙の幅からはみ出す中身があると、収まるようにページ全体を縮小して印刷する (長い行のあるコードブロック 1 つで全体が約 7 割になった)。はみ出しを見せたまま縮小だけ止めることはできない。`overflow: clip` と `overflow-clip-margin` でも縮小した。
