@@ -70,3 +70,30 @@ Plug 'liuchengxu/vista.vim'
         autocmd!
         autocmd BufWinEnter,TabEnter * call s:WaitForSymbols()
     augroup END
+
+    function s:ResetLayout() abort
+        let l:editors = filter(gettabinfo(tabpagenr())[0].windows,
+            \ {_, id -> getwinvar(id, '&filetype') !~# '^\(nerdtree\|vista\)'})
+        if empty(l:editors)
+            return
+        endif
+        let l:current = index(l:editors, win_getid()) == -1 ? l:editors[0] : win_getid()
+        for l:id in l:editors
+            call win_execute(l:id, 'wincmd J')
+        endfor
+        NERDTreeFocus
+        wincmd H
+        execute 'vertical resize' g:NERDTreeWinSize
+        call win_gotoid(l:current)
+        let l:vista = bufwinid('__vista__')
+        if l:vista == -1
+            Vista coc
+        else
+            call win_execute(l:vista, ['wincmd L', 'vertical resize ' . g:vista_sidebar_width])
+        endif
+        " サイドバーは winfixwidth なので、編集ウインドウの高さだけが揃う
+        wincmd =
+        call win_gotoid(l:current)
+    endfunction
+
+    nnoremap <silent> <C-w><CR> :call <SID>ResetLayout()<CR>
