@@ -56,6 +56,7 @@
 - statusline のカーソル列は `%v` で表示幅を示す。全角文字は2列、タブは展開後の幅で数える。
 - `<Leader>F` は `NERDTreeFind` を実行し、現在のファイルをツリーで表示して NERDTree へフォーカスを移す。
 - Vista (outline) は、バッファの表示時とタブ移動時に、言語サーバがシンボルを返すのを最大 5 秒待って自動で開く。`g:vista_auto_open = 0` で止まる。手で閉じても、次にファイルを開けばまた開く。
+- `<C-w><CR>` は、NERDTree を左 (`g:NERDTreeWinSize`)、Vista を右 (`g:vista_sidebar_width`) に戻し、閉じていれば開く。残りのウインドウは中央に上下へ均等に並べ、カーソルは元の編集ウインドウに残す。実装は `vimrc.d/plugins/vista.vim`。
 
 #### git レビューモード
 
