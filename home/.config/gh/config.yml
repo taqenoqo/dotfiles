@@ -19,6 +19,7 @@ aliases:
     issue minep: "!gh issue list -a @me --json 'number,title,projectItems' --jq 'sort_by(.projectItems[0].status.name) | .[] | [.number, .title, .projectItems[0].status.name] | @tsv' | column -t -s $'\\t'"
     pr mine: pr list -a @me
     reqr: search prs --state=open --draft=false --review-requested=@me
+    reqrp: 'api graphql -f q="is:pr is:open draft:false review-requested:@me" -f query="query($q:String!){search(query:$q,type:ISSUE,first:30){nodes{...on PullRequest{repository{nameWithOwner} number title url additions deletions updatedAt}}}}" --template "{{range .data.search.nodes}}{{tablerow (hyperlink .url (printf `%s#%v` .repository.nameWithOwner .number) | color `green`) .title (printf `+%v` .additions | color `green`) (printf `-%v` .deletions | color `red`) (timeago .updatedAt | color `black+h`)}}{{end}}{{tablerender}}"'
     reqm: search prs --state=open --draft=false --author=@me --review=approved
     reqt: '!gh project item-list "$GH_DEFAULT_PROJECT_NUM" --owner "$GH_DEFAULT_PROJECT_OWNER" --query "-status:completed verifier:*$GH_MY_NAME*"'
     develop: '!gh issue develop "$1" -cn "issue-$1" && git switch - && git worktree add "$(git rev-parse --show-toplevel)/../issue-$1"'
