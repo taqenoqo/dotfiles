@@ -193,14 +193,16 @@ function s:AIRefPath()
     return l:path[len(l:root[0]) + 1:]
 endfunction
 
-function YankAIRef() range
-    let l:lines = a:firstline == a:lastline ? a:firstline : a:firstline . '-' . a:lastline
-    let @+ = s:AIRefPath() . ':' . l:lines
+function YankAIRef(with_lines) range
+    let @+ = s:AIRefPath()
+    if a:with_lines
+        let @+ .= ':' . (a:firstline == a:lastline ? a:firstline : a:firstline . '-' . a:lastline)
+    endif
     echo 'Yanked: ' . @+
 endfunction
 
-nnoremap <Leader>y :call YankAIRef()<CR>
-xnoremap <Leader>y :call YankAIRef()<CR>
+nnoremap <Leader>y :call YankAIRef(0)<CR>
+xnoremap <Leader>y :call YankAIRef(1)<CR>
 
 filetype plugin indent on
 
