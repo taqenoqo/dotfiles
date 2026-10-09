@@ -23,6 +23,7 @@
 		--glob="refs/remotes/*/staging*" \
 		--glob="refs/remotes/*/stage*" \
 		--glob="refs/remotes/*/support*" \
+		--glob="refs/remotes/*/epic*" \
 		--glob=HEAD \
 		--decorate-refs="refs/heads/*" \
 		--decorate-refs="refs/stash" \
@@ -35,9 +36,10 @@
 		--decorate-refs="refs/remotes/*/staging*" \
 		--decorate-refs="refs/remotes/*/stage*" \
 		--decorate-refs="refs/remotes/*/support*" \
+		--decorate-refs="refs/remotes/*/epic*" \
 		--decorate-refs=HEAD
 	grapha = graph0 --all
-	graphs = graph --simplify-by-decoration
+	graphs = grapha --simplify-by-decoration
 [push]
 	default = upstream
 [user]
@@ -49,7 +51,7 @@
 	user = taqenoqo
 [diff]
 	tool = vimdiff
-	algorithm = minimal
+	algorithm = patience
 [merge]
 	tool = vimdiff
 [difftool "vimdiff"]
