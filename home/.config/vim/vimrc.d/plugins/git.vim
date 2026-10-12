@@ -43,18 +43,32 @@ Plug 'tpope/vim-fugitive'
         return l:resolved[0]
     endfunction
 
-    function! GitSetReviewBase()
-        let l:rev = input('Input rev to review: ')
-        if !empty(l:rev)
-            let l:rev = s:ResolveReviewBase(l:rev)
-            if empty(l:rev)
-                return
-            endif
+    " origin/HEAD は既定ブランチ (main / master) を指すので、ブランチ名を判別せずに済む。
+    let s:review_rev = 'origin/HEAD...'
+
+    function s:ApplyReviewBase(rev)
+        let l:base = empty(a:rev) ? '' : s:ResolveReviewBase(a:rev)
+        if !empty(a:rev) && empty(l:base)
+            return 0
         endif
 
-        execute 'NERDTreeGitStatusDiffRef ' . l:rev
-        call coc#config('git.diffRevision', l:rev)
+        execute 'NERDTreeGitStatusDiffRef ' . l:base
+        call coc#config('git.diffRevision', l:base)
         silent! CocCommand git.refresh
+        return 1
+    endfunction
+
+    function GitSetReviewBase()
+        let l:rev = input('Input rev to review: ')
+        if s:ApplyReviewBase(l:rev) && !empty(l:rev)
+            let s:review_rev = l:rev
+        endif
+    endfunction
+
+    " 解決済みのコミットではなく入力を覚えておき、切り替えのたびに解決し直す。
+    " HEAD が進んでも merge-base が追従するため。
+    function GitToggleReviewBase()
+        call s:ApplyReviewBase(empty(get(g:, 'NERDTreeGitStatusDiffRef', '')) ? s:review_rev : '')
     endfunction
 
     function! GitDiffFromReviewRef()
@@ -66,7 +80,8 @@ Plug 'tpope/vim-fugitive'
     nmap <Leader>gd :call GitDiffFromReviewRef()<CR>
     nmap <Leader>gD :call GitDiffFromInput()<CR>
     nmap <Leader>gM :call GitDiffFromMergeBaseInput()<CR>
-    nmap <Leader>gr :call GitSetReviewBase()<CR>
+    nmap <Leader>gr :call GitToggleReviewBase()<CR>
+    nmap <Leader>gR :call GitSetReviewBase()<CR>
     nmap <Leader>gl :GlLog<CR>
     nmap <Leader>ga :Gwrite<CR>
     nmap <Leader>gb :Git blame<CR>
