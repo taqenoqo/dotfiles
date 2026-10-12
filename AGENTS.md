@@ -171,7 +171,7 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 
 ### Pandoc
 
-- pandoc のオプションは `home/.local/bin/md2html` だけに書く。`quickrun.vim` は `md2html` を呼ぶだけにし、シェルから叩いたときと `<leader>r` とで結果が食い違わないようにする。HTML は標準出力へ書き出し、ファイル名より後ろの引数は HTML を書き出す側の pandoc に渡す。
+- pandoc のオプションは `home/.local/bin/md2html` だけに書く。`quickrun.vim` は `md2html` を呼ぶだけにし、シェルから叩いたときと `<leader>r` とで結果が食い違わないようにする。HTML は標準出力へ書き出し、`--` より後ろの引数は HTML を書き出す側の pandoc に渡す。`-o` を付けると `$TMPDIR/md2html/<ファイル名>.html` へ上書きで書き出し、`open` でブラウザに開く。
 - Mermaid の図はブラウザ側で描画する。`mermaid.lua` がコードブロックを `div.mermaid` に置き換え、`template.html` が CDN の Mermaid を読み込む。数式の MathJax も CDN から読むので、同じ方式に揃えている。
 - `mermaid-filter` で変換時に SVG へ焼き込む方式は不採用。同梱の Chromium が x86_64 用で arm64 では起動せず、図が黙って消えていた (詳細は調査記録)。
 - 図の入れ物は `pre` ではなく `div` にする。公式の例は `pre.mermaid` だが、`style.css` のコードブロック用の枠・等幅フォント・スクロール指定が図にもかかるため。

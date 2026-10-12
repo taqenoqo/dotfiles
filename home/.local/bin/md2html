@@ -1,9 +1,18 @@
 #!/bin/sh
 # Markdown を自分用のスタイルの単一 HTML に変換し、標準出力へ書き出す。
-# 使い方: md2html <file.md> [HTML を書き出す側の pandoc に渡すオプション...]
+# 使い方: md2html [-o] <file.md> [-- HTML を書き出す側の pandoc に渡すオプション...]
+#   -o: 標準出力ではなく一時ファイルへ書き出し、ブラウザで開く
 
-src=$1
-shift
+open=
+src=
+while [ $# -gt 0 ]; do
+    case $1 in
+        -o) open=1 ;;
+        --) shift; break ;;
+        *) src=$1 ;;
+    esac
+    shift
+done
 
 ditaa_filter() {
     if command -v pandoc-ditaa-filter >/dev/null; then
@@ -34,16 +43,26 @@ from=$from+link_attributes
 from=$from+fenced_divs
 from=$from+bracketed_spans
 
-pandoc --from="$from" --to=json "$columns" "$src" |
-    ditaa_filter |
-    pandoc --from=json --to=html5 "$columns" \
-        --template="$XDG_DATA_HOME/pandoc/template.html" \
-        --mathjax="$XDG_DATA_HOME/pandoc/dynload.js" \
-        --css="$XDG_DATA_HOME/pandoc/style.css" \
-        --include-in-header="$XDG_DATA_HOME/pandoc/mathjax_config.html" \
-        --embed-resources \
-        --standalone \
-        --variable=pagetitle:"$(basename "$src")" \
-        --lua-filter="$XDG_DATA_HOME/pandoc/mermaid.lua" \
-        --lua-filter="$XDG_DATA_HOME/pandoc/table.lua" \
-        "$@"
+convert() {
+    pandoc --from="$from" --to=json "$columns" "$src" |
+        ditaa_filter |
+        pandoc --from=json --to=html5 "$columns" \
+            --template="$XDG_DATA_HOME/pandoc/template.html" \
+            --mathjax="$XDG_DATA_HOME/pandoc/dynload.js" \
+            --css="$XDG_DATA_HOME/pandoc/style.css" \
+            --include-in-header="$XDG_DATA_HOME/pandoc/mathjax_config.html" \
+            --embed-resources \
+            --standalone \
+            --variable=pagetitle:"$(basename "$src")" \
+            --lua-filter="$XDG_DATA_HOME/pandoc/mermaid.lua" \
+            --lua-filter="$XDG_DATA_HOME/pandoc/table.lua" \
+            "$@"
+}
+
+if [ -z "$open" ]; then
+    convert "$@"
+else
+    # ファイル名ごとに上書きするので、一時ファイルが溜まらず、ブラウザの再読み込みで最新になる
+    html=${TMPDIR:-/tmp}/md2html/$(basename "$src" .md).html
+    mkdir -p "$(dirname "$html")" && convert "$@" >"$html" && open "$html"
+fi
