@@ -60,12 +60,16 @@
 
 #### git レビューモード
 
-`<Leader>gr` を押すと比較先の revision を尋ね、以下 3 つが同じ基準に切り替わる。
+`<Leader>gR` を押すと比較先の revision を尋ね、以下 3 つが同じ基準に切り替わる。
 空入力で通常表示（ワークツリー基準）に戻る。
 
 - NERDTree のファイルマーカー（`g:NERDTreeGitStatusDiffRef`）
 - `<Leader>gd` の差分先（`GitDiffFromReviewRef()`）
 - 行番号横の gutter（coc-git の `git.diffRevision`）
+
+`<Leader>gr` は、ワークツリー基準と、最後に `<Leader>gR` で指定した revision とを切り替える。
+未指定なら `origin/HEAD...`（既定ブランチとの merge-base）を使う。入力を覚えておき、
+切り替えのたびに解決し直すので、HEAD が進んでも merge-base が追従する。
 
 入力は `s:ResolveReviewBase()` で 1 つのコミットに解決してから 3 箇所へ配る。三点記法は
 merge-base に、それ以外は `git rev-parse --verify` で解決する。渡す先ごとに revision の
