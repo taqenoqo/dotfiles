@@ -55,6 +55,7 @@ Plug 'tpope/vim-fugitive'
         execute 'NERDTreeGitStatusDiffRef ' . l:base
         call coc#config('git.diffRevision', l:base)
         silent! CocCommand git.refresh
+        echo 'Review base: ' . (empty(a:rev) ? 'worktree' : a:rev . ' (' . l:base[:6] . ')')
         return 1
     endfunction
 
