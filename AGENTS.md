@@ -183,6 +183,7 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 - Mermaid の図はブラウザ側で描画する。`mermaid.lua` がコードブロックを `div.mermaid` に置き換え、`template.html` が CDN の Mermaid を読み込む。数式の MathJax も CDN から読むので、同じ方式に揃えている。
 - `mermaid-filter` で変換時に SVG へ焼き込む方式は不採用。同梱の Chromium が x86_64 用で arm64 では起動せず、図が黙って消えていた (詳細は調査記録)。
 - 図の入れ物は `pre` ではなく `div` にする。公式の例は `pre.mermaid` だが、`style.css` のコードブロック用の枠・等幅フォント・スクロール指定が図にもかかるため。
+- 図は元の大きさの 0.75 倍で表示し、それでも本文の幅を超える図は幅に合わせて縮める。Mermaid の既定では幅を超える図だけが縮むので、細い図 (クラス図など) が等倍のまま、横長の図 (フローチャートなど) より大きく見えていた。`template.html` が描画のたびに SVG の `max-width` を元の幅の 0.75 倍にしている。横長の図は今も小さく、倍率は揃いきらない (0.46〜0.75)。
 - 表は `table.lua` で `div.table-wrap` に包み、div をスクロールの枠、表を `width: max-content` にする。列は中身の幅になり、上限で折り返し、はみ出した分は表ごとに横スクロールする。表そのものをスクロールの枠 (`display: block; overflow-x: auto`) にすると、ブラウザが列を縮めてページ幅に押し込むので採らない。
 - 列幅の上限は `main` の幅に対する割合 (`cqi`) で指定し、「35% と、枠の幅 ÷ 列数 の大きい方」とする。列数は `table.lua` が `--cols` として div に渡す。`main` に `container-type: inline-size` を付けているのはこのため。上限を列数によらない固定値にすると、2 列の表はセルが長くても枠の 7 割ほどで止まり、右が余る。
 - 「短い列 + 長い列」の 2 列の表では、長い列が 50% で止まり余りが残る (未解決)。
@@ -281,7 +282,10 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 - 親の `font-weight` が 300 のとき、`strong` の既定値 `bolder` は 400 にしかならない。ヒラギノ明朝 ProN には W3 と W6 しか無く、300 も 400 も W3 で表示されるので、太字にならない。`body` に 300 を指定しないこと。
 - Playwright の MCP ツールは `file:` の URL を開けない。生成した HTML の表示確認は、出力先のディレクトリを `python3 -m http.server --bind 127.0.0.1` で配信して開く。作業ファイルはリポジトリ直下の `.playwright-mcp/` に作られるので、確認後に消す。
 - `playwright-cli` も既定では `file:` を開けない (`Allowed protocols: http:, https:, about:, data:`)。`run-code` の `page.goto` でも同じ。`{"allowUnrestrictedFileAccess": true}` を書いた設定ファイルを `open --config=` で渡すと開ける (microsoft/playwright#39560)。
-- Mermaid は図を 1 つずつ非同期で描画し、描き終えた要素に `data-processed` を付ける。構文エラーの図にも付き、「Syntax error in text」の SVG が描かれる。`sample.md` (図 12 個) では、最後の図まで約 18 秒かかった。
+- Mermaid は図を 1 つずつ非同期で描画し、描き始める前の要素に `data-processed` を付ける (`mermaid.ts` の `runThrowsErrors`)。描き終えた印ではない。構文エラーの図にも付き、「Syntax error in text」の SVG が描かれる。`sample.md` (図 12 個) では、最後の図まで約 18 秒かかった。
+- Mermaid の図を CSS の `zoom` で縮めてはいけない。Mermaid が縮んだ状態で文字の幅を測るため箱が小さく描かれ、クラス図や ER 図の文字が切れた。
+- `mermaid.run()` に引数のオブジェクトを渡すと、既定の `querySelector: '.mermaid'` が使われない。対象が無いという例外を `suppressErrors: true` が黙って捨て、何も描かれない。
+- pandoc のテンプレートでは `$` が変数の記号になるので、`template.html` の JS にテンプレートリテラル (`${…}`) は書けない。
 - pandoc は、パイプテーブルのソースに `--columns` (既定 72) を超える行があると、表を全幅にし、列幅を区切り行のダッシュの本数の比で固定する (`<colgroup>` を出力する)。中身と無関係な配分になるので、`md2html` で `--columns=100000` を渡して止めている。
 - 表のセルの `max-width` は Chrome で効く (仕様上は未定義)。`%` は表自身の幅が基準になり循環するので使えない。`cqi` はコンテナのコンテンツ領域 (padding を除く) が基準。
 - 表のセルの `max-width` は、Chrome では `box-sizing` の指定によらず、padding を含めたセル全体の幅を制限する。`35cqi` (222.6px) に対しセルの幅は 221.1px だった。上限から padding を引く必要はなく、引くと 2 列の合計が枠より 48px 狭くなった。
