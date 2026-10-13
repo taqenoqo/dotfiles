@@ -155,6 +155,14 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
     - 生成の記録が無いスライド (手で足したもの) は消さず、直前に残る生成済みスライドの後ろに付ける。
     - 変わっていない要素を一字も変えないため、前回の `DECK` はローカルに持たず、Apps Script エディタに残っているコードから取り出して書き換える。
 
+### md-preview スキル
+
+- Markdown を `md2html` で HTML にし、`playwright-cli` で開いて見た目を確認し、報告するだけ。Markdown は直さない (ユーザの指定)。
+- `md2html -o` は使わない。`open` が開くのはユーザのブラウザで、AI からは見えないため。
+- ページ全体を 1 枚に撮る `screenshot --full-page` は使わない。長い文書 (`sample.md` で高さ 12,022px) では縮小されて表やコードが読めない。ページは画面 1 枚分ずつに分けて撮り、Mermaid の図は別に図ごとに撮る。
+- 本文にコマンドやコードを書かず、試して初めて分かった落とし穴だけを書く。書き方は実行するエージェントに `playwright-cli --help` を見て組み立てさせる。`playwright-cli` はアルファ版 (1.59.0-alpha) でコマンドが変わり得るためと、Claude Code など他のツールでも同じ本文で通じるようにするため (ユーザの指摘)。
+- `playwright-cli` に依存させ、Playwright MCP には対応させない。スキルは `md2html` をシェルで実行するので、シェルが使えればどのツールからでも `playwright-cli` を呼べる。MCP では `file:` を開くために HTTP サーバの起動と停止が要るうえ、ツール名もツールごとに違う。
+
 ### Vim script
 
 - 関数定義に `!` を付けない (`function` を使う)。`!` なしでも同じスクリプトの再 source は例外扱いで黙って置き換わるため、vimrc を読み直しても困らない。一方 `!` を付けると別スクリプトの同名関数を黙って上書きし、衝突に気づけなくなる (詳細は調査記録)。
@@ -272,6 +280,8 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 - `mermaid-filter` (1.4.7) は mermaid-cli の 10 系に固定で、puppeteer が入れる Chromium は x86_64 用。arm64 では `spawn Unknown system error -86` で起動に失敗する。旧 Lua フィルタは失敗したブロックを削除していたため、pandoc は正常終了し、正しい図まで消えていた。実行したディレクトリに `mermaid-filter.err` も残る。
 - 親の `font-weight` が 300 のとき、`strong` の既定値 `bolder` は 400 にしかならない。ヒラギノ明朝 ProN には W3 と W6 しか無く、300 も 400 も W3 で表示されるので、太字にならない。`body` に 300 を指定しないこと。
 - Playwright の MCP ツールは `file:` の URL を開けない。生成した HTML の表示確認は、出力先のディレクトリを `python3 -m http.server --bind 127.0.0.1` で配信して開く。作業ファイルはリポジトリ直下の `.playwright-mcp/` に作られるので、確認後に消す。
+- `playwright-cli` も既定では `file:` を開けない (`Allowed protocols: http:, https:, about:, data:`)。`run-code` の `page.goto` でも同じ。`{"allowUnrestrictedFileAccess": true}` を書いた設定ファイルを `open --config=` で渡すと開ける (microsoft/playwright#39560)。
+- Mermaid は図を 1 つずつ非同期で描画し、描き終えた要素に `data-processed` を付ける。構文エラーの図にも付き、「Syntax error in text」の SVG が描かれる。`sample.md` (図 12 個) では、最後の図まで約 18 秒かかった。
 - pandoc は、パイプテーブルのソースに `--columns` (既定 72) を超える行があると、表を全幅にし、列幅を区切り行のダッシュの本数の比で固定する (`<colgroup>` を出力する)。中身と無関係な配分になるので、`md2html` で `--columns=100000` を渡して止めている。
 - 表のセルの `max-width` は Chrome で効く (仕様上は未定義)。`%` は表自身の幅が基準になり循環するので使えない。`cqi` はコンテナのコンテンツ領域 (padding を除く) が基準。
 - 表のセルの `max-width` は、Chrome では `box-sizing` の指定によらず、padding を含めたセル全体の幅を制限する。`35cqi` (222.6px) に対しセルの幅は 221.1px だった。上限から padding を引く必要はなく、引くと 2 列の合計が枠より 48px 狭くなった。
