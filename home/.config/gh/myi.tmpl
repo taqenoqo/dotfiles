@@ -1,0 +1,45 @@
+{{- /* テンプレートには並べ替えもグループ化も無いので、ステータスとリポジトリそれぞれの初出の行で見出しを出し、そのリポジトリの全件をまとめて出す */ -}}
+{{- range $i, $issue := .data.search.nodes -}}
+  {{- range .projectItems.nodes -}}
+    {{- if and (hasSuffix $project .project.url) .status (eq .status.name $status) -}}
+      {{- $firstInStatus := true -}}
+      {{- $firstInRepo := true -}}
+      {{- range $j, $prev := $.data.search.nodes -}}
+        {{- if lt $j $i -}}
+          {{- range .projectItems.nodes -}}
+            {{- if and (hasSuffix $project .project.url) .status (eq .status.name $status) -}}
+              {{- $firstInStatus = false -}}
+              {{- if eq $prev.repository.nameWithOwner $issue.repository.nameWithOwner -}}
+                {{- $firstInRepo = false -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if $firstInStatus -}}
+        {{- $status | color "yellow+b" }}{{ "\n" -}}
+      {{- end -}}
+      {{- if $firstInRepo -}}
+        {{- "  " }}{{ $issue.repository.nameWithOwner | color "cyan" }}{{ "\n" -}}
+        {{- range $.data.search.nodes -}}
+          {{- $other := . -}}
+          {{- if eq .repository.nameWithOwner $issue.repository.nameWithOwner -}}
+            {{- range .projectItems.nodes -}}
+              {{- if and (hasSuffix $project .project.url) .status (eq .status.name $status) -}}
+                {{- $ago := timeago $other.updatedAt -}}
+                {{- $color := "254" -}}
+                {{- if regexMatch "just|minute|hour" $ago -}}{{- $color = "232+b" -}}
+                {{- else if regexMatch "^[1-6] days? ago" $ago -}}{{- $color = "234" -}}
+                {{- else if regexMatch "day" $ago -}}{{- $color = "242" -}}
+                {{- else if regexMatch "month" $ago -}}{{- $color = "250" -}}
+                {{- end -}}
+                {{- tablerow "  " (hyperlink $other.url (printf "#%v" $other.number) | color "green") ($ago | color $color) $other.title (join ", " (pluck "name" $other.labels.nodes) | color "black+h") -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+        {{- tablerender -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

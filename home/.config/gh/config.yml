@@ -20,7 +20,8 @@ aliases:
     pr mine: pr list -a @me
     reqr: 'api graphql -f q="is:pr is:open draft:false review-requested:@me" -f query="query($q:String!){search(query:$q,type:ISSUE,first:30){nodes{...on PullRequest{repository{nameWithOwner} number title url additions deletions updatedAt}}}}" --template "{{range .data.search.nodes}}{{tablerow (hyperlink .url (printf `%s#%v` .repository.nameWithOwner .number) | color `green`) .title (printf `+%v` .additions | color `green`) (printf `-%v` .deletions | color `red`) (timeago .updatedAt | color `black+h`)}}{{end}}{{tablerender}}"'
     reqm: search prs --state=open --draft=false --author=@me --review=approved
-    reqt: '!gh project item-list "$GH_DEFAULT_PROJECT_NUM" --owner "$GH_DEFAULT_PROJECT_OWNER" --query "-status:completed verifier:*$GH_MY_NAME*"'
+    reqt: '!gh project item-list "$GH_PROJECT_NUM" --owner "$GH_PROJECT_OWNER" --query "-status:completed verifier:*$GH_MY_NAME*"'
+    myi: '!t="{{\$project := \"/$GH_PROJECT_OWNER/projects/$GH_PROJECT_NUM\"}}"; IFS=,; for s in $GH_PROJECT_STATUSES; do t="$t{{\$status := \"$s\"}}$(cat "${XDG_CONFIG_HOME:-$HOME/.config}/gh/myi.tmpl")"; done; gh api graphql -f q="project:$GH_PROJECT_OWNER/$GH_PROJECT_NUM assignee:@me is:issue is:open sort:updated-desc" -f query="query(\$q:String!){search(query:\$q,type:ISSUE,first:100){nodes{...on Issue{repository{nameWithOwner} number title url updatedAt labels(first:10){nodes{name}} projectItems(first:10){nodes{project{url} status:fieldValueByName(name:\"Status\"){...on ProjectV2ItemFieldSingleSelectValue{name}}}}}}}}" --template "$t"'
     develop: '!gh issue develop "$1" -cn "issue-$1" && git switch - && git worktree add "$(git rev-parse --show-toplevel)/../issue-$1"'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
