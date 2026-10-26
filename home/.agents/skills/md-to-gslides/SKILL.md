@@ -16,7 +16,7 @@ Google Cloud プロジェクトを作れない環境や、Playwright が起動�
 
 ## 前提
 
-- macOS の Google Chrome、`playwright-cli`、`jq`
+- macOS の Google Chrome、`playwright-cli`、`jq`、`node`
 - Google の表示言語が日本語であること。画面上の要素を日本語の文言で探すため。
 - ユーザが同席していること。ログインと Apps Script の承認はユーザにしてもらう。
 
@@ -135,13 +135,26 @@ const DECK = [
     - 箇条書きの階層は行頭のタブの数で表す。草案のスペースの字下げはタブに、`*` や `+` の記号は `-` に置き換える。
     - 連続する箇条書きの行は 1 つのリストになる。入れ子の行は、記号が違っても親のリストに入る (番号を途切れさせないため)。
     - `` `...` `` は、バッククォートを外して等幅フォントにする。
+    - `` ``` `` で始まる行から、同じ数のバッククォートだけの行まではコードブロックになる。
+      フェンスの行は消え、間の行は書き換えずにそのまま写る (スペースの字下げもタブにしない)。
+      等幅フォントになり、フェンスに言語名 (`` ```haskell `` など) があれば色が付く。
   - `null` または省略: 触らない。スライド番号 (`SLIDE_NUMBER`) などはこれにする。
 - `build` は、前回の `build` と同じ要素のページを作り直さずに残し、`DECK` の順に並べ直す。手直しも残る。
   - それ以外の要素からは新しくページを作る。前回から変わったページや無くなったページは消え、その手直しも消える。
   - 生成の記録が無いページ (Google スライド上で手で足したページ) は残し、直前に残る生成済みページの後ろに付ける。
   - 初回だけは、テンプレートに元からあるページを全部消す。
 
-converter.gs と deck.js を連結して流し込み、`build` を実行する。
+コードブロックの色付けには Prism を使う。草案にあるコードブロックの言語名を `{LANGS}` に空白区切りで並べ (無ければ空)、
+Prism を `$WORK/prism.js` に用意する。依存する言語や別名 (`hs` など) は Prism の `dependencies.js` が解決する。
+Prism に無い言語は、等幅フォントになるだけで色は付かない。
+
+```bash
+cd $WORK && B=https://cdn.jsdelivr.net/npm/prismjs@1 && curl -sfLO $B/components.json && curl -sfLO $B/dependencies.js \
+  && IDS=$(node -e 'const c = require("./components.json"); console.log(require("./dependencies.js")(c, process.argv.slice(1)).getIds().filter(id => id in c.languages).join(" "))' {LANGS}) \
+  && for id in core $IDS; do curl -sfL $B/components/prism-$id.min.js && echo || exit 1; done > prism.js
+```
+
+converter.gs と prism.js と deck.js を連結して流し込み、`build` を実行する。
 `build` は最後に、再利用・新規・削除・手動の枚数をログに出す。画面を見る前に、草案から見込んだ枚数と合っているかを確かめる。
 新規のときは、生成できたら草案の front matter に `gslides: <コピーしたデッキの URL>` を書き足す。
 front matter は、ファイルの 1 行目の `---` から始める (無ければ 1 行目に作る)。
@@ -191,7 +204,7 @@ rm -rf $WORK
 ## Apps Script の実行方法
 
 エディタのタブで、コードを流し込んで保存し、関数 `{FUNCTION}` を選んで実行する。
-`{FILES}` は `inspect` なら converter.gs、`build` なら converter.gs と `$WORK/deck.js`。
+`{FILES}` は `inspect` なら converter.gs、`build` なら converter.gs と `$WORK/prism.js` と `$WORK/deck.js` (この順)。
 `CODE` の代入から実行までを、1 回のシェルの呼び出しで行う。
 
 ```bash
@@ -199,9 +212,14 @@ CODE=$(cat {FILES} | jq -Rs .) && playwright-cli -s=gslides run-code "async page
   await page.evaluate(code => monaco.editor.getModels().find(m => m.uri.path.endsWith('.js')).setValue(code), $CODE);
   await page.keyboard.press('Meta+S');
   await page.waitForFunction(() => document.querySelector('[aria-label=\"ドライブにプロジェクトを保存\"]').disabled, null, { timeout: 30000 });
-  await page.getByRole('listbox', { name: '実行する関数を選択' }).click();
-  await page.getByRole('option', { name: '{FUNCTION}', exact: true }).click({ timeout: 30000 });
-  await page.waitForFunction(() => document.querySelector('[aria-label=\"実行する関数を選択\"]').innerText.trim() === '{FUNCTION}', null, { timeout: 30000 });
+  const select = page.getByRole('listbox', { name: '実行する関数を選択' });
+  for (let tries = 0; (await select.innerText()).trim() !== '{FUNCTION}'; tries++) {
+    if (tries === 10) throw new Error('{FUNCTION} を選べない');
+    await page.keyboard.press('Escape');
+    await select.click();
+    await page.getByRole('option', { name: '{FUNCTION}', exact: true }).click({ timeout: 5000 }).catch(() => {});
+    await page.waitForTimeout(1000);
+  }
   await page.getByRole('button', { name: '選択した関数を実行' }).click();
 }"
 ```
@@ -218,7 +236,7 @@ playwright-cli -s=gslides run-code "async page => {
 ```
 
 - 保存が終わる前に関数を選ぶと、保存の後で選択が元に戻り、前の関数が走る。保存ボタンが押せなくなる (未保存の変更が無くなる) のを待ってから選ぶ。
-  念のため、選択が反映されたのを確かめてから実行する。
+- 保存が終わった後も、関数の一覧はしばらく古いままのことがある。開いた一覧は後から更新されないことがあり、目的の関数が 30 秒出なかった。選んだのに元に戻ることもある。そのため、選択欄が目的の関数名になるまで一覧を開き直す。
 - 完了判定にはログ本文ではなく種別 (aria-label) を使う。ログ本文にはテンプレートの文章が含まれ得るため。
 - 初回は「承認が必要です」が出て、空のログが返る。「権限を確認」を押すと承認画面が別タブで開く (押した操作がナビゲーションのエラーで終わることがあるが、開いていれば問題ない)。
   ユーザに許可してもらうと実行がそのまま続くので、実行し直さずに、待機とログ取得のコードだけをもう一度実行する。
