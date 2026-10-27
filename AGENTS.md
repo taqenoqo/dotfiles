@@ -150,6 +150,8 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
     - pptx の取り込み (LibreOffice と Google スライドで見た目が異なる)
     - Gemini による生成 (デザインを指定しても独自のデザインを出力する)
 - gws CLI など API を使う方法は GCP プロジェクトを要するが、会社の権限では作れない。Playwright 用の Chrome 拡張もストアからインストールできない。そこで、一時プロファイルのデバッグ用 Chrome にユーザがログインし、playwright-cli で CDP 接続する。GAS は Apps Script エディタの UI から実行する。
+- Chrome と一時プロファイルは、ユーザが作業の終わりを告げるまで残す。生成のたびに片付けると、続けて直しを頼まれるたびにログインし直すことになり、ユーザが面倒がった。
+    - プロファイルを固定の場所に残す案 (ログイン状態がディスクに残り続け、Chrome 136 の保護も効かない) と、普段の Chrome に接続する案 (接続ごとに許可のダイアログが出て、普段のブラウザを操作させることになる) は採らなかった。
 - テーマを取り込むのではなく、テンプレートのデッキごとコピーする。テンプレートは固定せず、毎回 URL を受け取る。
 - 中間形式は YAML にしない。GAS にそのまま貼れる JS リテラル `DECK` を使い、レイアウトは `inspect` で得た objectId で指定する。
 - スクリプトには `@OnlyCurrentDoc` を付け、権限をそのプレゼンテーションだけに絞る。
@@ -277,6 +279,7 @@ tmux の隣ペインで動く CLI エージェントに貼るための機能。
 - `PropertiesService.getDocumentProperties()` はバインドスクリプトで使え、追加の承認は要らなかった。
 - `Slide.move(index)` の index は移動前の並びで数える。望む順に先頭から `move(0)`, `move(1)`, … と呼べば、その順に並ぶ。
 - 組織が管理する Chrome プロファイルでは、拡張機能の更新ページや `chrome://managed-user-profile-notice/` のタブが勝手に開き、playwright-cli のタブ番号がずれる。`chrome://` のタブを `tab-close` すると固まって戻らない。
+- Chrome 136 から、`--remote-debugging-port` は既定のユーザデータディレクトリでは無視され、`--user-data-dir` で別のディレクトリを指す必要がある (https://developer.chrome.com/blog/remote-debugging-port)。Chrome 144 からは `chrome://inspect/#remote-debugging` で許可すれば起動中の普段の Chrome に接続できるが、CDP クライアントの接続ごとに許可のダイアログが出る (https://developer.chrome.com/docs/devtools/agents/get-started/configuration 、https://github.com/ChromeDevTools/chrome-devtools-mcp/issues/1794)。
 - playwright-cli の `run-code` の出力は `### Result` と `### Error` の節に分かれる。Result の節だけを抜き出すと、エラーが黙って消える。
 - Google スライドのフォントサイズ欄は、選択範囲にサイズが混在していると空になる。
 - Google スライドには、Google ドキュメントのような組み込みのコードブロックが無い。
