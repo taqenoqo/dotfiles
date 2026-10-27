@@ -29,7 +29,7 @@
                 {{- $ago := timeago $other.updatedAt -}}
                 {{- $color := "254" -}}
                 {{- if regexMatch "just|minute|hour" $ago -}}{{- $color = "232+b" -}}
-                {{- else if regexMatch "^[1-6] days? ago" $ago -}}{{- $color = "234" -}}
+                {{- else if regexMatch "^[1-7] days? ago" $ago -}}{{- $color = "234" -}}
                 {{- else if regexMatch "day" $ago -}}{{- $color = "242" -}}
                 {{- else if regexMatch "month" $ago -}}{{- $color = "250" -}}
                 {{- end -}}
