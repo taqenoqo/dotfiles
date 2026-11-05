@@ -45,7 +45,7 @@ alias stdoc='() { stack hoogle -- --color --info $@ | less -R }'
 alias copilot='copilot \
     --add-dir "$HOME/.copilot/installed-plugins" \
     --add-dir "$HOME/.copilot/skills" \
-    --add-dir "$HOME/.config/ai" \
+    --add-dir "$HOME/.agents" \
     --add-dir "$HOME/dotfiles/" \
     --add-dir "/tmp" \
     --allow-tool="shell(mkdir)" \
