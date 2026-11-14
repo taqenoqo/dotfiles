@@ -17,6 +17,7 @@
   - `.config/gh/` — GitHub CLI 設定（XDG）
   - `.config/lazygit/` — lazygit 設定（XDG）
   - `.config/marp/` — Marp（Markdown スライド）テーマ設定（XDG）
+  - `.config/direnv/` — direnv 設定（XDG）。`.envrc` がなくても `.env` を読み込む
   - `.local/bin/md2html` — Markdown を自分用のスタイルの単一 HTML に変換するコマンド。Vim の `<leader>r` もこれを呼ぶ
   - `.local/share/pandoc/` — Pandoc の HTML テンプレート、スタイル、Lua フィルタ、スタイル確認用の `sample.md`（XDG）
   - `.asdfrc` — asdf バージョンマネージャー設定
