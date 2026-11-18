@@ -73,6 +73,7 @@
   ],
   "json.schemaDownload.trustedDomains": {
     "https://raw.githubusercontent.com": true,
-    "https://www.schemastore.org": true
+    "https://www.schemastore.org": true,
+    "https://biomejs.dev": true
   }
 }
